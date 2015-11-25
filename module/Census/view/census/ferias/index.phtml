@@ -1,0 +1,115 @@
+<div class="container">
+	<?php 
+		/* echo "<pre>";
+		print_r($resumoFerias);
+		echo "</pre>"; */
+	?>
+  <h2>Férias 2016</h2>
+  <p>Distribuição das férias do efetivo do BPMA referente ao ano de 2015</p>            
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+      	<th>Situação</th>
+        <th>Jan</th>
+        <th>Fev</th>
+        <th>Mar</th>
+        <th>Abr</th>
+        <th>Mai</th>
+        <th>Jun</th>
+        <th>Jul</th>
+        <th>Ago</th>
+        <th>Set</th>
+        <th>Out</th>
+        <th>Nov</th>
+        <th>Dez</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Previsão</td>
+        <td class="text-center"><a href="/ferias/listar?mes=JAN"><?php echo $resumoFerias['JAN']?></a></td>
+        <td class="text-center"><a href="/ferias/listar?mes=FEV"><?php echo $resumoFerias['FEV']?></a></td>
+        <td class="text-center"><a href="/ferias/listar?mes=MAR"><?php echo $resumoFerias['MAR']?></a></td>
+        <td class="text-center"><a href="/ferias/listar?mes=ABR"><?php echo $resumoFerias['ABR']?></a></td>
+        <td class="text-center"><a href="/ferias/listar?mes=MAI"><?php echo $resumoFerias['MAI']?></a></td>
+        <td class="text-center"><a href="/ferias/listar?mes=JUN"><?php echo $resumoFerias['JUN']?></a></td>
+        <td class="text-center"><a href="/ferias/listar?mes=JUL"><?php echo $resumoFerias['JUL']?></a></td>
+        <td class="text-center"><a href="/ferias/listar?mes=AGO"><?php echo $resumoFerias['AGO']?></a></td>
+        <td class="text-center"><a href="/ferias/listar?mes=SET"><?php echo $resumoFerias['SET']?></a></td>
+        <td class="text-center"><a href="/ferias/listar?mes=OUT"><?php echo $resumoFerias['OUT']?></a></td>
+        <td class="text-center"><a href="/ferias/listar?mes=NOV"><?php echo $resumoFerias['NOV']?></a></td>
+        <td class="text-center"><a href="/ferias/listar?mes=DEZ"><?php echo $resumoFerias['DEZ']?></a></td>
+        <th class="text-center"><?php echo $resumoFerias['JAN'] + $resumoFerias['FEV'] + $resumoFerias['MAR'] + $resumoFerias['ABR']
+                	 + $resumoFerias['MAI'] + $resumoFerias['JUN'] + $resumoFerias['JUL'] + $resumoFerias['AGO']
+        			 + $resumoFerias['SET'] + $resumoFerias['OUT'] + $resumoFerias['NOV'] + $resumoFerias['DEZ']
+        ?></th>
+      </tr>
+      <tr>
+        <td>Gozadas</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+      </tr>
+      <tr>
+        <td>Não gozadas</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="ct-chart ct-perfect-fourth"></div>
+  <script type="text/javascript">
+  var data = {
+		  // A labels array that can contain any sort of values
+		  labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+		  // Our series array that contains series objects or in this case series data arrays
+		  series: [
+		    [	<?php echo $resumoFerias['JAN']?>, 
+		    	<?php echo $resumoFerias['FEV']?>, 
+		    	<?php echo $resumoFerias['MAR']?>,
+		    	<?php echo $resumoFerias['ABR']?>, 
+		    	<?php echo $resumoFerias['MAI']?>, 
+		    	<?php echo $resumoFerias['JUN']?>,
+		    	<?php echo $resumoFerias['JUL']?>, 
+		    	<?php echo $resumoFerias['AGO']?>, 
+		    	<?php echo $resumoFerias['SET']?>,
+		    	<?php echo $resumoFerias['OUT']?>, 
+		    	<?php echo $resumoFerias['NOV']?>, 
+		    	<?php echo $resumoFerias['DEZ']?>,
+			],
+			[40,40,40,40,40,40,40,40,40,40,40,40]
+		  ]
+		};
+  		var options = {
+		  width: 700,
+		  height: 200
+		};
+
+		// Create a new line chart object where as first parameter we pass in a selector
+		// that is resolving to our chart container element. The Second parameter
+		// is the actual data object.
+		new Chartist.Bar('.ct-chart', data, options);
+		</script>
+</div>

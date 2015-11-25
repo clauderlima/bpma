@@ -1,0 +1,29 @@
+<div class="panel panel-primary">
+	<?php echo $this->form()->openTag($form); ?>
+	<div class="panel-heading">
+        <div class="panel-title">
+            Cadastro de CTGRAFI para <?php echo $this->policial['postograduacao'] . " " . $this->policial['nomeguerra'] ?>
+        </div>
+    </div>
+    <div class="panel-body">
+    	<div class="row">
+    		<div class="col-xs-3">
+    			<?php echo $this->formRow($form->get('numero')) ?>
+    		</div>
+    		<div class="col-xs-3">
+    			<?php echo $this->formRow($form->get('boletim')) ?>
+    		</div>
+    		<div class="col-xs-3">
+    			<?php echo $this->formRow($form->get('data')) ?>
+    		</div>
+    		<div class="col-xs-3">
+    			<?php echo $this->formRow($form->get('armcodigo')) ?>
+    		</div>
+    		<input type="hidden" id="polcodigo" name="polcodigo" value="<?php echo $this->policial['codigo']?>">
+    	</div>
+    </div>
+    <div class="panel-footer">
+    <?php echo $this->formSubmit($form->get('submit')) ?>
+    </div>
+    <?php echo $this->form()->closeTag($form); ?> 
+</div>

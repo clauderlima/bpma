@@ -1,0 +1,163 @@
+<?php 
+ 	/* echo "<pre>";
+	print_r($form);
+	exit;  */
+?>
+
+<ul class="nav nav-pills">
+	<li class="active"><a data-toggle="tab" href="#home">Dados Pessoais</a></li>
+	<li><a data-toggle="tab" href="#menu1">Endereço/Contato</a></li>
+	<li><a data-toggle="tab" href="#menu2">Dados Funcionais</a></li>
+</ul>
+
+<?php echo $this->form()->openTag($form); ?>
+<div class="tab-content">
+	<div id="home" class="tab-pane fade in active">
+		<div class="panel panel-info">
+			<div class="panel-heading">Dados Pessoais:</div>
+			<div class="painel-body" style="padding: 5px">
+				<!-- Linha 1 do formulário -->
+				<div class="row">
+					<div class="col-xs-8"><?php echo $this->formRow($form->get('nomecompleto')) ?></div>
+					<div class="col-xs-2"></div>
+					<div class="col-xs-2">Foto</div>
+				</div>
+				<!-- Linha 2 do formulário -->
+				<div class="row">
+					<div class="col-xs-3"><?php echo $this->formRow($form->get('cpf')) ?></div>
+					<div class="col-xs-3"><?php echo $this->formRow($form->get('rg')) ?></div>
+					<div class="col-xs-2"><?php echo $this->formRow($form->get('orgaoexpedidor')) ?></div>
+				</div>
+				<!-- Linha 3 do formulário -->
+				<div class="row">
+					<div class="col-xs-4"><?php echo $this->formRow($form->get('naturalidade')) ?></div>
+					<div class="col-xs-3"><?php echo $this->formRow($form->get('naturalidadeuf')) ?></div>
+					<div class="col-xs-3"><?php echo $this->formRow($form->get('datanascimento')) ?></div>
+					<div class="col-xs-2"><?php echo $this->formRow($form->get('sexo')) ?></div>
+				</div>
+				<!-- Linha 4 do formulário -->
+				<div class="row">
+					<div class="col-xs-4"><?php echo $this->formRow($form->get('estadocivil')) ?></div>
+					<div class="col-xs-3"><?php echo $this->formRow($form->get('cnh')) ?></div>
+					<div class="col-xs-2"><?php echo $this->formRow($form->get('cnhcategoria')) ?></div>
+					<div class="col-xs-3"><?php echo $this->formRow($form->get('cnhvalidade')) ?></div>
+				</div>
+				<!-- Linha 5 do formulário -->
+				<div class="row">
+					<div class="col-xs-6"><?php echo $this->formRow($form->get('nomepai')) ?></div>
+					<div class="col-xs-6"><?php echo $this->formRow($form->get('nomemae')) ?></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="menu1" class="tab-pane fade">
+		<div class="panel panel-info">
+			<div class="panel-heading">Contato:</div>
+			<div class="painel-body" style="padding: 5px">
+				<!-- Linha 1 do formulário -->
+				<div class="row">
+					<div class="col-xs-3"><?php echo $this->formRow($form->get('telefonefixo')) ?></div>
+					<div class="col-xs-3"><?php echo $this->formRow($form->get('telefonecelular')) ?></div>
+					<div class="col-xs-6"><?php echo $this->formRow($form->get('email')) ?></div>
+				</div>
+				<!-- Linha 2 do formulário -->
+			</div>
+		</div>
+		<div class="panel panel-info">
+			<div class="panel-heading">Endereço:</div>
+			<div class="painel-body" style="padding: 5px">
+				<div class="row">
+					<div class="col-xs-2"><?php echo $this->formRow($form->get('enderecouf')) ?></div>
+					<div class="col-xs-4"><?php echo $this->formRow($form->get('enderecocidade')) ?></div>
+					<div class="col-xs-3"><?php echo $this->formRow($form->get('enderecobairro')) ?></div>
+					<div class="col-xs-3"><?php echo $this->formRow($form->get('enderecoquadra')) ?></div>
+				</div>
+				<!-- Linha 3 do formulário -->
+				<div class="row">
+					<div class="col-xs-4"><?php echo $this->formRow($form->get('enderecoconjunto')) ?></div>
+					<div class="col-xs-2"><?php echo $this->formRow($form->get('endereconumero')) ?></div>
+					<div class="col-xs-3"><?php echo $this->formRow($form->get('enderecocep')) ?></div>
+					<div class="col-xs-3"><?php echo $this->formRow($form->get('enderecotipo')) ?></div>
+				</div>
+				<!-- Linha 4 do formulário -->
+				<div class="row">
+					<div class="col-xs-12"><?php echo $this->formRow($form->get('enderecocomplemento')) ?></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="menu2" class="tab-pane fade">
+		<div class="panel panel-info">
+			<div class="panel-heading">Dados Funcionais:</div>
+			<div class="painel-body" style="padding: 5px">
+				<!-- Linha 1 do formulário -->
+				<div class="row">
+					<div class="col-xs-3"><?php echo $this->formRow($form->get('postograduacao')) ?></div>
+					<div class="col-xs-3"><?php echo $this->formRow($form->get('nomeguerra')) ?></div>
+					<div class="col-xs-2"><?php echo $this->formRow($form->get('matricula')) ?></div>
+					<div class="col-xs-2"><?php echo $this->formRow($form->get('matriculasiape')) ?></div>
+					<div class="col-xs-2"><?php echo $this->formRow($form->get('comportamento')) ?></div>
+				</div>
+				<!-- Linha 2 do formulário -->
+				<div class="row">
+					<div class="col-xs-3"><?php echo $this->formRow($form->get('dataadmissao')) ?></div>
+					<div class="col-xs-2"><?php echo $this->formRow($form->get('quadro')) ?></div>
+					<div class="col-xs-2"><?php echo $this->formRow($form->get('antiguidade')) ?></div>
+					<div class="col-xs-2"><?php echo $this->formRow($form->get('funcionaltipo')) ?></div>
+					<div class="col-xs-3"><?php echo $this->formRow($form->get('identidadefuncionalvalidade')) ?></div>
+				</div>
+				<!-- Linha 3 do formulário -->
+				<div class="row">
+					<div class="col-xs-3"><?php echo $this->formRow($form->get('bienalvalidade')) ?></div>
+					<div class="col-xs-3"><?php echo $this->formRow($form->get('tafvalidade')) ?></div>
+					<div class="col-xs-2"><?php echo $this->formRow($form->get('tiposangue')) ?></div>
+					<div class="col-xs-2"><?php echo $this->formRow($form->get('doadorsangue')) ?></div>
+					<div class="col-xs-2"><?php echo $this->formRow($form->get('portearmasituacao')) ?></div>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-info">
+			<div class="panel-heading">Dados do Serviço:</div>
+			<div class="painel-body" style="padding: 5px">
+				<!-- Linha 4 do formulário -->
+				<div class="row">
+					<div class="col-xs-4"><?php echo $this->formRow($form->get('subunidade')) ?></div>
+					<div class="col-xs-4"><?php echo $this->formRow($form->get('lotacao')) ?></div>
+					<div class="col-xs-4"><?php echo $this->formRow($form->get('servicoposto')) ?></div>
+				</div>
+				<div class="row">
+					<div class="col-xs-4"><?php echo $this->formRow($form->get('servicofuncao')) ?></div>
+					<div class="col-xs-4"><?php echo $this->formRow($form->get('servicoescala')) ?></div>
+					<div class="col-xs-4"><?php echo $this->formRow($form->get('servicohorario')) ?></div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+		<div class="panel panel-primary">
+			<div class="painel-body" style="padding: 5px">
+				<!-- Linha 1 do formulário -->
+				<div class="row">
+					<div class="col-xs-6"><?php echo $this->formSubmit($form->get('submit')) ?></div>
+					<div class="col-xs-6"><a href="/census"><button type="button" class="btn btn-default">Voltar</button></a></div>
+<?php echo $this->form()->closeTag($form); ?>
+			</div>
+		</div>
+	</div>
+	
+<script>
+
+//select
+var tipo = document.getElementById("funcionaltipo");
+var validadefuncional = document.getElementById("identidadefuncionalvalidade");
+
+// quando o select muda
+tipo.onchange = function () {
+	var valor = tipo.value;
+	if ( valor === "I" ){
+		validadefuncional.disabled = true;
+	}
+}
+</script>

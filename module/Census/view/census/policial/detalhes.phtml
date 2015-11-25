@@ -1,0 +1,111 @@
+<?php 
+//echo "<pre>";
+//print_r($policial);
+//exit;
+?>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="panel-title">
+            <div class="campo"><?php echo $this->filter($policial)->postoGraduacao() . " " . $this->filter($policial)->nomeGuerra(); ?></div>
+        </div>
+        <?php //echo "<pre>"; echo print_r($policial); exit;?>
+    </div>
+    <div class="panel-body">
+    
+	<div class="barra-usuario" data-example-id="nav-pills-with-dropdown">
+	    <ul class="nav nav-pills">
+	      	<li role="presentation" class="dropdown">
+	        	<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+	          Requerimento <span class="caret"></span>
+	        	</a>
+	        	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				    <li><a href="/requerimento/abono/<?php echo $this->filter($policial)->codigo(); ?>">Abono de Ponto Anual</a></li>
+					<li class="divider"></li>
+					<li><a href="#">Reprogramação de Férias</a></li>
+					<li><a href="#">Não Gozo de Férias</a></li>
+					<li><a href="#">Parcelamento de Férias</a></li>
+					<li><a href="#">Licença Especial</a></li>
+					<li class="divider"></li>
+					<li><a href="#">Ressarcimento de Despesas</a></li>
+					<li><a href="#">Inclusão de Dependentes</a></li>
+  				</ul>
+			</li>
+			<li role="presentation" class="dropdown">
+	        	<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+	          		Férias <span class="caret"></span>
+	        	</a>
+	        	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				    <li><a href="/ferias/adicionar/<?php echo $this->filter($policial)->codigo(); ?>">Programar</a></li>
+					<li class="divider"></li>
+					<li><a href="#">Indicar Opções</a></li>
+  				</ul>
+			</li>
+			<li role="presentation" class="dropdown">
+	        	<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+	          		Formação<span class="caret"></span>
+	        	</a>
+	        	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				    <li><a href="/formacao/adicionar/<?php echo $this->filter($policial)->codigo(); ?>">Adicionar Formação</a></li>
+					<li class="divider"></li>
+					<li><a href="#">Curso PM</a></li>
+  				</ul>
+			</li>
+			<li role="presentation" class="dropdown">
+	        	<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+	          		Saude<span class="caret"></span>
+	        	</a>
+	        	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				    <li><a href="#">Restrição</a></li>
+					<li class="divider"></li>
+					<li><a href="#">Dispensa</a></li>
+  				</ul>
+			</li>
+			<li role="presentation" class="dropdown">
+	        	<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+	          		Cautelas <span class="caret"></span>
+	        	</a>
+	        	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				    <li><a href="/ctgrafi/adicionar/<?php echo $this->filter($policial)->codigo() ?>">CTGRAF</a></li>
+					<li class="divider"></li>
+					<li><a href="#">Material</a></li>
+  				</ul>
+			</li>
+			<li role="presentation" class="dropdown">
+	        	<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+	          		Alterações <span class="caret"></span>
+	        	</a>
+	        	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				    <li><a href="#">Elogio</a></li>
+				    <li><a href="#">Punição</a></li>
+					<li class="divider"></li>
+					<li><a href="#">Faltas ao Serviço</a></li>
+  				</ul>
+			</li>
+	    </ul>
+	  </div>
+    
+    
+    <?php //echo "<pre>"; echo print_r($this->policial);?>
+    <br>
+    <strong>Dados Pessoais:</strong>
+    	<table class="table table-bordered">
+    		<tr><td colspan="10"><div class="legenda">Nome Completo:</div><div class="campo"><?php echo $this->filter($policial)->nomeCompleto(); ?></div></td><td colspan="2"><div class="legenda">Quadro:</div><div class="campo"><?php echo $this->filter($policial)->quadro(); ?></div></td></tr>
+    		<tr><td colspan="3"><div class="legenda">Matricula:</div><div class="campo"><?php echo $this->filter($policial)->matricula(); ?></div></td><td colspan="4"><div class="legenda">Admissão:</div><div class="campo"><?php echo $this->filter($policial)->dataAdmissao(); ?></div></td><td colspan="2"><div class="legenda">Funcional Validade:</div><div class="campo"><?php echo $this->filter($policial)->identidadeFuncionalValidade(); ?></div></td><td colspan="2"><div class="legenda">Sangue:</div><div class="campo"><?php echo $this->filter($policial)->tipoSangue() ?></div></td><td colspan="2"><div class="legenda">Doador?:</div><div class="campo"><?php echo $this->filter($policial)->doadorSangue() ?></div></td></tr>
+    		<tr><td colspan="5"><div class="legenda">CNH:</div><div class="campo"><?php echo $this->filter($policial)->cnhCategoria(); ?></div></td><td><div class="legenda">CNH Validade:</div><div class="campo"><?php echo $this->filter($policial)->cnhValidade(); ?></div></td><td colspan="3"><div class="legenda">TAF Validade:</div><div class="campo"><?php echo $this->filter($policial)->tafValidade(); ?></div></td><td colspan="2"><div class="legenda">Bienal Validade:</div><div class="campo"><?php echo $this->filter($policial)->bienalValidade(); ?></div></td><td colspan="2"><div class="legenda">Porte de Arma:</div><div class="campo"><?php echo $this->filter($policial)->porteArmaSituacao(); ?></div></td></tr>
+    	</table>
+    <strong>Contato:</strong>
+    	<table class="table table-bordered">
+    		<tr><td colspan="3"><div class="legenda">Cidade Residência:</div><div class="campo"><?php echo $this->filter($policial)->enderecoCidade() ?></div></td><td colspan="3"><div class="legenda">Celular:</div><div class="campo"><?php echo $this->filter($policial)->telefoneCelular() ?></div></td><td colspan="3"><div class="legenda">Fixo:</div><div class="campo"><?php echo $this->filter($policial)->telefoneFixo() ?></div></td><td colspan="6"><div class="legenda">Email:</div><div class="campo"><?php echo $this->policial->pol_Email ?></div></td></tr>
+    	</table>
+    <strong>Serviço:</strong>
+    	<table class="table table-bordered">
+    		<tr><td colspan="3"><div class="legenda">Sub Unidade:</div><div class="campo"><?php echo $this->filter($policial)->subUnidade(); ?></div></td><td colspan="3"><div class="legenda">Lotação:</div><div class="campo"><?php echo $this->filter($policial)->lotacao(); ?></div></td><td colspan="6"><div class="legenda">Posto de Serviço:</div><div class="campo"><?php echo $this->filter($policial)->servicoPosto(); ?></div></td></tr>
+    		<tr><td colspan="4"><div class="legenda">Função:</div><div class="campo"><?php echo $this->filter($policial)->servicoFuncao(); ?></div></td><td colspan="4"><div class="legenda">Escala:</div><div class="campo"><?php echo $this->filter($policial)->servicoEscala(); ?></div></td><td colspan="4"><div class="legenda">Horário:</div><div class="campo"><?php echo $this->filter($policial)->servicoHorario(); ?></div></td></tr>
+    	</table>
+    </div>
+    <div class="panel-footer">
+        <a href="<?php echo $this->url('census', array('action' => 'editar', 'id' => $this->filter($policial)->codigo())) ?>" class="btn btn-primary btn-sm">Editar Dados</a>
+        <a href="<?php echo $this->url('census'); ?>" class="btn btn-default btn-sm">Voltar</a>
+    </div>
+</div>

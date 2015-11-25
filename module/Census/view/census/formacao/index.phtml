@@ -1,0 +1,52 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+        <div class="panel-title">
+            Formação dos Policiais do BPMA
+        </div>
+    </div>
+    <div class="panel-body">
+    	<table class="table">
+    		<thead>
+    			<tr>
+    				<th>Pos/Grad</th>
+    				<th>Nome Guerra</th>
+    				<th>Tipo</th>
+    				<th>Nome</th>
+    				<th>Instituição</th>
+    				<th>Conclusão</th>
+    				<th>Área do Conhecimento</th>
+    				<th>Opções</th>
+    			</tr>
+    		</thead>
+    		<tbody>
+    		<?php foreach ($dados as $item):?>
+    			<tr>
+    				
+    				<td><?php echo $item->getPolcodigo()->getPostograduacao()?></td>
+    				<td><?php echo $item->getPolcodigo()->getNomeguerra()?></td>
+    				<td><?php echo $item->getTipo()?></td>
+    				<td><?php echo $item->getNome()?></td>
+    				<td><?php echo $item->getInstituicao()?></td>
+    				<td><?php echo $item->getConclusao()->format('Y');?></td>
+    				<td><?php echo $item->getAreaconhecimento()?></td>
+    				<td><a href="/formacao/editar/<?php echo $item->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
+    				<a href="/formacao/deletar/<?php echo $item->getCodigo()?>" onClick="deleta()"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a></td>
+    				
+    			</tr>
+    			<?php endforeach;?>
+    		</tbody>
+    	</table>
+    </div>
+    <div class="panel-footer">
+    </div>
+</div>
+
+<script>
+	function deleta(){
+		if(confirm("Tem certeza que deseja excluir este registro?")){
+			return true;
+		} else {
+			return false;
+		}
+}
+</script>

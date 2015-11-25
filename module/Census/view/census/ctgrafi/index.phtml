@@ -1,0 +1,43 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+        <div class="panel-title">
+            CTGRAFI - Certificado de Transferência de Guarda e Resposabilidade de Arma de Fogo Institucional
+        </div>
+    </div>
+    <div class="panel-body">
+    	<table class="table">
+    		<thead>
+    			<tr>
+    				<th>Post/Grad</th>
+    				<th>Nome Guerra</th>
+    				<th>Número</th>
+    				<th>Espécie</th>
+    				<th>Marca</th>
+    				<th>Modelo</th>
+    				<th>Número Série</th>
+    				<th>Tombamento</th>
+    				<th>Opções</th>
+    			</tr>
+    		</thead>
+    		<tbody>
+    		<?php foreach ($dados as $item):?>
+    			<tr>
+    				
+    				<td><?php echo $item->getPolcodigo()->getPostograduacao()?></td>
+    				<td><?php echo $item->getPolcodigo()->getNomeGuerra()?></td>
+    				<td><?php echo $item->getNumero()?></td>
+    				<td><?php echo $item->getArmcodigo()->getEspecie()?></td>
+    				<td><?php echo $item->getArmcodigo()->getMarca()?></td>
+    				<td><?php echo $item->getArmcodigo()->getModelo()?></td>
+    				<td><?php echo $item->getArmcodigo()->getNumeroserie()?></td>
+    				<td><?php echo $item->getArmcodigo()->getTombamento()?></td>
+    				<td><a href="/ctgrafi/editar/<?php echo $item->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a></td>
+    				
+    			</tr>
+    			<?php endforeach;?>
+    		</tbody>
+    	</table>
+    </div>
+    <div class="panel-footer">
+    </div>
+</div>

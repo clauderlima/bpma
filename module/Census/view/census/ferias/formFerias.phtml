@@ -1,0 +1,63 @@
+<?php 
+  	/* echo "<pre>";
+	print_r($policial);
+	print_r($ferias);
+	echo "</pre>"; */
+	//exit; 
+?>
+
+<ul class="nav nav-pills">
+	<li class="active"><a data-toggle="tab" href="#home">Férias</a></li>
+</ul>
+
+<?php echo $this->form()->openTag($form); ?>
+<div class="tab-content">
+	<div id="home" class="tab-pane fade in active">
+		<div class="panel panel-info">
+			<div class="panel-heading">Programação de Férias para <?php echo $this->policial->pol_PostoGraduacao . " " . $this->policial->pol_NomeGuerra ?></div>
+			<div class="painel-body" style="padding: 2px">
+			
+			
+			<div class="container">      
+  <table class="table table-bordered" style="width: 95%">
+    <thead>
+      <tr>
+      	<th>Referência</th>
+        <th>Previsão</th>
+      </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($ferias as $feria):?>
+      <tr>
+        <td><?php echo $feria['anoreferencia'];?></td>
+        <td><?php echo $feria['programacao'];?></td>
+      </tr>
+      <?php endforeach;?>
+    </tbody>
+  </table>
+</div>
+			
+			
+			
+			
+				<!-- Linha 2 do formulário -->
+				<div class="row">
+					<div class="col-xs-3"><?php echo $this->formRow($form->get('anoreferencia')) ?></div>
+					<div class="col-xs-3"><?php echo $this->formRow($form->get('programacao')) ?></div>
+					<div class="col-xs-3"><input type="hidden" name="polcodigo" value="<?php echo $this->policial->pol_Codigo ?>"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+		<div class="panel panel-primary">
+			<div class="painel-body" style="padding: 5px">
+				<!-- Linha 1 do formulário -->
+				<div class="row">
+					<div class="col-xs-6"><?php echo $this->formSubmit($form->get('submit')) ?></div>
+					<div class="col-xs-6"><a href="/census"><button type="button" class="btn btn-default">Voltar</button></a></div>
+<?php echo $this->form()->closeTag($form); ?>
+			</div>
+		</div>
+	</div>
