@@ -12,20 +12,19 @@ class Restricaomedica extends AbstractService
 	
 		$arrTipo = array();
 		
-		if (count($data['tipo']))
+		if (count($data['retcodigo']))
 		{
-			foreach ($data['tipo'] as $tipo)
+			foreach ($data['retcodigo'] as $tipo)
 			{
-				//$emTipo = $this->getEmRef('Census\Entity\Restricaotipo', $tipo);
+				$emTipo = $this->getEmRef('Census\Entity\Restricaotipo', $tipo);
 				//echo "<pre>" . print_r($emTipo) . "<br>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-				$emTipo = $this->getEm('Census\Entity\Restricaotipo');
-				$entityTipo = $emTipo->findOneByRetcodigo($tipo);
-				$arrTipo = $emTipo;
+				//$emTipo = $this->getEm('Census\Entity\Restricaotipo');
+				//$entityTipo = $emTipo->findOneByRetcodigo($tipo);
+				$arrTipo[] = $emTipo;
 			}
 		}
 		
-		$data['tipo'] = $arrTipo;
-		
+		$data['retcodigo'] = $arrTipo;
 		
 		return parent::insert($data, $entity);
 	}

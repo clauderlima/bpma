@@ -50,15 +50,15 @@ class Restricaomedica extends Form
 		$this->add($fim);
 		
 		// tipos (tabela restricao tipo)
-		$tipo = new Select('tipo');
-		$tipo->setLabel('Tipo')
+		$retcodigo = new Select('retcodigo');
+		$retcodigo->setLabel('Tipo')
 			->setAttributes(array(
-				'id' => 'tipo',
+				'id' => 'retcodigo',
 				'multiple' => true,
 				'class' => 'form-control',
 				'options' => $arrRestricoes
 		));
-		$this->add($tipo);
+		$this->add($retcodigo);
 	
 		//submit
 		$submit = new Submit('submit');

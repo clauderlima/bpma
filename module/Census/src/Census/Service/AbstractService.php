@@ -55,10 +55,10 @@ class AbstractService implements ServiceLocatorAwareInterface
 		$entity = new $entity($data);
   		
 		/* echo "<pre>";
-		print_r($entity);
+		var_dump($entity);
 		echo " xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ";
-		print_r($data);
-		exit;  */ 
+		var_dump($data);
+		exit;   */
 		
 		$em = $this->getEm();
 		$em->persist($entity);

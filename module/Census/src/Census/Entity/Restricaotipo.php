@@ -39,7 +39,7 @@ class Restricaotipo
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Restricaomedica", mappedBy="retcodigo", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Restricaomedica", mappedBy="retcodigo",  cascade={"persist"})
      */
     private $rescodigo;
 
@@ -48,7 +48,7 @@ class Restricaotipo
      */
 
     public function __construct(array $data) {
-    	$this->resCodigo = new \Doctrine\Common\Collections\ArrayCollection();
+    	$this->rescodigo = new \Doctrine\Common\Collections\ArrayCollection();
     	$hydrator = new ClassMethods();
     	$hydrator->hydrate($data, $this);
     }

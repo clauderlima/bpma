@@ -5,26 +5,24 @@
         </div>
     </div>
     <div class="panel-body">
-    <a href="/restricao/cadastrar"><button type="button" class="btn btn-default navbar-btn">Nova Restrição</button></a>
-    </div>
-    <div class="panel-body">
     	<table class="table">
     		<thead>
     			<tr>
-    				<th>Codigo</th>
-    				<th>Descrição</th>
-    				<th>Opções</th>
+    				<th>Post/Grad</th>
+    				<th>Nome de Guerra</th>
+    				<th>Início</th>
+    				<th>Fim</th>
+    				<th>Restrições</th>
     			</tr>
     		</thead>
     		<tbody>
     		<?php foreach ($dados as $item):?>
     			<tr>
-    				
-    				<td><?php echo $item->getTipo()?></td>
-    				<td><?php echo $item->getDescricao()?></td>
-    				<td><a href="/restricao/editar/<?php echo $item->getRetcodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
-    				<a href="/restricao/deletar/<?php echo $item->getRetcodigo()?>" onClick="deleta()"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a></td>
-    				
+    				<td></td>
+    				<td></td>
+    				<td><?php echo $item->getInicio()->format('d/m/Y');?></td>
+    				<td><?php echo $item->getFim()->format('d/m/Y');?></td>
+    				<td><?php echo var_dump($item->getRetcodigo())?></td>
     			</tr>
     			<?php endforeach;?>
     		</tbody>

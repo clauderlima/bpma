@@ -8,7 +8,7 @@ class RestricaoController extends AbstractController
 {
 	public function indexAction()
 	{
-		$dataRestricao = $this->getEm('Census\Entity\Restricaotipo')->findAll();
+		$dataRestricao = $this->getEm('Census\Entity\Restricaomedica')->findAll();
 		
 		return new ViewModel(array(
 			'dados' => $dataRestricao,

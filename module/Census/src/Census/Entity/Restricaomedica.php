@@ -66,7 +66,8 @@ class Restricaomedica
      * Constructor
      */
     public function __construct(array $data) {
-    	$this->tipo = new \Doctrine\Common\Collections\ArrayCollection();
+ 
+    	$this->retcodigo = new \Doctrine\Common\Collections\ArrayCollection();
     	$hydrator = new ClassMethods();
     	$hydrator->hydrate($data, $this);
     }
