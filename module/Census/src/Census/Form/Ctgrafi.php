@@ -57,7 +57,7 @@ class Ctgrafi extends Form
 				'class' => 'form-control',
 				'options' => $arrArmas
 				));
-				$this->add($armcodigo);
+		$this->add($armcodigo);
 				
 		// pol_Codigo
 		$polcodigo = new Hidden('polcodigo');

@@ -15,7 +15,7 @@ class RestricaoController extends AbstractController
 		));
 	}
 
-	public function cadastrarAction()
+	public function adicionarAction()
 	{
 		// Definindo variaveis
 		$request = $this->getRequest();
@@ -94,6 +94,48 @@ class RestricaoController extends AbstractController
 		));
 			
 		$view->setTemplate('census/restricao/form.phtml');
+			
+		return $view;
+	}
+	
+	public function cadastrarAction()
+	{
+		// Definindo variaveis
+		$request = $this->getRequest();
+		$id = (int) $this->params()->fromRoute('id', 0);
+	
+		// Instaciando services
+		$serviceRestricaomedica = $this->getServiceLocator()->get('census-service-restricaomedica');
+		$dataPolicial = $this->getEm('Census\Entity\Policial')->find($id)->toArray();
+	
+		// Instaciando o Form
+		$form = new \Census\Form\Restricaomedica($this->getServiceLocator()->get('servicemanager'));
+	
+		if ($request->isPost())
+		{
+			// setando o input filter no orm
+			$data = $request->getPost()->toArray();
+			$form->setData($data);
+			$form->setInputFilter(new \Census\Filter\Restricaomedica());
+	
+			if ($form->isValid())
+			{
+				if ($serviceRestricaomedica->insert($data, 'Census\Entity\Restricaomedica'))
+				{
+					$this->flashMessenger()->addSuccessMessage("CTGRAFI cadastrado com sucesso!");
+					return $this->redirect()->toUrl('/restricao');
+				}
+			} else {
+				$this->flashMessenger()->addErrorMessage('Erro ao cadastrar arma! <br>Verifique se os campos foram preenchidos corretamente.');
+			}
+		}
+			
+		$view = new ViewModel(array(
+				'form' => $form,
+				'policial' => $dataPolicial
+		));
+			
+		$view->setTemplate('census/restricao/form-rm.phtml');
 			
 		return $view;
 	}

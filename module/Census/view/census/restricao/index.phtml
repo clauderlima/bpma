@@ -22,8 +22,8 @@
     				
     				<td><?php echo $item->getTipo()?></td>
     				<td><?php echo $item->getDescricao()?></td>
-    				<td><a href="/restricao/editar/<?php echo $item->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
-    				<a href="/restricao/deletar/<?php echo $item->getCodigo()?>" onClick="deleta()"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a></td>
+    				<td><a href="/restricao/editar/<?php echo $item->getRetcodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
+    				<a href="/restricao/deletar/<?php echo $item->getRetcodigo()?>" onClick="deleta()"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a></td>
     				
     			</tr>
     			<?php endforeach;?>

@@ -1,0 +1,28 @@
+<div class="panel panel-primary">
+	<?php echo $this->form()->openTag($form); ?>
+	<div class="panel-heading">
+        <div class="panel-title">
+            Cadastro de Restrição Médica
+        </div>
+    </div>
+    <div class="panel-body">
+    	<div class="row">
+    		<div class="col-xs-3">
+    			<?php echo $this->formRow($form->get('inicio')) ?>
+    		</div>
+    		
+    		<div class="col-xs-3">
+    			<?php echo $this->formRow($form->get('fim')) ?>
+    		</div>
+    		
+    		<div class="col-xs-3">
+    			<?php echo $this->formRow($form->get('tipo')) ?>
+    		</div>
+    	</div>
+    	<input type="hidden" id="polcodigo" name="polcodigo" value="<?php echo $this->policial['codigo']?>">
+    </div>
+    <div class="panel-footer">
+    <?php echo $this->formSubmit($form->get('submit')) ?>
+    </div>
+    <?php echo $this->form()->closeTag($form); ?> 
+</div>

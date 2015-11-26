@@ -9,7 +9,7 @@ use Zend\Stdlib\Hydrator\ClassMethods;
  * Restricaotipo
  *
  * @ORM\Table(name="restricaotipo")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Census\Repository\Restricaotipo")
  */
 class Restricaotipo
 {
@@ -20,7 +20,7 @@ class Restricaotipo
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $codigo;
+    private $retcodigo;
 
     /**
      * @var string
@@ -39,7 +39,7 @@ class Restricaotipo
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Restricaomedica", mappedBy="retCodigo")
+     * @ORM\ManyToMany(targetEntity="Restricaomedica", mappedBy="retcodigo", cascade={"persist"})
      */
     private $rescodigo;
 
@@ -60,12 +60,12 @@ class Restricaotipo
     }
 
 
-    public function getCodigo(){
-        return $this->codigo;
+    public function getRetcodigo(){
+        return $this->retcodigo;
     }
 
-    public function setCodigo($codigo){
-        $this->codigo = $codigo;
+    public function setRetcodigo($retcodigo){
+        $this->retcodigo = $retcodigo;
         return $this;
     }
 

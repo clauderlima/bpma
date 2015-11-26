@@ -157,6 +157,7 @@ return array(
 			'census-service-ctgrafi' => 'Census\Service\Ctgrafi',
 			'census-service-formacao' => 'Census\Service\Formacao',
 			'census-service-restricao' => 'Census\Service\Restricao',
+			'census-service-restricaomedica' => 'Census\Service\Restricaomedica',
 		)
 	),
 		'doctrine' => array(

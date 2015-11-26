@@ -8,7 +8,7 @@ use Zend\Stdlib\Hydrator\ClassMethods;
 /**
  * Restricaomedica
  *
- * @ORM\Table(name="restricaoMedica", indexes={@ORM\Index(name="fk_restricaoMedica_policial1_idx", columns={"pol_Codigo"})})
+ * @ORM\Table(name="restricaomedica", indexes={@ORM\Index(name="fk_restricaoMedica_policial1_idx", columns={"pol_Codigo"})})
  * @ORM\Entity
  */
 class Restricaomedica
@@ -18,37 +18,55 @@ class Restricaomedica
      *
      * @ORM\Column(name="res_Codigo", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $resCodigo;
+    private $rescodigo;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="res_InicioData", type="date", nullable=false)
      */
-    private $resIniciodata;
+    private $inicio;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="res_FinalData", type="date", nullable=false)
      */
-    private $resFinaldata;
+    private $fim;
 
     /**
      * @var \Policial
      *
-     * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\OneToOne(targetEntity="Policial")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="pol_Codigo", referencedColumnName="pol_Codigo")
      * })
      */
-    private $polCodigo;
+    private $polcodigo;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Restricaotipo", inversedBy="rescodigo", cascade={"persist"})
+     * @ORM\JoinTable(name="restricaomedica_restricaotipo",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="res_Codigo", referencedColumnName="res_Codigo")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="ret_Codigo", referencedColumnName="ret_Codigo")
+     *   }
+     * )
+     */
+    private $retcodigo;
+
+    /**
+     * Constructor
+     */
     public function __construct(array $data) {
+    	$this->tipo = new \Doctrine\Common\Collections\ArrayCollection();
     	$hydrator = new ClassMethods();
     	$hydrator->hydrate($data, $this);
     }
@@ -59,42 +77,49 @@ class Restricaomedica
     	return $hydrator->extract($this);
     }
 
-
-    public function getResCodigo(){
-        return $this->resCodigo;
+    public function getRescodigo(){
+        return $this->rescodigo;
     }
 
-    public function setResCodigo($resCodigo){
-        $this->resCodigo = $resCodigo;
+    public function setRescodigo($rescodigo){
+        $this->rescodigo = $rescodigo;
         return $this;
     }
 
-    public function getResIniciodata(){
-        return $this->resIniciodata;
+    public function getInicio(){
+        return $this->inicio;
     }
 
-    public function setResIniciodata($resIniciodata){
-        $this->resIniciodata = $resIniciodata;
+    public function setInicio($inicio){
+        $this->inicio = new \DateTime($inicio);
         return $this;
     }
 
-    public function getResFinaldata(){
-        return $this->resFinaldata;
+    public function getFim(){
+        return $this->fim;
     }
 
-    public function setResFinaldata($resFinaldata){
-        $this->resFinaldata = $resFinaldata;
+    public function setFim($fim){
+        $this->fim = new \DateTime($fim);
         return $this;
     }
 
-    public function getPolCodigo(){
-        return $this->polCodigo;
+    public function getPolcodigo(){
+        return $this->polcodigo;
     }
 
-    public function setPolCodigo($polCodigo){
-        $this->polCodigo = $polCodigo;
+    public function setPolcodigo($polcodigo){
+        $this->polcodigo = $polcodigo;
+        return $this;
+    }
+
+    public function getRetcodigo(){
+        return $this->retcodigo;
+    }
+
+    public function setRetcodigo($retcodigo){
+        $this->retcodigo = $retcodigo;
         return $this;
     }
 
 }
-
