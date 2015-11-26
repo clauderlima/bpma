@@ -8,7 +8,7 @@ use Zend\Stdlib\Hydrator\ClassMethods;
 /**
  * Restricaotipo
  *
- * @ORM\Table(name="restricaoTipo", indexes={@ORM\Index(name="fk_restricaoTipo_restricaoMedica1_idx", columns={"res_Codigo"})})
+ * @ORM\Table(name="restricaotipo")
  * @ORM\Entity
  */
 class Restricaotipo
@@ -18,7 +18,7 @@ class Restricaotipo
      *
      * @ORM\Column(name="ret_Codigo", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $codigo;
 
@@ -37,18 +37,18 @@ class Restricaotipo
     private $descricao;
 
     /**
-     * @var \Restricaomedica
+     * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Restricaomedica")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="res_Codigo", referencedColumnName="res_Codigo")
-     * })
+     * @ORM\ManyToMany(targetEntity="Restricaomedica", mappedBy="retCodigo")
      */
     private $rescodigo;
 
+    /**
+     * Constructor
+     */
+
     public function __construct(array $data) {
+    	$this->resCodigo = new \Doctrine\Common\Collections\ArrayCollection();
     	$hydrator = new ClassMethods();
     	$hydrator->hydrate($data, $this);
     }
@@ -58,6 +58,7 @@ class Restricaotipo
     	$hydrator = new ClassMethods();
     	return $hydrator->extract($this);
     }
+
 
     public function getCodigo(){
         return $this->codigo;

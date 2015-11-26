@@ -4,6 +4,7 @@ namespace Census\Form;
 
 use Zend\Form\Form;
 use Zend\Form\Element\Text;
+use Zend\Form\Element\Submit;
 
 class RestricaoTipo extends Form
 {
@@ -12,13 +13,13 @@ class RestricaoTipo extends Form
 		parent::__construct('formRestricaoTipo');
 		
 		// res_Nome
-		$nome = new Text('nome');
-		$nome->setLabel('Nome')
+		$tipo = new Text('tipo');
+		$tipo->setLabel('Codigo')
 			->setAttributes(array(
-				'id' => 'observacao',
+				'id' => 'tipo',
 				'class' => 'form-control',
 			));
-		$this->add($nome);
+		$this->add($tipo);
 		
 		// res_CodigoRestricao
 		$codigorestricao = new Text('codigorestricao');

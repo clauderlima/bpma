@@ -13,6 +13,7 @@ return array(
 			'FeriasController' => 'Census\Controller\FeriasController',
 			'CtgrafiController' => 'Census\Controller\CtgrafiController',
 			'FormacaoController' => 'Census\Controller\FormacaoController',
+			'RestricaoController' => 'Census\Controller\RestricaoController',
 		),
 	),
 		
@@ -82,6 +83,20 @@ return array(
 					),
 				),
 			),
+			'restricao' => array(
+				'type'      => 'Segment',
+				'options'   => array(
+					'route'    => '/restricao[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+						'controller' => 'RestricaoController',
+						'action'     => 'index',
+					),
+				),
+			),
 			'ctgrafi' => array(
 				'type'      => 'Segment',
 				'options'   => array(
@@ -141,6 +156,7 @@ return array(
 			'census-service-arma' => 'Census\Service\Arma',
 			'census-service-ctgrafi' => 'Census\Service\Ctgrafi',
 			'census-service-formacao' => 'Census\Service\Formacao',
+			'census-service-restricao' => 'Census\Service\Restricao',
 		)
 	),
 		'doctrine' => array(

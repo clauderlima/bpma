@@ -1,0 +1,55 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+        <div class="panel-title">
+            Relação de Armas
+        </div>
+    </div>
+    <div class="panel-body">
+    <a href="/arma/adicionar"><button type="button" class="btn btn-default navbar-btn">Nova Arma</button></a>
+    </div>
+    <div class="panel-body">
+    	<table class="table">
+    		<thead>
+    			<tr>
+    				<th>Espécie</th>
+    				<th>Calibre</th>
+    				<th>Modelo</th>
+    				<th>Marca</th>
+    				<th>Número de Série</th>
+    				<th>Tombamento</th>
+    				<th>Policial</th>
+    				<th>Opções</th>
+    			</tr>
+    		</thead>
+    		<tbody>
+    		<?php foreach ($armas as $arma):?>
+    			<tr>
+    				
+    				<td><?php echo $arma->getEspecie()?></td>
+    				<td><?php echo $arma->getCalibre()?></td>
+    				<td><?php echo $arma->getModelo()?></td>
+    				<td><?php echo $arma->getMarca()?></td>
+    				<td><?php echo $arma->getNumeroserie()?></td>
+    				<td><?php echo $arma->getTombamento()?></td>
+    				<td></td>
+    				<td><a href="/arma/editar/<?php echo $arma->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
+    				<a href="/arma/delete/<?php echo $arma->getCodigo()?>" onClick="deleta()"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a></td>
+    				
+    			</tr>
+    			<?php endforeach;?>
+    		</tbody>
+    	</table>
+    </div>
+    <div class="panel-footer">
+    </div>
+</div>
+
+<script>
+	function deleta(){
+		if(confirm("Tem certeza que deseja excluir este registro?")){
+			return true;
+		} else {
+			return false;
+		}
+}
+</script>

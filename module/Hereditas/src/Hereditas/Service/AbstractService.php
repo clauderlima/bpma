@@ -1,6 +1,6 @@
 <?php
 
-namespace Census\Service;
+namespace Hereditas\Service;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -53,13 +53,11 @@ class AbstractService implements ServiceLocatorAwareInterface
 	public function insert(array $data, $entity)
 	{
 		$entity = new $entity($data);
-  		
-		/* echo "<pre>";
+/*  		echo "<pre>";
 		print_r($entity);
 		echo " xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ";
 		print_r($data);
-		exit;  */ 
-		
+		exit;  */
 		$em = $this->getEm();
 		$em->persist($entity);
 		$em->flush();
