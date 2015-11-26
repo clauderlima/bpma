@@ -9,7 +9,7 @@ class CtgrafiController extends AbstractController
 	public function indexAction()
 	{
 		$dataCtgrafi = $this->getEm('Census\Entity\Ctgrafi')->findAll();
-
+		
 		return new ViewModel(array(
 			'dados' => $dataCtgrafi,
 		));
@@ -20,15 +20,15 @@ class CtgrafiController extends AbstractController
 		// Definindo variaveis
 		$request = $this->getRequest();
 		$id = (int) $this->params()->fromRoute('id', 0);
-		 
+		
 		// Instaciando services
 		$serviceCtgrafi = $this->getServiceLocator()->get('census-service-ctgrafi');
 		
 		$dataPolicial = $this->getEm('Census\Entity\Policial')->find($id)->toArray();
-		 
+		
 		// Instaciando o Form
 		$form = new \Census\Form\Ctgrafi($this->getServiceLocator()->get('servicemanager'));
-		 
+		
 		if ($request->isPost())
 		{
 			// setando o input filter no orm

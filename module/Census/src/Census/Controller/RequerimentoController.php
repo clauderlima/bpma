@@ -53,6 +53,7 @@ class RequerimentoController extends AbstractController
 		
 		$abono = new Abono($id, $dataInicial, $quantidadeDias, $chefeImediato, $dados[0]);
 		
+		return new ViewModel();
 		
 	}
 	

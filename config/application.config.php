@@ -8,6 +8,7 @@
 return array(
     'modules' => array(
         'Census',
+    	'Hereditas',
     	'DoctrineModule',
     	'DoctrineORMModule'
     ),

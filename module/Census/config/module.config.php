@@ -11,8 +11,6 @@ return array(
 			'MapaController' => 'Census\Controller\MapaController',
 			'RequerimentoController' => 'Census\Controller\RequerimentoController',
 			'FeriasController' => 'Census\Controller\FeriasController',
-			'PatrimonioController' => 'Census\Controller\PatrimonioController',
-			'ArmaController' => 'Census\Controller\ArmaController',
 			'CtgrafiController' => 'Census\Controller\CtgrafiController',
 			'FormacaoController' => 'Census\Controller\FormacaoController',
 		),
@@ -70,20 +68,6 @@ return array(
 					),
 				),
 			),
-			'patrimonio' => array(
-				'type'      => 'Segment',
-				'options'   => array(
-					'route'    => '/patrimonio[/:action][/:id]',
-					'constraints' => array(
-						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-						'id'     => '[0-9]+',
-					),
-					'defaults' => array(
-						'controller' => 'PatrimonioController',
-						'action'     => 'index',
-					),
-				),
-			),
 			'formacao' => array(
 				'type'      => 'Segment',
 				'options'   => array(
@@ -94,20 +78,6 @@ return array(
 					),
 					'defaults' => array(
 						'controller' => 'FormacaoController',
-						'action'     => 'index',
-					),
-				),
-			),
-			'arma' => array(
-				'type'      => 'Segment',
-				'options'   => array(
-					'route'    => '/arma[/:action][/:id]',
-					'constraints' => array(
-						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-						'id'     => '[0-9]+',
-					),
-					'defaults' => array(
-						'controller' => 'ArmaController',
 						'action'     => 'index',
 					),
 				),

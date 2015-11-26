@@ -46,7 +46,7 @@ class Ctgrafi
     /**
      * @var \Arma
      *
-     * @ORM\ManyToOne(targetEntity="Arma")
+     * @ORM\ManyToOne(targetEntity="Hereditas\Entity\Arma")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="arm_Codigo", referencedColumnName="arm_Codigo")
      * })

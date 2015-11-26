@@ -20,21 +20,21 @@ class Restricaotipo
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $retCodigo;
+    private $codigo;
 
     /**
      * @var string
      *
      * @ORM\Column(name="ret_Tipo", type="string", length=45, nullable=false)
      */
-    private $retTipo;
+    private $tipo;
 
     /**
      * @var string
      *
      * @ORM\Column(name="ret_Descricao", type="string", length=45, nullable=false)
      */
-    private $retDescricao;
+    private $descricao;
 
     /**
      * @var \Restricaomedica
@@ -46,7 +46,7 @@ class Restricaotipo
      *   @ORM\JoinColumn(name="res_Codigo", referencedColumnName="res_Codigo")
      * })
      */
-    private $resCodigo;
+    private $rescodigo;
 
     public function __construct(array $data) {
     	$hydrator = new ClassMethods();
@@ -59,40 +59,39 @@ class Restricaotipo
     	return $hydrator->extract($this);
     }
 
-
-    public function getRetCodigo(){
-        return $this->retCodigo;
+    public function getCodigo(){
+        return $this->codigo;
     }
 
-    public function setRetCodigo($retCodigo){
-        $this->retCodigo = $retCodigo;
+    public function setCodigo($codigo){
+        $this->codigo = $codigo;
         return $this;
     }
 
-    public function getRetTipo(){
-        return $this->retTipo;
+    public function getTipo(){
+        return $this->tipo;
     }
 
-    public function setRetTipo($retTipo){
-        $this->retTipo = $retTipo;
+    public function setTipo($tipo){
+        $this->tipo = $tipo;
         return $this;
     }
 
-    public function getRetDescricao(){
-        return $this->retDescricao;
+    public function getDescricao(){
+        return $this->descricao;
     }
 
-    public function setRetDescricao($retDescricao){
-        $this->retDescricao = $retDescricao;
+    public function setDescricao($descricao){
+        $this->descricao = $descricao;
         return $this;
     }
 
-    public function getResCodigo(){
-        return $this->resCodigo;
+    public function getRescodigo(){
+        return $this->rescodigo;
     }
 
-    public function setResCodigo($resCodigo){
-        $this->resCodigo = $resCodigo;
+    public function setRescodigo($rescodigo){
+        $this->rescodigo = $rescodigo;
         return $this;
     }
 

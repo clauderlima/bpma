@@ -19,7 +19,7 @@ class Ctgrafi extends Form
 		$em = $sm->get('Doctrine\ORM\EntityManager');
 		$arrArmas = array("" => "Selecione");
 		
-		$repoArmas = $em->getRepository('Census\Entity\Arma');
+		$repoArmas = $em->getRepository('Hereditas\Entity\Arma');
 		$arrArmas += $repoArmas->fetchPairs();
 		
 		// ctg_Numero
