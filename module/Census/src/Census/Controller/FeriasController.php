@@ -24,7 +24,24 @@ class FeriasController extends AbstractController
     		$ferias = $query->getResult()[0][1];
     		$resumoFerias[$mes] = $ferias;
     	}
-    	 
+    	
+    	//@TODO lançar os policiais que não possuem férias lançadas
+ /*    	$query = $this->getEm()->createQueryBuilder()
+    			->select('p.codigo,p.matricula,p.subunidade,p.lotacao,p.telefonecelular,p.postograduacao,p.nomeguerra,f.programacao')
+    			->from('\Census\Entity\Ferias','f')
+    			->Join('f.polcodigo','p')
+    			->where('f.anoreferencia = 2015')
+    			->orderBy('p.antiguidade', 'ASC')
+    			->getQuery();
+    	
+    	$semFerias = $query->getResult(); */
+    	
+    	
+    	
+    	/* echo "<pre>";
+    	print_r($semFerias);
+    	exit; */
+    	
     	$view = new ViewModel(array(
     			'resumoFerias' => $resumoFerias
     	));

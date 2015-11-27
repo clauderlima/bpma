@@ -2,6 +2,12 @@
 	<div class="panel-heading">
         <div class="panel-title">
             Restrições Médicas
+            
+            <?php 
+            echo "<pre>";
+            print_r($dados);
+            exit;
+            ?>
         </div>
     </div>
     <div class="panel-body">
@@ -20,8 +26,8 @@
     			<tr>
     				<td></td>
     				<td></td>
-    				<td><?php echo $item->getInicio()->format('d/m/Y');?></td>
-    				<td><?php echo $item->getFim()->format('d/m/Y');?></td>
+    				<td><?php //echo $item->getInicio()->format('d/m/Y');?></td>
+    				<td><?php //echo $item->getFim()->format('d/m/Y');?></td>
     				<td><?php echo var_dump($item->getRetcodigo())?></td>
     			</tr>
     			<?php endforeach;?>

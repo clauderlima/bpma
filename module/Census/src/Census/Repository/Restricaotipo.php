@@ -13,7 +13,7 @@ class Restricaotipo extends AbstractRepository
 		{
 			foreach ($result as $item)
 			{
-				$arrResult[$item->getRetcodigo()] = $item->getTipo();
+				$arrResult[$item->getRetcodigo()] = $item->getTipo() . " - " . $item->getDescricao();
 			}
 		}
 	

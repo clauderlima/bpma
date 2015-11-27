@@ -8,7 +8,71 @@ class RestricaoController extends AbstractController
 {
 	public function indexAction()
 	{
-		$dataRestricao = $this->getEm('Census\Entity\Restricaomedica')->findAll();
+		//$dataRestricao = $this->getEm('Census\Entity\Restricaomedica')->findAll();
+		
+/* 		$query = $this->getEm()->createQueryBuilder()
+			->select('r.rescodigo,r.inicio,r.fim')
+			->from('\Census\Entity\Restricaomedica','r')
+			->getQuery(); */
+		
+/* 		$query = $this->getEm()->createQueryBuilder()
+			->select('p.codigo,p.postograduacao,p.nomeguerra,r.rescodigo,r.inicio,r.fim')
+			->from('\Census\Entity\Restricaomedica','r')
+			->innerJoin('r.polcodigo','p')
+			->where('r.polcodigo = p.codigo')
+			->getQuery(); */
+		
+		
+		//@TODO Colocar essa lógica no Model e verificar porque o doctrine não está trazendo as informaçõse
+		
+		$query = $this->getEm()->createQueryBuilder()
+			->select('p.codigo,p.postograduacao,p.nomeguerra,r.rescodigo,r.inicio,r.fim,t.tipo')
+			->from('\Census\Entity\Restricaomedica','r')
+			->innerJoin('r.polcodigo','p')
+			->where('r.polcodigo = p.codigo')
+			->innerJoin('r.retcodigo','t')
+			->orderBy('p.antiguidade', 'ASC')
+			->getQuery();
+		 
+		$dataRestricao = $query->getResult();
+		
+		$dataPolicial = array();
+		
+		foreach ($dataRestricao as $item)
+		{
+			foreach ($item as $chave => $valor)
+			{
+				switch ($chave) {
+					case 'codigo':
+						$policial['codigo'] = $valor;
+					break;
+					case 'postograduacao':
+						$policial['postograduacao'] = $valor;
+					break;
+					case 'nomeguerra':
+						$policial['nomeguerra'] = $valor;
+					break;
+					case 'rescodigo':
+						$policial['rescodigo'] = $valor;
+					break;
+					case 'inicio':
+						$policial['inicio'] = $valor->format('d/m/Y');
+					break;
+					case 'fim':
+						$policial['fim'] = $valor->format('d/m/Y');
+					break;
+			
+				}
+			echo "<br>zz" . $item['codigo'] . "  " . $item['tipo'];
+			}
+			$dataPolicial[] = $policial;
+		}
+		
+		echo "<br>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br>";
+		echo "<pre>";
+		print_r($dataPolicial);
+		
+		echo "<br>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br>";
 		
 		return new ViewModel(array(
 			'dados' => $dataRestricao,

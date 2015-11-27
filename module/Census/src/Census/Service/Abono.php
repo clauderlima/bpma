@@ -189,7 +189,7 @@ class Abono extends AbstractService
 		
 		$document = $mailMerge->retrieveDocument('pdf');
 		
-		$filename = 'requerimentos\abono\Abono-' . $this->matricula . '.pdf';
+		$filename = 'c:\BPMA\requerimentos\abono\Abono-' . $this->matricula . '.pdf';
 		
 		file_put_contents($filename, $document);
 		
