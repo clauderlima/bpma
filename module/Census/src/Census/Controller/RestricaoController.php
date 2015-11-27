@@ -8,7 +8,7 @@ class RestricaoController extends AbstractController
 {
 	public function indexAction()
 	{
-		//$dataRestricao = $this->getEm('Census\Entity\Restricaomedica')->findAll();
+		$dataRestricao = $this->getEm('Census\Entity\Restricaomedica')->findAll();
 		
 /* 		$query = $this->getEm()->createQueryBuilder()
 			->select('r.rescodigo,r.inicio,r.fim')
@@ -25,7 +25,7 @@ class RestricaoController extends AbstractController
 		
 		//@TODO Colocar essa lógica no Model e verificar porque o doctrine não está trazendo as informaçõse
 		
-		$query = $this->getEm()->createQueryBuilder()
+/* 		$query = $this->getEm()->createQueryBuilder()
 			->select('p.codigo,p.postograduacao,p.nomeguerra,r.rescodigo,r.inicio,r.fim,t.tipo')
 			->from('\Census\Entity\Restricaomedica','r')
 			->innerJoin('r.polcodigo','p')
@@ -34,9 +34,9 @@ class RestricaoController extends AbstractController
 			->orderBy('p.antiguidade', 'ASC')
 			->getQuery();
 		 
-		$dataRestricao = $query->getResult();
+		$dataRestricao = $query->getResult(); */
 		
-		$dataPolicial = array();
+		/* $dataPolicial = array();
 		
 		foreach ($dataRestricao as $item)
 		{
@@ -73,7 +73,7 @@ class RestricaoController extends AbstractController
 		print_r($dataPolicial);
 		
 		echo "<br>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br>";
-		
+		 */
 		return new ViewModel(array(
 			'dados' => $dataRestricao,
 		));

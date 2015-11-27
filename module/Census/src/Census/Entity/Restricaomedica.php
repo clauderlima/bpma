@@ -39,7 +39,6 @@ class Restricaomedica
     /**
      * @var \Policial
      *
-     * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\OneToOne(targetEntity="Policial")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="pol_Codigo", referencedColumnName="pol_Codigo")
