@@ -13,6 +13,7 @@
     				<th>Início</th>
     				<th>Fim</th>
     				<th>Restrições</th>
+    				<th>Opções</th>
     			</tr>
     		</thead>
     		<tbody>
@@ -25,9 +26,14 @@
     				<td><?php 
           					foreach ($item->getRetcodigo() as $var)
           					{
-          						echo $var->getTipo() . " ";
+          						$desc = $var->getDescricao();
+          						$tipo = $var->getTipo();
+          						
+          						echo "<i title='$desc'>$tipo </i>";
           					}
             //echo $item->getRetcodigo()->getTipo()?></td>
+            		<td><a href="/restricao/alterar/<?php echo $item->getRescodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a></td>
+    				
     			</tr>
     			<?php endforeach;?>
     		</tbody>
