@@ -43,3 +43,8 @@ class ComposerAutoloaderInitab10695f89073fb91a7aed784cf37a96
         return $loader;
     }
 }
+
+function composerRequireab10695f89073fb91a7aed784cf37a96($file)
+{
+    require $file;
+}

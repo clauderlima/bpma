@@ -17,9 +17,6 @@ class Restricaomedica extends AbstractService
 			foreach ($data['retcodigo'] as $tipo)
 			{
 				$emTipo = $this->getEmRef('Census\Entity\Restricaotipo', $tipo);
-				//echo "<pre>" . print_r($emTipo) . "<br>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-				//$emTipo = $this->getEm('Census\Entity\Restricaotipo');
-				//$entityTipo = $emTipo->findOneByRetcodigo($tipo);
 				$arrTipo[] = $emTipo;
 			}
 		}
@@ -31,8 +28,20 @@ class Restricaomedica extends AbstractService
 	
 	public function update(array $data, $entity, $id)
 	{
-		$data['armcodigo'] = $this->getEmRef('Hereditas\Entity\Arma', $data['armcodigo']);
 		$data['polcodigo'] = $this->getEmRef('Census\Entity\Policial', $data['polcodigo']);
+	
+		$arrTipo = array();
+		
+		if (count($data['retcodigo']))
+		{
+			foreach ($data['retcodigo'] as $tipo)
+			{
+				$emTipo = $this->getEmRef('Census\Entity\Restricaotipo', $tipo);
+				$arrTipo[] = $emTipo;
+			}
+		}
+		
+		$data['retcodigo'] = $arrTipo;
 	
 		return parent::update($data, $entity, $id);
 	}

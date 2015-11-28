@@ -8,6 +8,8 @@ use Zend\Form\Element\Select;
 use Zend\Form\Element\Date;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Form\Element\Hidden;
+use Zend\Form\Element\MultiCheckbox;
+use Zend\Form\Element\Checkbox;
 
 class Restricaomedica extends Form
 {
@@ -55,9 +57,8 @@ class Restricaomedica extends Form
 			->setAttributes(array(
 				'id' => 'retcodigo',
 				'multiple' => true,
-				'class' => 'form-control',
-				'options' => $arrRestricoes
-		));
+				'class' => 'form-control'))
+			->setValueOptions($arrRestricoes);
 		$this->add($retcodigo);
 	
 		//submit

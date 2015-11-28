@@ -145,19 +145,18 @@ class RestricaoController extends AbstractController
 		// Definindo variaveis
 		$request = $this->getRequest();
 		$id = (int) $this->params()->fromRoute('id', 0);
-	
+		
 		// Instaciando services
 		$serviceRestricaomedica = $this->getServiceLocator()->get('census-service-restricaomedica');
-		$dataPolicial = $this->getEm('Census\Entity\Policial')->find($id)->toArray();
+		
 	
 		// Instaciando o Form
 		$form = new \Census\Form\Restricaomedica($this->getServiceLocator()->get('servicemanager'));
 		$restricaomedica = $this->getEm('Census\Entity\Restricaomedica')->find($id)->toArray();
 		
-		echo "<pre>";
-		print_r($restricaomedica);
-		exit;
+		$idpolicial = $restricaomedica['polcodigo'];
 		
+		$dataPolicial = $this->getEm('Census\Entity\Policial')->find($idpolicial)->toArray();
 		
 		$form->setData($restricaomedica);
 	
@@ -170,7 +169,7 @@ class RestricaoController extends AbstractController
 	
 			if ($form->isValid())
 			{
-				if ($serviceRestricaomedica->insert($data, 'Census\Entity\Restricaomedica'))
+				if ($serviceRestricaomedica->update($data, 'Census\Entity\Restricaomedica', $id))
 				{
 					$this->flashMessenger()->addSuccessMessage("CTGRAFI cadastrado com sucesso!");
 					return $this->redirect()->toUrl('/restricao');
@@ -188,6 +187,21 @@ class RestricaoController extends AbstractController
 		$view->setTemplate('census/restricao/form-rm.phtml');
 			
 		return $view;
+	}
+	
+	public function deletarAction()
+	{
+		$id = (int) $this->params()->fromRoute('id', 0);
+	
+		$serviceRestricaomedica = $this->getServiceLocator()->get('census-service-restricaomedica');
+	
+		$dadosRestricaomedica = $this->getEm('Census\Entity\Restricaomedica')->find($id);
+	
+		if ($dadosRestricaomedica)
+		{
+			if ($serviceRestricaomedica->delete('Census\Entity\Restricaomedica', $id))
+				return $this->redirect()->toUrl('/restricao');
+		}
 	}
 
 }
