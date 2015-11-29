@@ -13,7 +13,9 @@ return array(
 			'FeriasController' => 'Census\Controller\FeriasController',
 			'CtgrafiController' => 'Census\Controller\CtgrafiController',
 			'FormacaoController' => 'Census\Controller\FormacaoController',
+			'CursoController' => 'Census\Controller\CursoController',
 			'RestricaoController' => 'Census\Controller\RestricaoController',
+			'DispensamedicaController' => 'Census\Controller\DispensamedicaController',
 		),
 	),
 		
@@ -83,6 +85,20 @@ return array(
 					),
 				),
 			),
+			'curso' => array(
+				'type'      => 'Segment',
+				'options'   => array(
+					'route'    => '/curso[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+', 
+					),
+					'defaults' => array(
+						'controller' => 'CursoController',
+						'action'     => 'index',
+					),
+				),
+			),
 			'restricao' => array(
 				'type'      => 'Segment',
 				'options'   => array(
@@ -93,6 +109,20 @@ return array(
 					),
 					'defaults' => array(
 						'controller' => 'RestricaoController',
+						'action'     => 'index',
+					),
+				),
+			),
+			'dispensamedica' => array(
+				'type'      => 'Segment',
+				'options'   => array(
+					'route'    => '/dispensamedica[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+						'controller' => 'DispensamedicaController',
 						'action'     => 'index',
 					),
 				),
@@ -156,8 +186,10 @@ return array(
 			'census-service-arma' => 'Census\Service\Arma',
 			'census-service-ctgrafi' => 'Census\Service\Ctgrafi',
 			'census-service-formacao' => 'Census\Service\Formacao',
+			'census-service-curso' => 'Census\Service\Curso',
 			'census-service-restricao' => 'Census\Service\Restricao',
 			'census-service-restricaomedica' => 'Census\Service\Restricaomedica',
+			'census-service-dispensamedica' => 'Census\Service\Dispensamedica',
 		)
 	),
 		'doctrine' => array(

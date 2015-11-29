@@ -4,7 +4,7 @@ namespace Census\Filter;
 
 use Zend\InputFilter\InputFilter;
 
-class Formacao extends InputFilter
+class Curso extends InputFilter
 {
 	public function __construct() 
 	{

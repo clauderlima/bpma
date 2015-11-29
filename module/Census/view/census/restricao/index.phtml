@@ -1,6 +1,56 @@
 <div class="panel panel-primary">
 	<div class="panel-heading">
         <div class="panel-title">
+            Restrições Médicas Vigentes
+        </div>
+    </div>
+    <div class="panel-body">
+    	<table class="table">
+    		<thead>
+    			<tr>
+    				<th>Post/Grad</th>
+    				<th>Nome de Guerra</th>
+    				<th>Início</th>
+    				<th>Fim</th>
+    				<th>Restrições</th>
+    				<th>Opções</th>
+    			</tr>
+    		</thead>
+    		<tbody>
+    		<?php foreach ($dados as $item):?>
+    		<?php 
+    				$today = new \DateTime('now');
+    			if ($item->getInicio() <= $today && $today <= $item->getFim()):?>
+    			<tr>
+    				<td><?php echo $item->getPolcodigo()->getPostoGraduacao()?></td>
+    				<td><?php echo $item->getPolcodigo()->getNomeGuerra()?></td>
+    				<td><?php echo $item->getInicio()->format('d/m/Y');?></td>
+    				<td><?php echo $item->getFim()->format('d/m/Y');?></td>
+    				<td><?php 
+          					foreach ($item->getRetcodigo() as $var)
+          					{
+          						$desc = $var->getDescricao();
+          						$tipo = $var->getTipo();
+          						
+          						echo "<i title='$desc'>$tipo </i>";
+          					}
+            //echo $item->getRetcodigo()->getTipo()?></td>
+            		<td><a href="/restricao/alterar/<?php echo $item->getRescodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
+    				<a href="/restricao/deletar/<?php echo $item->getRescodigo()?>"><i class="glyphicon glyphicon-trash" style="color: red"></i></a></td>
+    			</tr>
+    			<?php endif;?>
+    			<?php endforeach;?>
+    		</tbody>
+    	</table>
+    </div>
+    <div class="panel-footer">
+    </div>
+</div>
+
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+        <div class="panel-title">
             Restrições Médicas
         </div>
     </div>

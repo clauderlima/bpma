@@ -48,7 +48,7 @@
 	        	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 				    <li><a href="/formacao/adicionar/<?php echo $this->filter($policial)->codigo(); ?>">Adicionar Formação</a></li>
 					<li class="divider"></li>
-					<li><a href="#">Curso PM</a></li>
+					<li><a href="/curso/adicionar/<?php echo $this->filter($policial)->codigo(); ?>">Curso PM</a></li>
   				</ul>
 			</li>
 			<li role="presentation" class="dropdown">
@@ -58,7 +58,7 @@
 	        	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 				    <li><a href="/restricao/cadastrar/<?php echo $this->filter($policial)->codigo(); ?>">Restrição Médica</a></li>
 					<li class="divider"></li>
-					<li><a href="#">Dispensa</a></li>
+					<li><a href="/dispensamedica/cadastrar/<?php echo $this->filter($policial)->codigo(); ?>">Dispensa</a></li>
   				</ul>
 			</li>
 			<li role="presentation" class="dropdown">

@@ -18,56 +18,55 @@ class Curso
      *
      * @ORM\Column(name="cur_Codigo", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $curCodigo;
+    private $codigo;
 
     /**
      * @var string
      *
      * @ORM\Column(name="cur_Nome", type="string", length=45, nullable=false)
      */
-    private $curNome;
+    private $nome;
 
     /**
      * @var string
      *
      * @ORM\Column(name="cur_Unidade", type="string", length=45, nullable=true)
      */
-    private $curUnidade;
+    private $unidade;
 
     /**
      * @var string
      *
      * @ORM\Column(name="cur_CargaHoraria", type="string", length=45, nullable=false)
      */
-    private $curCargahoraria;
+    private $cargahoraria;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="cur_DataConclusao", type="date", nullable=false)
      */
-    private $curDataconclusao;
+    private $dataconclusao;
 
     /**
      * @var string
      *
      * @ORM\Column(name="cur_Tipo", type="string", length=45, nullable=true)
      */
-    private $curTipo;
+    private $tipo;
 
     /**
      * @var \Policial
      *
-     * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\OneToOne(targetEntity="Policial")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="pol_Codigo", referencedColumnName="pol_Codigo")
      * })
      */
-    private $polCodigo;
+    private $polcodigo;
 
     public function __construct(array $data) {
     	$hydrator = new ClassMethods();
@@ -80,67 +79,66 @@ class Curso
     	return $hydrator->extract($this);
     }
 
-
-    public function getCurCodigo(){
-        return $this->curCodigo;
+    public function getCodigo(){
+        return $this->codigo;
     }
 
-    public function setCurCodigo($curCodigo){
-        $this->curCodigo = $curCodigo;
+    public function setCodigo($codigo){
+        $this->codigo = $codigo;
         return $this;
     }
 
-    public function getCurNome(){
-        return $this->curNome;
+    public function getNome(){
+        return $this->nome;
     }
 
-    public function setCurNome($curNome){
-        $this->curNome = $curNome;
+    public function setNome($nome){
+        $this->nome = $nome;
         return $this;
     }
 
-    public function getCurUnidade(){
-        return $this->curUnidade;
+    public function getUnidade(){
+        return $this->unidade;
     }
 
-    public function setCurUnidade($curUnidade){
-        $this->curUnidade = $curUnidade;
+    public function setUnidade($unidade){
+        $this->unidade = $unidade;
         return $this;
     }
 
-    public function getCurCargahoraria(){
-        return $this->curCargahoraria;
+    public function getCargahoraria(){
+        return $this->cargahoraria;
     }
 
-    public function setCurCargahoraria($curCargahoraria){
-        $this->curCargahoraria = $curCargahoraria;
+    public function setCargahoraria($cargahoraria){
+        $this->cargahoraria = $cargahoraria;
         return $this;
     }
 
-    public function getCurDataconclusao(){
-        return $this->curDataconclusao;
+    public function getDataconclusao(){
+        return $this->dataconclusao;
     }
 
-    public function setCurDataconclusao($curDataconclusao){
-        $this->curDataconclusao = $curDataconclusao;
+    public function setDataconclusao($dataconclusao){
+        $this->dataconclusao = new \DateTime($dataconclusao);
         return $this;
     }
 
-    public function getCurTipo(){
-        return $this->curTipo;
+    public function getTipo(){
+        return $this->tipo;
     }
 
-    public function setCurTipo($curTipo){
-        $this->curTipo = $curTipo;
+    public function setTipo($tipo){
+        $this->tipo = $tipo;
         return $this;
     }
 
-    public function getPolCodigo(){
-        return $this->polCodigo;
+    public function getPolcodigo(){
+        return $this->polcodigo;
     }
 
-    public function setPolCodigo($polCodigo){
-        $this->polCodigo = $polCodigo;
+    public function setPolcodigo($polcodigo){
+        $this->polcodigo = $polcodigo;
         return $this;
     }
 

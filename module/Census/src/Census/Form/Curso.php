@@ -6,6 +6,7 @@ use Zend\Form\Form;
 use Zend\Form\Element\Text;
 use Zend\Form\Element\Select;
 use Zend\Form\Element\Date;
+use Zend\Form\Element\Submit;
 
 class Curso extends Form
 {
@@ -41,7 +42,7 @@ class Curso extends Form
 		$this->add($cargahoraria);
 		
 		// cur_DataConclusao
-		$conclusao = new Date('conclusao');
+		$conclusao = new Date('dataconclusao');
 		$conclusao->setLabel('Data de conclusão')
 		->setAttributes(array(
 				'id' => 'conclusao',
@@ -56,14 +57,25 @@ class Curso extends Form
 				'id' => 'tipo',
 				'class' => 'form-control'))
 			->setValueOptions(array(
-				'COMSOC' => 'Comunicação Social',
-				'INF' => 'Informática',
-				'TRA' => 'Trânsito'
+				'Curso de Formação' => 'Curso de Formação',
+				'Curso de Especialização' => 'Curso de Especialização',
+				'Curso de Habilitação' => 'Curso de Habilitação',
+				'Curso de Aperfeiçoamento' => 'Curso de Aperfeiçoamento',
+				'Curso de Graduação' => 'Curso de Graduação',
+				'Curso de Pós-graduação' => 'Curso de Pós-graduação',
+				'Programa de Atualização Básica em Segurança Pública' => 'Programa de Atualização Básica em Segurança Pública',
+
 		));
 		$this->add($tipo);
 	
+		//submit
 		$submit = new Submit('submit');
-		$submit->setValue('Salvar');
+		$submit->setAttributes(array(
+				'id' => 'submit',
+				'value' => 'Enviar',
+				'type' => 'button',
+				'class' => 'btn btn-default'
+		));
 		$this->add($submit);
 	}
 }

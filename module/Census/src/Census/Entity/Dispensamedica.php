@@ -18,35 +18,48 @@ class Dispensamedica
      *
      * @ORM\Column(name="dis_Codigo", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $disCodigo;
+    private $codigo;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="dis_InicioData", type="date", nullable=true)
      */
-    private $disIniciodata;
+    private $inicio;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dis_Motivo", type="string", length=45, nullable=false)
+     */
+    private $motivo;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dis_CID", type="string", length=45, nullable=false)
+     */
+    private $cid;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="dis_FimData", type="date", nullable=true)
      */
-    private $disFimdata;
+    private $fim;
 
     /**
      * @var \Policial
      *
-     * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\OneToOne(targetEntity="Policial")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="pol_Codigo", referencedColumnName="pol_Codigo")
      * })
      */
-    private $polCodigo;
+    private $polcodigo;
 
     public function __construct(array $data) {
     	$hydrator = new ClassMethods();
@@ -60,39 +73,60 @@ class Dispensamedica
     }
 
 
-    public function getDisCodigo(){
-        return $this->disCodigo;
+
+    public function getCodigo(){
+        return $this->codigo;
     }
 
-    public function setDisCodigo($disCodigo){
-        $this->disCodigo = $disCodigo;
+    public function setCodigo($codigo){
+        $this->codigo = $codigo;
         return $this;
     }
 
-    public function getDisIniciodata(){
-        return $this->disIniciodata;
+    public function getInicio(){
+        return $this->inicio;
     }
 
-    public function setDisIniciodata($disIniciodata){
-        $this->disIniciodata = $disIniciodata;
+    public function setInicio($inicio){
+        $this->inicio = new \DateTime($inicio);
         return $this;
     }
 
-    public function getDisFimdata(){
-        return $this->disFimdata;
+    public function getFim(){
+        return $this->fim;
     }
 
-    public function setDisFimdata($disFimdata){
-        $this->disFimdata = $disFimdata;
+    public function setFim($fim){
+        $this->fim = new \DateTime($fim);
         return $this;
     }
 
-    public function getPolCodigo(){
-        return $this->polCodigo;
+    public function getPolcodigo(){
+        return $this->polcodigo;
     }
 
-    public function setPolCodigo($polCodigo){
-        $this->polCodigo = $polCodigo;
+    public function setPolcodigo($polcodigo){
+        $this->polcodigo = $polcodigo;
+        return $this;
+    }
+
+
+    public function getMotivo(){
+        return $this->motivo;
+    }
+
+    public function setMotivo($motivo){
+        $this->motivo = $motivo;
+        return $this;
+    }
+
+
+    public function getCid(){
+        return $this->cid;
+    }
+
+    public function setCid($cid){
+        $this->cid = $cid;
         return $this;
     }
 

@@ -1,0 +1,95 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+        <div class="panel-title">
+            Dispensa Médicas Vigentes do BPMA
+        </div>
+    </div>
+    <div class="panel-body">
+    	<table class="table">
+    		<thead>
+    			<tr>
+    				<th>Pos/Grad</th>
+    				<th>Nome Guerra</th>
+    				<th>Início</th>
+    				<th>Fim</th>
+    				<th>Motivo</th>
+    				<th>QTD dias no ano</th>
+    				<th>Opções</th>
+    			</tr>
+    		</thead>
+    		<tbody>
+    		<?php foreach ($dados as $item):?>
+    			<?php 
+    				$today = new \DateTime('now');
+    			if ($item->getInicio() <= $today && $today <= $item->getFim()):?>
+    			<tr>
+    				<td><?php echo $item->getPolcodigo()->getPostograduacao()?></td>
+    				<td><?php echo $item->getPolcodigo()->getNomeguerra()?></td>
+    				<td><?php echo $item->getInicio()->format('d/m/Y')?></td>
+    				<td><?php echo $item->getFim()->format('d/m/Y')?></td>
+    				<td><?php echo $item->getMotivo()?></td>
+    				<td></td>
+    				<td><a href="/dispensamedica/editar/<?php echo $item->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
+    				<a href="/dispensamedica/deletar/<?php echo $item->getCodigo()?>" onClick="deleta()"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a></td>
+    			</tr>
+    			<?php endif;?>
+    			<?php endforeach;?>
+    		</tbody>
+    	</table>
+    </div>
+    <div class="panel-footer">
+    </div>
+</div>
+
+
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+        <div class="panel-title">
+            Dispensa Médicas do BPMA no ano
+        </div>
+    </div>
+    <div class="panel-body">
+    	<table class="table">
+    		<thead>
+    			<tr>
+    				<th>Pos/Grad</th>
+    				<th>Nome Guerra</th>
+    				<th>Início</th>
+    				<th>Fim</th>
+    				<th>Motivo</th>
+    				<th>QTD dias no ano</th>
+    				<th>Opções</th>
+    			</tr>
+    		</thead>
+    		<tbody>
+    		<?php foreach ($dados as $item):?>
+    			<tr>
+    				
+    				<td><?php echo $item->getPolcodigo()->getPostograduacao()?></td>
+    				<td><?php echo $item->getPolcodigo()->getNomeguerra()?></td>
+    				<td><?php echo $item->getInicio()->format('d/m/Y')?></td>
+    				<td><?php echo $item->getFim()->format('d/m/Y')?></td>
+    				<td><?php echo $item->getMotivo()?></td>
+    				<td></td>
+    				<td><a href="/dispensamedica/editar/<?php echo $item->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
+    				<a href="/dispensamedica/deletar/<?php echo $item->getCodigo()?>" onClick="deleta()"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a></td>
+    				
+    			</tr>
+    			<?php endforeach;?>
+    		</tbody>
+    	</table>
+    </div>
+    <div class="panel-footer">
+    </div>
+</div>
+
+<script>
+	function deleta(){
+		if(confirm("Tem certeza que deseja excluir este registro?")){
+			return true;
+		} else {
+			return false;
+		}
+}
+</script>

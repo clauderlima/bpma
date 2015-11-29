@@ -8,14 +8,12 @@ use Zend\Form\Element\Select;
 use Zend\Form\Element\Date;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Form\Element\Hidden;
-use Zend\Form\Element\MultiCheckbox;
-use Zend\Form\Element\Checkbox;
 
 class Restricaomedica extends Form
 {
 	public function __construct(ServiceLocatorInterface $sm) 
 	{
-		parent::__construct('formCtgrafi');;
+		parent::__construct('formRestricaomedica');;
 		
 		$em = $sm->get('Doctrine\ORM\EntityManager');
 		$arrRestricoes = array();
