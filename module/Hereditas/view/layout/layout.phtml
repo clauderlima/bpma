@@ -22,7 +22,7 @@
                         ->prependStylesheet($this->basePath() . '/assets/css/pe-icon-7-stroke.css')
                         ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
         ?>
-
+ 
         <!-- Scripts -->
         <?php
         echo $this
@@ -67,6 +67,36 @@
 		                            	<li><a href="/census">Consulta ao Cadastro</a></li>
 		                            	<li><a href="/mapa">Mapa do Efetivo</a></li>
 		                            	<li><a href="/ferias">Férias</a></li>
+	                        		</ul>
+	                    		</div>
+                			</li>
+                			
+                			<li>                   
+                    			<a data-toggle="collapse" href="#componentsFormacao">                        
+                        			<i class="pe-7s-study"></i> 
+                        			<p>Formação
+                           				<b class="caret"></b>
+                        			</p>
+                    			</a>                
+	                    		<div class="collapse" id="componentsFormacao">
+	                        		<ul class="nav">
+		                            	<li><a href="/formacao">Curso Civil</a></li>
+		                            	<li><a href="/curso">Curso Militar</a></li>
+	                        		</ul>
+	                    		</div>
+                			</li>
+                			
+                			<li>                   
+                    			<a data-toggle="collapse" href="#componentsSaude">                        
+                        			<i class="glyphicon glyphicon-heart-empty"></i> 
+                        			<p>Saúde
+                           				<b class="caret"></b>
+                        			</p>
+                    			</a>                
+	                    		<div class="collapse" id="componentsSaude">
+	                        		<ul class="nav">
+		                            	<li><a href="/restricao">Restrições Médicas</a></li>
+		                            	<li><a href="/dispensamedica">Dispensas Médicas</a></li>
 	                        		</ul>
 	                    		</div>
                 			</li>
