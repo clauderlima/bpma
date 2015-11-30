@@ -3,7 +3,6 @@
 namespace Census\Modulo;
 
 use ZendService\LiveDocx\MailMerge;
-use Zend\View\Model\ViewModel;
 
 class Abono extends Requerimento
 {	

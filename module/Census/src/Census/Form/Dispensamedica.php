@@ -2,10 +2,8 @@
 
 namespace Census\Form;
 
-use Zend\Form\Form;
-use Zend\Form\Element\Text;
-use Zend\Form\Element\Select;
 use Zend\Form\Element\Date;
+use Zend\Form\Element\Text;
 use Zend\Form\Element\Submit;
 
 class Dispensamedica extends Form
