@@ -43,16 +43,3 @@ $(function (){
     // mascara para captcha com 12 caracteres apenas alfabéticos: xxxxxxxxxxxx
     $("input#inputCaptcha").mask("aaaaa");
 });
-
-/**
- * plugin typeahead
- */
-$(function (){
-    $('input.typeahead').typeahead({
-        ajax: { 
-            url: '/pessoal/search',    // url do serviço AJAX
-            triggerLength: 2,           // mínimo de caracteres
-            displayField: 'pes_NomeCompleto',       // campo do JSON utilizado de retorno
-        }
-    });
-});

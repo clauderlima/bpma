@@ -6,29 +6,27 @@
         <?php //echo "<pre>"; echo print_r($policial); exit;?>
     </div>
     <div class="panel-body">
-    <form method="POST" action="/requerimento/geraabono/<?php echo $dados[0]["codigo"]?>">
-Data Início: <input type="date" name="dataInicial"><br>
-Quantidade de dias: <select name="quantidadeDias">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
-			</select><br>
-Chefe Imediato: <select name="chefeImediato">
-		<option value="Osvaldo Cordeiro de Lisboa Júnio - Maj QOPM">Maj Lisboa</option>
-		<option value="Clauder Costa de Lima - Maj QOPM">Maj Clauder</option>
-		<option value="Emerson Roberto Araújo Melão - Cap QOPM">Cap Emerson</option>
-		<option value="Marcos Braga e Silva Araújo - Cap QOPM">Cap Marcos Braga</option>
-		<option value="Giulliano Ribeiro de Enoki - Cap QOPM">Cap Enoki</option>
-		<option value="Adelino José de Oliveira Júnior - Cap QOPM">Cap Adelino</option>
-		<option value="Oscar Calcagno Fettermann - 2º Ten QOPM">2º Ten Fettermann</option>
-		<option value="Natanael Marçal de Sousa - 2º Ten QOPM">2º Ten Natanael</option>
-	</select>
-<br><br><input type="submit" value="Enviar">
-</form>
+    <form method="POST" action="/requerimento/requererAbono/<?php echo $dados[0]["codigo"]?>">
+    	<div class="row">
+    		<div class="col-xs-4">
+    			Data Início: <input type="date" name="dataInicial"><br>
+    		</div>
+    		<div class="col-xs-4">
+    			Quantidade de dias: 
+    			<select name="quantidadeDias">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+				</select>
+    		</div>
+    	</div>
     </div>
+	<div class="panel-footer">
+		<input type="submit" value="Enviar">
+	</div>
+</form>
 </div>
-<?php // echo "<pre>"; print_r($dados);?>
 
 

@@ -20,41 +20,45 @@ class RequerimentoController extends AbstractController
 	{
 		$id = (int) $this->params()->fromRoute('id', 0);
 		
-		$query = $this->getEm()->createQuery("SELECT p.codigo, p.nomecompleto, p.postograduacao, p.matricula, 
-				p.matriculasiape, p.dataadmissao, p.email, p.comportamento, p.telefonecelular, p.subunidade, p.nomeguerra 
+		$query = $this->getEm()->createQuery("SELECT p.codigo, p.postograduacao, p.nomeguerra 
 				FROM Census\Entity\Policial p WHERE p.codigo = :codigo");
 		$query->setParameter('codigo',$id);
 		
 		$dados = $query->getResult();
 		
-		return (new ViewModel())
-		->setVariable('dados', $dados);
+		$view = new ViewModel();
+		$view->setVariable('dados', $dados);
+		return $view;
 		
 	}
 	
-	public function geraabonoAction()
+	public function requererAbonoAction()
 	{
 		$id = (int) $this->params()->fromRoute('id', 0);
 		
 		//Pega dados do Formulário de abono
-		$dataInicial = $_POST['dataInicial'];
-		$quantidadeDias = $_POST['quantidadeDias'];
-		$chefeImediato = $_POST['chefeImediato'];
+		$inicio = $_POST['dataInicial'];
+		$qtdDias = $_POST['quantidadeDias'];
 		
-		/* echo "<h1>Resultado:</h1>";
-		echo "<br>Id: $id<br>dataInicial: $dataInicial<br>quantidadeDias: $quantidadeDias<br>";
-		exit; */
-		$query = $this->getEm()->createQuery("SELECT p.codigo, p.nomecompleto, p.postograduacao, p.matricula,
-				p.matriculasiape, p.dataadmissao, p.email, p.comportamento, p.telefonecelular, p.subunidade, p.nomeguerra
-				FROM Census\Entity\Policial p WHERE p.codigo = :codigo");
-		$query->setParameter('codigo',$id);
+		$abono = new \Census\Modulo\Abono($this->getServiceLocator()->get('servicemanager'));
 		
-		$dados = $query->getResult();
+		$abono->requer($id, $inicio, $qtdDias);
 		
-		$abono = new Abono($id, $dataInicial, $quantidadeDias, $chefeImediato, $dados[0]);
+		$filename = array(
+			'arquivo' => $abono->getArquivo()
+		);
 		
-		return new ViewModel();
+		$view = new ViewModel();
+		$view->setTerminal(true);
+		return $view;
 		
+	}
+	
+	public function testeAction()
+	{
+		 $view = new ViewModel();
+    		$view->setTerminal(true);
+    		return $view;
 	}
 	
 }
