@@ -16,6 +16,7 @@ return array(
 			'CursoController' => 'Census\Controller\CursoController',
 			'RestricaoController' => 'Census\Controller\RestricaoController',
 			'DispensamedicaController' => 'Census\Controller\DispensamedicaController',
+			'AlteracaoController' => 'Census\Controller\AlteracaoController',
 		),
 	),
 		
@@ -155,6 +156,20 @@ return array(
 					),
 				),
 			),
+			'alteracao' => array(
+				'type'      => 'Segment',
+				'options'   => array(
+					'route'    => '/alteracao[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+						'controller' => 'AlteracaoController',
+						'action'     => 'index',
+					),
+				),
+			),
 			'requerimento' => array(
 				'type'      => 'Segment',
 				'options'   => array(
@@ -190,6 +205,7 @@ return array(
 			'census-service-restricao' => 'Census\Service\Restricao',
 			'census-service-restricaomedica' => 'Census\Service\Restricaomedica',
 			'census-service-dispensamedica' => 'Census\Service\Dispensamedica',
+			'census-service-alteracao' => 'Census\Service\Alteracao',
 		)
 	),
 		'doctrine' => array(

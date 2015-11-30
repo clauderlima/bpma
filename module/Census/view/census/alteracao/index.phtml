@@ -1,0 +1,50 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+        <div class="panel-title">
+            Alterações dos Policiais do BPMA
+        </div>
+    </div>
+    <div class="panel-body">
+    	<table class="table">
+    		<thead>
+    			<tr>
+    				<th>Pos/Grad</th>
+    				<th>Nome Guerra</th>
+    				<th>Tipo</th>
+    				<th>Descrição</th>
+    				<th>Data</th>
+    				<th>Boletim</th>
+    				<th>Opções</th>
+    			</tr>
+    		</thead>
+    		<tbody>
+    		<?php foreach ($dados as $item):?>
+    			<tr>
+    				
+    				<td><?php echo $item->getPolcodigo()->getPostograduacao()?></td>
+    				<td><?php echo $item->getPolcodigo()->getNomeguerra()?></td>
+    				<td><?php echo $item->getTipo()?></td>
+    				<td><?php echo $item->getDescricao()?></td>
+    				<td><?php echo $item->getData()->format('d/m/Y');?></td>
+    				<td><?php echo $item->getBoletim()?></td>
+    				<td><a href="/alteracao/editar/<?php echo $item->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
+    				<a href="/alteracao/deletar/<?php echo $item->getCodigo()?>" onClick="deleta()"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a></td>
+    				
+    			</tr>
+    			<?php endforeach;?>
+    		</tbody>
+    	</table>
+    </div>
+    <div class="panel-footer">
+    </div>
+</div>
+
+<script>
+	function deleta(){
+		if(confirm("Tem certeza que deseja excluir este registro?")){
+			return true;
+		} else {
+			return false;
+		}
+}
+</script>
