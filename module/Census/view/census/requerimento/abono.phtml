@@ -1,32 +1,32 @@
 <div class="panel panel-primary">
 	<div class="panel-heading">
-        <div class="panel-title">
+		<div class="panel-title">
             Requerimento de abono para <?php echo $dados[0]['postograduacao'] . " " . $dados[0]['nomeguerra']; ?>
         </div>
         <?php //echo "<pre>"; echo print_r($policial); exit;?>
     </div>
-    <div class="panel-body">
-    <form method="POST" action="/requerimento/requererAbono/<?php echo $dados[0]["codigo"]?>">
-    	<div class="row">
-    		<div class="col-xs-4">
-    			Data Início: <input type="date" name="dataInicial"><br>
-    		</div>
-    		<div class="col-xs-4">
-    			Quantidade de dias: 
-    			<select name="quantidadeDias">
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
-				</select>
-    		</div>
-    	</div>
-    </div>
+	<div class="panel-body">
+    <?php $idpolicial = $dados[0]['codigo']?>
+    <form method="POST"
+			action="/requerimento/requererAbono/<?php echo $idpolicial?>">
+			<div class="row">
+				<div class="col-xs-4">
+					Data Início: <input type="date" name="dataInicial"><br>
+				</div>
+				<div class="col-xs-4">
+					Quantidade de dias: <select name="quantidadeDias">
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+						<option>5</option>
+					</select>
+				</div>
+			</div>
+	
+	</div>
 	<div class="panel-footer">
 		<input type="submit" value="Enviar">
 	</div>
-</form>
+	</form>
 </div>
-
-
