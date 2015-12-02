@@ -8,8 +8,7 @@
     	<table class="table">
     		<thead>
     			<tr>
-    				<th>Pos/Grad</th>
-    				<th>Nome Guerra</th>
+    				<th>Policial</th>
     				<th>Tipo</th>
     				<th>Nome</th>
     				<th>Unidade</th>
@@ -21,8 +20,7 @@
     		<?php foreach ($dados as $item):?>
     			<tr>
     				
-    				<td><?php echo $item->getPolcodigo()->getPostograduacao()?></td>
-    				<td><?php echo $item->getPolcodigo()->getNomeguerra()?></td>
+    				<td><a href="/census/detalhes/<?php echo $item->getPolcodigo()->getCodigo()?>"><?php echo $item->getPolcodigo()->getPostograduacao()?> <?php echo $item->getPolcodigo()->getNomeguerra()?></a></td>
     				<td><?php echo $item->getTipo()?></td>
     				<td><?php echo $item->getNome()?></td>
     				<td><?php echo $item->getUnidade()?></td>
