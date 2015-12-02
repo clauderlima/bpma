@@ -23,6 +23,7 @@ class Formacao extends Form
 				'class' => 'form-control'))
 			->setValueOptions(array(
 				'' => "Selecione",
+				'Ensino Médio' => 'Ensino Médio',
 				'Bacharelado' => 'Bacharelado',
 				'Licenciatura' => 'Licenciatura',
 				'Tecnólogo' => 'Tecnólogo',
@@ -70,6 +71,7 @@ class Formacao extends Form
 				'class' => 'form-control'))
 			->setValueOptions(array(
 				'' => "Selecione",
+				'Ensino Médio' => 'Ensino Médio',
 				'Ciências Extatas e da Terra' => 'Ciências Extatas e da Terra',
 				'Ciências Biológicas' => 'Ciências Biológicas',
 				'Ciências da Saúde' => 'Ciências da Saúde',

@@ -103,5 +103,20 @@ class CtgrafiController extends AbstractController
 			
 		return $view;
 	}
+	
+	public function deletarAction()
+	{
+		$id = (int) $this->params()->fromRoute('id', 0);
+	
+		$serviceCtgrafi = $this->getServiceLocator()->get('census-service-ctgrafi');
+	
+		$dadosCtgrafi = $this->getEm('Census\Entity\Ctgrafi')->find($id);
+	
+		if ($dadosCtgrafi)
+		{
+			if ($serviceCtgrafi->delete('Census\Entity\Ctgrafi', $id))
+				return $this->redirect()->toUrl('/ctgrafi');
+		}
+	}
 
 }

@@ -15,7 +15,7 @@ class Arma extends Form
 		
 		//arm_Tombamento
 		$tombamento = new Text('tombamento');
-		$tombamento->setLabel('Tombamento')
+		$tombamento->setLabel('Tombamento / SIGMA')
 		->setAttributes(array(
 				'id' => 'tombamento',
 				'class' => 'form-control',
@@ -32,6 +32,7 @@ class Arma extends Form
 				'' => 'Selecione...',
 				'Pistola' => 'Pistola',
 				'Revólver' => 'Revólver',
+				'Carabina' => 'Carabina',
 			));
 		$this->add($especie);
 		
@@ -44,6 +45,8 @@ class Arma extends Form
 			->setValueOptions(array(
 				'' => 'Selecione...',
 				'Taurus' => 'Taurus',
+				'CBC' => 'CBC',
+				'Rossi' => 'Rossi',
 		));
 		$this->add($marca);
 		
@@ -56,6 +59,8 @@ class Arma extends Form
 			->setValueOptions(array(
 				'' => 'Selecione...',
 				'PT 24/7 PRO' => 'PT 24/7 PRO',
+				'Revólver' => 'Revólver',
+				'Carabina' => 'Carabina',
 		));
 		$this->add($modelo);
 		
@@ -78,6 +83,7 @@ class Arma extends Form
 				'' => 'Selecione...',
 				'.40mm' => '.40mm',
 				'.38mm' => '.38mm',
+				'.22mm' => '.22mm',
 			));
 		$this->add($calibre);
 		

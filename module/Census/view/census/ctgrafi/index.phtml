@@ -1,8 +1,3 @@
-<?php 
-echo "<pre>";
-var_dump($dados);
-exit;
-?>
 
 <div class="panel panel-primary">
 	<div class="panel-heading">
@@ -37,8 +32,8 @@ exit;
     				<td><?php echo $item->getArmcodigo()->getModelo()?></td>
     				<td><?php echo $item->getArmcodigo()->getNumeroserie()?></td>
     				<td><?php echo $item->getArmcodigo()->getTombamento()?></td>
-    				<td><a href="/ctgrafi/editar/<?php echo $item->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a></td>
-    				
+    				<td><a href="/ctgrafi/editar/<?php echo $item->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a>
+    				<a href="/ctgrafi/deletar/<?php echo $item->getCodigo()?>"><i class="glyphicon glyphicon-trash"></i></a></td>
     			</tr>
     			<?php endforeach;?>
     		</tbody>
