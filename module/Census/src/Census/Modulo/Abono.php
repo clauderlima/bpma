@@ -62,16 +62,13 @@ class Abono extends Requerimento
 		{
 			// Caso caia aqui pode ser:
 			// abono já quererido, abono anterior parcial, abono anterior indeferido, ja gozou completo
-			echo "<pre>";
+	
 			$diasgozados = 0;
 			$diasrequeridos = 0;
 			$diasautorizados = 0;
 			$infogozados = array();
 			$inforequeridos = array();
 			$infoautorizados = array();
-			$textoInfoGozados = array();
-			$textoInfoRequeridos = array();
-			$textoInfoAutorizados = array();
 			
 			$hoje = new \DateTime('now');
 			
@@ -156,12 +153,12 @@ class Abono extends Requerimento
 		$service = $this->sm->get('census-service-requerimentoabono');
 		$dataabono = $service->insert($data, 'Census\Entity\Requerimentoabono');
 		
-		$this->numero = str_pad($dataabono->getCodigo(), 6, "0", STR_PAD_LEFT) . "/" . $hoje->format('Y');
+		$this->numero = str_pad($dataabono->getCodigo(), 4, "0", STR_PAD_LEFT);
 		
 		//Gerar o requerimento
 		$this->geraRequerimento();
 	}
-	
+
 	function geraRequerimento()
 	{
 		// Configuração para gerar datas em português
