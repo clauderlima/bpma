@@ -136,11 +136,51 @@ class PolicialController extends AbstractController
     		// redirecionar para action index
     		return $this->redirect()->toRoute('census');
     	}
-    	 
+    	
+    	
+    	$em = $this->getEm();
+    	
+    	// Dados Formação
+    	$formacaocivil = $em->createQueryBuilder()
+	    	->select('f')
+	    	->from('Census\Entity\Formacao', 'f')
+	    	->where('f.polcodigo = :polcodigo')
+	    	->setParameter('polcodigo', $id)
+	    	->orderBy('f.conclusao', 'ASC')
+	    	->getQuery()->getResult();
+    	$formacaomilitar = $em->createQueryBuilder()
+	    	->select('c')
+	    	->from('Census\Entity\Curso', 'c')
+	    	->where('c.polcodigo = :polcodigo')
+	    	->setParameter('polcodigo', $id)
+	    	->orderBy('c.dataconclusao', 'ASC')
+	    	->getQuery()->getResult();
+    	
+    	// Dados Alterações
+    	$alteracoes = $em->createQueryBuilder()
+	    	->select('a')
+	    	->from('Census\Entity\Alteracao', 'a')
+	    	->where('a.polcodigo = :polcodigo')
+	    	->setParameter('polcodigo', $id)
+	    	->orderBy('a.codigo', 'ASC')
+	    	->getQuery()->getResult();
+    	// Dados Requerimentos
+    	$requerimentos = $em->createQueryBuilder()
+	    	->select('r')
+	    	->from('Census\Entity\Requerimentoabono', 'r')
+	    	->where('r.polcodigo = :polcodigo')
+	    	->setParameter('polcodigo', $id)
+	    	->orderBy('r.codigo', 'ASC')
+	    	->getQuery()->getResult();
+    
     	// dados eviados para detalhes.phtml
     	return (new ViewModel())
-    	->setTerminal($this->getRequest()->isXmlHttpRequest())
-    	->setVariable('policial', $policial);
+    		->setTerminal($this->getRequest()->isXmlHttpRequest())
+    		->setVariable('policial', $policial)
+    		->setVariable('formacaocivil', $formacaocivil)
+    		->setVariable('formacaomilitar', $formacaomilitar)
+    		->setVariable('alteracoes', $alteracoes)
+    		->setVariable('requerimentos', $requerimentos);
     }
  
     // GET /policial/editar/id

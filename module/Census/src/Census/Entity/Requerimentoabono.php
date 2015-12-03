@@ -44,9 +44,9 @@ class Requerimentoabono
     private $datasolicitacao;
 
     /**
-     * @var boolean
+     * @var string
      *
-     * @ORM\Column(name="rab_Decisao", type="boolean", nullable=true)
+     * @ORM\Column(name="rab_Decisao", type="string", length=45, nullable=true)
      */
     private $decisao;
 
@@ -129,7 +129,14 @@ class Requerimentoabono
     }
 
     public function setDatadecisao($datadecisao){
-        $this->datadecisao = new \DateTime($datadecisao);
+        if ($datadecisao)
+        {
+        	$this->datadecisao = new \DateTime($datadecisao);
+        } else 
+        {
+        	$this->datadecisao = NULL;
+        }
+        	
         return $this;
     }
 

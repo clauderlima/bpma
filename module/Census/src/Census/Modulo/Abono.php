@@ -76,7 +76,7 @@ class Abono extends Requerimento
 			{
 				if ($abono->getInicio() < $hoje)
 				{
-					if ($abono->getDecisao() == '1')
+					if ($abono->getDecisao() == 'Deferido')
 					{
 						$diasgozados += $abono->getQuantidadedias();
 						$infogozados[] = array(
@@ -86,7 +86,7 @@ class Abono extends Requerimento
 					}
 				} else 
 				{
-					if ($abono->getDecisao() == '1')
+					if ($abono->getDecisao() == 'Deferido')
 					{
 						$diasautorizados += $abono->getQuantidadedias();
 						$infoautorizados[] = array(

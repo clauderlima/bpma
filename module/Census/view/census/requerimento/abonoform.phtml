@@ -1,0 +1,35 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<div class="panel-title">
+            <h3 class="panel-title"><?php echo $this->policial['postograduacao'] . " " . $this->policial['nomeguerra']?> - Requerimento de Abono</h3>
+        </div>
+    </div>
+    <div class="panel-body">
+    <?php echo $this->form()->openTag($form); ?>
+    	<div class="row">
+    		
+    		<div class="col-xs-8">
+    			<?php echo $this->formRow($form->get('inicio')) ?>
+    		</div>
+    		<div class="col-xs-4">
+    			<?php echo $this->formRow($form->get('quantidadedias')) ?>
+    		</div>    		
+    	</div>
+    	<div class="row">
+    		<div class="col-xs-6">
+    			<?php echo $this->formRow($form->get('datasolicitacao')) ?>
+    		</div>
+    		<div class="col-xs-3">
+    			<?php echo $this->formRow($form->get('decisao')) ?>
+    		</div>
+    		<div class="col-xs-3">
+    			<?php echo $this->formRow($form->get('datadecisao')) ?>
+    		</div>
+    		<input type="hidden" id="polcodigo" name="polcodigo" value="<?php echo $this->policial['codigo']?>">
+    	</div>
+    </div>
+    <div class="panel-footer">
+    <?php echo $this->formSubmit($form->get('submit')) ?>
+    </div>
+    <?php echo $this->form()->closeTag($form); ?> 
+</div>

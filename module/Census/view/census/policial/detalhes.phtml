@@ -12,7 +12,8 @@
         <?php //echo "<pre>"; echo print_r($policial); exit;?>
     </div>
     <div class="panel-body">
-    
+    <div class="row">
+    <div class="col-xs-8">
 	<div class="barra-usuario" data-example-id="nav-pills-with-dropdown">
 	    <ul class="nav nav-pills">
 	      	<li role="presentation" class="dropdown">
@@ -83,6 +84,11 @@
 			</li>
 	    </ul>
 	  </div>
+	  </div>
+	  <div class="col-xs-4">
+	    <a href="<?php echo $this->url('census', array('action' => 'editar', 'id' => $this->filter($policial)->codigo())) ?>" class="btn btn-primary btn-sm">Editar Dados</a>
+  	  </div>
+	  </div>
     
     
     <?php //echo "<pre>"; echo print_r($this->policial);?>
@@ -102,7 +108,120 @@
     		<tr><td colspan="3"><div class="legenda">Sub Unidade:</div><div class="campo"><?php echo $this->filter($policial)->subUnidade(); ?></div></td><td colspan="3"><div class="legenda">Lotação:</div><div class="campo"><?php echo $this->filter($policial)->lotacao(); ?></div></td><td colspan="6"><div class="legenda">Posto de Serviço:</div><div class="campo"><?php echo $this->filter($policial)->servicoPosto(); ?></div></td></tr>
     		<tr><td colspan="4"><div class="legenda">Função:</div><div class="campo"><?php echo $this->filter($policial)->servicoFuncao(); ?></div></td><td colspan="4"><div class="legenda">Escala:</div><div class="campo"><?php echo $this->filter($policial)->servicoEscala(); ?></div></td><td colspan="4"><div class="legenda">Horário:</div><div class="campo"><?php echo $this->filter($policial)->servicoHorario(); ?></div></td></tr>
     	</table>
-    </div>
+    
+    <?php if (count($formacaomilitar) || count($formacaocivil)):?>	
+     <strong>Formação:</strong>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Tipo</th>
+					<th>Curso</th>
+					<th>Nome</th>
+					<th>Conclusão</th>
+					<th>Opções</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php $counter = 1;?>
+			
+				<?php foreach ($formacaomilitar as $militar):?>
+				<tr>
+					<th scope="row"><?php echo $counter++?></th>
+					<td>Militar</td>
+					<td><?php echo $militar->getTipo()?></td>
+					<td><?php echo $militar->getNome()?></td>
+					<td><?php echo $militar->getDataconclusao()->format('Y')?></td>
+					<td><a href="/curso/editar/<?php echo $militar->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
+    				<a href="/curso/deletar/<?php echo $militar->getCodigo()?>" onClick="deleta()"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a></td>
+				</tr>
+				<?php endforeach;?>
+				
+				<?php foreach ($formacaocivil as $civil):?>
+				<tr>
+					<th scope="row"><?php echo $counter++?></th>
+					<td>Civil</td>
+					<td><?php echo $civil->getTipo()?></td>
+					<td><?php echo $civil->getNome()?></td>
+					<td><?php echo $civil->getConclusao()->format('Y')?></td>
+					<td><a href="/formacao/editar/<?php echo $civil->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
+    				<a href="/formacao/deletar/<?php echo $civil->getCodigo()?>" onClick="deleta()"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a></td>
+				</tr>
+				<?php endforeach;?>
+			</tbody>
+		</table>
+		<?php endif;?>
+		<?php if (count($alteracoes)):?>
+		<strong>Alterações:</strong>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Tipo</th>
+					<th>Alteração</th>
+					<th>Descrição</th>
+					<th>Data Fato</th>
+					<th>Opções</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php $counter = 1;?>
+				<?php foreach ($alteracoes as $alteracao):?>
+				<tr>
+					<th scope="row"><?php echo $counter++?></th>
+					<td><?php echo $alteracao->getTipo()?></td>
+					<td><?php echo $alteracao->getFaltaServico()?></td>
+					<td><?php echo $alteracao->getDescricao()?></td>
+					<td><?php echo $alteracao->getDatafato()->format('d/m/Y')?></td>
+					<td><a href="/alteracao/editar/<?php echo $alteracao->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
+    				<a href="/alteracao/deletar/<?php echo $alteracao->getCodigo()?>" onClick="deleta()"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a></td>
+				</tr>
+				<?php endforeach;?>
+			</tbody>
+		</table>
+		<?php endif;?>
+		<?php if (count($requerimentos)):?>
+		<strong>Requerimentos:</strong>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Tipo</th>
+					<th>Dias</th>
+					<th>Início</th>
+					<th>Decisão</th>
+					<th>Data Decisão</th>
+					<th>Opções</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php $counter = 1;?>
+				<?php foreach ($requerimentos as $requerimento):?>
+				<tr>
+					<th scope="row"><?php echo $counter++?></th>
+					<td>Abono</td>
+					<td><?php echo $requerimento->getQuantidadedias()?></td>
+					<td><?php echo $requerimento->getDatasolicitacao()->format('d/m/Y')?></td>
+					<td><?php 
+						if ($requerimento->getDecisao()) 
+						{
+							echo $requerimento->getDecisao();
+						} else {
+							echo  "Em tramitação";;
+						}
+							
+						?></td>
+					<td><?php 
+						if ($requerimento->getDatadecisao())
+							echo $requerimento->getDatadecisao()->format('d/m/Y')?></td>
+					<td><a href="/requerimento/editarabono/<?php echo $requerimento->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
+    				<a href="/requerimento/deletarabono/<?php echo $requerimento->getCodigo()?>" onClick="deleta()"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a></td>
+				</tr>
+				<?php endforeach;?>
+			</tbody>
+		</table>
+		<?php endif;?>
+	</div>
     <div class="panel-footer">
         <a href="<?php echo $this->url('census', array('action' => 'editar', 'id' => $this->filter($policial)->codigo())) ?>" class="btn btn-primary btn-sm">Editar Dados</a>
         <a href="<?php echo $this->url('census'); ?>" class="btn btn-default btn-sm">Voltar</a>
