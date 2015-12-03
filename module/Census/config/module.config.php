@@ -206,6 +206,7 @@ return array(
 			'census-service-restricaomedica' => 'Census\Service\Restricaomedica',
 			'census-service-dispensamedica' => 'Census\Service\Dispensamedica',
 			'census-service-alteracao' => 'Census\Service\Alteracao',
+			'census-service-requerimentoabono' => 'Census\Service\Requerimentoabono',
 		)
 	),
 		'doctrine' => array(

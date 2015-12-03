@@ -6,7 +6,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 abstract class Requerimento
 {
-	private $sm;
+	protected  $sm;
 	
 	protected $numero;
 	protected $codigo;

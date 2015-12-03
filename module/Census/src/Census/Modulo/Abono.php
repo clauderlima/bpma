@@ -3,6 +3,7 @@
 namespace Census\Modulo;
 
 use ZendService\LiveDocx\MailMerge;
+use Census\Entity\Requerimentoabono;
 
 class Abono extends Requerimento
 {	
@@ -45,6 +46,119 @@ class Abono extends Requerimento
 		
 		$this->buscaDados($id);
 		
+		$em = $this->sm->get('Doctrine\ORM\EntityManager');
+		$abonoanteriores = $em->createQueryBuilder()
+			->select('a')
+			->from('Census\Entity\Requerimentoabono', 'a')
+			->where('a.polcodigo = :polcodigo')
+			->setParameter('polcodigo', $id)
+			->orderBy('a.codigo', 'ASC')
+			->getQuery()->getResult();
+		
+		if (!$abonoanteriores)
+		{
+			$this->gozosAnteriores = "O policial não gozou abono neste ano.";
+		} else 
+		{
+			// Caso caia aqui pode ser:
+			// abono já quererido, abono anterior parcial, abono anterior indeferido, ja gozou completo
+			echo "<pre>";
+			$diasgozados = 0;
+			$diasrequeridos = 0;
+			$diasautorizados = 0;
+			$infogozados = array();
+			$inforequeridos = array();
+			$infoautorizados = array();
+			$textoInfoGozados = array();
+			$textoInfoRequeridos = array();
+			$textoInfoAutorizados = array();
+			
+			$hoje = new \DateTime('now');
+			
+			foreach ($abonoanteriores as $abono)
+			{
+				if ($abono->getInicio() < $hoje)
+				{
+					if ($abono->getDecisao() == '1')
+					{
+						$diasgozados += $abono->getQuantidadedias();
+						$infogozados[] = array(
+							'inicio' => $abono->getInicio()->format('d/m/Y'),
+							'dias' => $abono->getQuantidadedias()
+						);
+					}
+				} else 
+				{
+					if ($abono->getDecisao() == '1')
+					{
+						$diasautorizados += $abono->getQuantidadedias();
+						$infoautorizados[] = array(
+								'inicio' => $abono->getInicio()->format('d/m/Y'),
+								'dias' => $abono->getQuantidadedias()
+						);
+					} else 
+					{
+						$diasrequeridos += $abono->getQuantidadedias();
+						$inforequeridos[] = array(
+								'inicio' => $abono->getInicio()->format('d/m/Y'),
+								'dias' => $abono->getQuantidadedias()
+						);
+					}
+				}
+			}
+			
+			$texto = "O policial possui: ";
+			if ($diasgozados)
+			{
+				$texto .= $diasgozados . " dias gozados; ";
+			}
+			if ($diasautorizados)
+			{
+				$texto .= $diasautorizados . " dias autorizados para gozo; ";
+			}
+			if ($diasrequeridos)
+			{
+				$texto .= $diasrequeridos . " dias requeridos aguardando decisão do comando; ";
+			}
+			
+			$this->gozosAnteriores = $texto;
+		}
+		
+		$faltaInjustificada = $em->createQueryBuilder()
+			->select('a')
+			->from('Census\Entity\Alteracao', 'a')
+			->where('a.polcodigo = :polcodigo AND a.faltaservico = 1')
+			->setParameter('polcodigo', $id)
+			->setMaxResults(1)
+			->getQuery()->getResult();
+		
+		if (!$faltaInjustificada)
+		{
+			$this->faltaInjustificada = "O policial não cometeu falta injustificada no ano passado.";
+		} else
+		{
+			// Caso caia aqui pode ser:
+			// abono já quererido, abono anterior parcial, abono anterior indeferido, ja gozou completo
+			$this->faltaInjustificada = "O policial cometeu falta injustificada no dia " . $faltaInjustificada[0]->getDatafato()->format('d/m/Y') . ", publicado no ".$faltaInjustificada[0]->getBoletim();
+		}
+		
+		//Gravar os dados
+		$hoje = new \DateTime();
+		$data = array(
+			'inicio' => $inicio,
+			'quantidadedias' => $qtdDias,
+			'datasolicitacao' => $hoje->format('Y-m-d'),
+			'decisao' => '',
+			'datadecisao' => '',
+			'polcodigo' => $id
+		);
+		
+		$service = $this->sm->get('census-service-requerimentoabono');
+		$dataabono = $service->insert($data, 'Census\Entity\Requerimentoabono');
+		
+		$this->numero = str_pad($dataabono->getCodigo(), 6, "0", STR_PAD_LEFT) . "/" . $hoje->format('Y');
+		
+		//Gerar o requerimento
 		$this->geraRequerimento();
 	}
 	
@@ -67,7 +181,8 @@ class Abono extends Requerimento
 			$mailMerge->setLocalTemplate('data\abono-cia.docx');
 		}
 	
-		$mailMerge->assign('nomePolicial', $this->nomePolicial)
+		$mailMerge->assign('numero', $this->numero)
+				->assign('nomePolicial', $this->nomePolicial)
 				->assign('postoGraduacao', $this->postoGraduacao)
 				->assign('matricula',  $this->matricula)
 				->assign('matriculaSiape',  $this->matriculaSiape)
