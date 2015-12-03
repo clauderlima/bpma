@@ -27,6 +27,7 @@ abstract class Requerimento
 	protected $funcaoChefeNgp;
 	protected $chefeSAd;
 	protected $funcaoChefeSAd;
+	protected $subunidade;
 	protected $lotacao;
 	protected $chefeImediato;
 	protected $funcaochefe;
@@ -143,6 +144,7 @@ abstract class Requerimento
 		
 		$chefeImediato = $dados[0]['nomecompleto'] . " - " . $dados[0]['postograduacao'] . " " . $dados[0]['quadro'];
 		
+		$this->subunidade = $policial->getSubunidade();
 		
 		switch ($policial->getSubunidade())
 		{

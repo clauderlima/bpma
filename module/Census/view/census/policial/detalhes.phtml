@@ -23,7 +23,7 @@
 	        	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 				    <li><a href="/requerimento/abono/<?php echo $this->filter($policial)->codigo(); ?>" target="_blank">Abono de Ponto Anual</a></li>
 					<li class="divider"></li>
-					<li><a href="#">Reprogramação de Férias</a></li>
+					<li><a href="/requerimento/reproferias/<?php echo $this->filter($policial)->codigo(); ?>" target="_blank">Reprogramação de Férias</a></li>
 					<li><a href="#">Não Gozo de Férias</a></li>
 					<li><a href="#">Parcelamento de Férias</a></li>
 					<li><a href="#">Gozo em momento oportuno</a></li>
@@ -187,6 +187,7 @@
 				<tr>
 					<th>#</th>
 					<th>Tipo</th>
+					<th>Solicitação</th>
 					<th>Dias</th>
 					<th>Início</th>
 					<th>Decisão</th>
@@ -200,8 +201,10 @@
 				<tr>
 					<th scope="row"><?php echo $counter++?></th>
 					<td>Abono</td>
-					<td><?php echo $requerimento->getQuantidadedias()?></td>
 					<td><?php echo $requerimento->getDatasolicitacao()->format('d/m/Y')?></td>
+					
+					<td><?php echo $requerimento->getQuantidadedias()?></td>
+					<td><?php echo $requerimento->getInicio()->format('d/m/Y')?></td>
 					<td><?php 
 						if ($requerimento->getDecisao()) 
 						{

@@ -116,11 +116,41 @@ class RequerimentoController extends AbstractController
 		}
 	}
 	
-	public function testeAction()
+	public function reproferiasAction()
 	{
-		 $view = new ViewModel();
-    		$view->setTerminal(true);
-    		return $view;
+		$id = (int) $this->params()->fromRoute('id', 0);
+		
+		$query = $this->getEm()->createQuery("SELECT p.codigo, p.postograduacao, p.nomeguerra 
+				FROM Census\Entity\Policial p WHERE p.codigo = :codigo");
+		$query->setParameter('codigo',$id);
+		
+		$dados = $query->getResult();
+		
+		$view = new ViewModel();
+		$view->setVariable('dados', $dados);
+		return $view;	
+	}
+	
+	public function reprogramarferiasAction()
+	{
+		$id = (int) $this->params()->fromRoute('id', 0);
+	
+		//Pega dados do Formulário de abono
+		$novomes = $_POST['novomes'];
+		$anoreferencia = $_POST['anoreferencia'];
+	
+		$abono = new \Census\Modulo\Reproferias($this->getServiceLocator()->get('servicemanager'));
+	
+		$abono->requer($id, $anoreferencia, $novomes);
+	
+		$filename = array(
+				'arquivo' => $abono->getArquivo()
+		);
+	
+		$view = new ViewModel();
+		$view->setTerminal(true);
+		return $view;
+	
 	}
 	
 }

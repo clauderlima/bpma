@@ -211,6 +211,7 @@ class Policial extends Form
 				'3' => 'Separado/Desquitado',
 				'4' => 'Divorciado',
 				'5' => 'Viúvo',
+				'6' => 'União Estável',
 			));
 		$this->add($estadocivil);
 		
