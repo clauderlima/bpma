@@ -32,6 +32,10 @@ abstract class Requerimento
 	protected $chefeImediato;
 	protected $funcaochefe;
 	protected $tipoRequerimento;
+	protected $comandante;
+	protected $funcaocomandante;
+	protected $decisao;
+	protected $datadecisao;
 	protected $arquivo;
 	
 	public function __construct(ServiceLocatorInterface $sm)
@@ -220,6 +224,8 @@ abstract class Requerimento
 			$this->chefeSAd = $subComandante;
 			$this->funcaoChefeSAd = "Sub Comandante do BPMA";
 			$this->lotacao = "Sub Comando do BPMA";
+			$this->comandante = "WILLIAM DELANO MARQUES DE ARAÚJO - TC QOPM";
+			$this->funcaocomandante = "Comandante do BPMA";
 			$this->tipoRequerimento = "BTL";
 		}
 	}

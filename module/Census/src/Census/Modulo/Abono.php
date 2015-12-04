@@ -142,21 +142,42 @@ class Abono extends Requerimento
 		//Gravar os dados
 		$hoje = new \DateTime();
 		$data = array(
-			'inicio' => $inicio,
-			'quantidadedias' => $qtdDias,
-			'datasolicitacao' => $hoje->format('Y-m-d'),
-			'decisao' => '',
-			'datadecisao' => '',
+			'nomepolicial' => $this->nomePolicial, 
+			'postograduacao' => $this->postoGraduacao, 
+			'matricula' => $this->matricula, 
+			'matriculasiape' => $this->matriculaSiape, 
+			'identificacaounica' => $this->identificacaoUnica, 
+			'quantidadedias' => $this->quantidadeDias, 
+			'inicioabono' => $this->inicio, 
+			'fimabono' => $this->fim, 
+			'datasolicitacao' => $this->dataAtual, 
+			'datainclusao' => $this->dataInclusao, 
+			'email' => $this->email, 
+			'comportamento' => $this->comportamento, 
+			'telefone' => $this->telefone, 
+			'faltainjustificada' => $this->faltaInjustificada, 
+			'gozosanteriores' => $this->gozosAnteriores, 
+			'sargenteante' => $this->sargenteante, 
+			'funcaosargenteante' => $this->funcaoSargenteante, 
+			'chefengp' => $this->chefeNgp, 
+			'funcaochefengp' => $this->funcaoChefeNgp, 
+			'chefesad' => $this->chefeSAd, 
+			'funcaochefeSad' => $this->funcaoChefeSAd, 
+			'lotacao' => $this->lotacao, 
+			'chefeimediato' => $this->chefeImediato, 
+			'fucaochefe' => $this->funcaochefe,
+			'comandante' => $this->comandante, 
+			'funcaocomandante' => $this->funcaocomandante, 
+			'decisao' => $this->decisao, 
+			'dataDecisao' => $this->datadecisao,
 			'polcodigo' => $id
 		);
 		
 		$service = $this->sm->get('census-service-requerimentoabono');
 		$dataabono = $service->insert($data, 'Census\Entity\Requerimentoabono');
 		
-		$this->numero = str_pad($dataabono->getCodigo(), 4, "0", STR_PAD_LEFT);
-		
 		//Gerar o requerimento
-		$this->geraRequerimento();
+		//$this->geraRequerimento();
 	}
 
 	function geraRequerimento()
