@@ -21,7 +21,7 @@
 	          Requerimento <span class="caret"></span>
 	        	</a>
 	        	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-				    <li><a href="/requerimento/abono/<?php echo $this->filter($policial)->codigo(); ?>" target="_blank">Abono de Ponto Anual</a></li>
+				    <li><a href="/requerimento/abono/<?php echo $this->filter($policial)->codigo(); ?>">Abono de Ponto Anual</a></li>
 					<li class="divider"></li>
 					<li><a href="/requerimento/reproferias/<?php echo $this->filter($policial)->codigo(); ?>" target="_blank">Reprogramação de Férias</a></li>
 					<li><a href="#">Não Gozo de Férias</a></li>
@@ -187,6 +187,7 @@
 				<tr>
 					<th>#</th>
 					<th>Tipo</th>
+					<th>Número</th>
 					<th>Solicitação</th>
 					<th>Dias</th>
 					<th>Início</th>
@@ -201,10 +202,11 @@
 				<tr>
 					<th scope="row"><?php echo $counter++?></th>
 					<td>Abono</td>
+					<td><?php echo $requerimento->getNumero()?></td>
 					<td><?php echo $requerimento->getDatasolicitacao()->format('d/m/Y')?></td>
 					
 					<td><?php echo $requerimento->getQuantidadedias()?></td>
-					<td><?php echo $requerimento->getInicio()->format('d/m/Y')?></td>
+					<td><?php echo $requerimento->getInicioabono()->format('d/m/Y')?></td>
 					<td><?php 
 						if ($requerimento->getDecisao()) 
 						{
@@ -218,7 +220,9 @@
 						if ($requerimento->getDatadecisao())
 							echo $requerimento->getDatadecisao()->format('d/m/Y')?></td>
 					<td><a href="/requerimento/editarabono/<?php echo $requerimento->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
-    				<a href="/requerimento/deletarabono/<?php echo $requerimento->getCodigo()?>" onClick="deleta()"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a></td>
+    				&nbsp;&nbsp; <a href="/requerimento/imprimirabono/<?php echo $requerimento->getCodigo()?>" target="_blank"><i class="glyphicon glyphicon-print"></i></a>
+    				<!-- &nbsp;&nbsp; <a href="/requerimento/deletarabono/<?php //echo $requerimento->getCodigo()?>" onClick="deleta()"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a>-->
+    				</td>
 				</tr>
 				<?php endforeach;?>
 			</tbody>

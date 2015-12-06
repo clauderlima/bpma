@@ -167,20 +167,20 @@ class PolicialController extends AbstractController
     	// Dados Requerimentos
     	$requerimentos = $em->createQueryBuilder()
 	    	->select('r')
-	    	->from('Census\Entity\Requerimentoabono', 'r')
+	    	->from('Census\Entity\Abono', 'r')
 	    	->where('r.polcodigo = :polcodigo')
 	    	->setParameter('polcodigo', $id)
 	    	->orderBy('r.codigo', 'ASC')
 	    	->getQuery()->getResult();
     
     	// dados eviados para detalhes.phtml
-    	return (new ViewModel())
-    		->setTerminal($this->getRequest()->isXmlHttpRequest())
-    		->setVariable('policial', $policial)
-    		->setVariable('formacaocivil', $formacaocivil)
-    		->setVariable('formacaomilitar', $formacaomilitar)
-    		->setVariable('alteracoes', $alteracoes)
-    		->setVariable('requerimentos', $requerimentos);
+    	return new ViewModel(array(
+    		'policial' => $policial, 
+    		'formacaocivil' => $formacaocivil,
+    		'formacaomilitar' => $formacaomilitar,
+    		'alteracoes' => $alteracoes,
+    		'requerimentos' => $requerimentos,
+    	));
     }
  
     // GET /policial/editar/id

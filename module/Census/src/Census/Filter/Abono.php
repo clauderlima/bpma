@@ -4,12 +4,12 @@ namespace Census\Filter;
 
 use Zend\InputFilter\InputFilter;
 
-class Requerimentoabono extends InputFilter
+class Abono extends InputFilter
 {
 	public function __construct() 
 	{
 		$this->add(array(
-				'name'		=> 'inicio',
+				'name'		=> 'inicioabono',
 				'required'	=> false,
 				'filters'	=> array(
 		

@@ -3,8 +3,9 @@
 namespace Census\Modulo;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Mvc\Controller\AbstractActionController;
 
-abstract class Requerimento
+abstract class Requerimento extends AbstractActionController
 {
 	protected  $sm;
 	
@@ -31,7 +32,7 @@ abstract class Requerimento
 	protected $lotacao;
 	protected $chefeImediato;
 	protected $funcaochefe;
-	protected $tipoRequerimento;
+	protected $template;
 	protected $comandante;
 	protected $funcaocomandante;
 	protected $decisao;
@@ -64,8 +65,8 @@ abstract class Requerimento
 		$this->matriculaSiape = substr($policial->getMatriculaSiape(),1,7);
 		$this->identificacaoUnica = $policial->getMatriculaSiape();
 		$dataHoje = new \DateTime();
-		$this->dataAtual = strftime('%d de %B de %Y', strtotime($dataHoje->format('Y-m-d')));
-		$this->dataInclusao = $policial->getDataAdmissao()->format('d/m/Y');
+		$this->dataAtual = $dataHoje;
+		$this->dataInclusao = $policial->getDataAdmissao();
 		
 		$comportamento ="";
 		switch ($policial->getComportamento())
@@ -156,37 +157,37 @@ abstract class Requerimento
 				$this->lotacao = "Seção Administrativa";
 				$this->funcaochefe = "Chefe da Seção Administrativa";
 				$this->chefeImediato = $this->chefeSAd;
-				$this->tipoRequerimento = "BTL";
+				$this->template = "BTL";
 				break;
 			case 'GOA':
 				$this->lotacao = "Grupamento de Operações Ambientais";
 				$this->funcaochefe = "Comandante do GOA";
 				$this->chefeImediato = $chefeImediato;
-				$this->tipoRequerimento = "CIA";
+				$this->template = "CIA";
 				break;
 			case 'CiaSul':
 				$this->lotacao = "Companhia Rural Sul";
 				$this->funcaochefe = "Comandante da Companhia Rural Sul";
 				$this->chefeImediato = $chefeImediato;
-				$this->tipoRequerimento = "CIA";
+				$this->template = "CIA";
 				break;
 			case 'CiaOeste':
 				$this->lotacao = "Companhia Rural Oeste";
 				$this->funcaochefe = "Comandante da Companhia Rural Oeste";
 				$this->chefeImediato = $chefeImediato;
-				$this->tipoRequerimento = "CIA";
+				$this->template = "CIA";
 				break;
 			case 'CiaLeste':
 				$this->lotacao = "Companhia Rural Leste";
 				$this->funcaochefe = "Comandante da Companhia Rural Leste";
 				$this->chefeImediato = $chefeImediato;
-				$this->tipoRequerimento = "CIA";
+				$this->template = "CIA";
 				break;
 			case 'GPTur':
 				$this->lotacao = "Grupamento Policiamento Turístico";
 				$this->funcaochefe = "Comandante do GPTur";
 				$this->chefeImediato = $chefeImediato;
-				$this->tipoRequerimento = "CIA";
+				$this->template = "CIA";
 				break;
 		}
 		
@@ -226,7 +227,7 @@ abstract class Requerimento
 			$this->lotacao = "Sub Comando do BPMA";
 			$this->comandante = "WILLIAM DELANO MARQUES DE ARAÚJO - TC QOPM";
 			$this->funcaocomandante = "Comandante do BPMA";
-			$this->tipoRequerimento = "BTL";
+			$this->template = "BTL";
 		}
 	}
 	

@@ -8,14 +8,14 @@ use Zend\Form\Element\Select;
 use Zend\Form\Element\Date;
 use Zend\Form\Element\Submit;
 
-class Requerimentoabono extends Form
+class Abono extends Form
 {
 	public function __construct() 
 	{
-		parent::__construct('formCurso');
+		parent::__construct('formABono');
 
 		// inicio;
-		$inicio = new Date('inicio');
+		$inicio = new Date('inicioabono');
 		$inicio->setLabel('Data de Início')
 		->setAttributes(array(
 				'disabled' => 'disabled',

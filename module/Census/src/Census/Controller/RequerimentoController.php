@@ -42,14 +42,14 @@ class RequerimentoController extends AbstractController
 		
 		$abono = new \Census\Modulo\Abono($this->getServiceLocator()->get('servicemanager'));
 		
-		$abono->requer($id, $inicio, $qtdDias);
-		
-		$filename = array(
-			'arquivo' => $abono->getArquivo()
-		);
-		
+		if ($abono->requer($id, $inicio, $qtdDias))
+		{
+			$this->flashMessenger()->addSuccessMessage("Curso cadastrado com sucesso!");
+			return $this->redirect()->toUrl('/census');
+		}
+
+		return $this->redirect()->toUrl('/census/detalhes/' . $id);
 		$view = new ViewModel();
-		$view->setTerminal(true);
 		return $view;
 		
 	}
@@ -61,11 +61,11 @@ class RequerimentoController extends AbstractController
 		$id = (int) $this->params()->fromRoute('id', 0);
 			
 		// Instaciando services
-		$service = $this->getServiceLocator()->get('census-service-requerimentoabono');
+		$service = $this->getServiceLocator()->get('census-service-abono');
 			
 		// Instaciando o Form
-		$form = new \Census\Form\Requerimentoabono();
-		$abono = $this->getEm('Census\Entity\Requerimentoabono')->find($id)->toArray();
+		$form = new \Census\Form\Abono();
+		$abono = $this->getEm('Census\Entity\Abono')->find($id)->toArray();
 	
 		$dataPolicial = $this->getEm('Census\Entity\Policial')->find($abono['polcodigo']->getCodigo())->toArray();
 	
@@ -77,11 +77,11 @@ class RequerimentoController extends AbstractController
 			$data = $request->getPost()->toArray();
 				
 			$form->setData($data);
-			$form->setInputFilter(new \Census\Filter\Requerimentoabono());
+			$form->setInputFilter(new \Census\Filter\Abono());
 	
 			if ($form->isValid())
 			{
-				if ($service->update($data, 'Census\Entity\Requerimentoabono', $id))
+				if ($service->update($data, 'Census\Entity\Abono', $id))
 				{
 					$this->flashMessenger()->addSuccessMessage("Curso cadastrado com sucesso!");
 					return $this->redirect()->toUrl('/census/detalhes/' . $abono['polcodigo']->getCodigo());
@@ -105,13 +105,13 @@ class RequerimentoController extends AbstractController
 	{
 		$id = (int) $this->params()->fromRoute('id', 0);
 	
-		$service = $this->getServiceLocator()->get('census-service-requerimentoabono');
+		$service = $this->getServiceLocator()->get('census-service-abono');
 	
-		$dados = $this->getEm('Census\Entity\Requerimentoabono')->find($id);
+		$dados = $this->getEm('Census\Entity\Abono')->find($id);
 	
 		if ($dados)
 		{
-			if ($service->delete('Census\Entity\Requerimentoabono', $id))
+			if ($service->delete('Census\Entity\Abono', $id))
 				return $this->redirect()->toUrl('/census/detalhes/' . $dados->getPolcodigo()->getCodigo());
 		}
 	}
@@ -129,6 +129,24 @@ class RequerimentoController extends AbstractController
 		$view = new ViewModel();
 		$view->setVariable('dados', $dados);
 		return $view;	
+	}
+	
+	public function imprimirabonoAction()
+	{
+		$id = (int) $this->params()->fromRoute('id', 0);
+		$data = $this->getEm('Census\Entity\Abono')->find($id)->toArray();
+		
+		$abono = new \Census\Modulo\Abono($this->getServiceLocator()->get('servicemanager'));
+		
+		if ($abono->imprimirAbono($data))
+		{
+			$this->flashMessenger()->addSuccessMessage("Curso cadastrado com sucesso!");
+			return $this->redirect()->toUrl('/census');
+		}
+
+		return $this->redirect()->toUrl('/census/detalhes/' . $id);
+		$view = new ViewModel();
+		return $view;
 	}
 	
 	public function reprogramarferiasAction()
