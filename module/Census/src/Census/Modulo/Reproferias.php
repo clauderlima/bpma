@@ -70,40 +70,58 @@ class Reproferias extends Requerimento
 		$this->polferiasBatalhao = $polferBatalhao[0][1];
 		
 		$polferSubunidade = $em->createQueryBuilder()
-			->select('f')
+			->select('count(f)')
 			->from('Census\Entity\Ferias', 'f')
-			->innerJoin('f', 'Census\Entity\Policial', 'p', 'f.polcodigo = p.codigo')
+			->innerJoin('f.polcodigo', 'p')
+			->where('p.subunidade = :subunidade AND f.programacao = :novomes')
+			->setParameter('subunidade', $this->subunidade)
+			->setParameter('novomes', $this->novaProgramacao)
 			->getQuery()->getResult();
-		///Continuar desse INNER xxxx
-		echo "<pre>";
-		print_r($polferSubunidade);
-		exit;
-			
+
 		$this->polferiasSubunidade = $polferSubunidade[0][1];
 		
 		
-		echo "<pre>";
-		print_r($this);
-		exit;
-		
-		//Gravar os dados
-		$hoje = new \DateTime();
+		// Gerando dados para incluir no banco
 		$data = array(
-			'inicio' => $inicio,
-			'quantidadedias' => $qtdDias,
-			'datasolicitacao' => $hoje->format('Y-m-d'),
-			'decisao' => '',
-			'datadecisao' => '',
-			'polcodigo' => $id
+				'nomepolicial' => $this->nomePolicial,
+				'postograduacao' => $this->postoGraduacao,
+				'matricula' => $this->matricula,
+				'matriculasiape' => $this->matriculaSiape,
+				'identificacaounica' => $this->identificacaoUnica,
+				'feriasprogramacao' => $this->feriasProgramacao,
+				'novaprogramacao' => $this->novaProgramacao,
+				'datasolicitacao' => $this->dataAtual,
+				'datainclusao' => $this->dataInclusao,
+				'email' => $this->email,
+				'comportamento' => $this->comportamento,
+				'telefone' => $this->telefone,
+				'polferiassubunidade' => $this->polferiasSubunidade,
+				'umdozesubunidade' => $this->umDozeSubunidade,
+				'polferiasbatalhao' => $this->polferiasBatalhao,
+				'umdozebatalhao' => $this->umDozeBatalhao,
+				'sargenteante' => $this->sargenteante,
+				'funcaosargenteante' => $this->funcaoSargenteante,
+				'chefengp' => $this->chefeNgp,
+				'funcaochefengp' => $this->funcaoChefeNgp,
+				'chefesad' => $this->chefeSAd,
+				'funcaochefeSad' => $this->funcaoChefeSAd,
+				'lotacao' => $this->lotacao,
+				'chefeimediato' => $this->chefeImediato,
+				'funcaochefe' => $this->funcaochefe,
+				'comandante' => $this->comandante,
+				'funcaocomandante' => $this->funcaocomandante,
+				'decisao' => $this->decisao,
+				'dataDecisao' => $this->datadecisao,
+				'template' => $this->template,
+				'polcodigo' => $id
 		);
 		
-		$service = $this->sm->get('census-service-requerimentoabono');
-		$dataabono = $service->insert($data, 'Census\Entity\Requerimentoabono');
+
+		$service = $this->sm->get('census-service-ferias');
+		$service->insert($data, 'Census\Entity\Ferias');
 		
-		$this->numero = str_pad($dataabono->getCodigo(), 4, "0", STR_PAD_LEFT);
+		//Verificar o conflito que esta dando com o controle de Férias e a Programação de Férias
 		
-		//Gerar o requerimento
-		$this->geraRequerimento();
 	}
 
 	function geraRequerimento()

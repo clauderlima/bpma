@@ -178,10 +178,7 @@ class Abono extends Requerimento
 		);
 		
 		$service = $this->sm->get('census-service-abono');
-		
-		
 		$service->insert($data, 'Census\Entity\Abono');
-		//return $this->redirect()->toRoute('Census', array('action' => 'detalhes', 'id' => $id));
 	}
 
 	function imprimirAbono(array $data)

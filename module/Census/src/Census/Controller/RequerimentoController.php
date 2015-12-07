@@ -157,9 +157,9 @@ class RequerimentoController extends AbstractController
 		$novomes = $_POST['novomes'];
 		$anoreferencia = $_POST['anoreferencia'];
 	
-		$abono = new \Census\Modulo\Reproferias($this->getServiceLocator()->get('servicemanager'));
+		$reproferias = new \Census\Modulo\Reproferias($this->getServiceLocator()->get('servicemanager'));
 	
-		$abono->requer($id, $anoreferencia, $novomes);
+		$reproferias->requer($id, $anoreferencia, $novomes);
 	
 		$filename = array(
 				'arquivo' => $abono->getArquivo()

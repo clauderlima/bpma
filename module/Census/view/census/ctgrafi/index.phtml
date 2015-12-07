@@ -9,23 +9,24 @@
     	<table class="table">
     		<thead>
     			<tr>
-    				<th>Post/Grad</th>
-    				<th>Nome Guerra</th>
+    				<th>Nº</th>
+    				<th>Policial</th>
     				<th>Número</th>
     				<th>Espécie</th>
     				<th>Marca</th>
     				<th>Modelo</th>
-    				<th>Número Série</th>
+    				<th>Nº Série</th>
     				<th>Tombamento</th>
     				<th>Opções</th>
     			</tr>
     		</thead>
     		<tbody>
+    		<?php $numero = 1 ?>
     		<?php foreach ($dados as $item):?>
     			<tr>
     				
-    				<td><?php echo $item->getPolcodigo()->getPostograduacao()?></td>
-    				<td><?php echo $item->getPolcodigo()->getNomeGuerra()?></td>
+    				<td><?php echo $numero++ ?></td>
+    				<td><a href="/census/detalhes/<?php echo $item->getPolcodigo()->getCodigo()?>"><?php echo $item->getPolcodigo()->getPostograduacao()?> <?php echo $item->getPolcodigo()->getNomeguerra()?></a></td>
     				<td><?php echo $item->getNumero()?></td>
     				<td><?php echo $item->getArmcodigo()->getEspecie()?></td>
     				<td><?php echo $item->getArmcodigo()->getMarca()?></td>
