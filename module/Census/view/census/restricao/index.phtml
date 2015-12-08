@@ -17,13 +17,14 @@
     			</tr>
     		</thead>
     		<tbody>
+    		<?php $counter = 1;?>
     		<?php foreach ($dados as $item):?>
     		<?php 
     				$today = new \DateTime('now');
     			if ($item->getInicio() <= $today && $today <= $item->getFim()):?>
     			<tr>
-    				<td><?php echo $item->getPolcodigo()->getPostoGraduacao()?></td>
-    				<td><?php echo $item->getPolcodigo()->getNomeGuerra()?></td>
+    				<td><?php echo $counter++ ?></td>
+    				<td><a href="/census/detalhes/<?php echo $item->getPolcodigo()->getCodigo()?>"><i title="<?php if ($item->getPolcodigo()->getSubunidade() == "Btl") $class="Batalhão"; echo $class ? $class : "Sem Classificação"; echo ($item->getPolcodigo()->getServicoposto()) ? " - " . $item->getPolcodigo()->getServicoposto() : " - Sem local"; echo ($item->getPolcodigo()->getServicofuncao()) ? " - " . $item->getPolcodigo()->getServicofuncao() : " - Sem função"?>"><?php echo $item->getPolcodigo()->getPostoGraduacao() . " " .$item->getPolcodigo()->getNomeGuerra()?></i></a></td>
     				<td><?php echo $item->getInicio()->format('d/m/Y');?></td>
     				<td><?php echo $item->getFim()->format('d/m/Y');?></td>
     				<td><?php 
@@ -67,10 +68,11 @@
     			</tr>
     		</thead>
     		<tbody>
+    		<?php $counter = 1;?>
     		<?php foreach ($dados as $item):?>
     			<tr>
-    				<td><?php echo $item->getPolcodigo()->getPostoGraduacao()?></td>
-    				<td><?php echo $item->getPolcodigo()->getNomeGuerra()?></td>
+    				<td><?php echo $counter++ ?></td>
+    				<td><a href="/census/detalhes/<?php echo $item->getRescodigo()?>"><?php echo $item->getPolcodigo()->getPostoGraduacao() . " " . $item->getPolcodigo()->getNomeGuerra()?></a></td>
     				<td><?php echo $item->getInicio()->format('d/m/Y');?></td>
     				<td><?php echo $item->getFim()->format('d/m/Y');?></td>
     				<td><?php 

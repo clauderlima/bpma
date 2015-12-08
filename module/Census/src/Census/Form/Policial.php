@@ -624,13 +624,13 @@ class Policial extends Form
 				'CiaApoio' => 'Companhia de Apoio',
 				'ServInter' => 'Serviço Interno',
 				'Lac' => 'Lacustre',
-				'Lac2' => 'Lacustre 2',
 				'RPA' => 'Rádio Patrulhamento Ambiental',
 				'GOC' => 'Grupo de Operações do Cerrado',
 				'GTA' => 'Grupo Tático Ambiental',
 				'RPR' => 'Rádio Patrulhamento',
 				'Exp' => 'Expediente SubUnidade',
 				'RM' => 'Restrição Médica',
+				'DM' => 'Dispensa Médica',
 		));
 		$this->add($lotacao);
 		

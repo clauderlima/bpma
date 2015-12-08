@@ -2,25 +2,29 @@
     <table class="table table-striped table-bordered table-hover">
         <thead>
 			<tr>
-			    <th>Matricula</th>
-			    <th>Post/Grad</th>
-			    <th>Nome Guerra</th>
-			    <th>Celular</th>
-			    <th>Lotação</th> 
-			    <th>Ação</th>  
+			    <th class="text-center">Nº</th>
+			    <th class="text-center">Matricula</th>
+			    <th class="text-center">Policial</th>
+			    <th class="text-center">Celular</th>
+			    <th class="text-center">SubUnidade</th> 
+			    <th class="text-center">Lotação</th>
+			    <th class="text-center">Função</th>
+			    <th class="text-center">Ação</th>  
 			</tr>
         </thead>
  
         <tbody>
-        	<?php //echo "<pre>"; print_r($this->lista);exit;?>
+        	<?php $counter = 1?>
             <?php foreach ($this->lista as $pessoa) : ?>
         	<tr>
+        	<td class="text-center"><?php echo $counter++ ?>
             <td class="text-center"><?php echo $pessoa['matricula']; ?></td>
-			<td><?php echo $pessoa['postograduacao']; ?></td>
-			<td><?php echo $pessoa['nomeguerra']; ?></td>
-			<td><?php echo $pessoa['telefonecelular']; ?></td>
-			<td><?php echo $pessoa['lotacao']; ?></td>
-            <td>
+			<td><?php echo $pessoa['postograduacao'] . " " . $pessoa['nomeguerra']; ?></td>
+			<td class="text-center"><?php echo $pessoa['telefonecelular']; ?></td>
+			<td><?php echo ($pessoa['subunidade'] == "Btl") ? "Batalhão" : $pessoa['subunidade']; ?></td>
+            <td><?php echo $pessoa['lotacao']; ?></td>
+            <td><?php echo $pessoa['servicofuncao']; ?></td>
+            <td class="text-center">
                 <a class="btn btn-xs btn-info" title="Detalhes"  href="<?php echo $this->url('census', array("action" => "detalhes", "id" => $pessoa['codigo'])); ?>"><span class="glyphicon glyphicon-new-window"></span></a>
             </td>
         </tr>

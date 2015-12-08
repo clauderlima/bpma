@@ -8,7 +8,12 @@ class RestricaoController extends AbstractController
 {
 	public function indexAction()
 	{
-		$dataRestricao = $this->getEm('Census\Entity\Restricaomedica')->findAll();
+		//$dataRestricao = $this->getEm('Census\Entity\Restricaomedica')->findAll();
+		$dataRestricao = $this->getEm()->createQueryBuilder()
+				->select('r')
+				->from('Census\Entity\Restricaomedica', 'r')
+				->orderBy('r.fim', 'ASC')
+				->getQuery()->getResult();
 		
 		return new ViewModel(array(
 			'dados' => $dataRestricao,

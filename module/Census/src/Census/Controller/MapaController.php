@@ -49,8 +49,9 @@ class MapaController extends AbstractController
     	switch ($lotacao) 
     	{
     		case 'total':
-    			$query = $this->getEm()->createQuery("SELECT p.codigo,p.matricula,p.lotacao,p.subunidade,p.telefonecelular,p.postograduacao,p.nomeguerra FROM Census\Entity\Policial p WHERE p.postograduacao = :postograduacao ORDER BY p.antiguidade");
+    			$query = $this->getEm()->createQuery("SELECT p.codigo,p.matricula,p.lotacao,p.subunidade,p.telefonecelular,p.postograduacao,p.nomeguerra FROM Census\Entity\Policial p WHERE p.postograduacao = :postograduacao AND p.subunidade <> :subunidade ORDER BY p.antiguidade");
     			$query->setParameter('postograduacao',$postograduacao);
+    			$query->setParameter('subunidade','TRC');
     			break;
     		case 'semclas':
     			$query = $this->getEm()->createQuery("SELECT p.codigo,p.matricula,p.lotacao,p.subunidade,p.telefonecelular,p.postograduacao,p.nomeguerra FROM Census\Entity\Policial p WHERE p.lotacao='' ORDER BY p.antiguidade");
@@ -87,21 +88,21 @@ class MapaController extends AbstractController
     	switch ($lotacao)
     	{
     		case 'total':
-    			$query = $this->getEm()->createQuery("SELECT p.codigo,p.matricula,p.lotacao,p.subunidade,p.telefonecelular,p.postograduacao,p.nomeguerra FROM Census\Entity\Policial p WHERE p.postograduacao = :postograduacao ORDER BY p.antiguidade");
+    			$query = $this->getEm()->createQuery("SELECT p.codigo,p.matricula,p.lotacao,p.subunidade,p.telefonecelular,p.postograduacao,p.nomeguerra,p.servicofuncao FROM Census\Entity\Policial p WHERE p.postograduacao = :postograduacao ORDER BY p.antiguidade");
     			$query->setParameter('postograduacao',$postograduacao);
     			break;
     		case 'semclas':
-    			$query = $this->getEm()->createQuery("SELECT p.codigo,p.matricula,p.lotacao,p.subunidade,p.telefonecelular,p.postograduacao,p.nomeguerra FROM Census\Entity\Policial p WHERE p.subunidade IS NULL ORDER BY p.antiguidade");
+    			$query = $this->getEm()->createQuery("SELECT p.codigo,p.matricula,p.lotacao,p.subunidade,p.telefonecelular,p.postograduacao,p.nomeguerra,p.servicofuncao FROM Census\Entity\Policial p WHERE p.subunidade IS NULL ORDER BY p.antiguidade");
     			break;
     		default:
-    			$query = $this->getEm()->createQuery("SELECT p.codigo,p.matricula,p.lotacao,p.subunidade,p.telefonecelular,p.postograduacao,p.nomeguerra FROM Census\Entity\Policial p WHERE p.postograduacao = :postograduacao AND p.lotacao = :lotacao ORDER BY p.antiguidade");
+    			$query = $this->getEm()->createQuery("SELECT p.codigo,p.matricula,p.lotacao,p.subunidade,p.telefonecelular,p.postograduacao,p.nomeguerra,p.servicofuncao FROM Census\Entity\Policial p WHERE p.postograduacao = :postograduacao AND p.lotacao = :lotacao ORDER BY p.antiguidade");
     			$query->setParameter('postograduacao',$postograduacao);
     			$query->setParameter('lotacao',$lotacao);
     			break;
     	}
     	 
     	if ($postograduacao == 'todos') {
-    		$query = $this->getEm()->createQuery("SELECT p.codigo,p.matricula,p.subunidade,p.lotacao,p.telefonecelular,p.postograduacao,p.nomeguerra FROM Census\Entity\Policial p WHERE p.lotacao = :lotacao ORDER BY p.antiguidade");
+    		$query = $this->getEm()->createQuery("SELECT p.codigo,p.matricula,p.subunidade,p.lotacao,p.telefonecelular,p.postograduacao,p.nomeguerra,p.servicofuncao FROM Census\Entity\Policial p WHERE p.lotacao = :lotacao ORDER BY p.antiguidade");
     		$query->setParameter('lotacao',$lotacao);
     	}
     	 

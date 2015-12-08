@@ -8,15 +8,14 @@
             <table class="table table-condensed table-bordered">
     			<thead>
       				<tr>
-        				<th>Post/Grad</th>
-        				<th><a href="/mapa/batalhao">Batalhão</a></th>
-        				<th><a href="/mapa/goa">GOA</a></th>
-        				<th>GPTur</th>
-        				<th>Cia Sul</th>
-        				<th>Cia Leste</th>
-        				<th>Cia Oeste</th>
-        				<th>TOTAL</th>
-        				<th>TOTAL Geral</th>
+        				<th class="text-center">Post/Grad</th>
+        				<th class="text-center"><a href="/mapa/batalhao">Batalhão</a></th>
+        				<th class="text-center"><a href="/mapa/goa">GOA</a></th>
+        				<th class="text-center">GPTur</th>
+        				<th class="text-center">Cia Sul</th>
+        				<th class="text-center">Cia Leste</th>
+        				<th class="text-center">Cia Oeste</th>
+        				<th class="text-center">Efetivo BPMA</th>
       				</tr>
     			</thead>
     			<tbody>
@@ -28,8 +27,7 @@
 			        <td class="text-center"><a href="mapa/listar?postgrad=TC&lotacao=CiaSul"><?php echo $this->efetivoCiasul['TC'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=TC&lotacao=CiaLeste"><?php echo $this->efetivoCialeste['TC'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=TC&lotacao=CiaOeste"><?php echo $this->efetivoCiaoeste['TC'] ?></a></td>
-			        <td class="text-center"><?php echo $this->efetivoBtl['TC']+$this->efetivoGoa['TC']+$this->efetivoGptur['TC']+$this->efetivoCiasul['TC']+$this->efetivoCialeste['TC']+$this->efetivoCiaoeste['TC'] ?></td>
-			        <th class="text-center"><a href="mapa/listar?postgrad=TC&lotacao=total"><?php echo $this->efetivoTotal['TC'] ?></a></th>
+			        <td class="text-center"><a href="mapa/listar?postgrad=TC&lotacao=total"><?php echo $this->efetivoTotal['TC'] ?></a></td>
 			      </tr>
 			      <tr class="text-center">
 			        <th class="text-center">Maj</th>
@@ -39,8 +37,7 @@
 			        <td class="text-center"><a href="mapa/listar?postgrad=Maj&lotacao=CiaSul"><?php echo $this->efetivoCiasul['Maj'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=Maj&lotacao=CiaLeste"><?php echo $this->efetivoCialeste['Maj'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=Maj&lotacao=CiaOeste"><?php echo $this->efetivoCiaoeste['Maj'] ?></a></td>
-			        <td class="text-center"><?php echo $this->efetivoBtl['Maj']+$this->efetivoGoa['Maj']+$this->efetivoGptur['Maj']+$this->efetivoCiasul['Maj']+$this->efetivoCialeste['Maj']+$this->efetivoCiaoeste['Maj'] ?></td>
-			        <th class="text-center"><a href="mapa/listar?postgrad=Maj&lotacao=total"><?php echo $this->efetivoTotal['Maj'] ?></a></th>
+			        <td class="text-center"><a href="mapa/listar?postgrad=Maj&lotacao=total"><?php echo $this->efetivoTotal['Maj'] ?></a></td>
 			      </tr>
 			      <tr class="text-center">
 			        <th class="text-center">Cap</th>
@@ -50,7 +47,6 @@
 			        <td class="text-center"><a href="mapa/listar?postgrad=Cap&lotacao=CiaSul"><?php echo $this->efetivoCiasul['Cap'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=Cap&lotacao=CiaLeste"><?php echo $this->efetivoCialeste['Cap'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=Cap&lotacao=CiaOeste"><?php echo $this->efetivoCiaoeste['Cap'] ?></a></td>
-			        <td class="text-center"><?php echo $this->efetivoBtl['Cap']+$this->efetivoGoa['Cap']+$this->efetivoGptur['Cap']+$this->efetivoCiasul['Cap']+$this->efetivoCialeste['Cap']+$this->efetivoCiaoeste['Cap'] ?></td>
 			        <th class="text-center"><a href="mapa/listar?postgrad=Cap&lotacao=total"><?php echo $this->efetivoTotal['Cap'] ?></a></th>
 			      </tr>
 			      <tr class="text-center">
@@ -61,7 +57,6 @@
 			        <td class="text-center"><a href="mapa/listar?postgrad=1º Ten&lotacao=CiaSul"><?php echo $this->efetivoCiasul['1Ten'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=1º Ten&lotacao=CiaLeste"><?php echo $this->efetivoCialeste['1Ten'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=1º Ten&lotacao=CiaOeste"><?php echo $this->efetivoCiaoeste['1Ten'] ?></a></td>
-			        <td class="text-center"><?php echo $this->efetivoBtl['1Ten']+$this->efetivoGoa['1Ten']+$this->efetivoGptur['1Ten']+$this->efetivoCiasul['1Ten']+$this->efetivoCialeste['1Ten']+$this->efetivoCiaoeste['1Ten'] ?></td>
 			        <th class="text-center"><a href="mapa/listar?postgrad=1º Ten&lotacao=total"><?php echo $this->efetivoTotal['1Ten'] ?></a></th>
 			      </tr>
 			      <tr>
@@ -72,7 +67,6 @@
 			        <td class="text-center"><a href="mapa/listar?postgrad=2º Ten&lotacao=CiaSul"><?php echo $this->efetivoCiasul['2Ten'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=2º Ten&lotacao=CiaLeste"><?php echo $this->efetivoCialeste['2Ten'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=2º Ten&lotacao=CiaOeste"><?php echo $this->efetivoCiaoeste['2Ten'] ?></a></td>
-			        <td class="text-center"><?php echo $this->efetivoBtl['2Ten']+$this->efetivoGoa['2Ten']+$this->efetivoGptur['2Ten']+$this->efetivoCiasul['2Ten']+$this->efetivoCialeste['2Ten']+$this->efetivoCiaoeste['2Ten'] ?></td>
 			        <th class="text-center"><a href="mapa/listar?postgrad=2º Ten&lotacao=total"><?php echo $this->efetivoTotal['2Ten'] ?></a></th>
 			      </tr>
 			      <tr>
@@ -83,7 +77,6 @@
 			        <td class="text-center"><a href="mapa/listar?postgrad=ST&lotacao=CiaSul"><?php echo $this->efetivoCiasul['ST'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=ST&lotacao=CiaLeste"><?php echo $this->efetivoCialeste['ST'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=ST&lotacao=CiaOeste"><?php echo $this->efetivoCiaoeste['ST'] ?></a></td>
-			        <td class="text-center"><?php echo $this->efetivoBtl['ST']+$this->efetivoGoa['ST']+$this->efetivoGptur['ST']+$this->efetivoCiasul['ST']+$this->efetivoCialeste['ST']+$this->efetivoCiaoeste['ST'] ?></td>
 			        <th class="text-center"><a href="mapa/listar?postgrad=ST&lotacao=total"><?php echo $this->efetivoTotal['ST'] ?></a></th>
 			      </tr>
 			      <tr>
@@ -94,7 +87,6 @@
 			        <td class="text-center"><a href="mapa/listar?postgrad=1º Sgt&lotacao=CiaSul"><?php echo $this->efetivoCiasul['1Sgt'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=1º Sgt&lotacao=CiaLeste"><?php echo $this->efetivoCialeste['1Sgt'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=1º Sgt&lotacao=CiaOeste"><?php echo $this->efetivoCiaoeste['1Sgt'] ?></a></td>
-			        <td class="text-center"><?php echo $this->efetivoBtl['1Sgt']+$this->efetivoGoa['1Sgt']+$this->efetivoGptur['1Sgt']+$this->efetivoCiasul['1Sgt']+$this->efetivoCialeste['1Sgt']+$this->efetivoCiaoeste['1Sgt'] ?></td>
 			        <th class="text-center"><a href="mapa/listar?postgrad=1º Sgt&lotacao=total"><?php echo $this->efetivoTotal['1Sgt'] ?></a></th>
 			      </tr>
 			      <tr>
@@ -105,7 +97,6 @@
 			        <td class="text-center"><a href="mapa/listar?postgrad=2º Sgt&lotacao=CiaSul"><?php echo $this->efetivoCiasul['2Sgt'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=2º Sgt&lotacao=CiaLeste"><?php echo $this->efetivoCialeste['2Sgt'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=2º Sgt&lotacao=CiaOeste"><?php echo $this->efetivoCiaoeste['2Sgt'] ?></a></td>
-			        <td class="text-center"><?php echo $this->efetivoBtl['2Sgt']+$this->efetivoGoa['2Sgt']+$this->efetivoGptur['2Sgt']+$this->efetivoCiasul['2Sgt']+$this->efetivoCialeste['2Sgt']+$this->efetivoCiaoeste['2Sgt'] ?></td>
 			        <th class="text-center"><a href="mapa/listar?postgrad=2º Sgt&lotacao=total"><?php echo $this->efetivoTotal['2Sgt'] ?></a></th>
 			      </tr>
 			      <tr>
@@ -116,7 +107,6 @@
 			        <td class="text-center"><a href="mapa/listar?postgrad=3º Sgt&lotacao=CiaSul"><?php echo $this->efetivoCiasul['3Sgt'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=3º Sgt&lotacao=CiaLeste"><?php echo $this->efetivoCialeste['3Sgt'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=3º Sgt&lotacao=CiaOeste"><?php echo $this->efetivoCiaoeste['3Sgt'] ?></a></td>
-			        <td class="text-center"><?php echo $this->efetivoBtl['3Sgt']+$this->efetivoGoa['3Sgt']+$this->efetivoGptur['3Sgt']+$this->efetivoCiasul['3Sgt']+$this->efetivoCialeste['3Sgt']+$this->efetivoCiaoeste['3Sgt'] ?></td>
 			        <th class="text-center"><a href="mapa/listar?postgrad=3º Sgt&lotacao=total"><?php echo $this->efetivoTotal['3Sgt'] ?></a></th>
 			      </tr>
 			      <tr>
@@ -127,7 +117,6 @@
 			        <td class="text-center"><a href="mapa/listar?postgrad=Cb&lotacao=CiaSul"><?php echo $this->efetivoCiasul['Cb'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=Cb&lotacao=CiaLeste"><?php echo $this->efetivoCialeste['Cb'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=Cb&lotacao=CiaOeste"><?php echo $this->efetivoCiaoeste['Cb'] ?></a></td>
-			        <td class="text-center"><?php echo $this->efetivoBtl['Cb']+$this->efetivoGoa['Cb']+$this->efetivoGptur['Cb']+$this->efetivoCiasul['Cb']+$this->efetivoCialeste['Cb']+$this->efetivoCiaoeste['Cb'] ?></td>
 			        <th class="text-center"><a href="mapa/listar?postgrad=Cb&lotacao=total"><?php echo $this->efetivoTotal['Cb'] ?></a></th>
 			      </tr>
 			      <tr>
@@ -139,7 +128,6 @@
 			        <td class="text-center"><a href="mapa/listar?postgrad=Sd&lotacao=CiaSul"><?php echo $this->efetivoCiasul['Sd'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=Sd&lotacao=CiaLeste"><?php echo $this->efetivoCialeste['Sd'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=Sd&lotacao=CiaOeste"><?php echo $this->efetivoCiaoeste['Sd'] ?></a></td>
-			        <td class="text-center"><?php echo $this->efetivoBtl['Sd']+$this->efetivoGoa['Sd']+$this->efetivoGptur['Sd']+$this->efetivoCiasul['Sd']+$this->efetivoCialeste['Sd']+$this->efetivoCiaoeste['Sd'] ?></td>
 			        <th class="text-center"><a href="mapa/listar?postgrad=Sd&lotacao=total"><?php echo $this->efetivoTotal['Sd'] ?></a></th>
 			      </tr>
 			      <tr>
@@ -151,7 +139,6 @@
 			        <td class="text-center"><a href="mapa/listar?postgrad=todos&lotacao=CiaLeste"><?php echo $this->efetivoCialeste['Total'] ?></a></td>
 			        <td class="text-center"><a href="mapa/listar?postgrad=todos&lotacao=CiaOeste"><?php echo $this->efetivoCiaoeste['Total'] ?></a></td>
 			        <td class="text-center"><?php echo $this->efetivoBtl['Total']+$this->efetivoGoa['Total']+$this->efetivoGptur['Total']+$this->efetivoCiasul['Total']+$this->efetivoCialeste['Total']+$this->efetivoCiaoeste['Total'] ?></td>
-			        <th class="text-center"><?php echo $this->efetivoTotal['Total'] ?></th>
 			      </tr>
 
 			      </tbody>
