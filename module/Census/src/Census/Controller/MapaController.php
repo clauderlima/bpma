@@ -130,12 +130,158 @@ class MapaController extends AbstractController
     	$efetivoSOp = $serviceContador->contasub('SOp');
     	$efetivoInt = $serviceContador->contasub('SSInt');
     	$efetivoNEEC = $serviceContador->contasub('NEEC');
-    	$efetivoNEAN = $serviceContador->contasub('NEAN');
+    	$efetivoNEAM = $serviceContador->contasub('NEAM');
     	$efetivoCAPA = $serviceContador->contasub('CeAPA');
     	$efetivoCAp = $serviceContador->contasub('CiaApoio');
     	$efetivoSvI = $serviceContador->contasub('ServInter');
     	$efetivoRM = $serviceContador->contasub('RM');
     	$efetivoTotal = $serviceContador->contasub('Total');
+    	
+    	
+    	$efetivoExpediente = array();
+    	
+    	$query = $this->getEm()->createQueryBuilder()
+    			->select('count(e)')
+    			->from('Census\Entity\Policial', 'e');
+    	    	
+    	$efBtl = $query->where('e.subunidade = :arg1 AND e.servicoescala = :arg2')
+    			->setParameter('arg1', 'Btl')
+    			->setParameter('arg2', '1')
+    			->getQuery()
+    			->getResult();
+    			
+    	$efGOA = $query->where('e.subunidade = :arg1 AND e.servicoescala = :arg2')
+    			->setParameter('arg1', 'GOA')
+    			->setParameter('arg2', '1')
+    			->getQuery()
+    			->getResult();
+    	
+    	$efGPTur = $query->where('e.subunidade = :arg1 AND e.servicoescala = :arg2')
+    			->setParameter('arg1', 'GPTur')
+    			->setParameter('arg2', '1')
+    			->getQuery()
+    			->getResult();
+    	
+    	$efCiaSul = $query->where('e.subunidade = :arg1 AND e.servicoescala = :arg2')
+    			->setParameter('arg1', 'CiaSul')
+    			->setParameter('arg2', '1')
+    			->getQuery()
+    			->getResult();
+    	
+		$efCiaLeste = $query->where('e.subunidade = :arg1 AND e.servicoescala = :arg2')
+    			->setParameter('arg1', 'CiaLeste')
+    			->setParameter('arg2', '1')
+    			->getQuery()
+    			->getResult();
+    			 
+		$efCiaOeste = $query->where('e.subunidade = :arg1 AND e.servicoescala = :arg2')
+    			->setParameter('arg1', 'CiaOeste')
+    			->setParameter('arg2', '1')
+    			->getQuery()
+    			->getResult();
+
+    	$efetivoExpediente = array(
+    			'Btl' => $efBtl[0],
+    			'GOA' => $efGOA[0], 
+    			'GPTur' => $efGPTur[0],
+    			'CiaSul' => $efCiaSul[0],
+    			'CiaLeste' => $efCiaLeste[0],
+    			'CiaOeste' => $efCiaOeste[0]
+    	);
+    			
+     	//Cia de Apoio
+    	$efCABtl = $query->where('e.subunidade = :arg1 AND e.lotacao = :arg2')
+	    	->setParameter('arg1', 'Btl')
+	    	->setParameter('arg2', 'CiaApoio')
+	    	->getQuery()
+	    	->getResult();
+    	 
+    	$efCAGOA = $query->where('e.subunidade = :arg1 AND e.lotacao = :arg2')
+	    	->setParameter('arg1', 'GOA')
+	    	->setParameter('arg2', 'CiaApoio')
+	    	->getQuery()
+	    	->getResult();
+    	 
+    	$efCAGPTur = $query->where('e.subunidade = :arg1 AND e.lotacao = :arg2')
+	    	->setParameter('arg1', 'GPTur')
+	    	->setParameter('arg2', 'CiaApoio')
+	    	->getQuery()
+	    	->getResult();
+    	 
+    	$efCACiaSul = $query->where('e.subunidade = :arg1 AND e.lotacao = :arg2')
+	    	->setParameter('arg1', 'CiaSul')
+	    	->setParameter('arg2', 'CiaApoio')
+	    	->getQuery()
+	    	->getResult();
+    	 
+    	$efCACiaLeste = $query->where('e.subunidade = :arg1 AND e.lotacao = :arg2')
+	    	->setParameter('arg1', 'CiaLeste')
+	    	->setParameter('arg2', 'CiaApoio')
+	    	->getQuery()
+	    	->getResult();
+    	
+    	$efCACiaOeste = $query->where('e.subunidade = :arg1 AND e.lotacao = :arg2')
+    			->setParameter('arg1', 'CiaOeste')
+    			->setParameter('arg2', 'CiaApoio')
+    			->getQuery()
+    			->getResult();
+    	
+    	$efetivoCA = array(
+    			'CABtl' => $efCABtl[0],
+    			'CAGOA' => $efCAGOA[0],
+    			'CAGPTur' => $efCAGPTur[0],
+    			'CACiaSul' => $efCACiaSul[0],
+    			'CACiaLeste' => $efCACiaLeste[0],
+    			'CACiaOeste' => $efCACiaOeste[0]
+    	);
+    	
+    	//Serviço Interno
+    	$efSIBtl = $query->where('e.subunidade = :arg1 AND e.lotacao = :arg2')
+    	->setParameter('arg1', 'Btl')
+    	->setParameter('arg2', 'ServInter')
+    	->getQuery()
+    	->getResult();
+    	
+    	$efSIGOA = $query->where('e.subunidade = :arg1 AND e.lotacao = :arg2')
+    	->setParameter('arg1', 'GOA')
+    	->setParameter('arg2', 'ServInter')
+    	->getQuery()
+    	->getResult();
+    	
+    	$efSIGPTur = $query->where('e.subunidade = :arg1 AND e.lotacao = :arg2')
+    	->setParameter('arg1', 'GPTur')
+    	->setParameter('arg2', 'ServInter')
+    	->getQuery()
+    	->getResult();
+    	
+    	$efSICiaSul = $query->where('e.subunidade = :arg1 AND e.lotacao = :arg2')
+    	->setParameter('arg1', 'CiaSul')
+    	->setParameter('arg2', 'ServInter')
+    	->getQuery()
+    	->getResult();
+    	
+    	$efSICiaLeste = $query->where('e.subunidade = :arg1 AND e.lotacao = :arg2')
+    	->setParameter('arg1', 'CiaLeste')
+    	->setParameter('arg2', 'ServInter')
+    	->getQuery()
+    	->getResult();
+    	 
+    	$efSICiaOeste = $query->where('e.subunidade = :arg1 AND e.lotacao = :arg2')
+    	->setParameter('arg1', 'CiaOeste')
+    	->setParameter('arg2', 'ServInter')
+    	->getQuery()
+    	->getResult();
+    	 
+    	$efetivoSI = array(
+    			'SIBtl' => $efSIBtl[0],
+    			'SIGOA' => $efSIGOA[0],
+    			'SIGPTur' => $efSIGPTur[0],
+    			'SICiaSul' => $efSICiaSul[0],
+    			'SICiaLeste' => $efSICiaLeste[0],
+    			'SICiaOeste' => $efSICiaOeste[0]
+    	);
+    	 
+  
     	
     	$view = new ViewModel(array(
     			'efetivoSAd' => $efetivoSAd,
@@ -149,12 +295,15 @@ class MapaController extends AbstractController
     			'efetivoSOp' => $efetivoSOp,
     			'efetivoInt' => $efetivoInt,
     			'efetivoNEEC' => $efetivoNEEC,
-    			'efetivoNEAN' => $efetivoNEAN,
+    			'efetivoNEAM' => $efetivoNEAM,
     			'efetivoCAPA' => $efetivoCAPA,
     			'efetivoCAp' => $efetivoCAp,
     			'efetivoSvI' => $efetivoSvI,
     			'efetivoRM' => $efetivoRM,
     			'efetivoTotal' => $efetivoTotal,
+    			'efetivoExpediente' => $efetivoExpediente,
+    			'efetivoCA' => $efetivoCA,
+    			'efetivoSI' => $efetivoSI,
     	));
     	return $view;
     }
