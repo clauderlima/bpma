@@ -259,6 +259,240 @@ class PolicialController extends AbstractController
     	return $this->redirect()->toRoute('census');
     }
     
+    public function temposervicoAction()
+    {
+    	$em = $this->getEm();
+    	 
+    	// Dados Formação
+    	$policial = $em->createQueryBuilder()
+    	->select('p.nomeguerra,p.datanascimento,p.dataadmissao,p.postograduacao,p.subunidade')
+    	->from('Census\Entity\Policial', 'p')
+    	//->where('f.polcodigo = :polcodigo')
+    	//->setParameter('polcodigo', $id)
+    	->orderBy('p.dataadmissao', 'ASC')
+    	->getQuery()->getResult();
+    	
+    	return new ViewModel(array(
+    		'policiais' => $policial,
+    	));
+    }
+    
+    public function aniversariantesAction()
+    {
+    	$em = $this->getEm();
+    	$config = 
+    
+    	// Dados Formação
+    	$policial = $em->createQueryBuilder()
+    	->select('p.nomeguerra,p.datanascimento,p.dataadmissao,p.postograduacao,p.subunidade')
+    	->from('Census\Entity\Policial', 'p')
+    	//->where('f.polcodigo = :polcodigo')
+    	//->setParameter('polcodigo', $id)
+    	->orderBy('p.datanascimento', 'ASC')
+    	->getQuery()->getResult();
+    	
+    	$hoje = new \DateTime();
+    	
+    	foreach ($policial as $item)
+    	{
+    		switch ($item['datanascimento']->format('m')) {
+    			case '01':
+    				$idade = $hoje->diff($item['datanascimento']);
+    				$data = array(
+    					'nomeguerra' => $item['nomeguerra'],
+    					'dianascimento' => $item['datanascimento']->format('d'),
+    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+    					'postograduacao' => $item['postograduacao'],
+    					'idade' => $idade->y . " anos"
+    				);
+    				
+    				$dataPolicialJAN[] = $data;
+    			break;
+    			
+    			case '02':
+    				$idade = $hoje->diff($item['datanascimento']);
+    				$data = array(
+    					'nomeguerra' => $item['nomeguerra'],
+    					'dianascimento' => $item['datanascimento']->format('d'),
+    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+    					'postograduacao' => $item['postograduacao'],
+    					'idade' => $idade->y . " anos"
+    				);
+    			
+    			$dataPolicialFEV[] = $data;
+    			break;
+    				
+    			case '03':
+    				$idade = $hoje->diff($item['datanascimento']);
+    				$data = array(
+    					'nomeguerra' => $item['nomeguerra'],
+    					'dianascimento' => $item['datanascimento']->format('d'),
+    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+    					'postograduacao' => $item['postograduacao'],
+    					'idade' => $idade->y . " anos"
+    				);
+    				
+    			$dataPolicialMAR[] = $data;
+    			break;
+    					
+    					
+    			case '04':
+    				$idade = $hoje->diff($item['datanascimento']);
+    				$data = array(
+    					'nomeguerra' => $item['nomeguerra'],
+    					'dianascimento' => $item['datanascimento']->format('d'),
+    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+    					'postograduacao' => $item['postograduacao'],
+    					'idade' => $idade->y . " anos"
+    				);
+    					
+    			$dataPolicialABR[] = $data;
+    			break;
+    						
+    						
+    			case '05':
+    				$idade = $hoje->diff($item['datanascimento']);
+    				$data = array(
+						'nomeguerra' => $item['nomeguerra'],
+						'dianascimento' => $item['datanascimento']->format('d'),
+						'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+						'postograduacao' => $item['postograduacao'],
+						'idade' => $idade->y . " anos"
+					);
+    						
+				$dataPolicialMAI[] = $data;
+				break;
+    							
+    							
+    							
+    			case '06':
+    				$idade = $hoje->diff($item['datanascimento']);
+    				$data = array(
+    					'nomeguerra' => $item['nomeguerra'],
+    					'dianascimento' => $item['datanascimento']->format('d'),
+    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+    					'postograduacao' => $item['postograduacao'],
+    					'idade' => $idade->y . " anos"
+    				);
+    							
+    			$dataPolicialJUN[] = $data;
+    			break;
+    								
+    								
+    			case '06':
+    				$idade = $hoje->diff($item['datanascimento']);
+    				$data = array(
+    					'nomeguerra' => $item['nomeguerra'],
+    					'dianascimento' => $item['datanascimento']->format('d'),
+    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+    					'postograduacao' => $item['postograduacao'],
+    					'idade' => $idade->y . " anos"
+    				);
+    								
+    			$dataPolicialJUL[] = $data;
+    			break;
+    			
+    			case '07':
+    				$idade = $hoje->diff($item['datanascimento']);
+    				$data = array(
+    					'nomeguerra' => $item['nomeguerra'],
+    					'dianascimento' => $item['datanascimento']->format('d'),
+    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+    					'postograduacao' => $item['postograduacao'],
+    					'idade' => $idade->y . " anos"
+    				);
+    			
+    				$dataPolicialJUL[] = $data;
+    				break;
+    				 
+    			case '08':
+    				$idade = $hoje->diff($item['datanascimento']);
+    				$data = array(
+    					'nomeguerra' => $item['nomeguerra'],
+    					'dianascimento' => $item['datanascimento']->format('d'),
+    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+    					'postograduacao' => $item['postograduacao'],
+    					'idade' => $idade->y . " anos"
+    				);
+    				 
+    				$dataPolicialAGO[] = $data;
+    				break;
+    			
+    			case '09':
+    				$idade = $hoje->diff($item['datanascimento']);
+    				$data = array(
+    					'nomeguerra' => $item['nomeguerra'],
+    					'dianascimento' => $item['datanascimento']->format('d'),
+    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+    					'postograduacao' => $item['postograduacao'],
+    					'idade' => $idade->y . " anos"
+    				);
+    			
+    				$dataPolicialSET[] = $data;
+    				break;
+    					
+    					
+    			case '10':
+    				$idade = $hoje->diff($item['datanascimento']);
+    				$data = array(
+    					'nomeguerra' => $item['nomeguerra'],
+    					'dianascimento' => $item['datanascimento']->format('d'),
+    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+    					'postograduacao' => $item['postograduacao'],
+    					'idade' => $idade->y . " anos"
+    				);
+    					
+    				$dataPolicialOUT[] = $data;
+    				break;
+    			
+    			
+    			case '11':
+    				$idade = $hoje->diff($item['datanascimento']);
+    				$data = array(
+    					'nomeguerra' => $item['nomeguerra'],
+    					'dianascimento' => $item['datanascimento']->format('d'),
+    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+    					'postograduacao' => $item['postograduacao'],
+    					'idade' => $idade->y . " anos"
+    				);
+    			
+    				$dataPolicialNOV[] = $data;
+    				break;
+    					
+    					
+    					
+    			case '12':
+    				$idade = $hoje->diff($item['datanascimento']);
+    				$data = array(
+    					'nomeguerra' => $item['nomeguerra'],
+    					'dianascimento' => $item['datanascimento']->format('d'),
+    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+    					'postograduacao' => $item['postograduacao'],
+    					'idade' => $idade->y . " anos"
+    				);
+    					
+    				$dataPolicialDEZ[] = $data;
+    				break;
+    		}
+    	}
+    	$dataPolicial['JAN'] = $dataPolicialJAN;
+    	$dataPolicial['FEV'] = $dataPolicialFEV;
+    	$dataPolicial['MAR'] = $dataPolicialMAR;
+    	$dataPolicial['ABR'] = $dataPolicialABR;
+    	$dataPolicial['MAI'] = $dataPolicialMAI;
+    	$dataPolicial['JUN'] = $dataPolicialJUN;
+    	$dataPolicial['JUL'] = $dataPolicialJUL;
+    	$dataPolicial['AGO'] = $dataPolicialAGO;
+    	$dataPolicial['SET'] = $dataPolicialSET;
+    	$dataPolicial['OUT'] = $dataPolicialOUT;
+    	$dataPolicial['NOV'] = $dataPolicialNOV;
+    	$dataPolicial['DEZ'] = $dataPolicialDEZ;
+    	
+    	return new ViewModel(array(
+    			'policiais' => $dataPolicial,
+    	));
+    }
+    
     /**
      * Metodo privado para obter instacia do Model PolicialTable
      *

@@ -1,0 +1,66 @@
+<ul role="tablist" class="nav nav-tabs">
+	<li role="" class="">
+		<a href="#JAN" data-toggle="tab"	aria-expanded="false">Jan</a>
+	</li>
+	<li class="">
+		<a href="#FEV" data-toggle="tab" aria-expanded="false">Fev</a>
+	</li>
+	<li class="">
+		<a href="#MAR" data-toggle="tab" aria-expanded="true">Mar</a>
+	</li>
+	<li class="">
+		<a href="#ABR" data-toggle="tab" aria-expanded="false">Abr</a>
+	</li>
+	<li class="">
+		<a href="#MAI" data-toggle="tab"	aria-expanded="false">Mai</a>
+	</li>
+	<li class="">
+		<a href="#JUN" data-toggle="tab" aria-expanded="false">Jun</a>
+	</li>
+	<li class="">
+		<a href="#JUL" data-toggle="tab" aria-expanded="true">Jul</a>
+	</li>
+	<li class="">
+		<a href="#AGO" data-toggle="tab" aria-expanded="false">Ago</a>
+	</li>
+	<li class="">
+		<a href="#SET" data-toggle="tab"	aria-expanded="false">Set</a>
+	</li>
+	<li class="">
+		<a href="#OUT" data-toggle="tab" aria-expanded="false">Out</a>
+	</li>
+	<li class="">
+		<a href="#NOV" data-toggle="tab" aria-expanded="true">Nov</a>
+	</li>
+	<li class="">
+		<a href="#DEZ" data-toggle="tab" aria-expanded="false">Dez</a>
+	</li>
+</ul>
+
+
+<div class="tab-content">
+<?php foreach ($policiais as $key=>$mes):?>
+<div id="<?php echo $key ?>" class="tab-pane">
+	<h3>Aniversariantes do mês de <?php echo $key?></h3>
+	<table class="table">
+		<tr>
+			<th>Nº</th>
+			<th>Policial</th>
+			<th>Dia</th>
+			<th>Idade</th>
+		</tr>
+		<?php $counter = 1?>
+		<?php foreach ($mes as $policial):?>
+		<tr>
+			<td><?php echo $counter++?></td>
+			<td><?php echo $policial['postograduacao'] . " " . $policial['nomeguerra']?></td>
+			<td><?php echo $policial['dianascimento']?></td>
+			<td><?php echo $policial['idade']?></td>
+		</tr>
+		<?php endforeach;?>
+	</table>
+	</div>
+	
+	<?php endforeach;?>
+	</div>
+</div>
