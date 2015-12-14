@@ -9,6 +9,7 @@ return array(
     'modules' => array(
         'Census',
     	'Hereditas',
+    	'Scriba',
     	'DoctrineModule',
     	'DoctrineORMModule'
     ),

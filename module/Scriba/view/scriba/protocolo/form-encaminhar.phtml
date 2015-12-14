@@ -1,0 +1,41 @@
+<div class="panel panel-primary">
+	<?php echo $this->form()->openTag($form); ?>
+	<div class="panel-heading">
+        <div class="panel-title">
+            Cadastro de Novo Documento
+        </div>
+    </div>
+    <div class="panel-body">
+    	<div class="row">
+    		<div class="col-xs-4">
+    			<?php echo $this->formRow($form->get('tipo')) ?>
+    		</div>
+    		<div class="col-xs-4">
+    			<?php echo $this->formRow($form->get('numero')) ?>
+    		</div>
+    		<div class="col-xs-4">
+    			<?php echo $this->formRow($form->get('recebimento')) ?>
+    		</div>
+    	</div>
+    	<div class="row">
+    		<div class="col-xs-12">
+    			<?php echo $this->formRow($form->get('assunto')) ?>
+    		</div>
+    	</div>
+    	<div class="row">
+    		<div class="col-xs-4">
+    			<?php echo $this->formRow($form->get('secao')) ?>
+    		</div>
+    		<div class="col-xs-4">
+    			<?php echo $this->formRow($form->get('encaminhamento')) ?>
+    		</div>
+    		<div class="col-xs-4">
+    			<?php echo $this->formRow($form->get('polcodigo')) ?>
+    		</div>
+    	</div>
+    </div>
+    <div class="panel-footer">
+    <?php echo $this->formSubmit($form->get('submit')) ?>
+    </div>
+    <?php echo $this->form()->closeTag($form); ?> 
+</div>

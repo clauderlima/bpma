@@ -6,6 +6,7 @@
 			    <th class="text-center">Matricula</th>
 			    <th class="text-center">Policial</th>
 			    <th class="text-center">Celular</th>
+			    <th class="text-center">SubUnidade</th>
 			    <th class="text-center">Lotação</th> 
 			    <th class="text-center">Ação</th>  
 			</tr>
@@ -19,6 +20,7 @@
             <td class="text-center"><?php echo $pessoa['matricula']; ?></td>
 			<td><?php echo $pessoa['postograduacao'] . " " . $pessoa['nomeguerra']; ?></td>
 			<td><?php echo $pessoa['telefonecelular']; ?></td>
+			<td><?php echo $pessoa['subunidade']; ?></td>
 			<td><?php echo $pessoa['lotacao']; ?></td>
             <td class="text-center">
                 <a class="btn btn-xs btn-info" title="Detalhes"  href="<?php echo $this->url('census', array("action" => "detalhes", "id" => $pessoa['codigo'])); ?>"><span class="glyphicon glyphicon-new-window"></span></a>

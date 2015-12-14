@@ -24,7 +24,22 @@
     			if ($item->getInicio() <= $today && $today <= $item->getFim()):?>
     			<tr>
     				<td><?php echo $counter++ ?></td>
-    				<td><a href="/census/detalhes/<?php echo $item->getPolcodigo()->getCodigo()?>"><i title="<?php if ($item->getPolcodigo()->getSubunidade() == "Btl") $class="Batalhão"; echo $class ? $class : "Sem Classificação"; echo ($item->getPolcodigo()->getServicoposto()) ? " - " . $item->getPolcodigo()->getServicoposto() : " - Sem local"; echo ($item->getPolcodigo()->getServicofuncao()) ? " - " . $item->getPolcodigo()->getServicofuncao() : " - Sem função"?>"><?php echo $item->getPolcodigo()->getPostoGraduacao() . " " .$item->getPolcodigo()->getNomeGuerra()?></i></a></td>
+    				<td><a href="/census/detalhes/<?php echo $item->getPolcodigo()->getCodigo()?>">
+    				    	<i title="<?php 
+    				    		if ($item->getPolcodigo()->getSubunidade() == "Btl") 
+    				    		{
+    				    			$class="Batalhão"; 
+    				    		} else 
+    				    		{ 
+    				    			$class = $item->getPolcodigo()->getSubunidade();
+    				    		} ; 
+    				    		echo $class ? $class : "Sem Classificação"; 
+    				    		echo ($item->getPolcodigo()->getServicoposto()) ? " - " . $item->getPolcodigo()->getServicoposto() : " - Sem local"; 
+    				    		echo ($item->getPolcodigo()->getServicofuncao()) ? " - " . $item->getPolcodigo()->getServicofuncao() : " - Sem função"?>">
+    				    		<?php echo $item->getPolcodigo()->getPostoGraduacao() . " " .$item->getPolcodigo()->getNomeGuerra()?>
+    				    	</i>
+    				    </a>
+    				</td>
     				<td><?php echo $item->getInicio()->format('d/m/Y');?></td>
     				<td><?php echo $item->getFim()->format('d/m/Y');?></td>
     				<td><?php 
