@@ -1,63 +1,71 @@
-<?php 
-  	/* echo "<pre>";
-	print_r($policial);
-	print_r($ferias);
-	echo "</pre>"; */
-	//exit; 
+<?php
+/*
+ * echo "<pre>";
+ * print_r($policial);
+ * print_r($ferias);
+ * echo "</pre>";
+ */
+// exit;
 ?>
-
-<ul class="nav nav-pills">
-	<li class="active"><a data-toggle="tab" href="#home">Férias</a></li>
-</ul>
-
 <?php echo $this->form()->openTag($form); ?>
-<div class="tab-content">
-	<div id="home" class="tab-pane fade in active">
-		<div class="panel panel-info">
-			<div class="panel-heading">Programação de Férias para <?php echo $this->policial->pol_PostoGraduacao . " " . $this->policial->pol_NomeGuerra ?></div>
-			<div class="painel-body" style="padding: 2px">
-			
-			
-			<div class="container">      
-  <table class="table table-bordered" style="width: 95%">
-    <thead>
-      <tr>
-      	<th>Referência</th>
-        <th>Previsão</th>
-      </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($ferias as $feria):?>
-      <tr>
-        <td><?php echo $feria['anoreferencia'];?></td>
-        <td><?php echo $feria['programacao'];?></td>
-      </tr>
-      <?php endforeach;?>
-    </tbody>
-  </table>
-</div>
-			
-			
-			
-			
-				<!-- Linha 2 do formulário -->
-				<div class="row">
-					<div class="col-xs-3"><?php echo $this->formRow($form->get('anoreferencia')) ?></div>
-					<div class="col-xs-3"><?php echo $this->formRow($form->get('programacao')) ?></div>
-					<div class="col-xs-3"><input type="hidden" name="polcodigo" value="<?php echo $this->policial->pol_Codigo ?>"></div>
-				</div>
-			</div>
+<div class="panel panel-primary">
+	<div class="panel-heading">Controle de Férias do <?php echo $this->policial->pol_PostoGraduacao . " " . $this->policial->pol_NomeGuerra ?></div>
+	<div class="panel-body" style="padding: 2px">
+		<div class="container"><br>
+			<table class="table">
+				<thead>
+					<tr>
+						<th class="text-center">Ref.</th>
+						<th class="text-center">Mês</th>
+						<th class="text-center">Gozada</th>
+						<th class="text-center">Parcela</th>
+						<th class="text-center">Início</th>
+						<th class="text-center">Qtd Dias</th>
+						<th class="text-center">Boletim</th>
+						<th class="text-center">Opções</th>
+					</tr>
+				</thead>
+				<tbody>
+    				<?php foreach ($ferias as $feria):?>
+      				<tr>
+						<td class="text-center"><?php echo $feria['anoreferencia'];?></td>
+						<td class="text-center"><?php echo $feria['programacao'];?></td>
+						<td class="text-center"><?php echo $feria['naogozo'];?></td>
+						<td class="text-center"><?php if ($feria['parcela']) echo $feria['parcela'] . "ª Parcela";?></td>
+						<td class="text-center"><?php if ($feria['inicio']) echo $feria['inicio']->format('d/m/Y');?></td>
+						<td class="text-center"><?php echo $feria['qtddias'];?></td>
+						<td class="text-center"><?php echo $feria['boletim'];?></td>
+						<td class="text-center"><a href="/ferias/deletar/<?php echo $feria['codigo'];?>"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a></td>
+					</tr>
+      			<?php endforeach;?>
+    		</tbody>
+			</table>
 		</div>
-	</div>
-</div>
 
-		<div class="panel panel-primary">
-			<div class="painel-body" style="padding: 5px">
-				<!-- Linha 1 do formulário -->
-				<div class="row">
-					<div class="col-xs-6"><?php echo $this->formSubmit($form->get('submit')) ?></div>
-					<div class="col-xs-6"><a href="/census"><button type="button" class="btn btn-default">Voltar</button></a></div>
-<?php echo $this->form()->closeTag($form); ?>
+		<div class="container">
+		<!-- Linha 2 do formulário -->
+			<div class="row">
+				<div class="col-xs-3"><?php echo $this->formRow($form->get('anoreferencia')) ?></div>
+				<div class="col-xs-3"><?php echo $this->formRow($form->get('programacao')) ?></div>
+				<div class="col-xs-3"><?php echo $this->formRow($form->get('naogozo'))?></div>
+				<div class="col-xs-3"><?php echo $this->formRow($form->get('parcela')) ?></div>
 			</div>
+			<div class="row">
+				
+				<div class="col-xs-3"><?php echo $this->formRow($form->get('inicio')) ?></div>
+				<div class="col-xs-3"><?php echo $this->formRow($form->get('qtddias'))?></div>
+				<div class="col-xs-6"><?php echo $this->formRow($form->get('boletim')) ?></div>
+			</div>
+				<input type="hidden" name="polcodigo" value="<?php echo $this->policial->pol_Codigo ?>">
 		</div>
+		<br>
 	</div>
+	<div class="panel-footer">
+		<a href="/census/detalhes/<?php echo $this->policial->pol_Codigo ?>"><button type="button" class="btn btn-default">Voltar</button></a>
+		
+		<div class="col-xs-6">
+				<?php echo $this->formSubmit($form->get('submit')) ?>
+		</div>
+		<?php echo $this->form()->closeTag($form); ?>
+	</div>
+</div>

@@ -4,7 +4,7 @@ namespace Census\Service;
 
 class NumeracaoRequerimento extends AbstractService
 {
-	public function insert($entity, $matricula)
+	public function numerar($entity, $matricula, $tiporequerimento)
 	{	
 		
 		$hoje = new \DateTime();
@@ -32,7 +32,7 @@ class NumeracaoRequerimento extends AbstractService
 		
 			
 		
-		$descricao = "Requerimento de Abono - " . $matricula . " - " . $hoje->format('d/m/Y');
+		$descricao = "Requerimento de " . $tiporequerimento . " - " . $matricula . " - " . $hoje->format('d/m/Y');
 		
 		// Adiciona o Numero no Controle de Numeracao
 		$datanumero = array(

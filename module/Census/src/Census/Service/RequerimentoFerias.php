@@ -2,7 +2,7 @@
 
 namespace Census\Service;
 
-class Abono extends AbstractService
+class RequerimentoFerias extends AbstractService
 {
 	public function insert(array $data, $entity)
 	{	
@@ -13,13 +13,12 @@ class Abono extends AbstractService
 		
 		// Busca um numero novo para o Requerimento
 		$serviceNumReq = $this->getServiceLocator()->get('census-service-numeracaorequerimento');
-		$numero = $serviceNumReq->insert('Census\Entity\NumeracaoRequerimento', $data['matricula']);
+		$numero = $serviceNumReq->numerar('Census\Entity\NumeracaoRequerimento', $data['matricula'], 'Abono');
 		
 		$numeroRequerimento = str_pad($numero->getCodigo(), 5, "0", STR_PAD_LEFT)."/".$data['datasolicitacao']->format('Y');
 		$data['numero'] = $numeroRequerimento;
 		$data['nrecodigo'] = $this->getEmRef('Census\Entity\NumeracaoRequerimento', $numero->getCodigo());
-		$data['inicioabono'] = $data['inicioabono']->format('Y/m/d');
-		$data['fimabono'] = $data['fimabono']->format('Y/m/d');
+		
 		$data['datasolicitacao'] = $data['datasolicitacao']->format('Y/m/d');
 		$data['datainclusao'] = $data['datainclusao']->format('Y/m/d');
 

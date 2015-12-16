@@ -4,7 +4,7 @@ namespace Census\Modulo;
 
 use ZendService\LiveDocx\MailMerge;
 
-class Abono extends Requerimento
+class RequerimentoAbono extends Requerimento
 {	
 	private $inicio;
 	private $quantidadeDias;
@@ -33,7 +33,7 @@ class Abono extends Requerimento
 		$em = $this->sm->get('Doctrine\ORM\EntityManager');
 		$abonoanteriores = $em->createQueryBuilder()
 		->select('a')
-		->from('Census\Entity\Abono', 'a')
+		->from('Census\Entity\RequerimentoAbono', 'a')
 		->where('a.polcodigo = :polcodigo')
 		->setParameter('polcodigo', $id)
 		->orderBy('a.codigo', 'ASC')
@@ -177,11 +177,11 @@ class Abono extends Requerimento
 				'polcodigo' => $id
 		);
 		
-		$service = $this->sm->get('census-service-abono');
-		$service->insert($data, 'Census\Entity\Abono');
+		$service = $this->sm->get('census-service-requerimentoabono');
+		$service->insert($data, 'Census\Entity\RequerimentoAbono');
 	}
 
-	function imprimirAbono(array $data)
+	function imprimir(array $data)
 	{
 		// Configuração para gerar datas em português
 		setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
@@ -250,6 +250,8 @@ class Abono extends Requerimento
 				->assign('funcaoChefeSAd', $data['funcaochefesad'])
 				
 				->assign('lotacao', $data['lotacao'])
+				->assign('comandante', $data['comandante'])
+				->assign('funcaocomandante', $data['funcaocomandante'])
 				->assign('funcaochefe', $data['funcaochefe'])
 				->assign('chefeImediato', $data['chefeimediato']);
 	

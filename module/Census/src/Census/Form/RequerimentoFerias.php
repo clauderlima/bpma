@@ -8,11 +8,11 @@ use Zend\Form\Element\Select;
 use Zend\Form\Element\Date;
 use Zend\Form\Element\Submit;
 
-class Abono extends Form
+class RequerimentoFerias extends Form
 {
 	public function __construct() 
 	{
-		parent::__construct('formABono');
+		parent::__construct('formFerias');
 
 		// inicio;
 		$inicio = new Date('inicioabono');

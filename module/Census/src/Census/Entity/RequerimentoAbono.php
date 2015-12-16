@@ -8,10 +8,10 @@ use Zend\Stdlib\Hydrator\ClassMethods;
 /**
  * Abono
  *
- * @ORM\Table(name="abono", indexes={@ORM\Index(name="fk_requerimentoAbono_policial1_idx", columns={"pol_Codigo"}), @ORM\Index(name="fk_requerimentoAbono_numeracao_requerimento1_idx", columns={"nab_Codigo"})})
+ * @ORM\Table(name="requerimento_abono", indexes={@ORM\Index(name="fk_requerimentoAbono_policial1_idx", columns={"pol_Codigo"}), @ORM\Index(name="fk_requerimentoAbono_numeracao_requerimento1_idx", columns={"nab_Codigo"})})
  * @ORM\Entity
  */
-class Abono
+class RequerimentoAbono
 {
     /**
      * @var integer

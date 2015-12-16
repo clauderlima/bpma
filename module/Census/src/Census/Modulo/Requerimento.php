@@ -11,6 +11,7 @@ abstract class Requerimento extends AbstractActionController
 	
 	protected $numero;
 	protected $codigo;
+	protected $tipo;
 	protected $nomePolicial;
 	protected $postoGraduacao;
 	protected $matricula;
@@ -225,10 +226,10 @@ abstract class Requerimento extends AbstractActionController
 			$this->chefeSAd = $subComandante;
 			$this->funcaoChefeSAd = "Sub Comandante do BPMA";
 			$this->lotacao = "Sub Comando do BPMA";
-			$this->comandante = "WILLIAM DELANO MARQUES DE ARAÚJO - TC QOPM";
-			$this->funcaocomandante = "Comandante do BPMA";
 			$this->template = "BTL";
 		}
+		$this->comandante = "WILLIAM DELANO MARQUES DE ARAÚJO - TC QOPM";
+		$this->funcaocomandante = "Comandante do BPMA";
 	}
 	
 	public function getArquivo()

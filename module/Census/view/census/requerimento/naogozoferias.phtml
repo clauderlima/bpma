@@ -1,0 +1,25 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<div class="panel-title">
+            Requerimento de não gozo de férias para <?php echo $dados[0]['postograduacao'] . " " . $dados[0]['nomeguerra']; ?>
+        </div>
+        <?php //echo "<pre>"; echo print_r($policial); exit;?>
+    </div>
+	<div class="panel-body">
+    <?php $idpolicial = $dados[0]['codigo']?>
+    <form method="POST"
+			action="/requerimento/requerernaogozoferias/<?php echo $idpolicial?>">
+			<div class="row">
+				<div class="col-xs-4">
+					Ano Referência: <select name="anoreferencia">
+						<option value="">Selecione</option>
+						<option value="2015">2015</option>
+						</select>
+				</div>
+			</div>
+	</div>
+	<div class="panel-footer">
+		<input type="submit" value="Enviar">
+	</div>
+	</form>
+</div>

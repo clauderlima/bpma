@@ -64,10 +64,10 @@ class Ferias extends \Census\Entity\Ferias implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'codigo', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'opcao1', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'opcao2', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'opcao3', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'anoreferencia', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'programacao', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'polcodigo');
+            return array('__isInitialized__', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'codigo', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'opcao1', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'opcao2', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'opcao3', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'anoreferencia', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'programacao', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'inicio', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'parcela', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'naogozo', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'boletim', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'qtddias', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'polcodigo');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'codigo', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'opcao1', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'opcao2', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'opcao3', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'anoreferencia', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'programacao', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'polcodigo');
+        return array('__isInitialized__', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'codigo', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'opcao1', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'opcao2', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'opcao3', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'anoreferencia', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'programacao', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'inicio', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'parcela', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'naogozo', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'boletim', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'qtddias', '' . "\0" . 'Census\\Entity\\Ferias' . "\0" . 'polcodigo');
     }
 
     /**
@@ -187,159 +187,269 @@ class Ferias extends \Census\Entity\Ferias implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getcodigo()
+    public function getCodigo()
     {
         if ($this->__isInitialized__ === false) {
-            return (int)  parent::getcodigo();
+            return (int)  parent::getCodigo();
         }
 
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getcodigo', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCodigo', array());
 
-        return parent::getcodigo();
+        return parent::getCodigo();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setcodigo($codigo)
+    public function setCodigo($codigo)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setcodigo', array($codigo));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCodigo', array($codigo));
 
-        return parent::setcodigo($codigo);
+        return parent::setCodigo($codigo);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getopcao1()
+    public function getOpcao1()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getopcao1', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getOpcao1', array());
 
-        return parent::getopcao1();
+        return parent::getOpcao1();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setopcao1($opcao1)
+    public function setOpcao1($opcao1)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setopcao1', array($opcao1));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setOpcao1', array($opcao1));
 
-        return parent::setopcao1($opcao1);
+        return parent::setOpcao1($opcao1);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getopcao2()
+    public function getOpcao2()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getopcao2', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getOpcao2', array());
 
-        return parent::getopcao2();
+        return parent::getOpcao2();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setopcao2($opcao2)
+    public function setOpcao2($opcao2)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setopcao2', array($opcao2));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setOpcao2', array($opcao2));
 
-        return parent::setopcao2($opcao2);
+        return parent::setOpcao2($opcao2);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getopcao3()
+    public function getOpcao3()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getopcao3', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getOpcao3', array());
 
-        return parent::getopcao3();
+        return parent::getOpcao3();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setopcao3($opcao3)
+    public function setOpcao3($opcao3)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setopcao3', array($opcao3));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setOpcao3', array($opcao3));
 
-        return parent::setopcao3($opcao3);
+        return parent::setOpcao3($opcao3);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getanoreferencia()
+    public function getAnoreferencia()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getanoreferencia', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAnoreferencia', array());
 
-        return parent::getanoreferencia();
+        return parent::getAnoreferencia();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setanoreferencia($anoreferencia)
+    public function setAnoreferencia($anoreferencia)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setanoreferencia', array($anoreferencia));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAnoreferencia', array($anoreferencia));
 
-        return parent::setanoreferencia($anoreferencia);
+        return parent::setAnoreferencia($anoreferencia);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getprogramacao()
+    public function getProgramacao()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getprogramacao', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getProgramacao', array());
 
-        return parent::getprogramacao();
+        return parent::getProgramacao();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setprogramacao($programacao)
+    public function setProgramacao($programacao)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setprogramacao', array($programacao));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setProgramacao', array($programacao));
 
-        return parent::setprogramacao($programacao);
+        return parent::setProgramacao($programacao);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getpolcodigo()
+    public function getInicio()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getpolcodigo', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getInicio', array());
 
-        return parent::getpolcodigo();
+        return parent::getInicio();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setpolcodigo($polcodigo)
+    public function setInicio($inicio)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setpolcodigo', array($polcodigo));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setInicio', array($inicio));
 
-        return parent::setpolcodigo($polcodigo);
+        return parent::setInicio($inicio);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getParcela()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getParcela', array());
+
+        return parent::getParcela();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setParcela($parcela)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setParcela', array($parcela));
+
+        return parent::setParcela($parcela);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getNaogozo()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getNaogozo', array());
+
+        return parent::getNaogozo();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setNaogozo($naogozo)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setNaogozo', array($naogozo));
+
+        return parent::setNaogozo($naogozo);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getBoletim()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getBoletim', array());
+
+        return parent::getBoletim();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setBoletim($boletim)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setBoletim', array($boletim));
+
+        return parent::setBoletim($boletim);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getQtddias()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getQtddias', array());
+
+        return parent::getQtddias();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setQtddias($qtddias)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setQtddias', array($qtddias));
+
+        return parent::setQtddias($qtddias);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPolcodigo()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPolcodigo', array());
+
+        return parent::getPolcodigo();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setPolcodigo($polcodigo)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPolcodigo', array($polcodigo));
+
+        return parent::setPolcodigo($polcodigo);
     }
 
 }

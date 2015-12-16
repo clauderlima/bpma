@@ -4,6 +4,7 @@ namespace Census\Controller;
 
 use Zend\View\Model\ViewModel;
 use Census\Service\Abono;
+use function Zend\Mvc\Controller\flashMessenger;
 
 
 class RequerimentoController extends AbstractController
@@ -40,12 +41,11 @@ class RequerimentoController extends AbstractController
 		$inicio = $_POST['dataInicial'];
 		$qtdDias = $_POST['quantidadeDias'];
 		
-		$abono = new \Census\Modulo\Abono($this->getServiceLocator()->get('servicemanager'));
+		$abono = new \Census\Modulo\RequerimentoAbono($this->getServiceLocator()->get('servicemanager'));
 		
 		if ($abono->requer($id, $inicio, $qtdDias))
 		{
 			$this->flashMessenger()->addSuccessMessage("Curso cadastrado com sucesso!");
-			return $this->redirect()->toUrl('/census');
 		}
 
 		return $this->redirect()->toUrl('/census/detalhes/' . $id);
@@ -54,18 +54,18 @@ class RequerimentoController extends AbstractController
 		
 	}
 	
-	public function editarabonoAction()
+	public function editarAbonoAction()
 	{
 		// Definindo variaveis
 		$request = $this->getRequest();
 		$id = (int) $this->params()->fromRoute('id', 0);
 			
 		// Instaciando services
-		$service = $this->getServiceLocator()->get('census-service-abono');
+		$service = $this->getServiceLocator()->get('census-service-requerimentoabono');
 			
 		// Instaciando o Form
 		$form = new \Census\Form\Abono();
-		$abono = $this->getEm('Census\Entity\Abono')->find($id)->toArray();
+		$abono = $this->getEm('Census\Entity\RequerimentoAbono')->find($id)->toArray();
 	
 		$dataPolicial = $this->getEm('Census\Entity\Policial')->find($abono['polcodigo']->getCodigo())->toArray();
 	
@@ -77,11 +77,11 @@ class RequerimentoController extends AbstractController
 			$data = $request->getPost()->toArray();
 				
 			$form->setData($data);
-			$form->setInputFilter(new \Census\Filter\Abono());
+			$form->setInputFilter(new \Census\Filter\RequerimentoAbono());
 	
 			if ($form->isValid())
 			{
-				if ($service->update($data, 'Census\Entity\Abono', $id))
+				if ($service->update($data, 'Census\Entity\RequerimentoAbono', $id))
 				{
 					$this->flashMessenger()->addSuccessMessage("Curso cadastrado com sucesso!");
 					return $this->redirect()->toUrl('/census/detalhes/' . $abono['polcodigo']->getCodigo());
@@ -101,7 +101,7 @@ class RequerimentoController extends AbstractController
 		return $view;
 	}
 	
-	public function deletarabonoAction()
+	public function deletarAbonoAction()
 	{
 		$id = (int) $this->params()->fromRoute('id', 0);
 	
@@ -116,32 +116,16 @@ class RequerimentoController extends AbstractController
 		}
 	}
 	
-	public function reproferiasAction()
+	public function imprimirAbonoAction()
 	{
 		$id = (int) $this->params()->fromRoute('id', 0);
+		$data = $this->getEm('Census\Entity\RequerimentoAbono')->find($id)->toArray();
 		
-		$query = $this->getEm()->createQuery("SELECT p.codigo, p.postograduacao, p.nomeguerra 
-				FROM Census\Entity\Policial p WHERE p.codigo = :codigo");
-		$query->setParameter('codigo',$id);
+		$abono = new \Census\Modulo\RequerimentoAbono($this->getServiceLocator()->get('servicemanager'));
 		
-		$dados = $query->getResult();
-		
-		$view = new ViewModel();
-		$view->setVariable('dados', $dados);
-		return $view;	
-	}
-	
-	public function imprimirabonoAction()
-	{
-		$id = (int) $this->params()->fromRoute('id', 0);
-		$data = $this->getEm('Census\Entity\Abono')->find($id)->toArray();
-		
-		$abono = new \Census\Modulo\Abono($this->getServiceLocator()->get('servicemanager'));
-		
-		if ($abono->imprimirAbono($data))
+		if ($abono->imprimir($data))
 		{
 			$this->flashMessenger()->addSuccessMessage("Curso cadastrado com sucesso!");
-			return $this->redirect()->toUrl('/census');
 		}
 
 		return $this->redirect()->toUrl('/census/detalhes/' . $id);
@@ -149,7 +133,34 @@ class RequerimentoController extends AbstractController
 		return $view;
 	}
 	
-	public function reprogramarferiasAction()
+	public function reproFeriasAction()
+	{
+		$id = (int) $this->params()->fromRoute('id', 0);
+	
+		//$query = $this->getEm()->createQuery("SELECT p.codigo, p.postograduacao, p.nomeguerra
+		//		FROM Census\Entity\Policial p WHERE p.codigo = :codigo");
+		
+		$query = $this->getEm()->createQueryBuilder()
+			->select('f', 'p')
+			->from('Census\Entity\Ferias', 'f')
+			->innerJoin('f.polcodigo', 'p')
+			->where('p.codigo = :codigo')
+			->setParameter('codigo',$id);
+	
+		$dados = $query->getQuery()->getResult();
+		
+		if (!$dados)
+		{
+			$this->flashMessenger()->addErrorMessage("O policial não possui férias programada no sistema");
+			return $this->redirect()->toUrl('/ferias/adicionar/' . $id);
+		}
+		
+		$view = new ViewModel();
+		$view->setVariable('dados', $dados);
+		return $view;
+	}
+	
+	public function requererReproFeriasAction()
 	{
 		$id = (int) $this->params()->fromRoute('id', 0);
 	
@@ -157,17 +168,254 @@ class RequerimentoController extends AbstractController
 		$novomes = $_POST['novomes'];
 		$anoreferencia = $_POST['anoreferencia'];
 	
-		$reproferias = new \Census\Modulo\Reproferias($this->getServiceLocator()->get('servicemanager'));
+		$reproferias = new \Census\Modulo\RequerimentoFerias($this->getServiceLocator()->get('servicemanager'));
+		
+		$reproferias->requerreproferias($id, $anoreferencia, $novomes);
 	
-		$reproferias->requer($id, $anoreferencia, $novomes);
-	
-		$filename = array(
-				'arquivo' => $abono->getArquivo()
-		);
-	
+		return $this->redirect()->toUrl('/census/detalhes/' . $id);
+		
 		$view = new ViewModel();
 		$view->setTerminal(true);
 		return $view;
+	
+	}
+	
+	public function editarReproFeriasAction()
+	{
+		// Definindo variaveis
+		$request = $this->getRequest();
+		$id = (int) $this->params()->fromRoute('id', 0);
+			
+		// Instaciando services
+		$service = $this->getServiceLocator()->get('census-service-requerimentoferias');
+			
+		// Instaciando o Form
+		$form = new \Census\Form\RequerimentoFerias();
+		$abono = $this->getEm('Census\Entity\RequerimentoFerias')->find($id)->toArray();
+		
+		$dataPolicial = $this->getEm('Census\Entity\Policial')->find($abono['polcodigo']->getCodigo())->toArray();
+		
+		$form->setData($abono);
+		
+		if ($request->isPost())
+		{
+			// setando o input filter no orm
+			$data = $request->getPost()->toArray();
+		
+			$form->setData($data);
+			$form->setInputFilter(new \Census\Filter\RequerimentoFerias());
+		
+			if ($form->isValid())
+			{
+				if ($service->update($data, 'Census\Entity\RequerimentoFerias', $id))
+				{
+					$this->flashMessenger()->addSuccessMessage("Curso cadastrado com sucesso!");
+					return $this->redirect()->toUrl('/census/detalhes/' . $abono['polcodigo']->getCodigo());
+				}
+			} else {
+				$this->flashMessenger()->addErrorMessage('Erro ao cadastrar curso! <br>Verifique se os campos foram preenchidos corretamente.');
+			}
+		}
+			
+		$view = new ViewModel(array(
+				'form' => $form,
+				'policial' => $dataPolicial
+		));
+			
+		$view->setTemplate('census/requerimento/feriasform.phtml');
+			
+		return $view;
+	}
+	
+	public function deletarReproFeriasAction()
+	{
+	
+	}
+	
+	public function imprimirReproFeriasAction()
+	{
+		$id = (int) $this->params()->fromRoute('id', 0);
+		$data = $this->getEm('Census\Entity\RequerimentoFerias')->find($id)->toArray();
+		
+		$reproferias = new \Census\Modulo\RequerimentoFerias($this->getServiceLocator()->get('servicemanager'));
+		
+		if ($reproferias->imprimirnaogozo($data))
+		{
+			$this->flashMessenger()->addSuccessMessage("Curso cadastrado com sucesso!");
+		}
+		
+		return $this->redirect()->toUrl('/census/detalhes/' . $id);
+		$view = new ViewModel();
+		return $view;
+	}
+	
+	public function naogozoFeriasAction()
+	{
+		$id = (int) $this->params()->fromRoute('id', 0);
+		
+		$query = $this->getEm()->createQuery("SELECT p.codigo, p.postograduacao, p.nomeguerra
+				FROM Census\Entity\Policial p WHERE p.codigo = :codigo");
+		$query->setParameter('codigo',$id);
+		
+		$dados = $query->getResult();
+		
+		$view = new ViewModel();
+		$view->setVariable('dados', $dados);
+		return $view;
+	}
+	
+	public function requererNaogozoFeriasAction()
+	{
+		$id = (int) $this->params()->fromRoute('id', 0);
+		
+		//Pega dados do Formulário
+		$anoreferencia = $_POST['anoreferencia'];
+		
+		$naogozoferias = new \Census\Modulo\RequerimentoFerias($this->getServiceLocator()->get('servicemanager'));
+		
+		$naogozoferias->requernaogozo($id, $anoreferencia);
+		
+		return $this->redirect()->toUrl('/census/detalhes/' . $id);
+		
+		$view = new ViewModel();
+		$view->setTerminal(true);
+		return $view;
+	}
+	
+	public function editarNaogozoFeriasAction()
+	{
+	
+	}
+	
+	public function deletarNaogozoFeriasAction()
+	{
+	
+	}
+	
+	public function imprimirNaogozoFeriasAction()
+	{
+	
+	}
+	
+	public function parcelamentoFeriasAction()
+	{
+		$id = (int) $this->params()->fromRoute('id', 0);
+		
+		//$query = $this->getEm()->createQuery("SELECT p.codigo, p.postograduacao, p.nomeguerra
+		//		FROM Census\Entity\Policial p WHERE p.codigo = :codigo");
+		
+		$query = $this->getEm()->createQueryBuilder()
+		->select('f', 'p')
+		->from('Census\Entity\Ferias', 'f')
+		->innerJoin('f.polcodigo', 'p')
+		->where('p.codigo = :codigo')
+		->setParameter('codigo',$id);
+		
+		$dados = $query->getQuery()->getResult();
+		
+		if (!$dados)
+		{
+			$this->flashMessenger()->addErrorMessage("O policial não possui férias programada no sistema");
+			return $this->redirect()->toUrl('/ferias/adicionar/' . $id);
+		}
+		
+		$view = new ViewModel();
+		$view->setVariable('dados', $dados);
+		return $view;
+	}
+	
+	public function requererParcelamentoFeriasAction()
+	{
+	
+	}
+	
+	public function editarParcelamentoFeriasAction()
+	{
+	
+	}
+	
+	public function deletarParcelamentoFeriasAction()
+	{
+	
+	}
+	
+	public function imprimirParcelamentoFeriasAction()
+	{
+	
+	}
+	
+	public function gozoOportunoFeriasAction()
+	{
+		
+	}
+	
+	public function requererGozoOportunoFeriasAction()
+	{
+	
+	}
+	
+	public function editarGozoOportunoFeriasAction()
+	{
+	
+	}
+	
+	public function deletarGozoOportunoFeriasAction()
+	{
+	
+	}
+	
+	public function imprimirGozoOportunoFeriasAction()
+	{
+	
+	}
+	
+	public function InterrupcaoFeriasAction()
+	{
+	
+	}
+	
+	public function requererInterrupcaoFeriasAction()
+	{
+	
+	}
+	
+	public function editarInterrupcaoFeriasAction()
+	{
+	
+	}
+	
+	public function deletarInterrupcaoFeriasAction()
+	{
+	
+	}
+	
+	public function imprimirInterrupcaoFeriasAction()
+	{
+	
+	}
+	
+	public function licensaEspecialAction()
+	{
+	
+	}
+	
+	public function requererLicensaEspecialAction()
+	{
+	
+	}
+	
+	public function editarLicensaEspecialAction()
+	{
+	
+	}
+	
+	public function deletarLicensaEspecialAction()
+	{
+	
+	}
+	
+	public function imprimirLicensaEspecialAction()
+	{
 	
 	}
 	

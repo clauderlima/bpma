@@ -23,12 +23,13 @@
 	        	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 				    <li><a href="/requerimento/abono/<?php echo $this->filter($policial)->codigo(); ?>">Abono de Ponto Anual</a></li>
 					<li class="divider"></li>
-					<li><a href="/requerimento/reproferias/<?php echo $this->filter($policial)->codigo(); ?>" target="_blank">Reprogramação de Férias</a></li>
-					<li><a href="#">Não Gozo de Férias</a></li>
-					<li><a href="#">Parcelamento de Férias</a></li>
-					<li><a href="#">Gozo em momento oportuno</a></li>
+					<li><a href="/requerimento/reproferias/<?php echo $this->filter($policial)->codigo(); ?>">Reprogramação de Férias</a></li>
+					<li><a href="/requerimento/naogozoferias/<?php echo $this->filter($policial)->codigo(); ?>">Não Gozo de Férias</a></li>
+					<li><a href="/requerimento/parcelamentoferias/<?php echo $this->filter($policial)->codigo(); ?>">Parcelamento de Férias</a></li>
+					<li><a href="/requerimento/gozooportunoferias/<?php echo $this->filter($policial)->codigo(); ?>">Gozo em momento oportuno</a></li>
+					<li><a href="/requerimento/interrupcaoferias/<?php echo $this->filter($policial)->codigo(); ?>">Interrupção de Férias</a></li>
 					<li class="divider"></li>
-					<li><a href="#">Licença Especial</a></li>
+					<li><a href="/requerimento/licensaespecial/<?php echo $this->filter($policial)->codigo(); ?>">Licença Especial</a></li>
 					<li class="divider"></li>
 					<li><a href="#">Ressarcimento de Despesas</a></li>
 					<li><a href="#">Inclusão de Dependentes</a></li>
@@ -180,7 +181,7 @@
 			</tbody>
 		</table>
 		<?php endif;?>
-		<?php if (count($requerimentos)):?>
+		<?php if (count($abonorequerimentos) || count($feriasrequerimentos)):?>
 		<strong>Requerimentos:</strong>
 		<table class="table table-bordered">
 			<thead>
@@ -198,7 +199,7 @@
 			</thead>
 			<tbody>
 				<?php $counter = 1;?>
-				<?php foreach ($requerimentos as $requerimento):?>
+				<?php foreach ($abonorequerimentos as $requerimento):?>
 				<tr>
 					<th scope="row"><?php echo $counter++?></th>
 					<td>Abono</td>
@@ -221,6 +222,36 @@
 							echo $requerimento->getDatadecisao()->format('d/m/Y')?></td>
 					<td><a href="/requerimento/editarabono/<?php echo $requerimento->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
     				&nbsp;&nbsp; <a href="/requerimento/imprimirabono/<?php echo $requerimento->getCodigo()?>" target="_blank"><i class="glyphicon glyphicon-print"></i></a>
+    				<!-- &nbsp;&nbsp; <a href="/requerimento/deletarabono/<?php //echo $requerimento->getCodigo()?>" onClick="deleta()"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a>-->
+    				</td>
+				</tr>
+				<?php endforeach;?>
+				
+				
+				<?php foreach ($feriasrequerimentos as $requerimento):?>
+				<tr>
+					<th scope="row"><?php echo $counter++?></th>
+					<td><?php echo $requerimento->getTipo() ?></td>
+					<td><?php echo $requerimento->getNumero() ?></td>
+					<td><?php echo $requerimento->getDatasolicitacao()->format('d/m/Y')?></td>
+					<td></td>
+					<td><?php echo $requerimento->getNovaProgramacao()?></td>
+					<td><?php 
+						if ($requerimento->getDecisao()) 
+						{
+							echo $requerimento->getDecisao();
+						} else {
+							echo  "Em tramitação";;
+						}
+						
+						?></td>
+					<td><?php 
+						if ($requerimento->getDatadecisao())
+							echo $requerimento->getDatadecisao()->format('d/m/Y')?>
+							
+					</td>
+					<td><a href="/requerimento/editarReproFerias/<?php echo $requerimento->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
+    				&nbsp;&nbsp; <a href="/requerimento/imprimirReproFerias/<?php echo $requerimento->getCodigo()?>" target="_blank"><i class="glyphicon glyphicon-print"></i></a>
     				<!-- &nbsp;&nbsp; <a href="/requerimento/deletarabono/<?php //echo $requerimento->getCodigo()?>" onClick="deleta()"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a>-->
     				</td>
 				</tr>

@@ -1,7 +1,7 @@
 <div class="panel panel-primary">
 	<div class="panel-heading">
 		<div class="panel-title">
-            Requerimento de reprogramação de férias para <?php echo $dados[0]->getPolcodigo()->getPostograduacao() . " " . $dados[0]->getPolcodigo()->getNomeguerra(); ?>
+            Requerimento de parcelamento de férias para <?php echo $dados[0]->getPolcodigo()->getPostograduacao() . " " . $dados[0]->getPolcodigo()->getNomeguerra(); ?>
         </div>
     </div>
 	<div class="panel-body">
@@ -38,38 +38,39 @@
     
     <div class="container"><br>
     
-    <form method="POST"
-			action="/requerimento/requererReproFerias/<?php echo $idpolicial?>">
-			<div class="row">
-				<div class="col-xs-4">
-					Ano Referência: <select name="anoreferencia" class="form-control">
-						<option value="">Selecione</option>
-						<option value="2015">2015</option>
-						</select>
-				</div>
-				<div class="col-xs-4">
-					
-					<lable for="novomes">Novo Mês: </label><select name="novomes" class="form-control">
-						<option value="">Selecione</option>
-						<option>JAN</option>
-						<option>FEV</option>
-						<option>MAR</option>
-						<option>ABR</option>
-						<option>MAI</option>
-						<option>JUN</option>
-						<option>JUL</option>
-						<option>AGO</option>
-						<option>SET</option>
-						<option>OUT</option>
-						<option>NOV</option>
-						<option>DEZ</option>
-					</select>
-				</div>
-			</div>
-		</div>
-	</div>
+    <table class="table">
+    	<tr>
+    		<th class="text-center">Parcela</th>
+    		<th>Início</th>
+    		<th>Qtd Dias</th>
+    		<th>Restante</th>
+    	</tr>
+    	<tr>
+    		<td class="text-center">1</td>
+    		<td><input type="date" class="form-control"></td>
+    		<td><input type="text"  class="form-control"></td>
+    		<td><input type="radio" name="restante1"> Não gozo<br>
+    		<input type="radio" name="restante1"> Momento oportuno</td>
+    	</tr>
+    	<tr>
+    		<td class="text-center">2</td>
+    		<td><input type="date" class="form-control"></td>
+    		<td><input type="text"  class="form-control"></td>
+    		<td><input type="radio" name="restante2"> Não gozo<br>
+    		<input type="radio" name="restante2"> Momento oportuno</td>
+    	</tr>
+    	<tr>
+    		<td class="text-center">3</td>
+    		<td><input type="date" class="form-control"></td>
+    		<td><input type="text"  class="form-control"></td>
+    		<td><input type="radio" name="restante3"> Não gozo<br>
+    		<input type="radio" name="restante3"> Momento oportuno</td>
+    	</tr>
+    </table>
+    
+	</div></div>
 	<div class="panel-footer">
 		<input type="submit" value="Enviar" >
 	</div>
 	</form>
-</div>
+</di

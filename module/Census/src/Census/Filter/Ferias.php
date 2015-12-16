@@ -48,6 +48,61 @@ class Ferias extends InputFilter
 			)
 		));
 		
+		$this->add(array(
+				'name'		=> 'naogozo',
+				'required'	=> false,
+				'filters'	=> array(
+		
+				),
+				'validators' => array(
+						array(
+								'name' => 'Zend\Validator\NotEmpty',
+								'options' => array(
+										'messages' => array(
+												\Zend\Validator\NotEmpty::IS_EMPTY => 'Campo obrigatório.'
+										)
+								)
+						)
+				)
+		));
+		
+		
+		$this->add(array(
+				'name'		=> 'parcela',
+				'required'	=> false,
+				'filters'	=> array(
+		
+				),
+				'validators' => array(
+						array(
+								'name' => 'Zend\Validator\NotEmpty',
+								'options' => array(
+										'messages' => array(
+												\Zend\Validator\NotEmpty::IS_EMPTY => 'Campo obrigatório.'
+										)
+								)
+						)
+				)
+		));
+		
+		
+		$this->add(array(
+				'name'		=> 'inicio',
+				'required'	=> false,
+				'filters'	=> array(
+		
+				),
+				'validators' => array(
+						array(
+								'name' => 'Zend\Validator\NotEmpty',
+								'options' => array(
+										'messages' => array(
+												\Zend\Validator\NotEmpty::IS_EMPTY => 'Campo obrigatório.'
+										)
+								)
+						)
+				)
+		));
 	}
 	
 }

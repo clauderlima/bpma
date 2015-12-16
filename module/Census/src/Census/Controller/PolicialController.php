@@ -137,7 +137,6 @@ class PolicialController extends AbstractController
     		return $this->redirect()->toRoute('census');
     	}
     	
-    	
     	$em = $this->getEm();
     	
     	// Dados Formação
@@ -164,13 +163,23 @@ class PolicialController extends AbstractController
 	    	->setParameter('polcodigo', $id)
 	    	->orderBy('a.codigo', 'ASC')
 	    	->getQuery()->getResult();
+    	
     	// Dados Requerimentos
-    	$requerimentos = $em->createQueryBuilder()
+    	$abonos = $em->createQueryBuilder()
 	    	->select('r')
-	    	->from('Census\Entity\Abono', 'r')
+	    	->from('Census\Entity\RequerimentoAbono', 'r')
 	    	->where('r.polcodigo = :polcodigo')
 	    	->setParameter('polcodigo', $id)
 	    	->orderBy('r.codigo', 'ASC')
+	    	->getQuery()->getResult();
+    	
+	    // Dados Requerimentos
+	    $ferias = $em->createQueryBuilder()
+	    	->select('s')
+	    	->from('Census\Entity\RequerimentoFerias', 's')
+	    	->where('s.polcodigo = :polcodigo')
+	    	->setParameter('polcodigo', $id)
+	    	->orderBy('s.codigo', 'ASC')
 	    	->getQuery()->getResult();
     
     	// dados eviados para detalhes.phtml
@@ -179,7 +188,8 @@ class PolicialController extends AbstractController
     		'formacaocivil' => $formacaocivil,
     		'formacaomilitar' => $formacaomilitar,
     		'alteracoes' => $alteracoes,
-    		'requerimentos' => $requerimentos,
+    		'abonorequerimentos' => $abonos,
+    		'feriasrequerimentos' => $ferias,
     	));
     }
  

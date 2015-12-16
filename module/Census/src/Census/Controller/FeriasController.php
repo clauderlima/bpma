@@ -90,8 +90,6 @@ class FeriasController extends AbstractController
     	{
     		// setando o input filter no orm
     		$data = $request->getPost()->toArray();
-
-    		$data['polcodigo'] = $this->getEmRef('\Census\Entity\Ferias', $data['polcodigo']);
     		
     		$form->setData($data);
     		$form->setInputFilter(new \Census\Filter\Ferias());
@@ -99,11 +97,7 @@ class FeriasController extends AbstractController
     			
     		if ($form->isValid())
     		{
-    			/* echo "<pre>";
-    			print_r($form);
-    			exit; */
-    			    			
-    			if ($serviceFerias->insertFerias($data, 'Census\Entity\Ferias', $policial->pol_Codigo))
+    			if ($serviceFerias->insert($data, 'Census\Entity\Ferias'))
     			{
     				$this->flashMessenger()->addSuccessMessage("Férias programada com sucesso!");
     				return $this->redirect()->toUrl('/ferias/adicionar/'.$id);
@@ -114,7 +108,8 @@ class FeriasController extends AbstractController
     	}
     	
     	// Dados do Resumo
-    	$query = $this->getEm()->createQuery("SELECT f.programacao,f.codigo,f.anoreferencia FROM Census\Entity\Ferias f WHERE f.polcodigo = :polcodigo ORDER BY f.anoreferencia");
+    	$query = $this->getEm()->createQuery("SELECT f.programacao,f.codigo,f.anoreferencia,f.naogozo,f.boletim,f.parcela,f.inicio,f.qtddias
+    			FROM Census\Entity\Ferias f WHERE f.polcodigo = :polcodigo ORDER BY f.anoreferencia");
     	$query->setParameter('polcodigo',$id);
     	$ferias = $query->getResult();
     	
@@ -234,25 +229,19 @@ class FeriasController extends AbstractController
     // DELETE /policial/deletar/id
     public function deletarAction()
     {
-    	// filtra id passsado pela url
     	$id = (int) $this->params()->fromRoute('id', 0);
     	
-    	// se id = 0 ou não informado redirecione para contatos
-    	if (!$id) {
-    		// adicionar mensagem de erro
-    		$this->flashMessenger()->addMessage("Policial não encotrado");
-    	} else {
-    		// aqui vai a lógica para deletar o contato no banco
-    		// 1 - solicitar serviço para pegar o model responsável pelo delete
-    		// 2 - deleta contato
-    		$this->getPolicialTable()->delete($id);
+    	$service = $this->getServiceLocator()->get('census-service-ferias');
     	
-    		// adicionar mensagem de sucesso
-    		$this->flashMessenger()->addSuccessMessage("Policial de ID $id deletado com sucesso");
+    	$dados = $this->getEm('Census\Entity\Ferias')->find($id);
+    	
+    	$policial = $dados->getPolcodigo()->getCodigo();
+    	
+    	if ($dados)
+    	{
+    		if ($service->delete('Census\Entity\Ferias', $id))
+    			return $this->redirect()->toUrl('/ferias/adicionar/' . $policial);
     	}
-    	
-    	// redirecionar para action index
-    	return $this->redirect()->toRoute('census');
     }
     
     public function listarAction()
