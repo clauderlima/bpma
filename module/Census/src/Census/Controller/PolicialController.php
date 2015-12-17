@@ -287,6 +287,24 @@ class PolicialController extends AbstractController
     	));
     }
     
+    public function bienalAction()
+    {
+    	$em = $this->getEm();
+    
+    	// Dados Formação
+    	$policial = $em->createQueryBuilder()
+    	->select('p.nomeguerra,p.bienalvalidade,p.dataadmissao,p.postograduacao,p.subunidade')
+    	->from('Census\Entity\Policial', 'p')
+    	->where('p.subunidade <> :polcodigo')
+    	->setParameter('polcodigo', 'TRC')
+    	->orderBy('p.antiguidade', 'ASC')
+    	->getQuery()->getResult();
+    	 
+    	return new ViewModel(array(
+    			'policiais' => $policial,
+    	));
+    }
+    
     public function aniversariantesAction()
     {
     	$em = $this->getEm();

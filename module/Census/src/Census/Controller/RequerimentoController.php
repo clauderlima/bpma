@@ -4,7 +4,7 @@ namespace Census\Controller;
 
 use Zend\View\Model\ViewModel;
 use Census\Service\Abono;
-use function Zend\Mvc\Controller\flashMessenger;
+//use function Zend\Mvc\Controller\flashMessenger;
 
 
 class RequerimentoController extends AbstractController
@@ -64,7 +64,7 @@ class RequerimentoController extends AbstractController
 		$service = $this->getServiceLocator()->get('census-service-requerimentoabono');
 			
 		// Instaciando o Form
-		$form = new \Census\Form\Abono();
+		$form = new \Census\Form\RequerimentoAbono();
 		$abono = $this->getEm('Census\Entity\RequerimentoAbono')->find($id)->toArray();
 	
 		$dataPolicial = $this->getEm('Census\Entity\Policial')->find($abono['polcodigo']->getCodigo())->toArray();
@@ -239,7 +239,7 @@ class RequerimentoController extends AbstractController
 		
 		$reproferias = new \Census\Modulo\RequerimentoFerias($this->getServiceLocator()->get('servicemanager'));
 		
-		if ($reproferias->imprimirnaogozo($data))
+		if ($reproferias->imprimirreproferias($data))
 		{
 			$this->flashMessenger()->addSuccessMessage("Curso cadastrado com sucesso!");
 		}

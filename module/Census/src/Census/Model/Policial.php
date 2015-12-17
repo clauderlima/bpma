@@ -59,6 +59,7 @@ class Policial implements InputFilterAwareInterface
 	public $pol_EnderecoCEP;
 	public $pol_EnderecoComplemento;
 	public $pol_EnderecoTipo;
+	public $pol_AtualizacaoCadastro;
 	
 	protected $inputFilter;
 	
@@ -116,6 +117,7 @@ class Policial implements InputFilterAwareInterface
 		$this->pol_EnderecoCEP					= (!empty($data['pol_EnderecoCEP'])) ? $data['pol_EnderecoCEP'] : null;
 		$this->pol_EnderecoComplemento			= (!empty($data['pol_EnderecoComplemento'])) ? $data['pol_EnderecoComplemento'] : null;
 		$this->pol_EnderecoTipo					= (!empty($data['pol_EnderecoTipo'])) ? $data['pol_EnderecoTipo'] : null;
+		$this->pol_AtualizacaoCadastro			= (!empty($data['pol_AtualizacaoCadastro'])) ? $data['pol_AtualizacaoCadastro'] : null;
     }
     
     

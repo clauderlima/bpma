@@ -159,7 +159,7 @@
 				<tr>
 					<th>#</th>
 					<th>Tipo</th>
-					<th>Alteração</th>
+					<th>Falta</th>
 					<th>Descrição</th>
 					<th>Data Fato</th>
 					<th>Opções</th>
@@ -171,7 +171,7 @@
 				<tr>
 					<th scope="row"><?php echo $counter++?></th>
 					<td><?php echo $alteracao->getTipo()?></td>
-					<td><?php echo $alteracao->getFaltaServico()?></td>
+					<td><?php echo ($alteracao->getFaltaServico() == '1')? "Sim": "Não"?></td>
 					<td><?php echo $alteracao->getDescricao()?></td>
 					<td><?php echo $alteracao->getDatafato()->format('d/m/Y')?></td>
 					<td><a href="/alteracao/editar/<?php echo $alteracao->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 

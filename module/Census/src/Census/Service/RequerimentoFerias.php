@@ -14,7 +14,7 @@ class RequerimentoFerias extends AbstractService
 		$serviceNumReq = $this->getServiceLocator()->get('census-service-numeracaorequerimento');
 		$numero = $serviceNumReq->numerar('Census\Entity\NumeracaoRequerimento', $data['matricula'], $data['tipo']);
 		
-		$numeroRequerimento = str_pad($numero->getCodigo(), 5, "0", STR_PAD_LEFT)."/".$data['datasolicitacao']->format('Y');
+		$numeroRequerimento = str_pad($numero->getNumero(), 5, "0", STR_PAD_LEFT)."/".$data['datasolicitacao']->format('Y');
 		$data['numero'] = $numeroRequerimento;
 		$data['nrecodigo'] = $this->getEmRef('Census\Entity\NumeracaoRequerimento', $numero->getCodigo());
 		

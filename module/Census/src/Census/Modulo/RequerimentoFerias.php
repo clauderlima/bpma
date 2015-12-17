@@ -275,7 +275,7 @@ function imprimir(array $data)
 	
 		$document = $mailMerge->retrieveDocument('pdf');
 	
-		if ($this->tipoRequerimento == 'BTL')
+		if ($this->template == 'BTL')
 		{
 			$filename = 'c:\BPMA\requerimentos\abono\Abono-' . $this->numero . '-BTL-' . $this->matricula . '.pdf';
 		} else 
@@ -508,12 +508,166 @@ function imprimir(array $data)
 	
 		$document = $mailMerge->retrieveDocument('pdf');
 	
-		if ($this->tipoRequerimento == 'BTL')
+		if ($this->template == 'BTL')
 		{
 			$filename = 'c:\BPMA\requerimentos\abono\Abono-' . $this->numero . '-BTL-' . $this->matricula . '.pdf';
 		} else
 		{
 			$filename = 'c:\BPMA\requerimentos\abono\Abono-' . $this->numero . '-CIA-' . $this->matricula . '.pdf';
+		}
+	
+		file_put_contents($filename, $document);
+	
+		unset($mailMerge);
+	
+		header("Content-Type: application/pdf");
+		echo file_get_contents($filename);
+	}
+	
+	function imprimirreproferias(array $data)
+	{
+		// Configuração para gerar datas em português
+		setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+	
+		// Preparando os dados
+		$data['datasolicitacao'] = strftime('%d de %B de %Y', strtotime($data['datasolicitacao']->format('Y-m-d')));
+		$data['datainclusao'] = $data['datainclusao']->format('d/m/Y');
+	
+		switch ($data['feriasprogramacao']) {
+			case 'JAN':
+				$data['feriasprogramacao'] = "Janeiro";
+				break;
+			case 'FEV':
+				$data['feriasprogramacao'] = "Fevereiro";
+				break;
+			case 'MAR':
+				$data['feriasprogramacao'] = "Março";
+				break;
+			case 'ABR':
+				$data['feriasprogramacao'] = "Abril";
+				break;
+			case 'MAI':
+				$data['feriasprogramacao'] = "Maio";
+				break;
+			case 'JUN':
+				$data['feriasprogramacao'] = "Junho";
+				break;
+			case 'JUL':
+				$data['feriasprogramacao'] = "Julho";
+				break;
+			case 'AGO':
+				$data['feriasprogramacao'] = "Agosto";
+				break;
+			case 'SET':
+				$data['feriasprogramacao'] = "Setembro";
+				break;
+			case 'OUT':
+				$data['feriasprogramacao'] = "Outubro";
+				break;
+			case 'NOV':
+				$data['feriasprogramacao'] = "Novembro";
+				break;
+			case 'DEZ':
+				$data['feriasprogramacao'] = "Dezembro";
+				break;
+		}
+	
+		switch ($data['novaprogramacao']) {
+			case 'JAN':
+				$data['novaprogramacao'] = "Janeiro";
+				break;
+			case 'FEV':
+				$data['novaprogramacao'] = "Fevereiro";
+				break;
+			case 'MAR':
+				$data['novaprogramacao'] = "Março";
+				break;
+			case 'ABR':
+				$data['novaprogramacao'] = "Abril";
+				break;
+			case 'MAI':
+				$data['novaprogramacao'] = "Maio";
+				break;
+			case 'JUN':
+				$data['novaprogramacao'] = "Junho";
+				break;
+			case 'JUL':
+				$data['novaprogramacao'] = "Julho";
+				break;
+			case 'AGO':
+				$data['novaprogramacao'] = "Agosto";
+				break;
+			case 'SET':
+				$data['novaprogramacao'] = "Setembro";
+				break;
+			case 'OUT':
+				$data['novaprogramacao'] = "Outubro";
+				break;
+			case 'NOV':
+				$data['novaprogramacao'] = "Novembro";
+				break;
+			case 'DEZ':
+				$data['novaprogramacao'] = "Dezembro";
+				break;
+		}
+	
+		$mailMerge = new MailMerge();
+	
+		$mailMerge->setUsername('clauderlima')
+		->setPassword('cclvcldf')
+		->setService (MailMerge::SERVICE_FREE);  // for LiveDocx Premium, use MailMerge::SERVICE_PREMIUM
+	
+		if ($data['template'] == 'BTL')
+		{
+			$mailMerge->setLocalTemplate('data\reproferias-btl.docx');
+		} else
+		{
+			$mailMerge->setLocalTemplate('data\reproferias-cia.docx');
+		}
+	
+		$mailMerge->assign('numero', $data['numero'])
+		->assign('nomePolicial', $data['nomepolicial'])
+		->assign('postoGraduacao', $data['postograduacao'])
+		->assign('matricula',  $data['matricula'])
+		->assign('matriculaSiape',  $data['matriculasiape'])
+		->assign('identificacaoUnica',  $data['identificacaounica'])
+		
+		->assign('anoExercicioFerias', $data['anoreferencia'])
+		->assign('feriasProgramacao', $data['feriasprogramacao'])
+		->assign('novaProgramacao', $data['novaprogramacao'])
+		->assign('dataAtual', $data['datasolicitacao'])
+		->assign('dataInclusao', $data['datainclusao'])
+		->assign('email', $data['email'])
+		->assign('comportamento', $data['comportamento'])
+		->assign('telefone', $data['telefone'])
+	
+		->assign('polferiasSubunidade', $data['polferiassubunidade'])
+		->assign('umDozeSubunidade', $data['umdozesubunidade'])
+		->assign('polferiasBatalhao', $data['polferiasbatalhao'])
+		->assign('umDozeBatalhao', $data['umdozebatalhao'])
+		->assign('sargenteante', $data['sargenteante'])
+		->assign('funcaoSargenteante', $data['funcaosargenteante'])
+		->assign('chefeNgp', $data['chefengp'])
+		->assign('funcaoChefeNgp', $data['funcaochefengp'])
+		->assign('chefeSAd', $data['chefesad'])
+		->assign('funcaoChefeSAd', $data['funcaochefesad'])
+	
+		->assign('comandante', $data['comandante'])
+		->assign('funcaocomandante', $data['funcaocomandante'])
+		->assign('lotacao', $data['lotacao'])
+		->assign('funcaochefe', $data['funcaochefe'])
+		->assign('chefeImediato', $data['chefeimediato']);
+	
+		$mailMerge->createDocument();
+	
+		$document = $mailMerge->retrieveDocument('pdf');
+	
+		if ($this->template == 'BTL')
+		{
+			$filename = 'c:\BPMA\requerimentos\abono\ReproFerias-' . $this->numero . '-BTL-' . $this->matricula . '.pdf';
+		} else
+		{
+			$filename = 'c:\BPMA\requerimentos\abono\ReproFerias-' . $this->numero . '-CIA-' . $this->matricula . '.pdf';
 		}
 	
 		file_put_contents($filename, $document);

@@ -11,16 +11,17 @@ class NumeracaoRequerimento extends AbstractService
 		$ano = $hoje->format('Y');
 		
 		$numero = $this->getEm()->createQueryBuilder()
-		->select('n')
-		->from('Census\Entity\NumeracaoRequerimento', 'n')
-		->orderBy('n.numero', 'DESC')
-		->where('n.ano = :ano')
-		->setParameter('ano', $ano)
-		->setMaxResults(1)
-		->getQuery()->getResult();
+			->select('n')
+			->from('Census\Entity\NumeracaoRequerimento', 'n')
+			->orderBy('n.numero', 'DESC')
+			->where('n.ano = :ano')
+			->setParameter('ano', $ano)
+			->setMaxResults(1)
+			->getQuery()->getResult();
 		
 		
 		$novonumero = 1;
+
 		
 		if ($numero)
 		{

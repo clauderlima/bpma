@@ -20,13 +20,17 @@ class RequerimentoAbono extends Requerimento
 		
 		// Dados do Requerimento de Abono
 		$inicioAbono = new \DateTime($inicio);
+		$fim = new \DateTime($inicio);
+		
 		$this->inicio = $inicioAbono;
+		
 		
 		$this->quantidadeDias = $qtdDias;
 		
-		$fimAbono = $inicioAbono->modify(($qtdDias - 1).' days');
-		$this->fim = $fimAbono;
+		$fimAbono = $fim->modify(($qtdDias - 1).' days');
 		
+		$this->fim = $fimAbono;
+
 		$this->buscaDados($id);
 		
 		// Abono Anteriores
@@ -176,6 +180,7 @@ class RequerimentoAbono extends Requerimento
 				'template' => $this->template,
 				'polcodigo' => $id
 		);
+	
 		
 		$service = $this->sm->get('census-service-requerimentoabono');
 		$service->insert($data, 'Census\Entity\RequerimentoAbono');
@@ -195,19 +200,19 @@ class RequerimentoAbono extends Requerimento
 		switch ($data['quantidadedias'])
 		{
 			case 1:
-				$data['quantidadedias'] = "(1) um";
+				$data['quantidadedias'] = "1 (um)";
 				break;
 			case 2:
-				$data['quantidadedias'] = "(2) dois";
+				$data['quantidadedias'] = "2 (dois)";
 				break;
 			case 3:
-				$data['quantidadedias'] = "(3) três";
+				$data['quantidadedias'] = "3 (três)";
 				break;
 			case 4:
-				$data['quantidadedias'] = "(4) quatro";
+				$data['quantidadedias'] = "4 (quatro)";
 				break;
 			case 5:
-				$data['quantidadedias'] = "(5) cinco";
+				$data['quantidadedias'] = "5 (cinco)";
 				break;
 		}
 
@@ -259,7 +264,7 @@ class RequerimentoAbono extends Requerimento
 	
 		$document = $mailMerge->retrieveDocument('pdf');
 	
-		if ($this->tipoRequerimento == 'BTL')
+		if ($this->template == 'BTL')
 		{
 			$filename = 'c:\BPMA\requerimentos\abono\Abono-' . $this->numero . '-BTL-' . $this->matricula . '.pdf';
 		} else 

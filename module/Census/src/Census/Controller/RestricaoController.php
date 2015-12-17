@@ -109,6 +109,16 @@ class RestricaoController extends AbstractController
 		$request = $this->getRequest();
 		$id = (int) $this->params()->fromRoute('id', 0);
 	
+		// Buscando as restrições do policial
+		$restricoes = $this->getEm()->createQueryBuilder()
+			->select('r')
+			->from('Census\Entity\Restricaomedica', 'r')
+			->where('r.polcodigo = :polcodigo')
+			->setParameter('polcodigo', $id)
+			->orderBy('r.fim', 'ASC')
+			->getQuery()->getResult();
+		
+		
 		// Instaciando services
 		$serviceRestricaomedica = $this->getServiceLocator()->get('census-service-restricaomedica');
 		$dataPolicial = $this->getEm('Census\Entity\Policial')->find($id)->toArray();
@@ -128,7 +138,7 @@ class RestricaoController extends AbstractController
 				if ($serviceRestricaomedica->insert($data, 'Census\Entity\Restricaomedica'))
 				{
 					$this->flashMessenger()->addSuccessMessage("CTGRAFI cadastrado com sucesso!");
-					return $this->redirect()->toUrl('/restricao');
+					return $this->redirect()->toUrl('/restricao/cadastrar/' . $id);
 				}
 			} else {
 				$this->flashMessenger()->addErrorMessage('Erro ao cadastrar arma! <br>Verifique se os campos foram preenchidos corretamente.');
@@ -137,7 +147,8 @@ class RestricaoController extends AbstractController
 			
 		$view = new ViewModel(array(
 				'form' => $form,
-				'policial' => $dataPolicial
+				'policial' => $dataPolicial,
+				'restricoes' => $restricoes
 		));
 			
 		$view->setTemplate('census/restricao/form-rm.phtml');

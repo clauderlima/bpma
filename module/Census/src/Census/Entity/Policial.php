@@ -371,6 +371,13 @@ class Policial
      * @ORM\Column(name="pol_EnderecoTipo", type="string", length=15, nullable=true)
      */
     private $enderecotipo;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pol_AtualizacaoCadastro", type="string", length=45, nullable=true)
+     */
+    private $atualizacaocadastro;
 
     public function __construct(array $data) {
     	$hydrator = new ClassMethods();
@@ -542,7 +549,7 @@ class Policial
     }
 
     public function getMatricula(){
-        return $this->mask($this->matricula, '###.###-#');
+        return $this->matricula;
     }
 
     public function setMatricula($matricula){
@@ -939,6 +946,7 @@ class Policial
         $this->enderecotipo = $enderecotipo;
         return $this;
     }
+    
 
     private function mask($val, $mask)
 	{
@@ -962,5 +970,20 @@ class Policial
  		return strrev($maskared);
 	}
     
+
+    public function setCodigo($codigo){
+        $this->codigo = $codigo;
+        return $this;
+    }
+
+    public function getAtualizacaocadastro(){
+        return $this->atualizacaocadastro;
+    }
+
+    public function setAtualizacaocadastro($atualizacaocadastro){
+        $this->atualizacaocadastro = $atualizacaocadastro;
+        return $this;
+    }
+
 }
 
