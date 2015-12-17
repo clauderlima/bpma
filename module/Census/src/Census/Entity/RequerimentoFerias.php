@@ -275,9 +275,9 @@ class RequerimentoFerias
     private $segundaparcelaqtddias;
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @ORM\Column(name="rfe_TerceiraParcelaInicio", type="string", length=45, nullable=true)
+     * @ORM\Column(name="rfe_TerceiraParcelaInicio", type="datetime", nullable=true)
      */
     private $terceiraparcelainicio;
 
@@ -294,6 +294,20 @@ class RequerimentoFerias
      * @ORM\Column(name="rfe_Template", type="string", length=30, nullable=true)
      */
     private $template;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="rfe_NaoGozo", type="string", length=45, nullable=true)
+     */
+    private $naogozo;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="rfe_MomentoOportuno", type="string", length=45, nullable=true)
+     */
+    private $momentooportuno;
     
     /**
      * @var \NumeracaoRequerimento
@@ -709,6 +723,25 @@ class RequerimentoFerias
 
     public function setTipo($tipo){
         $this->tipo = $tipo;
+        return $this;
+    }
+
+
+    public function getNaogozo(){
+        return $this->naogozo;
+    }
+
+    public function setNaogozo($naogozo){
+        $this->naogozo = $naogozo;
+        return $this;
+    }
+
+    public function getMomentooportuno(){
+        return $this->momentooportuno;
+    }
+
+    public function setMomentooportuno($momentooportuno){
+        $this->momentooportuno = $momentooportuno;
         return $this;
     }
 

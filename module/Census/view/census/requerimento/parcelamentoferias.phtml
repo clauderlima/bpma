@@ -37,40 +37,78 @@
 			</table>
     
     <div class="container"><br>
-    
+    <form action="/requerimento/requererparcelamentoferias/<?php echo $dados[0]->getPolcodigo()->getCodigo();?>" method="POST">
     <table class="table">
     	<tr>
     		<th class="text-center">Parcela</th>
     		<th>Início</th>
     		<th>Qtd Dias</th>
-    		<th>Restante</th>
     	</tr>
     	<tr>
     		<td class="text-center">1</td>
-    		<td><input type="date" class="form-control"></td>
-    		<td><input type="text"  class="form-control"></td>
-    		<td><input type="radio" name="restante1"> Não gozo<br>
-    		<input type="radio" name="restante1"> Momento oportuno</td>
+    		<td><input type="date" name="inicio1" class="form-control"></td>
+    		<td><input type="text"  name="qtddias1" class="form-control"></td>
     	</tr>
-    	<tr>
+    	<tr id="linha2" style="visibility: hidden;">
     		<td class="text-center">2</td>
-    		<td><input type="date" class="form-control"></td>
-    		<td><input type="text"  class="form-control"></td>
-    		<td><input type="radio" name="restante2"> Não gozo<br>
-    		<input type="radio" name="restante2"> Momento oportuno</td>
+    		<td><input type="date" name="inicio2" class="form-control"></td>
+    		<td><input type="text" name="qtddias2" class="form-control"></td>
+    	</tr>
+    	<tr id="linha3" style="visibility: hidden;">
+    		<td class="text-center">3</td>
+    		<td><input type="date" name="inicio3" class="form-control"></td>
+    		<td><input type="text" name="qtddias3" class="form-control"></td>
     	</tr>
     	<tr>
-    		<td class="text-center">3</td>
-    		<td><input type="date" class="form-control"></td>
-    		<td><input type="text"  class="form-control"></td>
-    		<td><input type="radio" name="restante3"> Não gozo<br>
-    		<input type="radio" name="restante3"> Momento oportuno</td>
+    		<td colspan="2"><strong>Qtd Parcelas: </strong>
+	    		<select id="parcelas" name="parcelas">
+	    			<option>1</option>
+	    			<option>2</option>
+	    			<option>3</option>
+	    		</select>
+	    		<strong>&nbsp;&nbsp;&nbsp;Ano Referência: </strong>
+	    		<select id="anoreferencia" name="anoreferencia">
+	    			<option>2015</option>
+	    			<option>2016</option>
+	    		</select>
+    		</td>
+    		<td colspan="2">
+    			<strong>Restante: </strong><input type="radio" name="restante" value="naogozo"> Não gozo 
+    		<input type="radio" name="restante" value="oportuno"> Momento oportuno
+    		</td>
     	</tr>
     </table>
     
-	</div></div>
+	</div>
+	</div>
 	<div class="panel-footer">
 		<input type="submit" value="Enviar" >
 	</div>
 	</form>
-</di
+</div>
+
+<script>
+
+//select
+var tipo = document.getElementById("parcelas");
+var linha1 = document.getElementById("linha1");
+var linha2 = document.getElementById("linha2");
+var linha3 = document.getElementById("linha3");
+
+// quando o select muda
+tipo.onchange = function () {
+	var valor = tipo.value;
+	if ( valor === "1" ){
+		linha2.style.visibility = "hidden";
+		linha3.style.visibility = "hidden";
+	}
+	if ( valor === "2" ){
+		linha2.style.visibility = "visible";
+		linha3.style.visibility = "hidden";
+	}
+	if ( valor === "3" ){
+		linha2.style.visibility = "visible";
+		linha3.style.visibility = "visible";
+	}
+}
+</script>

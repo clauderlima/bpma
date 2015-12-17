@@ -10,10 +10,9 @@ class RequerimentoFerias extends AbstractService
 		
 		$data['polcodigo'] = $this->getEmRef('Census\Entity\Policial', $data['polcodigo']);
 		
-		
 		// Busca um numero novo para o Requerimento
 		$serviceNumReq = $this->getServiceLocator()->get('census-service-numeracaorequerimento');
-		$numero = $serviceNumReq->numerar('Census\Entity\NumeracaoRequerimento', $data['matricula'], 'Abono');
+		$numero = $serviceNumReq->numerar('Census\Entity\NumeracaoRequerimento', $data['matricula'], $data['tipo']);
 		
 		$numeroRequerimento = str_pad($numero->getCodigo(), 5, "0", STR_PAD_LEFT)."/".$data['datasolicitacao']->format('Y');
 		$data['numero'] = $numeroRequerimento;

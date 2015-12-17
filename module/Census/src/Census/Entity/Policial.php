@@ -447,7 +447,7 @@ class Policial
     }
 
     public function setDatanascimento($datanascimento){
-        $this->datanascimento = new \DateTime($datanascimento);
+        if ($datanascimento) $this->datanascimento = new \DateTime($datanascimento);
         return $this;
     }
 
@@ -501,7 +501,7 @@ class Policial
     }
 
     public function setCnhvalidade($cnhvalidade){
-        $this->cnhvalidade = new \DateTime($cnhvalidade);
+        if ($cnhvalidade) $this->cnhvalidade = new \DateTime($cnhvalidade);
         return $this;
     }
 
@@ -542,11 +542,11 @@ class Policial
     }
 
     public function getMatricula(){
-        return $this->matricula;
+        return $this->mask($this->matricula, '###.###-#');
     }
 
     public function setMatricula($matricula){
-        $this->matricula = $matricula;
+        $this->matricula = preg_replace('/[^0-9]/', '', $matricula);
         return $this;
     }
 
@@ -564,7 +564,7 @@ class Policial
     }
 
     public function setDataadmissao($dataadmissao){
-        $this->dataadmissao = new \DateTime($dataadmissao);
+        if ($dataadmissao) $this->dataadmissao = new \DateTime($dataadmissao);
         return $this;
     }
 
@@ -627,7 +627,7 @@ class Policial
     }
 
     public function setIdentidadefuncionalvalidade($identidadefuncionalvalidade){
-        $this->identidadefuncionalvalidade = new \DateTime($identidadefuncionalvalidade);
+        if ($identidadefuncionalvalidade) $this->identidadefuncionalvalidade = new \DateTime($identidadefuncionalvalidade);
         return $this;
     }
 
@@ -717,7 +717,7 @@ class Policial
     }
 
     public function setBienalvalidade($bienalvalidade){
-        $this->bienalvalidade = new \DateTime($bienalvalidade);
+        if ($bienalvalidade) $this->bienalvalidade = new \DateTime($bienalvalidade);
         return $this;
     }
 
@@ -726,7 +726,9 @@ class Policial
     }
 
     public function setTafvalidade($tafvalidade){
-        $this->tafvalidade = new \DateTime($tafvalidade);
+        
+    	if ($tafvalidade) $this->tafvalidade = new \DateTime($tafvalidade);
+    	
         return $this;
     }
 
@@ -938,5 +940,27 @@ class Policial
         return $this;
     }
 
+    private function mask($val, $mask)
+	{
+ 		$maskared = '';
+ 		$k = 0;
+ 		$val = strrev($val);
+ 		
+ 		for($i=strlen($mask)-1; $i > 0; $i--)
+ 		{
+ 			if($mask[$i] == '#')
+ 			{
+ 				if(isset($val[$k]))
+ 					$maskared .= $val[$k++];
+ 			}
+ 			else
+ 			{
+ 				if(isset($mask[$i]))
+ 					$maskared .= $mask[$i];
+ 			}
+ 		}
+ 		return strrev($maskared);
+	}
+    
 }
 

@@ -327,6 +327,16 @@ class RequerimentoController extends AbstractController
 	public function requererParcelamentoFeriasAction()
 	{
 	
+		$id = (int) $this->params()->fromRoute('id', 0);
+		
+		//Pega dados do Formulário
+		$dadosform = $this->getRequest()->getPost()->toArray();
+		
+		$parcelamento = new \Census\Modulo\RequerimentoFerias($this->getServiceLocator()->get('servicemanager'));
+		
+		$parcelamento->requerparcelamentoferias($id, $dadosform);
+		
+		return $this->redirect()->toUrl('/census/detalhes/' . $id);
 	}
 	
 	public function editarParcelamentoFeriasAction()

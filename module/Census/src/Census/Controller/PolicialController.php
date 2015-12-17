@@ -277,8 +277,8 @@ class PolicialController extends AbstractController
     	$policial = $em->createQueryBuilder()
     	->select('p.nomeguerra,p.datanascimento,p.dataadmissao,p.postograduacao,p.subunidade')
     	->from('Census\Entity\Policial', 'p')
-    	//->where('f.polcodigo = :polcodigo')
-    	//->setParameter('polcodigo', $id)
+    	->where('p.subunidade <> :polcodigo')
+    	->setParameter('polcodigo', 'TRC')
     	->orderBy('p.dataadmissao', 'ASC')
     	->getQuery()->getResult();
     	
@@ -498,6 +498,20 @@ class PolicialController extends AbstractController
     	$dataPolicial['NOV'] = $dataPolicialNOV;
     	$dataPolicial['DEZ'] = $dataPolicialDEZ;
     	
+    	usort($dataPolicial['JAN'], array($this,'cmp'));
+    	usort($dataPolicial['FEV'], array($this,'cmp'));
+    	usort($dataPolicial['MAR'], array($this,'cmp'));
+    	usort($dataPolicial['ABR'], array($this,'cmp'));
+    	usort($dataPolicial['MAI'], array($this,'cmp'));
+    	usort($dataPolicial['JUN'], array($this,'cmp'));
+    	usort($dataPolicial['JUL'], array($this,'cmp'));
+    	usort($dataPolicial['AGO'], array($this,'cmp'));
+    	usort($dataPolicial['SET'], array($this,'cmp'));
+    	usort($dataPolicial['OUT'], array($this,'cmp'));
+    	usort($dataPolicial['NOV'], array($this,'cmp'));
+    	usort($dataPolicial['DEZ'], array($this,'cmp'));
+ 
+    	
     	return new ViewModel(array(
     			'policiais' => $dataPolicial,
     	));
@@ -518,5 +532,10 @@ class PolicialController extends AbstractController
     	// return vairavel de classe com service ModelPessoa
     	return $this->policialTable;
     	//return $this->getServiceLocator()->get('ModelPolicial');
+    }
+    
+    private function cmp($a, $b)
+    {
+    	return $a['dianascimento'] > $b['dianascimento'];
     }
 }
