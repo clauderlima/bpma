@@ -508,7 +508,7 @@ function imprimir(array $data)
 	
 		$document = $mailMerge->retrieveDocument('pdf');
 	
-		if ($this->tipoRequerimento == 'BTL')
+		if ($this->template == 'BTL')
 		{
 			$filename = 'c:\BPMA\requerimentos\abono\Abono-' . $this->numero . '-BTL-' . $this->matricula . '.pdf';
 		} else
