@@ -4,7 +4,7 @@ namespace Census\Controller;
 
 use Zend\View\Model\ViewModel;
 use Census\Service\Abono;
-use function Zend\Mvc\Controller\flashMessenger;
+use Zend\Mvc\Controller\flashMessenger;
 
 
 class RequerimentoController extends AbstractController
