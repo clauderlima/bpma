@@ -20,11 +20,14 @@ class RequerimentoAbono extends Requerimento
 		
 		// Dados do Requerimento de Abono
 		$inicioAbono = new \DateTime($inicio);
+		
+		$fimAbono = new \DateTime($inicio);
+		$fimAbono->add(new \DateInterval("P" . $qtdDias . "D"));
+		
 		$this->inicio = $inicioAbono;
 		
 		$this->quantidadeDias = $qtdDias;
 		
-		$fimAbono = $inicioAbono->modify(($qtdDias - 1).' days');
 		$this->fim = $fimAbono;
 		
 		$this->buscaDados($id);
@@ -32,13 +35,13 @@ class RequerimentoAbono extends Requerimento
 		// Abono Anteriores
 		$em = $this->sm->get('Doctrine\ORM\EntityManager');
 		$abonoanteriores = $em->createQueryBuilder()
-		->select('a')
-		->from('Census\Entity\RequerimentoAbono', 'a')
-		->where('a.polcodigo = :polcodigo')
-		->setParameter('polcodigo', $id)
-		->orderBy('a.codigo', 'ASC')
-		->getQuery()->getResult();
-		
+			->select('a')
+			->from('Census\Entity\RequerimentoAbono', 'a')
+			->where('a.polcodigo = :polcodigo')
+			->setParameter('polcodigo', $id)
+			->orderBy('a.codigo', 'ASC')
+			->getQuery()->getResult();
+			
 		if (!$abonoanteriores)
 		{
 			$this->gozosAnteriores = "O policial não gozou abono este ano.";
@@ -195,19 +198,19 @@ class RequerimentoAbono extends Requerimento
 		switch ($data['quantidadedias'])
 		{
 			case 1:
-				$data['quantidadedias'] = "(1) um";
+				$data['quantidadedias'] = "1 (um)";
 				break;
 			case 2:
-				$data['quantidadedias'] = "(2) dois";
+				$data['quantidadedias'] = "2 (dois)";
 				break;
 			case 3:
-				$data['quantidadedias'] = "(3) três";
+				$data['quantidadedias'] = "3 (três)";
 				break;
 			case 4:
-				$data['quantidadedias'] = "(4) quatro";
+				$data['quantidadedias'] = "4 (quatro)";
 				break;
 			case 5:
-				$data['quantidadedias'] = "(5) cinco";
+				$data['quantidadedias'] = "5 (cinco)";
 				break;
 		}
 
@@ -224,7 +227,8 @@ class RequerimentoAbono extends Requerimento
 		{
 			$mailMerge->setLocalTemplate('data\abono-cia.docx');
 		}
-	
+
+		
 		$mailMerge->assign('numero', $data['numero'])
 				->assign('nomePolicial', $data['nomepolicial'])
 				->assign('postoGraduacao', $data['postograduacao'])
@@ -259,7 +263,7 @@ class RequerimentoAbono extends Requerimento
 	
 		$document = $mailMerge->retrieveDocument('pdf');
 	
-		if ($this->tipoRequerimento == 'BTL')
+		if ($this->template == 'BTL')
 		{
 			$filename = 'c:\BPMA\requerimentos\abono\Abono-' . $this->numero . '-BTL-' . $this->matricula . '.pdf';
 		} else 

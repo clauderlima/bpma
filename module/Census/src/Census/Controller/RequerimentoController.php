@@ -239,7 +239,7 @@ class RequerimentoController extends AbstractController
 		
 		$reproferias = new \Census\Modulo\RequerimentoFerias($this->getServiceLocator()->get('servicemanager'));
 		
-		if ($reproferias->imprimirnaogozo($data))
+		if ($reproferias->imprimirreproferias($data))
 		{
 			$this->flashMessenger()->addSuccessMessage("Curso cadastrado com sucesso!");
 		}
@@ -294,7 +294,19 @@ class RequerimentoController extends AbstractController
 	
 	public function imprimirNaogozoFeriasAction()
 	{
-	
+		$id = (int) $this->params()->fromRoute('id', 0);
+		$data = $this->getEm('Census\Entity\RequerimentoFerias')->find($id)->toArray();
+		
+		$service = new \Census\Modulo\RequerimentoFerias($this->getServiceLocator()->get('servicemanager'));
+		
+		if ($service->imprimirnaogozo($data))
+		{
+			$this->flashMessenger()->addSuccessMessage("Curso cadastrado com sucesso!");
+		}
+		
+		return $this->redirect()->toUrl('/census/detalhes/' . $id);
+		$view = new ViewModel();
+		return $view;
 	}
 	
 	public function parcelamentoFeriasAction()
@@ -305,11 +317,11 @@ class RequerimentoController extends AbstractController
 		//		FROM Census\Entity\Policial p WHERE p.codigo = :codigo");
 		
 		$query = $this->getEm()->createQueryBuilder()
-		->select('f', 'p')
-		->from('Census\Entity\Ferias', 'f')
-		->innerJoin('f.polcodigo', 'p')
-		->where('p.codigo = :codigo')
-		->setParameter('codigo',$id);
+			->select('f', 'p')
+			->from('Census\Entity\Ferias', 'f')
+			->innerJoin('f.polcodigo', 'p')
+			->where('p.codigo = :codigo')
+			->setParameter('codigo',$id);
 		
 		$dados = $query->getQuery()->getResult();
 		
@@ -351,7 +363,19 @@ class RequerimentoController extends AbstractController
 	
 	public function imprimirParcelamentoFeriasAction()
 	{
-	
+		$id = (int) $this->params()->fromRoute('id', 0);
+		$data = $this->getEm('Census\Entity\RequerimentoFerias')->find($id)->toArray();
+		
+		$service = new \Census\Modulo\RequerimentoFerias($this->getServiceLocator()->get('servicemanager'));
+		
+		if ($service->imprimirparcelamentoferias($data))
+		{
+			$this->flashMessenger()->addSuccessMessage("Curso cadastrado com sucesso!");
+		}
+		
+		return $this->redirect()->toUrl('/census/detalhes/' . $id);
+		$view = new ViewModel();
+		return $view;
 	}
 	
 	public function gozoOportunoFeriasAction()

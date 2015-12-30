@@ -8,68 +8,73 @@
     <?php $idpolicial = $dados[0]->getPolcodigo()->getCodigo()?>
     
    <table class="table">
-				<thead>
-					<tr>
-						<th class="text-center">Ref.</th>
-						<th class="text-center">Mês</th>
-						<th class="text-center">Gozada</th>
-						<th class="text-center">Parcela</th>
-						<th class="text-center">Início</th>
-						<th class="text-center">Qtd Dias</th>
-						<th class="text-center">Boletim</th>
-						<th class="text-center">Opções</th>
-					</tr>
-				</thead>
-				<tbody>
+			<thead>
+				<tr>
+					<th class="text-center">Ref.</th>
+					<th class="text-center">Mês</th>
+					<th class="text-center">Gozada</th>
+					<th class="text-center">Parcela</th>
+					<th class="text-center">Início</th>
+					<th class="text-center">Qtd Dias</th>
+					<th class="text-center">Boletim</th>
+					<th class="text-center">Opções</th>
+				</tr>
+			</thead>
+			<tbody>
     				<?php foreach ($dados as $feria):?>
       				<tr>
-						<td class="text-center"><?php echo $feria->getAnoreferencia()?></td>
-						<td class="text-center"><?php echo $feria->getProgramacao()?></td>
-						<td class="text-center"><?php echo $feria->getNaogozo()?></td>
-						<td class="text-center"><?php if ($feria->getParcela()) echo $feria->getParcela() . "ª Parcela"?></td>
-						<td class="text-center"><?php if ($feria->getInicio()) echo $feria->getInicio()->format('d/m/Y')?></td>
-						<td class="text-center"><?php echo $feria->getQtddias()?></td>
-						<td class="text-center"><?php echo $feria->getBoletim()?></td>
-						<td class="text-center"><a href="/ferias/deletar/<?php echo $feria->getCodigo()?>"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a></td>
-					</tr>
+					<td class="text-center"><?php echo $feria->getAnoreferencia()?></td>
+					<td class="text-center"><?php echo $feria->getProgramacao()?></td>
+					<td class="text-center"><?php echo $feria->getNaogozo()?></td>
+					<td class="text-center"><?php if ($feria->getParcela()) echo $feria->getParcela() . "ª Parcela"?></td>
+					<td class="text-center"><?php if ($feria->getInicio()) echo $feria->getInicio()->format('d/m/Y')?></td>
+					<td class="text-center"><?php echo $feria->getQtddias()?></td>
+					<td class="text-center"><?php echo $feria->getBoletim()?></td>
+					<td class="text-center"><a
+						href="/ferias/deletar/<?php echo $feria->getCodigo()?>"><i
+							style="color: red;" class="glyphicon glyphicon-remove"></i></a></td>
+				</tr>
       			<?php endforeach;?>
     		</tbody>
-			</table>
-    
-    <div class="container"><br>
-    
-    <form method="POST"
-			action="/requerimento/requererReproFerias/<?php echo $idpolicial?>">
-			<div class="row">
-				<div class="col-xs-4">
-					Ano Referência: <select name="anoreferencia" class="form-control">
-						<option value="">Selecione</option>
-						<option value="2015">2015</option>
+		</table>
+
+		<div class="container">
+			<br>
+
+			<form method="POST"
+				action="/requerimento/requererReproFerias/<?php echo $idpolicial?>">
+				<div class="row">
+					<div class="col-xs-4">
+						Ano Referência: <select name="anoreferencia" class="form-control">
+							<option value="">Selecione</option>
+							<option value="2015">2015</option>
 						</select>
+					</div>
+					<div class="col-xs-4">
+
+						<label for="novomes">Novo Mês: </label><select name="novomes"
+							class="form-control">
+							<option value="">Selecione</option>
+							<option>JAN</option>
+							<option>FEV</option>
+							<option>MAR</option>
+							<option>ABR</option>
+							<option>MAI</option>
+							<option>JUN</option>
+							<option>JUL</option>
+							<option>AGO</option>
+							<option>SET</option>
+							<option>OUT</option>
+							<option>NOV</option>
+							<option>DEZ</option>
+						</select>
+					</div>
 				</div>
-				<div class="col-xs-4">
-					
-					<lable for="novomes">Novo Mês: </label><select name="novomes" class="form-control">
-						<option value="">Selecione</option>
-						<option>JAN</option>
-						<option>FEV</option>
-						<option>MAR</option>
-						<option>ABR</option>
-						<option>MAI</option>
-						<option>JUN</option>
-						<option>JUL</option>
-						<option>AGO</option>
-						<option>SET</option>
-						<option>OUT</option>
-						<option>NOV</option>
-						<option>DEZ</option>
-					</select>
-				</div>
-			</div>
+		
 		</div>
 	</div>
 	<div class="panel-footer">
-		<input type="submit" value="Enviar" >
+		<input type="submit" value="Enviar">
 	</div>
 	</form>
 </div>

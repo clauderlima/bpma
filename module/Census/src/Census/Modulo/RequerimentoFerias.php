@@ -138,7 +138,7 @@ class RequerimentoFerias extends Requerimento
 		
 	}
 
-function imprimir(array $data)
+function imprimirxxxx(array $data)
 	{
 		// Configuração para gerar datas em português
 		setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
@@ -233,31 +233,36 @@ function imprimir(array $data)
 	
 		if ($data['template'] == 'BTL')
 		{
-			$mailMerge->setLocalTemplate('data\reproferias-btl.docx');
+			$mailMerge->setLocalTemplate('data\abono-btl.docx');
 		} else 
 		{
-			$mailMerge->setLocalTemplate('data\reproferias-cia.docx');
+			$mailMerge->setLocalTemplate('data\abono-cia.docx');
 		}
 	
+		echo "<pre>";
+		print_r($data);
+		exit;
+		
 		$mailMerge->assign('numero', $data['numero'])
 				->assign('nomePolicial', $data['nomepolicial'])
 				->assign('postoGraduacao', $data['postograduacao'])
 				->assign('matricula',  $data['matricula'])
 				->assign('matriculaSiape',  $data['matriculasiape'])
 				->assign('identificacaoUnica',  $data['identificacaounica'])
-				->assign('anoExercicioFerias', $data['anoreferencia'])
-				->assign('feriasProgramacao', $data['feriasprogramacao'])
-				->assign('novaProgramacao', $data['novaprogramacao'])
+				
+				->assign('quantidadeDias', $data[''])
+				->assign('inicioAbono', $data[''])
+				->assign('fimAbono', $data['quantidadedias'])
+				
 				->assign('dataAtual', $data['datasolicitacao'])
 				->assign('dataInclusao', $data['datainclusao'])
 				->assign('email', $data['email'])
 				->assign('comportamento', $data['comportamento'])
 				->assign('telefone', $data['telefone'])
 				
-				->assign('polferiasSubunidade', $data['polferiassubunidade'])
-				->assign('umDozeSubunidade', $data['umdozesubunidade'])
-				->assign('polferiasBatalhao', $data['polferiasbatalhao'])
-				->assign('umDozeBatalhao', $data['umdozebatalhao'])
+				->assign('faltaInjustificada', $data[''])
+				->assign('gozosAnteriores', $data[''])
+				
 				->assign('sargenteante', $data['sargenteante'])
 				->assign('funcaoSargenteante', $data['funcaosargenteante'])
 				->assign('chefeNgp', $data['chefengp'])
@@ -524,6 +529,160 @@ function imprimir(array $data)
 		echo file_get_contents($filename);
 	}
 	
+	function imprimirreproferias(array $data)
+	{
+		// Configuração para gerar datas em português
+		setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+	
+		// Preparando os dados
+		$data['datasolicitacao'] = strftime('%d de %B de %Y', strtotime($data['datasolicitacao']->format('Y-m-d')));
+		$data['datainclusao'] = $data['datainclusao']->format('d/m/Y');
+	
+		
+		switch ($data['feriasprogramacao']) {
+			case 'JAN':
+				$data['feriasprogramacao'] = "janeiro";
+				break;
+			case 'FEV':
+				$data['feriasprogramacao'] = "fevereiro";
+				break;
+			case 'MAR':
+				$data['feriasprogramacao'] = "março";
+				break;
+			case 'ABR':
+				$data['feriasprogramacao'] = "abril";
+				break;
+			case 'MAI':
+				$data['feriasprogramacao'] = "maio";
+				break;
+			case 'JUN':
+				$data['feriasprogramacao'] = "junho";
+				break;
+			case 'JUL':
+				$data['feriasprogramacao'] = "julho";
+				break;
+			case 'AGO':
+				$data['feriasprogramacao'] = "agosto";
+				break;
+			case 'SET':
+				$data['feriasprogramacao'] = "setembro";
+				break;
+			case 'OUT':
+				$data['feriasprogramacao'] = "outubro";
+				break;
+			case 'NOV':
+				$data['feriasprogramacao'] = "novembro";
+				break;
+			case 'DEZ':
+				$data['feriasprogramacao'] = "dezembro";
+				break;
+		}
+	
+		switch ($data['novaprogramacao']) {
+			case 'JAN':
+				$data['novaprogramacao'] = "janeiro";
+				break;
+			case 'FEV':
+				$data['novaprogramacao'] = "fevereiro";
+				break;
+			case 'MAR':
+				$data['novaprogramacao'] = "março";
+				break;
+			case 'ABR':
+				$data['novaprogramacao'] = "abril";
+				break;
+			case 'MAI':
+				$data['novaprogramacao'] = "maio";
+				break;
+			case 'JUN':
+				$data['novaprogramacao'] = "junho";
+				break;
+			case 'JUL':
+				$data['novaprogramacao'] = "julho";
+				break;
+			case 'AGO':
+				$data['novaprogramacao'] = "agosto";
+				break;
+			case 'SET':
+				$data['novaprogramacao'] = "setembro";
+				break;
+			case 'OUT':
+				$data['novaprogramacao'] = "outubro";
+				break;
+			case 'NOV':
+				$data['novaprogramacao'] = "novembro";
+				break;
+			case 'DEZ':
+				$data['novaprogramacao'] = "dezembro";
+				break;
+		}
+	
+		$mailMerge = new MailMerge();
+	
+		$mailMerge->setUsername('clauderlima')
+			->setPassword('cclvcldf')
+			->setService (MailMerge::SERVICE_FREE);  // for LiveDocx Premium, use MailMerge::SERVICE_PREMIUM
+	
+		if ($data['template'] == 'BTL')
+		{
+			$mailMerge->setLocalTemplate('data\reproferias-btl.docx');
+		} else
+		{
+			$mailMerge->setLocalTemplate('data\reproferias-cia.docx');
+		}
+	
+		$mailMerge->assign('numero', $data['numero'])
+		->assign('nomePolicial', $data['nomepolicial'])
+		->assign('postoGraduacao', $data['postograduacao'])
+		->assign('matricula',  $data['matricula'])
+		->assign('matriculaSiape',  $data['matriculasiape'])
+		->assign('identificacaoUnica',  $data['identificacaounica'])
+		->assign('anoExercicioFerias', $data['anoreferencia'])
+		->assign('feriasProgramacao', $data['feriasprogramacao'])
+		->assign('novaProgramacao', $data['novaprogramacao'])
+		->assign('dataAtual', $data['datasolicitacao'])
+		->assign('dataInclusao', $data['datainclusao'])
+		->assign('email', $data['email'])
+		->assign('comportamento', $data['comportamento'])
+		->assign('telefone', $data['telefone'])
+	
+		->assign('polferiasSubunidade', $data['polferiassubunidade'])
+		->assign('umDozeSubunidade', $data['umdozesubunidade'])
+		->assign('polferiasBatalhao', $data['polferiasbatalhao'])
+		->assign('umDozeBatalhao', $data['umdozebatalhao'])
+		->assign('sargenteante', $data['sargenteante'])
+		->assign('funcaoSargenteante', $data['funcaosargenteante'])
+		->assign('chefeNgp', $data['chefengp'])
+		->assign('funcaoChefeNgp', $data['funcaochefengp'])
+		->assign('chefeSAd', $data['chefesad'])
+		->assign('funcaoChefeSAd', $data['funcaochefesad'])
+	
+		->assign('comandante', $data['comandante'])
+		->assign('funcaocomandante', $data['funcaocomandante'])
+		->assign('lotacao', $data['lotacao'])
+		->assign('funcaochefe', $data['funcaochefe'])
+		->assign('chefeImediato', $data['chefeimediato']);
+	
+		$mailMerge->createDocument();
+	
+		$document = $mailMerge->retrieveDocument('pdf');
+	
+		if ($this->template == 'BTL')
+		{
+			$filename = 'c:\BPMA\requerimentos\ferias\ReproFerias-' . $this->numero . '-BTL-' . $this->matricula . '.pdf';
+		} else
+		{
+			$filename = 'c:\BPMA\requerimentos\ferias\ReproFerias-' . $this->numero . '-CIA-' . $this->matricula . '.pdf';
+		}
+	
+		file_put_contents($filename, $document);
+	
+		unset($mailMerge);
+	
+		header("Content-Type: application/pdf");
+		echo file_get_contents($filename);
+	}
+	
 	public function requerparcelamentoferias($id, array $dadosform)
 	{
 		// Configuração para gerar datas em português
@@ -558,13 +717,13 @@ function imprimir(array $data)
 	
 		// feriasProgramacao
 		$feriasprogramacao = $em->createQueryBuilder()
-		->select('f')
-		->from('Census\Entity\Ferias', 'f')
-		->where('f.polcodigo = :polcodigo AND f.anoreferencia = :anoref')
-		->setParameter('polcodigo', $id)
-		->setParameter('anoref', $this->anoExercicioFerias)
-		->orderBy('f.codigo', 'ASC')
-		->getQuery()->getResult();
+			->select('f')
+			->from('Census\Entity\Ferias', 'f')
+			->where('f.polcodigo = :polcodigo AND f.anoreferencia = :anoref')
+			->setParameter('polcodigo', $id)
+			->setParameter('anoref', $this->anoExercicioFerias)
+			->orderBy('f.codigo', 'ASC')
+			->getQuery()->getResult();
 			
 		if ($feriasprogramacao)
 		{
@@ -576,40 +735,40 @@ function imprimir(array $data)
 		// Calculo de efetivo
 	
 		$efetivobatalhao = $em->createQueryBuilder()
-		->select('count(p)')
-		->from('Census\Entity\Policial', 'p')
-		->where('p.subunidade <> :trc')
-		->setParameter('trc', 'TRC')
-		->getQuery()->getResult();
+			->select('count(p)')
+			->from('Census\Entity\Policial', 'p')
+			->where('p.subunidade <> :trc')
+			->setParameter('trc', 'TRC')
+			->getQuery()->getResult();
 	
 		$this->umDozeBatalhao = ceil($efetivobatalhao[0][1]/12);
 	
 		$efetivoSubunidade = $em->createQueryBuilder()
-		->select('count(s)')
-		->from('Census\Entity\Policial', 's')
-		->where('s.subunidade = :subunidade')
-		->setParameter('subunidade', $this->subunidade)
-		->getQuery()->getResult();
+			->select('count(s)')
+			->from('Census\Entity\Policial', 's')
+			->where('s.subunidade = :subunidade')
+			->setParameter('subunidade', $this->subunidade)
+			->getQuery()->getResult();
 	
 		$this->umDozeSubunidade = ceil($efetivoSubunidade[0][1]/12);
 	
 		$polferBatalhao = $em->createQueryBuilder()
-		->select('count(f)')
-		->from('Census\Entity\Ferias', 'f')
-		->where('f.programacao = :mes')
-		->setParameter('mes', $this->novaProgramacao)
-		->getQuery()->getResult();
+			->select('count(f)')
+			->from('Census\Entity\Ferias', 'f')
+			->where('f.programacao = :mes')
+			->setParameter('mes', $this->novaProgramacao)
+			->getQuery()->getResult();
 	
 		$this->polferiasBatalhao = $polferBatalhao[0][1];
 	
 		$polferSubunidade = $em->createQueryBuilder()
-		->select('count(f)')
-		->from('Census\Entity\Ferias', 'f')
-		->innerJoin('f.polcodigo', 'p')
-		->where('p.subunidade = :subunidade AND f.programacao = :novomes')
-		->setParameter('subunidade', $this->subunidade)
-		->setParameter('novomes', $this->novaProgramacao)
-		->getQuery()->getResult();
+			->select('count(f)')
+			->from('Census\Entity\Ferias', 'f')
+			->innerJoin('f.polcodigo', 'p')
+			->where('p.subunidade = :subunidade AND f.programacao = :novomes')
+			->setParameter('subunidade', $this->subunidade)
+			->setParameter('novomes', $this->novaProgramacao)
+			->getQuery()->getResult();
 	
 		$this->polferiasSubunidade = $polferSubunidade[0][1];
 	
@@ -662,10 +821,169 @@ function imprimir(array $data)
 				'polcodigo' => $id
 		);
 	
+		echo "<pre>";
+		print_r($data);
+		exit;
 		$service = $this->sm->get('census-service-requerimentoferias');
 		$service->insert($data, 'Census\Entity\RequerimentoFerias');
 	
 		//Verificar o conflito que esta dando com o controle de Férias e a Programação de Férias
 	
+	}
+	
+	function imprimirparcelamentoferias(array $data)
+	{
+		// Configuração para gerar datas em português
+		setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+	
+		// Preparando os dados
+		$data['datasolicitacao'] = strftime('%d de %B de %Y', strtotime($data['datasolicitacao']->format('Y-m-d')));
+		$data['datainclusao'] = $data['datainclusao']->format('d/m/Y');
+	
+	
+		switch ($data['feriasprogramacao']) {
+			case 'JAN':
+				$data['feriasprogramacao'] = "janeiro";
+				break;
+			case 'FEV':
+				$data['feriasprogramacao'] = "fevereiro";
+				break;
+			case 'MAR':
+				$data['feriasprogramacao'] = "março";
+				break;
+			case 'ABR':
+				$data['feriasprogramacao'] = "abril";
+				break;
+			case 'MAI':
+				$data['feriasprogramacao'] = "maio";
+				break;
+			case 'JUN':
+				$data['feriasprogramacao'] = "junho";
+				break;
+			case 'JUL':
+				$data['feriasprogramacao'] = "julho";
+				break;
+			case 'AGO':
+				$data['feriasprogramacao'] = "agosto";
+				break;
+			case 'SET':
+				$data['feriasprogramacao'] = "setembro";
+				break;
+			case 'OUT':
+				$data['feriasprogramacao'] = "outubro";
+				break;
+			case 'NOV':
+				$data['feriasprogramacao'] = "novembro";
+				break;
+			case 'DEZ':
+				$data['feriasprogramacao'] = "dezembro";
+				break;
+		}
+	
+		switch ($data['novaprogramacao']) {
+			case 'JAN':
+				$data['novaprogramacao'] = "janeiro";
+				break;
+			case 'FEV':
+				$data['novaprogramacao'] = "fevereiro";
+				break;
+			case 'MAR':
+				$data['novaprogramacao'] = "março";
+				break;
+			case 'ABR':
+				$data['novaprogramacao'] = "abril";
+				break;
+			case 'MAI':
+				$data['novaprogramacao'] = "maio";
+				break;
+			case 'JUN':
+				$data['novaprogramacao'] = "junho";
+				break;
+			case 'JUL':
+				$data['novaprogramacao'] = "julho";
+				break;
+			case 'AGO':
+				$data['novaprogramacao'] = "agosto";
+				break;
+			case 'SET':
+				$data['novaprogramacao'] = "setembro";
+				break;
+			case 'OUT':
+				$data['novaprogramacao'] = "outubro";
+				break;
+			case 'NOV':
+				$data['novaprogramacao'] = "novembro";
+				break;
+			case 'DEZ':
+				$data['novaprogramacao'] = "dezembro";
+				break;
+		}
+	
+		$mailMerge = new MailMerge();
+	
+		$mailMerge->setUsername('clauderlima')
+		->setPassword('cclvcldf')
+		->setService (MailMerge::SERVICE_FREE);  // for LiveDocx Premium, use MailMerge::SERVICE_PREMIUM
+	
+		if ($data['template'] == 'BTL')
+		{
+			$mailMerge->setLocalTemplate('data\reproferias-btl.docx');
+		} else
+		{
+			$mailMerge->setLocalTemplate('data\reproferias-cia.docx');
+		}
+	
+		$mailMerge->assign('numero', $data['numero'])
+		->assign('nomePolicial', $data['nomepolicial'])
+		->assign('postoGraduacao', $data['postograduacao'])
+		->assign('matricula',  $data['matricula'])
+		->assign('matriculaSiape',  $data['matriculasiape'])
+		->assign('identificacaoUnica',  $data['identificacaounica'])
+		
+		->assign('anoExercicioFerias', $data['anoreferencia'])
+		->assign('feriasProgramacao', $data['feriasprogramacao'])
+		
+		->assign('primeiraParcela', $data['primeiraparcela'])
+		->assign('segundaParcela', $data['segundaparcela'])
+		->assign('terceiraParcela', $data['terceiraparcela'])
+		->assign('restante', $data['restante'])
+		
+		->assign('dataAtual', $data['datasolicitacao'])
+		->assign('dataInclusao', $data['datainclusao'])
+		->assign('email', $data['email'])
+		->assign('comportamento', $data['comportamento'])
+		->assign('telefone', $data['telefone'])
+	
+		->assign('sargenteante', $data['sargenteante'])
+		->assign('funcaoSargenteante', $data['funcaosargenteante'])
+		->assign('chefeNgp', $data['chefengp'])
+		->assign('funcaoChefeNgp', $data['funcaochefengp'])
+		->assign('chefeSAd', $data['chefesad'])
+		->assign('funcaoChefeSAd', $data['funcaochefesad'])
+	
+		->assign('comandante', $data['comandante'])
+		->assign('funcaocomandante', $data['funcaocomandante'])
+		->assign('lotacao', $data['lotacao'])
+		->assign('funcaochefe', $data['funcaochefe'])
+		->assign('chefeImediato', $data['chefeimediato']);
+	
+		$mailMerge->createDocument();
+	
+		$document = $mailMerge->retrieveDocument('pdf');
+	
+		if ($this->template == 'BTL')
+		{
+			$filename = 'c:\BPMA\requerimentos\ferias\ReproFerias-' . $this->numero . '-BTL-' . $this->matricula . '.pdf';
+		} else
+		{
+			$filename = 'c:\BPMA\requerimentos\ferias\ReproFerias-' . $this->numero . '-CIA-' . $this->matricula . '.pdf';
+		}
+	
+		file_put_contents($filename, $document);
+	
+		unset($mailMerge);
+	
+		header("Content-Type: application/pdf");
+		echo file_get_contents($filename);
 	}
 }

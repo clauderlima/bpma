@@ -229,6 +229,24 @@
 				
 				
 				<?php foreach ($feriasrequerimentos as $requerimento):?>
+					<?php
+						switch ($requerimento->getTipo()) {
+							case 'Não Gozo de Férias':
+								$tipoEdit = 'editarNaogozoFerias';
+								$tipoPrint = 'imprimirNaogozoFerias';
+							break;
+							
+							case 'Reprogramação de Férias':
+								$tipoEdit = 'editarReproFerias';
+								$tipoPrint = 'imprimirReproFerias';
+							break;
+							
+							case 'Parcelamento de Férias':
+								$tipoEdit = 'editarParcelamentoFerias';
+								$tipoPrint = 'imprimirParcelamentoFerias';
+								break;
+						}
+					?>
 				<tr>
 					<th scope="row"><?php echo $counter++?></th>
 					<td><?php echo $requerimento->getTipo() ?></td>
@@ -250,8 +268,8 @@
 							echo $requerimento->getDatadecisao()->format('d/m/Y')?>
 							
 					</td>
-					<td><a href="/requerimento/editarReproFerias/<?php echo $requerimento->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
-    				&nbsp;&nbsp; <a href="/requerimento/imprimirReproFerias/<?php echo $requerimento->getCodigo()?>" target="_blank"><i class="glyphicon glyphicon-print"></i></a>
+					<td><a href="/requerimento/<?php echo $tipoEdit?>/<?php echo $requerimento->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
+    				&nbsp;&nbsp; <a href="/requerimento/<?php echo $tipoPrint?>/<?php echo $requerimento->getCodigo()?>" target="_blank"><i class="glyphicon glyphicon-print"></i></a>
     				<!-- &nbsp;&nbsp; <a href="/requerimento/deletarabono/<?php //echo $requerimento->getCodigo()?>" onClick="deleta()"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a>-->
     				</td>
 				</tr>
