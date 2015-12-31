@@ -287,6 +287,48 @@ class PolicialController extends AbstractController
     	));
     }
     
+    public function efetivoAction()
+    {
+    	$em = $this->getEm();
+    
+		$secao = $_POST['secao'];
+		
+    	if ($secao == 'GOA' || $secao == 'CiaSul' || $secao == 'CiaOeste' || $secao == 'CiaLeste' || $secao == 'GPTur')
+    	{
+    		$policial = $em->createQueryBuilder()
+	    		->select('p.nomeguerra,p.postograduacao,p.subunidade,p.codigo')
+	    		->from('Census\Entity\Policial', 'p')
+	    		->where('p.subunidade = :subunidade')
+	    		->setParameter('subunidade', $secao)
+	    		->orderBy('p.antiguidade', 'ASC')
+	    		->getQuery()->getResult();
+    		
+    		$arrEfetivo = array();
+    	} else 
+    	{
+	    	$policial = $em->createQueryBuilder()
+		    	->select('p.nomeguerra,p.postograduacao,p.subunidade,p.codigo')
+		    	->from('Census\Entity\Policial', 'p')
+		    	->where('p.lotacao = :lotacao AND p.subunidade = :subunidade')
+		    	->setParameter('lotacao', $secao)
+		    	->setParameter('subunidade', 'Btl')
+		    	->orderBy('p.antiguidade', 'ASC')
+		    	->getQuery()->getResult();
+	    	
+		    $arrEfetivo = array();
+    	}
+    	
+    	foreach ($policial as $item)
+    	{
+    		$arrEfetivo += array(
+    			$item['codigo'] => $item['postograduacao'] . " " . $item['nomeguerra'],
+    		);
+    	}
+    	
+    	echo json_encode($arrEfetivo);
+    	exit;
+    }
+    
     public function aniversariantesAction()
     {
     	$em = $this->getEm();

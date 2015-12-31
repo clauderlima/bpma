@@ -1,0 +1,43 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+        <div class="panel-title">
+            Encaminhar <?php echo $dados['tipo']." ".$dados['numero']?>
+        </div>
+    </div>
+    <div class="panel-body">
+	<?php echo $this->form()->openTag($form); ?>
+    	<div class="row">
+    		<div class="col-xs-4">
+    			<?php echo $this->formRow($form->get('secao')) ?>
+    		</div>
+    		<div class="col-xs-4">
+    			<label for="policial">Policial</label>
+    			<select name="polcodigo" id="polcodigo" class="form-control"></select>
+    		</div>
+    	</div>
+    </div>
+    <div class="panel-footer">
+    <?php echo $this->formSubmit($form->get('submit')) ?>
+    </div>
+    <?php echo $this->form()->closeTag($form); ?> 
+</div>
+
+<script>
+$(document).ready(function(){
+	   $("#secao").change(function(){
+	      $.ajax({
+	         type: "POST",
+	         url: "/census/efetivo",
+	         data: {secao: $("#secao").val()},
+	         dataType: "json",
+	         success: function(json){
+	            var options = "";
+	            $.each(json, function(key, value){
+	               options += '<option value="' + key + '">' + value + '</option>';
+	            });
+	            $("#polcodigo").html(options);
+	         }
+	      });
+	   });
+	});
+</script>

@@ -3,11 +3,12 @@
 namespace Scriba\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Zend\Stdlib\Hydrator\ClassMethods;
 
 /**
  * Protocolo
  *
- * @ORM\Table(name="protocolo", indexes={@ORM\Index(name="fk_protocolo_policial1_idx", columns={"pol_Codigo"})})
+ * @ORM\Table(name="protocolo", uniqueConstraints={@ORM\UniqueConstraint(name="pro_Numero_UNIQUE", columns={"pro_Numero"}), @ORM\UniqueConstraint(name="pro_Codigo_UNIQUE", columns={"pro_Codigo"})})
  * @ORM\Entity
  */
 class Protocolo
@@ -22,66 +23,27 @@ class Protocolo
     private $codigo;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="pro_Tipo", type="string", length=100, nullable=false)
-     */
-    private $tipo;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="pro_Numero", type="string", length=45, nullable=false)
+     * @ORM\Column(name="pro_Numero", type="integer", nullable=false)
      */
     private $numero;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="pro_Recebimento", type="datetime", nullable=false)
+     * @ORM\Column(name="pro_Ano", type="string", length=4, nullable=false)
      */
-    private $recebimento;
+    private $ano;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pro_Secao", type="string", length=100, nullable=true)
+     * @ORM\Column(name="pro_Descricao", type="string", length=155, nullable=false)
      */
-    private $secao;
+    private $descricao;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="pro_Encaminhamento", type="datetime", nullable=true)
-     */
-    private $encaminhamento;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="pro_Acao", type="string", length=45, nullable=true)
-     */
-    private $acao;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="pro_Assunto", type="string", length=250, nullable=true)
-     */
-    private $assunto;
-
-    /**
-     * @var \Policial
-     *
-     * @ORM\ManyToOne(targetEntity="Census\Entity\Policial")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="pol_Codigo", referencedColumnName="pol_Codigo")
-     * })
-     */
-    private $polcodigo;
-
-    public function __construct(array $data)
-    {
+    public function __construct(array $data) {
     	$hydrator = new ClassMethods();
     	$hydrator->hydrate($data, $this);
     }
@@ -102,15 +64,6 @@ class Protocolo
         return $this;
     }
 
-    public function getTipo(){
-        return $this->tipo;
-    }
-
-    public function setTipo($tipo){
-        $this->tipo = $tipo;
-        return $this;
-    }
-
     public function getNumero(){
         return $this->numero;
     }
@@ -120,57 +73,21 @@ class Protocolo
         return $this;
     }
 
-    public function getRecebimento(){
-        return $this->recebimento;
+    public function getAno(){
+        return $this->ano;
     }
 
-    public function setRecebimento($recebimento){
-        $this->recebimento = new \DateTime($recebimento);
+    public function setAno($ano){
+        $this->ano = $ano;
         return $this;
     }
 
-    public function getSecao(){
-        return $this->secao;
+    public function getDescricao(){
+        return $this->descricao;
     }
 
-    public function setSecao($secao){
-        $this->secao = $secao;
-        return $this;
-    }
-
-    public function getEncaminhamento(){
-        return $this->encaminhamento;
-    }
-
-    public function setEncaminhamento($encaminhamento){
-        $this->encaminhamento = new \DateTime($encaminhamento);
-        return $this;
-    }
-
-    public function getAcao(){
-        return $this->acao;
-    }
-
-    public function setAcao($acao){
-        $this->acao = $acao;
-        return $this;
-    }
-
-    public function getAssunto(){
-        return $this->assunto;
-    }
-
-    public function setAssunto($assunto){
-        $this->assunto = $assunto;
-        return $this;
-    }
-
-    public function getPolcodigo(){
-        return $this->polcodigo;
-    }
-
-    public function setPolcodigo($polcodigo){
-        $this->polcodigo = $polcodigo;
+    public function setDescricao($descricao){
+        $this->descricao = $descricao;
         return $this;
     }
 

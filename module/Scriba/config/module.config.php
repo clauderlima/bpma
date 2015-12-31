@@ -6,37 +6,23 @@ return array(
 	# definir e gerenciar controllers
 	'controllers' => array(
 		'invokables' => array(
-			'ProtocoloController' => 'Scriba\Controller\ProtocoloController',
+			'DocumentoController' => 'Scriba\Controller\DocumentoController',
 		),
 	),
 		
 	# definir e gerenciar rotas
 	'router' => array(
 		'routes' => array(
-			'scriba' => array(
+			'documento' => array(
 				'type'      => 'Segment',
 				'options'   => array(
-					'route'    => '/scriba[/:action][/:id]',
+					'route'    => '/documento[/:action][/:id]',
 					'constraints' => array(
 						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
 						'id'     => '[0-9]+',
 					),
 					'defaults' => array(
-						'controller' => 'IndexController',
-						'action'     => 'index',
-					),
-				),
-			),
-			'protocolo' => array(
-				'type'      => 'Segment',
-				'options'   => array(
-					'route'    => '/protocolo[/:action][/:id]',
-					'constraints' => array(
-						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-						'id'     => '[0-9]+',
-					),
-					'defaults' => array(
-						'controller' => 'ProtocoloController',
+						'controller' => 'DocumentoController',
 						'action'     => 'index',
 					),
 				),
@@ -51,6 +37,8 @@ return array(
 		),
 		'invokables' => array(
 			'scriba-service-protocolo' => 'Scriba\Service\Protocolo',
+			'scriba-service-documento' => 'Scriba\Service\Documento',
+			'scriba-service-encaminhamento' => 'Scriba\Service\Encaminhamento',
 		)
 	),
 		'doctrine' => array(
@@ -77,7 +65,7 @@ return array(
 		'template_map'              => array(
 			'layout/layout'         => __DIR__ . '/../view/layout/layout.phtml',
 			'layout/scriba'			=> __DIR__ . '/../view/layout/scriba.phtml',
-			'hereditas/home/index'     => __DIR__ . '/../view/hereditas/home/index.phtml',
+			'documento/home/index'     => __DIR__ . '/../view/documento/home/index.phtml',
 			'error/404'             => __DIR__ . '/../view/error/404.phtml',
 			'error/index'           => __DIR__ . '/../view/error/index.phtml',
 		),

@@ -1,0 +1,55 @@
+<a href="/documento/adicionar"><button class="btn btn-success btn-fill btn-wd">Novo Documento</button></a>
+<br>&nbsp;
+<div class="panel panel-primary">
+	<div class="panel-heading">
+        <div class="panel-title">
+            Documentos em tramitação na Unidade
+        </div>
+    </div>
+    <div class="panel-body">
+    	<table class="table">
+    		<thead>
+    			<tr>
+    				<th>Nº</th>
+    				<th>Documento</th>
+    				<th>Data</th>
+    				<th>Assunto</th>
+    				<th>Origem</th>
+    				<th>Recebimento</th>
+    				<th>Seção Atual</th>
+    				<th>Desde</th>
+    				<th>Status</th>
+    				<th>Opções</th>
+    			</tr>
+    		</thead>
+    		<tbody>
+    		<?php $counter = 1?>
+    		<?php foreach ($dados as $item):?>
+    			<tr>
+    				<th><?php echo $counter++?></th>
+    				<td><?php echo $item->getTipo() . " " . $item->getNumero()?></td>
+    				<td><?php echo $item->getData()->format('d/m/Y')?></td>
+    				<td><?php echo $item->getAssunto()?></td>
+    				<td><?php echo $item->getOrigem()?></td>
+    				<td><?php echo $item->getRecebimento()->format('d/m/Y')?></td>
+    				<td><?php 
+    					if ($item->getEnccodigo())
+    					{
+    						echo $item->getEnccodigo()->getSecao();
+						} ?></td>
+    				<td><?php 
+    					if ($item->getEnccodigo())
+    					{
+    						echo $item->getEnccodigo()->getData()->format('d/m/Y');
+						} ?></td>
+    				<td><?php echo $item->getStatus()?></td>
+    				<td><a href="/documento/tramitar/<?php echo $item->getCodigo()?>"><i class="glyphicon glyphicon-step-forward"></i></a></td>
+    			</tr>
+    			<?php endforeach;?>
+    		</tbody>
+    	</table>
+    </div>
+    <div class="panel-footer">
+    </div>
+</div>
+

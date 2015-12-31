@@ -13,5 +13,4 @@ class ProtocoloController extends AbstractController
 			'$dados' => $dataProtocolo,
 		));
 	}
-
-	
+}	
