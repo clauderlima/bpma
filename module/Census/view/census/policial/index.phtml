@@ -1,3 +1,58 @@
+<?php if(count($successMessages)) : ?>
+	<?php foreach ($successMessages as $msg) : ?>
+	<script type="text/javascript">
+    	$(document).ready(function(){
+        	
+        	$.notify({
+            	icon: 'pe-7s-bell',
+            	message: "<?php echo $msg; ?>"
+            	
+            },{
+                type: 'success',
+                timer: 3000
+            });
+            
+    	});
+	</script> 
+	<?php endforeach; ?>
+<?php endif; ?> 
+<?php if(count($errorMessages)) : ?>
+	<?php foreach ($errorMessages as $msg) : ?>
+	<script type="text/javascript">
+    	$(document).ready(function(){
+        	
+        	$.notify({
+            	icon: 'pe-7s-bell',
+            	message: "<?php echo $msg; ?>"
+            	
+            },{
+                type: 'danger',
+                timer: 3000
+            });
+            
+    	});
+	</script> 
+	<?php endforeach; ?>
+<?php endif; ?> 
+<?php if(count($flashMessages)) : ?>
+	<?php foreach ($flashMessages as $msg) : ?>
+	<script type="text/javascript">
+    	$(document).ready(function(){
+        	
+        	$.notify({
+            	icon: 'pe-7s-bell',
+            	message: "<?php echo $msg; ?>"
+            	
+            },{
+                type: 'warning',
+                timer: 3000
+            });
+            
+    	});
+	</script> 
+	<?php endforeach; ?>
+<?php endif; ?> 
+
 <div class="topo-table">
     <a href="<?php echo $this->url('census', array('action' => 'adicionar'))?>" class="btn btn-success" title="Novo">
     	<span class="glyphicon glyphicon-plus"></span>
@@ -71,6 +126,7 @@
     	['route' => 'census']
 	);
 	?>
+	
 </div>	
 	<div class="modal fade" id="modal-detalhes-contato">
     <div class="modal-dialog">
@@ -80,8 +136,6 @@
             </div>
           </div>
     </div>
-	
-
 </div>
 <?php $this->headScript()->captureStart(); ?>
 $(function(){
@@ -103,18 +157,4 @@ $(function(){
             event.preventDefault();
     });
 });
-
-$(function(){
-    $('#modal-detalhes-contato').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget)             // Button that triggered the modal
-        var contato_url = button.data('contato-url')    // Extract info from data-* attributes
-        
-        var modal = $(this)
-        modal.
-            find('.modal-body').        // localizar corpo modal
-            html('Carregando...').      // colocar html caso a requição demore
-            load(contato_url)           // inserir conteudo html AJAX
-    })
-});
-
 <?php $this->headScript()->captureEnd(); ?>

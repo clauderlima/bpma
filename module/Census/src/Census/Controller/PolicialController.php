@@ -29,11 +29,13 @@ class PolicialController extends AbstractController
     			/* $search */           $paramsUrl['search'],
     			/* $itensPaginacao */   5
     	);
+    	
+    	$view = new ViewModel(['relacao' => $paginacao] + $paramsUrl);
+    	$view->setVariable('errorMessages', $this->flashMessenger()->getErrorMessages());
+    	$view->setVariable('successMessages', $this->flashMessenger()->getSuccessMessages());
+    	$view->setVariable('flashMessages', $this->flashMessenger()->getMessages());
     	 
-    	// retonar paginação mais os params de url para view
-    	return new ViewModel(['relacao' => $paginacao] + $paramsUrl);
-    	//$viewModel->setTemplate('layout/census');
-    	//return $viewModel;
+    	return $view;
     }
  
     // GET /policial/novo
@@ -233,7 +235,8 @@ class PolicialController extends AbstractController
     	}
     	
     	$view = new ViewModel(array(
-    			'form' => $form
+    			'form' => $form,
+    			'flashMessages' => $this->flashMessenger()->getMessages()
     	));
     	$view->setTemplate('census/policial/formPolicial.phtml');
     	
