@@ -1,11 +1,44 @@
 <div class="panel panel-primary">
 	<div class="panel-heading">
         <div class="panel-title">
-           <?php if ($dados)echo "Datalhamento do Documento"; else echo "Documento não tramitado ainda" ?> <?php if ($dados) echo $dados[0]->getDoccodigo()->getTipo() . " " . $dados[0]->getDoccodigo()->getNumero()?>
+           <?php if ($dados)echo "Tramitação do Documento"; else echo "Documento não tramitado ainda" ?>
         </div>
     </div>
     <div class="panel-body">
-    	<table class="table">
+    	<?php if ($dados): ?>
+    	
+    	<div class="panel panel-default">
+    		<div class="panel-body">
+    		<div class="row">
+    			<div class="col-xs-3">
+    				<i>Documento:</i><br><?php echo $dados[0]->getDoccodigo()->getTipo() . " " . $dados[0]->getDoccodigo()->getNumero()?>
+    			</div>
+    			<div class="col-xs-3">
+    				<i>Data:</i><br><?php echo $dados[0]->getDoccodigo()->getData()->format('d/m/Y')?>
+    			</div>
+    			<div class="col-xs-6">
+    				<i>Origem:</i><br><?php echo $dados[0]->getDoccodigo()->getOrigem()?>
+    			</div>
+    		</div>
+    		<br>
+    		<div class="row">
+    			<div class="col-xs-6">
+    				<i>Assunto:</i><br><?php echo $dados[0]->getDoccodigo()->getAssunto()?>
+    			</div>
+    		</div>   
+    		<br>
+    		<div class="row">
+    			<div class="col-xs-2">
+    				<i>Protocolo:</i><br><?php echo str_pad($dados[0]->getDoccodigo()->getProcodigo()->getNumero(), 3, "0", STR_PAD_LEFT);?>
+    			</div>
+    			<div class="col-xs-2">
+    				<i>Data de Recebimento:</i><br><?php echo $dados[0]->getDoccodigo()->getRecebimento()->format('d/m/Y')?>
+    			</div>
+    		</div>   	
+    	</div>
+    	</div>
+    	
+    	<table class="table table-hover table-striped">
     		<thead>
     			<tr>
     				<th>Nº</th>
@@ -18,7 +51,6 @@
     		</thead>
     		<tbody>
     		<?php 
-    			if ($dados):
     			$dados[] = array('data' => 'fim'); 
     			
     			$counter = 1;
@@ -63,6 +95,7 @@
     		</tbody>
     	</table>
     </div>
+    <?php if ($dados):?>
     <div class="panel-footer">
     	<div class="row">
     		<div class="col-xs-6 text-center">
@@ -75,5 +108,6 @@
     		</div>
     	</div>
     </div>
+    <?php endif;?>
 </div>
 

@@ -47,7 +47,7 @@ class DocumentoController extends AbstractController
 			{
 				$result[$key]['secao'] = "Secretaria";
 				$result[$key]['desde'] = $item->getRecebimento()->format('d/m/Y');
-				$result[$key]['status'] = "Recebido";
+				$result[$key]['status'] = "";
 			}
 		}
 		
