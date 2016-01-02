@@ -629,8 +629,8 @@ function imprimirxxxx(array $data)
 		} else
 		{
 			$mailMerge->setLocalTemplate('data\reproferias-cia.docx');
-		}
-	
+		}	
+		
 		$mailMerge->assign('numero', $data['numero'])
 		->assign('nomePolicial', $data['nomepolicial'])
 		->assign('postoGraduacao', $data['postograduacao'])
@@ -821,9 +821,6 @@ function imprimirxxxx(array $data)
 				'polcodigo' => $id
 		);
 	
-		echo "<pre>";
-		print_r($data);
-		exit;
 		$service = $this->sm->get('census-service-requerimentoferias');
 		$service->insert($data, 'Census\Entity\RequerimentoFerias');
 	
@@ -919,19 +916,37 @@ function imprimirxxxx(array $data)
 				break;
 		}
 	
-		$mailMerge = new MailMerge();
+ 		$mailMerge = new MailMerge();
 	
 		$mailMerge->setUsername('clauderlima')
-		->setPassword('cclvcldf')
-		->setService (MailMerge::SERVICE_FREE);  // for LiveDocx Premium, use MailMerge::SERVICE_PREMIUM
+			->setPassword('cclvcldf')
+			->setService (MailMerge::SERVICE_FREE);  // for LiveDocx Premium, use MailMerge::SERVICE_PREMIUM 
 	
 		if ($data['template'] == 'BTL')
 		{
-			$mailMerge->setLocalTemplate('data\reproferias-btl.docx');
+			$mailMerge->setLocalTemplate('data\parcelamentoferias-btl.docx');
 		} else
 		{
-			$mailMerge->setLocalTemplate('data\reproferias-cia.docx');
-		}
+			$mailMerge->setLocalTemplate('data\parcelamentoferias-cia.docx');
+		} 
+		
+		$data['nrecodigo'] = "";
+		$data['polcodigo'] = "";
+		
+		$data['primeiraparcela'] = "- 1ª parcela de " . $data['primeiraparcelaqtddias'] . " dias no período de " . 
+			$data['primeiraparcelainicio']->format('d/m') . " à " . $data['primeiraparcelainicio']
+			->add(new \DateInterval("P".($data['primeiraparcelaqtddias']-1)."D"))->format('d/m/Y') . ";";
+		$data['segundaparcela'] = "- 2ª parcela de " . $data['segundaparcelaqtddias'] . " dias no período de " . 
+			$data['segundaparcelainicio']->format('d/m') . " à " . $data['segundaparcelainicio']
+			->add(new \DateInterval("P".($data['terceiraparcelaqtddias']-1)."D"))->format('d/m/Y') . ";";
+		$data['terceiraparcela'] = "- 3ª parcela de " . $data['terceiraparcelaqtddias'] . " dias no período de " . 
+			$data['terceiraparcelainicio']->format('d/m') . " à " . $data['terceiraparcelainicio']
+			->add(new \DateInterval("P".($data['terceiraparcelaqtddias']-1)."D"))->format('d/m/Y') . ";";
+		
+		if ($data['momentooportuno'])
+			$data['restante'] = " - E o restante dos " . $data['momentooportuno'] . " dias para gozo em momento oporturno.";
+		if ($data['naogozo'])
+				$data['restante'] = "E o restante dos " . $data['naogozo'] . " dias para não gozo.";
 	
 		$mailMerge->assign('numero', $data['numero'])
 		->assign('nomePolicial', $data['nomepolicial'])

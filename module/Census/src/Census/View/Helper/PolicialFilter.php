@@ -402,6 +402,82 @@ class PolicialFilter extends AbstractHelper
 	public function lotacao()
 	{
 		$result = $this->policial->pol_Lotacao;
+		switch ($result) {
+			case 'Cmd':
+				$result = "Comando";
+			break;
+			case 'SAd': 
+				$result = "Seção Administrativa";
+			break;
+			case 'NGP': 
+				$result = "Núcleo de Gestão de Pessoal";
+			break;
+			case 'NCC': 
+				$result = "Núcleo de Controle e Correição";
+			break;
+			case 'Sec': 
+				$result = "Secretaria";
+			break;
+			case 'NCS': 
+				$result = "Núcleo de Comunicação Social";
+			break;
+			case 'NProj': 
+				$result = "Núcleo de Projetos";
+			break;
+			case 'Almox': 
+				$result = "Almoxarifado";
+			break;
+			case 'NMan': 
+				$result = "Núcleo de Manutenção";
+			break;
+			case 'SOp': 
+				$result = "Seção Operacional";
+			break;
+			case 'SSInt': 
+				$result = "SubSeção de Inteligência";
+			break;
+			case 'NEEC': 
+				$result = "NEEC";
+			break;
+			case 'NEAM': 
+				$result = "NEAM";
+			break;
+			case 'CeAPA': 
+				$result = "Centro de Acolhimento Provisório de Animais";
+			break;
+			case 'CiaApoio': 
+				$result = "Companhia de Apoio";
+			break;
+			case 'ServInter': 
+				$result = "Serviço Interno";
+			break;
+			case 'Lac': 
+				$result = "Lacustre";
+			break;
+			case 'RPA': 
+				$result = "Rádio Patrulhamento Ambiental";
+			break;
+			case 'GOC': 
+				$result = "Grupo de Operações do Cerrado";
+			break;
+			case 'GTA': 
+				$result = "Grupo Tático Ambiental";
+			break;
+			case 'RPR': 
+				$result = "Rádio Patrulhamento";
+			break;
+			case 'Exp': 
+				$result = "Expediente SubUnidade";
+			break;
+			case 'RM': 
+				$result = "Restrição Médica";
+			break;
+			case 'DM': 
+				$result = "Dispensa Médica";
+			break;
+			
+		}
+		
 		return $this->view->escapeHTML($result);
 	}
 	

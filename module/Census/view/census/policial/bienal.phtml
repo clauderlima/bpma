@@ -1,0 +1,30 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="panel-title">
+            <div class="campo">Bienal do Efetivo do BPMA</div>
+        </div>
+    </div>
+
+<table class="table">
+<tr>
+		<th>Nº</th>
+		<th>Policial</th>
+		<th>Bienal</th>
+		<th>Validade</th>
+		<th>Situação</th>
+	</tr>
+	<?php 
+	$counter = 1;
+	$hoje = new \DateTime()?>
+	<?php foreach ($policiais as $item):?>
+	
+	<tr>
+		<td><?php echo $counter++?></td>
+		<td><?php echo $item['postograduacao'] . " " . $item['nomeguerra']?></td>
+		<td><?php echo $item['bienalvalidade']->format('d/m/Y')?></td>
+		<td><?php echo $item['bienalvalidade']->add(new DateInterval("P2Y"))->format('d/m/Y')?></td>
+		<td><?php $hoje = new \DateTime(); echo ($item['bienalvalidade']->add(new DateInterval("P2Y")) < $hoje) ? "Vencida" : "ok"?>
+	<?php endforeach;?>
+	</tr>
+</table>
+</div>

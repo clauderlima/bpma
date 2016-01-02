@@ -48,6 +48,8 @@
 			<th>Policial</th>
 			<th>Dia</th>
 			<th>Idade</th>
+			<th>Subunidade</th>
+			<th>Lotação</th>
 		</tr>
 		<?php $counter = 1?>
 		<?php foreach ($mes as $policial):?>
@@ -56,11 +58,13 @@
 			<td><?php echo $policial['postograduacao'] . " " . $policial['nomeguerra']?></td>
 			<td><?php echo $policial['dianascimento']?></td>
 			<td><?php echo $policial['idade']?></td>
+			<td><?php echo $policial['subunidade']?></td>
+			<td><?php echo $policial['lotacao']?></td>
 		</tr>
 		<?php endforeach;?>
 	</table>
 	</div>
 	
 	<?php endforeach;?>
-	</div>
 </div>
+

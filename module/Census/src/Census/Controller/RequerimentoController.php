@@ -64,7 +64,7 @@ class RequerimentoController extends AbstractController
 		$service = $this->getServiceLocator()->get('census-service-requerimentoabono');
 			
 		// Instaciando o Form
-		$form = new \Census\Form\Abono();
+		$form = new \Census\Form\RequerimentoAbono();
 		$abono = $this->getEm('Census\Entity\RequerimentoAbono')->find($id)->toArray();
 	
 		$dataPolicial = $this->getEm('Census\Entity\Policial')->find($abono['polcodigo']->getCodigo())->toArray();
@@ -236,14 +236,14 @@ class RequerimentoController extends AbstractController
 	{
 		$id = (int) $this->params()->fromRoute('id', 0);
 		$data = $this->getEm('Census\Entity\RequerimentoFerias')->find($id)->toArray();
-		
+
 		$reproferias = new \Census\Modulo\RequerimentoFerias($this->getServiceLocator()->get('servicemanager'));
 		
 		if ($reproferias->imprimirreproferias($data))
 		{
 			$this->flashMessenger()->addSuccessMessage("Curso cadastrado com sucesso!");
 		}
-		
+		die;
 		return $this->redirect()->toUrl('/census/detalhes/' . $id);
 		$view = new ViewModel();
 		return $view;
@@ -284,7 +284,49 @@ class RequerimentoController extends AbstractController
 	
 	public function editarNaogozoFeriasAction()
 	{
-	
+		// Definindo variaveis
+		$request = $this->getRequest();
+		$id = (int) $this->params()->fromRoute('id', 0);
+			
+		// Instaciando services
+		$service = $this->getServiceLocator()->get('census-service-requerimentoferias');
+			
+		// Instaciando o Form
+		$form = new \Census\Form\RequerimentoFerias();
+		$abono = $this->getEm('Census\Entity\RequerimentoFerias')->find($id)->toArray();
+		
+		$dataPolicial = $this->getEm('Census\Entity\Policial')->find($abono['polcodigo']->getCodigo())->toArray();
+		
+		$form->setData($abono);
+		
+		if ($request->isPost())
+		{
+			// setando o input filter no orm
+			$data = $request->getPost()->toArray();
+		
+			$form->setData($data);
+			$form->setInputFilter(new \Census\Filter\RequerimentoFerias());
+		
+			if ($form->isValid())
+			{
+				if ($service->update($data, 'Census\Entity\RequerimentoFerias', $id))
+				{
+					$this->flashMessenger()->addSuccessMessage("Curso cadastrado com sucesso!");
+					return $this->redirect()->toUrl('/census/detalhes/' . $abono['polcodigo']->getCodigo());
+				}
+			} else {
+				$this->flashMessenger()->addErrorMessage('Erro ao cadastrar curso! <br>Verifique se os campos foram preenchidos corretamente.');
+			}
+		}
+			
+		$view = new ViewModel(array(
+				'form' => $form,
+				'policial' => $dataPolicial
+		));
+			
+		$view->setTemplate('census/requerimento/feriasform.phtml');
+			
+		return $view;
 	}
 	
 	public function deletarNaogozoFeriasAction()
@@ -353,7 +395,44 @@ class RequerimentoController extends AbstractController
 	
 	public function editarParcelamentoFeriasAction()
 	{
-	
+		// Definindo variaveis
+		$request = $this->getRequest();
+		$id = (int) $this->params()->fromRoute('id', 0);
+			
+		// Instaciando services
+		$service = $this->getServiceLocator()->get('census-service-requerimentoferias');
+			
+		// Instaciando o Form
+		$form = new \Census\Form\RequerimentoFerias();
+		$abono = $this->getEm('Census\Entity\RequerimentoFerias')->find($id)->toArray();
+		
+		echo "<pre>";
+		print_r($abono);
+		exit;
+		
+		$dataPolicial = $this->getEm('Census\Entity\Policial')->find($abono['polcodigo']->getCodigo())->toArray();
+		
+		$form->setData($abono);
+		
+		if ($request->isPost())
+		{
+			// setando o input filter no orm
+			$data = $request->getPost()->toArray();
+		
+			$form->setData($data);
+			$form->setInputFilter(new \Census\Filter\RequerimentoFerias());
+		
+			if ($form->isValid())
+			{
+				if ($service->update($data, 'Census\Entity\RequerimentoFerias', $id))
+				{
+					$this->flashMessenger()->addSuccessMessage("Curso cadastrado com sucesso!");
+					return $this->redirect()->toUrl('/census/detalhes/' . $abono['polcodigo']->getCodigo());
+				}
+			} else {
+				$this->flashMessenger()->addErrorMessage('Erro ao cadastrar curso! <br>Verifique se os campos foram preenchidos corretamente.');
+			}
+		}
 	}
 	
 	public function deletarParcelamentoFeriasAction()

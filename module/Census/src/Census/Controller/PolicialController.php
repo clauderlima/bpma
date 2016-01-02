@@ -332,6 +332,24 @@ class PolicialController extends AbstractController
     	exit;
     }
     
+    public function bienalAction()
+    {
+    	$em = $this->getEm();
+    
+    	// Dados Formação
+    	$policial = $em->createQueryBuilder()
+	    	->select('p.nomeguerra,p.bienalvalidade,p.dataadmissao,p.postograduacao,p.subunidade')
+	    	->from('Census\Entity\Policial', 'p')
+	    	->where('p.subunidade <> :polcodigo')
+	    	->setParameter('polcodigo', 'TRC')
+	    	->orderBy('p.antiguidade', 'ASC')
+	    	->getQuery()->getResult();
+    
+    	return new ViewModel(array(
+    			'policiais' => $policial,
+    	));
+    }
+    
     public function aniversariantesAction()
     {
     	$em = $this->getEm();
@@ -339,7 +357,7 @@ class PolicialController extends AbstractController
     
     	// Dados Formação
     	$policial = $em->createQueryBuilder()
-    	->select('p.nomeguerra,p.datanascimento,p.dataadmissao,p.postograduacao,p.subunidade')
+    	->select('p.nomeguerra,p.datanascimento,p.dataadmissao,p.postograduacao,p.subunidade,p.lotacao')
     	->from('Census\Entity\Policial', 'p')
     	//->where('f.polcodigo = :polcodigo')
     	//->setParameter('polcodigo', $id)
@@ -358,6 +376,8 @@ class PolicialController extends AbstractController
     					'dianascimento' => $item['datanascimento']->format('d'),
     					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
     					'postograduacao' => $item['postograduacao'],
+    					'subunidade' => $item['subunidade'],
+    					'lotacao' => $item['lotacao'],
     					'idade' => $idade->y . " anos"
     				);
     				
@@ -371,6 +391,8 @@ class PolicialController extends AbstractController
     					'dianascimento' => $item['datanascimento']->format('d'),
     					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
     					'postograduacao' => $item['postograduacao'],
+    					'subunidade' => $item['subunidade'],
+    					'lotacao' => $item['lotacao'],
     					'idade' => $idade->y . " anos"
     				);
     			
@@ -384,6 +406,8 @@ class PolicialController extends AbstractController
     					'dianascimento' => $item['datanascimento']->format('d'),
     					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
     					'postograduacao' => $item['postograduacao'],
+    					'subunidade' => $item['subunidade'],
+    					'lotacao' => $item['lotacao'],
     					'idade' => $idade->y . " anos"
     				);
     				
@@ -398,6 +422,8 @@ class PolicialController extends AbstractController
     					'dianascimento' => $item['datanascimento']->format('d'),
     					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
     					'postograduacao' => $item['postograduacao'],
+    					'subunidade' => $item['subunidade'],
+    					'lotacao' => $item['lotacao'],
     					'idade' => $idade->y . " anos"
     				);
     					
@@ -412,6 +438,8 @@ class PolicialController extends AbstractController
 						'dianascimento' => $item['datanascimento']->format('d'),
 						'datanascimento' => $item['datanascimento']->format('d/m/Y'),
 						'postograduacao' => $item['postograduacao'],
+    					'subunidade' => $item['subunidade'],
+    					'lotacao' => $item['lotacao'],
 						'idade' => $idade->y . " anos"
 					);
     						
@@ -427,6 +455,8 @@ class PolicialController extends AbstractController
     					'dianascimento' => $item['datanascimento']->format('d'),
     					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
     					'postograduacao' => $item['postograduacao'],
+    					'subunidade' => $item['subunidade'],
+    					'lotacao' => $item['lotacao'],
     					'idade' => $idade->y . " anos"
     				);
     							
@@ -441,6 +471,8 @@ class PolicialController extends AbstractController
     					'dianascimento' => $item['datanascimento']->format('d'),
     					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
     					'postograduacao' => $item['postograduacao'],
+    					'subunidade' => $item['subunidade'],
+    					'lotacao' => $item['lotacao'],
     					'idade' => $idade->y . " anos"
     				);
     								
@@ -454,6 +486,8 @@ class PolicialController extends AbstractController
     					'dianascimento' => $item['datanascimento']->format('d'),
     					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
     					'postograduacao' => $item['postograduacao'],
+    					'subunidade' => $item['subunidade'],
+    					'lotacao' => $item['lotacao'],
     					'idade' => $idade->y . " anos"
     				);
     			
@@ -467,6 +501,8 @@ class PolicialController extends AbstractController
     					'dianascimento' => $item['datanascimento']->format('d'),
     					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
     					'postograduacao' => $item['postograduacao'],
+    					'subunidade' => $item['subunidade'],
+    					'lotacao' => $item['lotacao'],
     					'idade' => $idade->y . " anos"
     				);
     				 
@@ -480,6 +516,8 @@ class PolicialController extends AbstractController
     					'dianascimento' => $item['datanascimento']->format('d'),
     					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
     					'postograduacao' => $item['postograduacao'],
+    					'subunidade' => $item['subunidade'],
+    					'lotacao' => $item['lotacao'],
     					'idade' => $idade->y . " anos"
     				);
     			
@@ -494,6 +532,8 @@ class PolicialController extends AbstractController
     					'dianascimento' => $item['datanascimento']->format('d'),
     					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
     					'postograduacao' => $item['postograduacao'],
+    					'subunidade' => $item['subunidade'],
+    					'lotacao' => $item['lotacao'],
     					'idade' => $idade->y . " anos"
     				);
     					
@@ -508,6 +548,8 @@ class PolicialController extends AbstractController
     					'dianascimento' => $item['datanascimento']->format('d'),
     					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
     					'postograduacao' => $item['postograduacao'],
+    					'subunidade' => $item['subunidade'],
+    					'lotacao' => $item['lotacao'],
     					'idade' => $idade->y . " anos"
     				);
     			
@@ -523,6 +565,8 @@ class PolicialController extends AbstractController
     					'dianascimento' => $item['datanascimento']->format('d'),
     					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
     					'postograduacao' => $item['postograduacao'],
+    					'subunidade' => $item['subunidade'],
+    					'lotacao' => $item['lotacao'],
     					'idade' => $idade->y . " anos"
     				);
     					

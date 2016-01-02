@@ -700,7 +700,7 @@ class Policial extends Form
 		
 		//pol_BienalValidade
 		$bienalvalidade = new Date('bienalvalidade');
-		$bienalvalidade->setLabel('Validade Bienal')
+		$bienalvalidade->setLabel('Bienal')
 		->setAttributes(array(
 				'id' => 'bienalvalidade',
 				'class' => 'form-control',
@@ -709,7 +709,7 @@ class Policial extends Form
 		
 		//pol_TAFValidade
 		$tafvalidade = new Date('tafvalidade');
-		$tafvalidade->setLabel('Validade TAF')
+		$tafvalidade->setLabel('TAF')
 		->setAttributes(array(
 				'id' => 'tafvalidade',
 				'class' => 'form-control',

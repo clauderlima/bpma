@@ -22,7 +22,7 @@ class RequerimentoAbono extends Requerimento
 		$inicioAbono = new \DateTime($inicio);
 		
 		$fimAbono = new \DateTime($inicio);
-		$fimAbono->add(new \DateInterval("P" . $qtdDias . "D"));
+		$fimAbono->add(new \DateInterval("P" . ($qtdDias - 1) . "D"));
 		
 		$this->inicio = $inicioAbono;
 		
