@@ -10,7 +10,7 @@
     	<table class="table">
     		<thead>
     			<tr>
-    				<th>Prot</th>
+    				<th>Nº</th>
     				<th>Documento</th>
     				<th>Data</th>
     				<th>Origem</th>
@@ -19,12 +19,11 @@
     				<th>Seção Atual</th>
     				<th>Desde</th>
     				<th>Status</th>
-    				<th>Opções</th>
     			</tr>
     		</thead>
     		<tbody>
     		<?php foreach ($dados as $item):?>
-    		<?php if ($item['status'] != "Arquivado"):?>
+    		<?php if ($item['status'] == "Arquivado"):?>
     			<tr>
     				<th><?php echo $item['protocolo']?></th>
     				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
@@ -51,7 +50,6 @@
     							$tramite = "Recebido";
     						}
     						echo $tramite ?></td>
-    				<td><a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward"></i></a></td>
     			</tr>
     			<?php endif;?>
     			<?php endforeach;?>

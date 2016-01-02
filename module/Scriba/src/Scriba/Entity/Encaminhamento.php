@@ -8,8 +8,9 @@ use Zend\Stdlib\Hydrator\ClassMethods;
 /**
  * Encaminhamento
  *
- * @ORM\Table(name="encaminhamento", indexes={@ORM\Index(name="fk_encaminhamento_policial1_idx", columns={"pol_Codigo"}), @ORM\Index(name="fk_encaminhamento_documento1_idx", columns={"doc_Codigo"})})
+ * @ORM\Table(name="encaminhamento", indexes={@ORM\Index(name="fk_encaminhamento_policial1_idx", columns={"pol_Codigo"}), @ORM\Index(name="fk_encaminhamento_documento1_idx", columns={"doc_Codigo"}), @ORM\Index(name="fk_encaminhamento_encaminhamento1_idx", columns={"enc_Encaminhamento"})})
  * @ORM\Entity
+ * 
  */
 class Encaminhamento
 {
@@ -35,18 +36,18 @@ class Encaminhamento
      * @ORM\Column(name="enc_Data", type="datetime", nullable=false)
      */
     private $data;
-
+    
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="enc_Encaminhamento", type="integer", nullable=true)
+     * @ORM\Column(name="enc_Status", type="string", length=45, nullable=true)
      */
-    private $encaminhamento;
+    private $status;
 
     /**
      * @var \Documento
      *
-     * @ORM\OneToOne(targetEntity="Documento")
+     * @ORM\ManyToOne(targetEntity="Documento")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="doc_Codigo", referencedColumnName="doc_Codigo")
      * })
@@ -54,12 +55,23 @@ class Encaminhamento
     private $doccodigo;
 
     /**
+     * @var \Encaminhamento
+     *
+     * @ORM\ManyToOne(targetEntity="Encaminhamento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="enc_Encaminhamento", referencedColumnName="enc_Codigo")
+     * })
+     */
+    private $encaminhamento;
+
+    /**
      * @var \Policial
      *
-     * @ORM\OneToOne(targetEntity="\Census\Entity\Policial")
+     * @ORM\ManyToOne(targetEntity="Census\Entity\Policial")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="pol_Codigo", referencedColumnName="pol_Codigo")
      * })
+     * 
      */
     private $polcodigo;
 
@@ -98,16 +110,7 @@ class Encaminhamento
     }
 
     public function setData($data){
-        $this->data = new \Datetime($data);
-        return $this;
-    }
-
-    public function getEncaminhamento(){
-        return $this->encaminhamento;
-    }
-
-    public function setEncaminhamento($encaminhamento){
-        $this->encaminhamento = $encaminhamento;
+        $this->data = new \DateTime($data);
         return $this;
     }
 
@@ -120,6 +123,15 @@ class Encaminhamento
         return $this;
     }
 
+    public function getEncaminhamento(){
+        return $this->encaminhamento;
+    }
+
+    public function setEncaminhamento($encaminhamento){
+        $this->encaminhamento = $encaminhamento;
+        return $this;
+    }
+
     public function getPolcodigo(){
         return $this->polcodigo;
     }
@@ -127,6 +139,15 @@ class Encaminhamento
     public function setPolcodigo($polcodigo){
         $this->polcodigo = $polcodigo;
         return $this;
+    }
+    
+    public function getStatus(){
+    	return $this->status;
+    }
+    
+    public function setStatus($status){
+    	$this->status = $status;
+    	return $this;
     }
 
 }

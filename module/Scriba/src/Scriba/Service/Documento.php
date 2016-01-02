@@ -12,7 +12,6 @@ class Documento extends AbstractService
 		$service = $this->getServiceLocator()->get('scriba-service-protocolo');
 		$numero = $service->numerar('Scriba\Entity\Protocolo', $data['tipo'], $data['numero']);
 		$data['procodigo'] = $numero;
-		$data['status'] = "Recebido";
 
 		return parent::insert($data, $entity);
 	}

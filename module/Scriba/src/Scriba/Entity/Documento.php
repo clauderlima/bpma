@@ -60,13 +60,6 @@ class Documento
     /**
      * @var string
      *
-     * @ORM\Column(name="doc_Status", type="string", length=45, nullable=true)
-     */
-    private $status;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="doc_Origem", type="string", length=120, nullable=true)
      */
     private $origem;
@@ -161,15 +154,6 @@ class Documento
 
     public function setRecebimento($recebimento){
         $this->recebimento = new \Datetime($recebimento);
-        return $this;
-    }
-
-    public function getStatus(){
-        return $this->status;
-    }
-
-    public function setStatus($status){
-        $this->status = $status;
         return $this;
     }
 

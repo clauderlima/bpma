@@ -1,0 +1,79 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+        <div class="panel-title">
+           <?php if ($dados)echo "Datalhamento do Documento"; else echo "Documento não tramitado ainda" ?> <?php if ($dados) echo $dados[0]->getDoccodigo()->getTipo() . " " . $dados[0]->getDoccodigo()->getNumero()?>
+        </div>
+    </div>
+    <div class="panel-body">
+    	<table class="table">
+    		<thead>
+    			<tr>
+    				<th>Nº</th>
+    				<th>Seção</th>
+    				<th>Recebido por</th>
+    				<th>Recebido em</th>
+    				<th>Tempo na Seção</th>
+    				<th>Status</th>
+    			</tr>
+    		</thead>
+    		<tbody>
+    		<?php 
+    			if ($dados):
+    			$dados[] = array('data' => 'fim'); 
+    			
+    			$counter = 1;
+    			$keys = array_keys($dados);
+    		?>
+    		<?php for ($item = 0; $item < count($keys); $item++):?>
+    			<tr>
+    				<th><?php echo $counter++?></th>
+    				<td><?php echo $dados[$keys[$item]]->getSecao()?></td>
+    				<td><?php echo $dados[$keys[$item]]->getPolcodigo()->getPostoGraduacao() . " " . $dados[$keys[$item]]->getPolcodigo()->getNomeGuerra()?></td>
+    				<td><?php echo $dados[$keys[$item]]->getData()->format('d/m/Y')?></td>
+    				<td><?php 
+    					if ($dados[$keys[$item+1]] <> 'fim')
+    					{
+    						if (is_object($dados[$keys[$item+1]]))
+    						{
+    							$ultima = $dados[$keys[$item+1]]->getData();
+    						} else 
+    						{
+    							$ultima = new \DateTime();
+    							echo $dados[$keys[$item]]->getData()->diff($ultima)->days;
+    							
+    							if ($dados[$keys[$item]]->getStatus() == "Arquivado")
+    							{
+    								echo "<td>Arquivado</td></tr>";
+    							} else
+    							{
+    								echo "<td>Local Atual</td></tr>";
+    							}
+    							break;
+    						}
+    					}
+    					
+    					echo $dados[$keys[$item]]->getData()->diff($ultima)->days
+    					
+    					?></td>
+    				<td><?php echo $dados[$keys[$item]]->getStatus()?></td>
+    			</tr>
+    			<?php 
+    			endfor;
+    			endif;?>
+    		</tbody>
+    	</table>
+    </div>
+    <div class="panel-footer">
+    	<div class="row">
+    		<div class="col-xs-6 text-center">
+    			<?php if ($dados[$keys[$item]]->getStatus() != "Arquivado"):?>
+    				<a href="/documento/arquivar/<?php if ($dados) echo $dados[0]->getDoccodigo()->getCodigo()?>"><i class="btn btn-warning glyphicon glyphicon-inbox"> Arquivar</i></a>
+    		</div>
+    		<div class="col-xs-6 text-center">
+    				<a href="/documento/tramitar/<?php if ($dados) echo $dados[0]->getDoccodigo()->getCodigo()?>"><i class="btn btn-success glyphicon glyphicon-step-forward"> Tramitar</i></a>
+    			<?php endif;?>
+    		</div>
+    	</div>
+    </div>
+</div>
+
