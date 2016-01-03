@@ -10,8 +10,10 @@ return array(
         'Census',
     	'Hereditas',
     	'Scriba',
+    	'User',
     	'DoctrineModule',
-    	'DoctrineORMModule'
+    	'DoctrineORMModule',
+    	'EdpModuleLayouts'
     ),
     'module_listener_options' => array(
         'module_paths' => array(

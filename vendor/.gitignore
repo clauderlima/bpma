@@ -1,6 +1,8 @@
 bin
 composer
 doctrine
+evandotpro
+myclabs
 phpdocumentor
 phpspec
 phpunit

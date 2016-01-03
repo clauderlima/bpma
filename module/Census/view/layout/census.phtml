@@ -1,86 +1,266 @@
 <?php echo $this->doctype(); ?>
- 
-<html lang="pt-BR">
+
+<html lang="en">
     <head>
         <meta charset="utf-8">
- 
-        <!-- Title Head -->
-        <?php
-        $NAME_APPLICATION = 'Cadastro de Policial';
-        echo $this
-                ->headTitle($NAME_APPLICATION)
-                ->setSeparator(' - ')
-                ->setAutoEscape(false)
-        ;
+        
+        <?php echo $this->headTitle('SGP '. $this->translate('Gestão de Unidade Policial'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
         ?>
- 
-        <!-- Meta Head -->
-        <?php
-        echo $this
-                ->headMeta()
-                ->appendName('viewport', 'width=device-width, initial-scale=1.0')
-                ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
-        ;
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->prependStylesheet($this->basePath('css/style.css'))
+                        ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+                        //->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+                        ->prependStylesheet($this->basePath() . '/assets/css/bootstrap.min.css')
+                        ->prependStylesheet($this->basePath() . '/assets/css/animate.min.css')
+                        ->prependStylesheet($this->basePath() . '/assets/css/light-bootstrap-dashboard.css')
+                        ->prependStylesheet($this->basePath() . '/assets/css/pe-icon-7-stroke.css')
+                        ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
         ?>
- 
-        <!-- Styles -->
-        <?php
-        echo $this
-                ->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-                ->prependStylesheet($this->basePath() . '/css/style.css')
-                ->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css')
-                ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
-                ->prependStylesheet($this->basePath() . '/assets/css/light-bootstrap-dashboard.css')
-        ;
-        ?>
-    </head>
-    <body>
-        <div class="container">
-            <div class="header">
-                <ul class="nav nav-pills pull-right">
-        			<?php
-        				$url_home = $this->url('home');
-        				$url_sobre = $this->url('sobre');
-        			?>
-        			<li <?php echo $this->menuAtivo($url_home); ?>>
-            			<a href="<?php echo $url_home; ?>">Início</a>
-        			</li>
-        			<li <?php echo $this->menuAtivo($url_sobre); ?>>
-            			<a href="<?php echo $url_sobre; ?>">Sobre</a>
-        			</li>
-    			</ul>
-                <h3 class="text-muted"><?php echo $NAME_APPLICATION; ?></h3>
-            </div>
-            
-            <?php echo $this->message(); ?>
-            
-            <div class="row marketing">
-                <?php echo $this->content; ?>
-            </div>
- 
-            <div class="footer">
-                <p class="muted credit pull-left">Polícia Militar do Distrito Federal <a href="">© 2015</a></p>
-                <p class="muted credit pull-right">Desenvolvido por <a href="mailto:clauderlima@gmail.com">Maj Clauder</a>.</p>
-            </div>
-        </div>
  
         <!-- Scripts -->
         <?php
         echo $this
                 ->headScript()
-                ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-                ->prependFile($this->basePath() . '/js/html5shiv.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-                ->prependFile($this->basepath() . '/js/jquery.maskedinput.min.js')
-                ->prependFile($this->basePath() . '/js/scripts.js')
-                ->prependFile($this->basePath() . '/js/bootstrap-typeahead.min.js')
-                ->prependFile($this->basePath() . '/js/bootstrap.min.js')
-                ->prependFile($this->basePath() . '/js/jquery.min.js')
-                ->prependFile($this->basePath() . '/assets/js/light-bootstrap-dashboard.js')
+                ->appendFile($this->basePath('assets/js/jquery.min.js'))
+                ->appendFile($this->basePath('assets/js/jquery-ui.min.js'))
+                ->appendFile($this->basePath('assets/js/bootstrap.min.js'))
+                // Forms Validations Plugin
+                ->appendFile($this->basePath('assets/js/jquery.validate.min.js'))
+                // Plugin for Date Time Picker and Full Calendar Plugin
+                ->appendFile($this->basePath('assets/js/moment.min.js'))
+                // Date Time Picker Plugin is included in this js file
+                ->appendFile($this->basePath('assets/js/bootstrap-datetimepicker.js'))
+                // Select Picker Plugin
+                ->appendFile($this->basePath('assets/js/bootstrap-selectpicker.js'))
+                // Checkbox, Radio, Switch and Tags Input Plugins
+                ->appendFile($this->basePath('assets/js/bootstrap-checkbox-radio-switch-tags.js'))
+                //
+                ->appendFile($this->basePath('assets/js/jquery-ui.min.js'))
+                // Charts Plugin
+                ->appendFile($this->basePath('assets/js/chartist.min.js'))
+                // Notifications Plugin
+                ->appendFile($this->basePath('assets/js/bootstrap-notify.js'))
+                // Sweet Alert 2 plugin
+                ->appendFile($this->basePath('assets/js/sweetalert2.js'))
+                // Vector Map plugin
+                ->appendFile($this->basePath('assets/js/jquery-jvectormap.js'))
+                // Wizard Plugin
+                ->appendFile($this->basePath('assets/js/jquery.bootstrap.wizard.min.js'))
+                // Datatable Plugin
+                ->appendFile($this->basePath('assets/js/bootstrap-table.js'))
+                // Full Calendar Plugin
+                ->appendFile($this->basePath('assets/js/fullcalendar.min.js'))
+                // Light Bootstrap Dashboard Core javascript and methods
+                ->appendFile($this->basePath('assets/js/light-bootstrap-dashboard.js'))
+                // Sharrre Library
+                ->appendFile($this->basePath('assets/js/jquery.sharrre.js'))
+                ->appendFile($this->basePath('js/jquery.maskedinput.min.js'))
+                ->appendFile($this->basePath('js/scripts.js'))
         ;
         
                 
  
         echo $this->inlineScript();
         ?>
-    </body>
+    </head>
+    
+    <body>
+    	<div class="wrapper">
+    		<div class="sidebar" data-color="blue" data-image="<?php echo $this->basePath('assets/img/loboGuara.png') ?>">
+    			<div class="sidebar-wrapper">
+    				<div class="logo">
+    					<a href="http://10.201.4.21" class="simple-text">SGP - BPMA</a>
+    				</div>
+    					<ul class="nav">
+    						<li>                   
+                    			<a data-toggle="collapse" href="#componentsCensus">                        
+                        			<i class="pe-7s-users"></i> 
+                        			<p>Census
+                           				<b class="caret"></b>
+                        			</p>
+                    			</a>                
+	                    		<div class="collapse" id="componentsCensus">
+	                        		<ul class="nav">
+		                            	<li><a href="/mapa">Mapa do Efetivo</a></li>
+		                            	<li><a href="/ferias">Férias</a></li>
+		                            	<li><a href="/alteracao">Alterações</a></li>
+	                        		</ul>
+	                    		</div>
+                			</li>
+                			
+                			<li>                   
+                    			<a data-toggle="collapse" href="#componentsFormacao">                        
+                        			<i class="pe-7s-study"></i> 
+                        			<p>Formação
+                           				<b class="caret"></b>
+                        			</p>
+                    			</a>                
+	                    		<div class="collapse" id="componentsFormacao">
+	                        		<ul class="nav">
+		                            	<li><a href="/formacao">Curso Civil</a></li>
+		                            	<li><a href="/curso">Curso Militar</a></li>
+	                        		</ul>
+	                    		</div>
+                			</li>
+                			
+                			<li>                   
+                    			<a data-toggle="collapse" href="#componentsSaude">                        
+                        			<i class="glyphicon glyphicon-heart-empty"></i> 
+                        			<p>Saúde
+                           				<b class="caret"></b>
+                        			</p>
+                    			</a>                
+	                    		<div class="collapse" id="componentsSaude">
+	                        		<ul class="nav">
+		                            	<li><a href="/restricao">Restrições Médicas</a></li>
+		                            	<li><a href="/dispensamedica">Dispensas Médicas</a></li>
+	                        		</ul>
+	                    		</div>
+                			</li>
+                			
+                			<li>                   
+                    			<a data-toggle="collapse" href="#componentsMaterial">                        
+                        			<i class="pe-7s-albums"></i> 
+                        			<p>Patrimonio
+                           				<b class="caret"></b>
+                        			</p>
+                    			</a>                
+	                    		<div class="collapse" id="componentsMaterial">
+	                        		<ul class="nav">
+		                            	<li><a href="/arma">Arma</a></li>
+		                            	<li><a href="/ctgrafi">CTGRAFI</a></li>
+	                        		</ul>
+	                    		</div>
+                			</li>
+                			
+                			<li>                   
+                    			<a data-toggle="collapse" href="#componentsProtocolo">                        
+                        			<i class="pe-7s-note2"></i> 
+                        			<p>Protocolo
+                           				<b class="caret"></b>
+                        			</p>
+                    			</a>                
+	                    		<div class="collapse" id="componentsProtocolo">
+	                        		<ul class="nav">
+		                            	<li><a href="/documento">Tramitação de Documentos</a></li>
+		                            	<li><a href="/documento/listararquivados">Documentos Arquivados</a></li>
+	                        		</ul>
+	                    		</div>
+                			</li>
+    					</ul>
+    				</div>
+    			</div>
+ 			<div class="main-panel">
+ 				<nav class="navbar navbar-default navbar-fixed">
+ 					<div class="container-fluid">
+ 						<div class="navbar-header">
+ 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#">
+ 								<span class="sr-only">Toggle navigation</span>
+ 								<span class="icon-bar"></span>
+                        		<span class="icon-bar"></span>
+                        		<span class="icon-bar"></span>
+ 							</button>
+ 							<a class="navbar-brand" href="#">Seção Administrativa</a>
+ 						</div>
+ 						<div class="collapse navbar-collapse">
+ 							<ul class="nav navbar-nav navbar-left">
+	                       		<li>
+	                            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	                                	<i class="fa fa-dashboard"></i>
+	                            	</a>
+	                        	</li>
+	                        	<li class="dropdown">
+	                              	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	                                    Informações do Efetivo
+	                                    <b class="caret"></b>
+	                              	</a>
+	                              	<ul class="dropdown-menu">
+		                                <li><a href="/census/aniversariantes">Aniversariantes</a></li>
+		                                <li><a href="/census/temposervico">Tempo de Servico</a></li>
+		                                <li><a href="/census/bienal">Bienal</a></li>
+	                              	</ul>
+	                        	</li>
+		                        <li>
+		                           <a href="">
+		                                <i class="fa fa-search"></i>
+		                            </a>
+		                        </li> 
+                    		</ul>
+                    
+		                    <ul class="nav navbar-nav navbar-right">
+		                        <li>
+		                           <a href="/census">
+		                               Consulta ao Efetivo
+		                            </a>
+		                        </li>
+		                        <li class="dropdown">
+		                         	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		                            	Mapa de Efetivo
+		                                	<b class="caret"></b>
+		                         	</a>
+		            				<ul class="dropdown-menu">
+				                    	<li><a href="/mapa">Geral</a></li>
+				                    	<li><a href="/mapa/batalhao">Batalhão</a></li>
+				                        <li class="divider"></li>
+				                        <li><a href="/mapa/goa">GOA</a></li>
+				                        <li class="divider"></li>
+				                        <li><a href="/mapa">GPTur</a></li>
+				                        <li class="divider"></li>
+				                        <li><a href="/mapa">Cia Rural Sul</a></li>
+				                        <li><a href="/mapa">Cia Rural Leste</a></li>
+				                        <li><a href="/mapa">Cia Rural Oeste</a></li>
+		                                
+		                 			</ul>
+	                        	</li>
+	                        	<li>
+	                            	<a href="#">
+	                                	<!--  Sair -->
+	                            	</a>
+	                        	</li> 
+	                    	</ul>
+ 						</div>
+ 					</div>
+ 				</nav>
+ 				<div class="content">
+ 					<div class="container-fluid">
+ 						<?php echo $this->content; ?>
+ 					</div>
+ 				</div>
+ 				<footer class="footer">
+            		<div class="container-fluid">
+                		<nav class="pull-left">
+                    		<ul>
+                        		<li>
+                            		<a href="#">
+                                
+                            		</a>
+                        		</li>
+                        		<li>
+                            		<a href="#">
+                                
+                           			</a>
+                        		</li>
+                        		<li>
+                            		<a href="#">
+                                
+                            		</a>
+                        		</li>
+                        		<li>
+                            		<a href="#">
+                               			GurugoNET
+                            		</a>
+                        		</li>
+                    		</ul>
+                		</nav>
+            		</div>
+        		</footer>
+ 			</div>
+  		</div>
+	</body>        
 </html>
