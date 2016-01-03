@@ -11,6 +11,7 @@ return array(
     	'Hereditas',
     	'Scriba',
     	'User',
+    	'Core',
     	'DoctrineModule',
     	'DoctrineORMModule',
     	'EdpModuleLayouts'

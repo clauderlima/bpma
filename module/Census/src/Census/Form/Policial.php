@@ -14,16 +14,9 @@ class Policial extends Form
 	{
 		parent::__construct('formPolicial');
 		
+		$collectionForm = new \Core\Collection\DadosForm;
 		
-/* 		//pol_Codigo
-		$codigo = new Text('codigo');
-		$codigo->setLabel('')
-		->setAttributes(array(
-				'id' => 'codigo',
-				'class' => 'form-control',
-				'placeholder' => ''
-		));
-		$this->add($codigo); */
+		$arrEstados = $collectionForm->getEstados();
 		
 		//pol_NomeCompleto
 		$nomecompleto = new Text('nomecompleto');
@@ -82,36 +75,7 @@ class Policial extends Form
 				'class' => 'form-control',
 				'placeholder' => ''
 			))
-			->setValueOptions(array(
-					""	=> "Selecione ...", 
-					"AC"=>"Acre", 
-					"AL"=>"Alagoas", 
-					"AM"=>"Amazonas", 
-					"AP"=>"Amapá",
-					"BA"=>"Bahia",
-					"CE"=>"Ceará",
-					"DF"=>"Distrito Federal",
-					"ES"=>"Espírito Santo",
-					"GO"=>"Goiás",
-					"MA"=>"Maranhão",
-					"MT"=>"Mato Grosso",
-					"MS"=>"Mato Grosso do Sul",
-					"MG"=>"Minas Gerais",
-					"PA"=>"Pará",
-					"PB"=>"Paraíba",
-					"PR"=>"Paraná",
-					"PE"=>"Pernambuco",
-					"PI"=>"Piauí",
-					"RJ"=>"Rio de Janeiro",
-					"RN"=>"Rio Grande do Norte",
-					"RO"=>"Rondônia",
-					"RS"=>"Rio Grande do Sul",
-					"RR"=>"Roraima",
-					"SC"=>"Santa Catarina",
-					"SE"=>"Sergipe",
-					"SP"=>"São Paulo",
-					"TO"=>"Tocantins"
-			));
+			->setValueOptions($arrEstados);
 		$this->add($naturalidadeuf);
 		
 		//pol_DataNascimento
