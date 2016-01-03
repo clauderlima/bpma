@@ -1,0 +1,36 @@
+<div class="panel panel-primary">
+	<?php echo $this->form()->openTag($form); ?>
+	<div class="panel-heading">
+        <div class="panel-title">
+            Cadastro de Nova Arma
+        </div>
+    </div>
+    <div class="panel-body">
+    	<div class="row">
+    		<div class="col-xs-4">
+    			<?php echo $this->formRow($form->get('especie')) ?>
+    		</div>
+    		<div class="col-xs-4">
+    			<?php echo $this->formRow($form->get('marca')) ?>
+    		</div>
+    		<div class="col-xs-4">
+    			<?php echo $this->formRow($form->get('modelo')) ?>
+    		</div>
+    	</div>
+    	<div class="row">
+    		<div class="col-xs-4">
+    			<?php echo $this->formRow($form->get('calibre')) ?>
+    		</div>
+    		<div class="col-xs-4">
+    			<?php echo $this->formRow($form->get('tombamento')) ?>
+    		</div>
+    		<div class="col-xs-4">
+    			<?php echo $this->formRow($form->get('numeroserie')) ?>
+    		</div>
+    	</div>
+    </div>
+    <div class="panel-footer">
+    <?php echo $this->formSubmit($form->get('submit')) ?>
+    </div>
+    <?php echo $this->form()->closeTag($form); ?> 
+</div>
