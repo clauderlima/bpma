@@ -1,0 +1,98 @@
+<?php echo $this->doctype(); ?>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        
+        <?php echo $this->headTitle('SGP '. $this->translate('Gestão de Unidade Policial'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->appendStylesheet($this->basePath('/assets/css/bootstrap.min.css'))
+                        ->appendStylesheet($this->basePath('/assets/css/light-bootstrap-dashboard.css'))
+                        ->appendStylesheet($this->basePath('/assets/css/pe-icon-7-stroke.css'))
+
+        ?>
+ 
+        <!-- Scripts -->
+        <?php
+        echo $this
+                ->headScript()
+                ->appendFile($this->basePath() . '/assets/js/jquery.min.js')
+                ->appendFile($this->basePath() . '/assets/js/jquery-ui.min.js')
+                ->appendFile($this->basePath() . '/assets/js/bootstrap.min.js');
+        
+        echo $this->inlineScript();
+        ?>
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+        <link href="http://fonts.googleapis.com/css?family=Roboto:400,700,300" rel="stylesheet" type="text/css">
+        
+    </head>
+    <body>
+<nav class="navbar">
+    <div class="container">    
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Sistema de Gestão Policial Militar</a>
+        </div>
+        <div class="collapse navbar-collapse">       
+            
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                   <a href="#">
+                        Contato
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+
+    <div class="login-page" data-color="blue" data-image="/assets/img/full-screen-image-1.jpg">   
+        
+    <!--   you can change the color of the filter page using: data-color="blue | azure | green | orange | red | purple" -->
+        <div class="content">
+        <?php echo $this->content; ?>
+        </div>
+    	
+    	<footer class="footer footer-transparent">
+            <div class="container">
+                <nav class="pull-left">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                Seção Administrativa
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                BPMA
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                               PMDF
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <p class="copyright pull-right">
+                    &copy; 2015 <a href="#">GurugoNet</a>,
+						fazendo o que já deveria ter sido feito
+                </p>
+            </div>
+        </footer>
+
+    </div>                             
+       
+
+
+
+	</body>       
+</html>

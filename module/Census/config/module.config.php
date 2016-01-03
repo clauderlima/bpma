@@ -232,14 +232,17 @@ return array(
 		'not_found_template'        => 'error/404',
 		'exception_template'        => 'error/index',
 		'template_map'              => array(
-			'layout/layout'         => __DIR__ . '/../view/layout/layout.phtml',
-			'layout/census'			=> __DIR__ . '/../view/layout/census.phtml',
-			'census/home/index'     => __DIR__ . '/../view/census/home/index.phtml',
 			'error/404'             => __DIR__ . '/../view/error/404.phtml',
 			'error/index'           => __DIR__ . '/../view/error/index.phtml',
 		),
 		'template_path_stack' => array(
 			__DIR__ . '/../view',
 		),
+	),
+	'module_layouts' => array(
+		'Census' => 'layout/census',
+		'Hereditas' => 'layout/census',
+		'Scriba' => 'layout/census',
+		'User' => 'layout/user',
 	),
 );

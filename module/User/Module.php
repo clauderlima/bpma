@@ -1,6 +1,6 @@
 <?php
 
-namespace Hereditas;
+namespace User;
 
 use Census\Model\Policial,
 	Census\Model\PolicialTable;
