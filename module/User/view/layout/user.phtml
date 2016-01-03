@@ -1,39 +1,39 @@
-<?php echo $this->doctype(); ?>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        
-        <?php echo $this->headTitle('SGP '. $this->translate('Gestão de Unidade Policial'))->setSeparator(' - ')->setAutoEscape(false) ?>
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/png" href="../../assets/img/favicon.ico">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-        <?php echo $this->headMeta()
-            ->appendName('viewport', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0')
-            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
-        ?>
+	<title>Sistema de Gestão Policial Militar</title>
 
-        <!-- Le styles -->
+	<!-- Le styles -->
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
                         ->appendStylesheet($this->basePath('/assets/css/bootstrap.min.css'))
                         ->appendStylesheet($this->basePath('/assets/css/light-bootstrap-dashboard.css'))
                         ->appendStylesheet($this->basePath('/assets/css/pe-icon-7-stroke.css'))
 
         ?>
- 
-        <!-- Scripts -->
+      
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+
+	<!-- Scripts -->
         <?php
-        echo $this
-                ->headScript()
+        echo $this->headScript()
                 ->appendFile($this->basePath() . '/assets/js/jquery.min.js')
                 ->appendFile($this->basePath() . '/assets/js/jquery-ui.min.js')
-                ->appendFile($this->basePath() . '/assets/js/bootstrap.min.js');
+                ->appendFile($this->basePath() . '/assets/js/bootstrap.min.js')
+                ->appendFile($this->basePath() . '/assets/js/light-bootstrap-dashboard.js');
         
         echo $this->inlineScript();
         ?>
-        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-        <link href="http://fonts.googleapis.com/css?family=Roboto:400,700,300" rel="stylesheet" type="text/css">
-        
-    </head>
-    <body>
-<nav class="navbar">
+
+</head>
+<body> 
+
+<nav class="navbar navbar-transparent navbar-absolute">
     <div class="container">    
         <div class="navbar-header">
             <a class="navbar-brand" href="#">Sistema de Gestão Policial Militar</a>
@@ -43,7 +43,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                    <a href="#">
-                        Contato
+                        Registro
                     </a>
                 </li>
             </ul>
@@ -52,13 +52,14 @@
 </nav>
 
 
-
-
-    <div class="login-page" data-color="blue" data-image="/assets/img/full-screen-image-1.jpg">   
+<div class="wrapper wrapper-full-page">
+    <div class="full-page login-page" data-color="blue" data-image="../../assets/img/full-screen-image-1.jpg">   
         
     <!--   you can change the color of the filter page using: data-color="blue | azure | green | orange | red | purple" -->
         <div class="content">
-        <?php echo $this->content; ?>
+            <div class="container">
+                <?php echo $this->content; ?>
+            </div>
         </div>
     	
     	<footer class="footer footer-transparent">
@@ -67,7 +68,7 @@
                     <ul>
                         <li>
                             <a href="#">
-                                Seção Administrativa
+                                PMDF
                             </a>
                         </li>
                         <li>
@@ -77,22 +78,34 @@
                         </li>
                         <li>
                             <a href="#">
-                               PMDF
+                                Seção Administrativa
                             </a>
                         </li>
                     </ul>
                 </nav>
                 <p class="copyright pull-right">
-                    &copy; 2015 <a href="#">GurugoNet</a>,
-						fazendo o que já deveria ter sido feito
+                    &copy; 2015 <a href="#">GurugoNET</a>, fazendo o que já deveria ter sido feito
                 </p>
             </div>
         </footer>
 
     </div>                             
        
+</div>
 
-
-
-	</body>       
+</body>
+    
+    
+	
+    <script type="text/javascript">
+        $().ready(function(){
+            lbd.checkFullPageBackgroundImage();
+            
+            setTimeout(function(){
+                // after 1000 ms we add the class animated to the login/register card
+                $('.card').removeClass('card-hidden');
+            }, 700)
+        });
+    </script>
 </html>
+
