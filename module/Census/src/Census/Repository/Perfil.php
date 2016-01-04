@@ -25,8 +25,8 @@ class Perfil extends AbstractRepository
 		$return = array();
 		if (count($roles)) {
 			foreach ($roles as $role) {
-				$roleFilho = $filterString->titleToSlug($role->getNome());
-				$rolePai = $role->getPerfil() ? $filterString->titleToSlug($role->getPerfil()->getNome()) : $filterString->titleToSlug($role->getNome());   
+				$roleFilho = $filterString->tituloToSlug($role->getNome());
+				$rolePai = $role->getPerfilcodigo() ? $filterString->tituloToSlug($role->getPerfilcodigo()->getNome()) : $filterString->tituloToSlug($role->getNome());   
 				$return[$roleFilho] = $rolePai;
 			}
 		}

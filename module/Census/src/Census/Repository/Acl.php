@@ -1,6 +1,6 @@
 <?php
 
-namespace User\Repository;
+namespace Census\Repository;
 
 use Core\Filter\String;
 use Census\Repository\AbstractRepository;
@@ -16,8 +16,8 @@ class Acl extends AbstractRepository
 		if (count($acl)) {
 			foreach ($acl as $item) {
 				$tipoPermissao = $item->getPermissao();
-				$perfilSlug = $filterString->titleToSlug($item->getPerfil()->getNome());
-				$arrPermissoes[$perfilSlug][$tipoPermissao] = $item->getResource()->getNome();
+				$perfilSlug = $filterString->tituloToSlug($item->getPercodigo()->getNome());
+				$arrPermissoes[$perfilSlug][$tipoPermissao] = $item->getReccodigo()->getNome();
 				$arrAcl['acl']['previlege'] = $arrPermissoes;
 			}
 			

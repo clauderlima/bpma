@@ -1,10 +1,10 @@
 <?php
 
-namespace User\Repository;
+namespace Census\Repository;
 
 use Census\Repository\AbstractRepository;
 
-class Resource extends AbstractRepository
+class Recurso extends AbstractRepository
 {
 	public function getResources() 
 	{

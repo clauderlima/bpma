@@ -9,7 +9,7 @@ use Zend\Stdlib\Hydrator\ClassMethods;
  * Recurso
  *
  * @ORM\Table(name="recurso")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Census\Repository\Recurso")
  */
 class Recurso
 {

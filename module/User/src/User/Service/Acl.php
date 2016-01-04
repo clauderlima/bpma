@@ -14,9 +14,9 @@ class Acl extends AbstractService
 		$authService = $this->getServiceLocator()->get('user-service-auth');
 		$role = $authService->getRole();
 		
-		$repositoryPerfil = $this->getEm('User\Entity\Perfil');
-		$repositoryResource = $this->getEm('User\Entity\Recurso');
-		$repositoryAcl = $this->getEm('User\Entity\Acl');
+		$repositoryPerfil = $this->getEm('Census\Entity\Perfil');
+		$repositoryResource = $this->getEm('Census\Entity\Recurso');
+		$repositoryAcl = $this->getEm('Census\Entity\Acl');
 		
 		$config = $repositoryAcl->listaAcl();
 		$config['acl']['roles'] = $repositoryPerfil->getRoles();

@@ -13,11 +13,11 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
- /*        
+        
         $moduleManager = $e->getApplication()->getServiceManager()->get('modulemanager');
         $sharedEvents = $moduleManager->getEventManager()->getSharedManager();
         $sharedEvents->attach('Zend\Mvc\Controller\AbstractActionController', MvcEvent::EVENT_DISPATCH, array($this, 'mvcPreDispatch'), 100);
-     */
+    
     }
 
     public function getConfig()

@@ -9,7 +9,7 @@ use Zend\Stdlib\Hydrator\ClassMethods;
  * Acl
  *
  * @ORM\Table(name="acl", indexes={@ORM\Index(name="fk_acl_perfil1_idx", columns={"per_Codigo"}), @ORM\Index(name="fk_acl_recurso1_idx", columns={"rec_Codigo"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Census\Repository\Acl")
  */
 class Acl
 {
