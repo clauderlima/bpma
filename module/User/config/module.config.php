@@ -6,6 +6,7 @@ return array(
 	'controllers' => array(
 		'invokables' => array(
 			'IndexController' => 'User\Controller\IndexController',
+			'UserController' => 'User\Controller\UserController',
 		),
 	),
 	# definir e gerenciar rotas
@@ -20,7 +21,7 @@ return array(
 						'id'     => '[0-9]+',
 					),
 					'defaults' => array(
-						'controller' => 'IndexController',
+						'controller' => 'UserController',
 						'action'     => 'index',
 					),
 				),
@@ -34,22 +35,42 @@ return array(
 			#'translator' => 'ZendI18nTranslatorTranslatorServiceFactory',
 		),
 		'invokables' => array(
-			//'hereditas-service-arma' => 'Hereditas\Service\Arma',
+			'user-service-usuario' => 'User\Service\Usuario',
+			'user-service-acl' => 'User\Service\Acl',
+			'user-service-auth' => 'User\Service\Auth',
 		)
 	),
 		'doctrine' => array(
-				'driver' => array(
-						__NAMESPACE__ . '_driver' => array(
-								'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-								'cache' => 'array',
-								'paths'	=> array(__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity')
-						),
-						'orm_default' => array(
-								'drivers' => array(
-										__NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
-								),
-						),
+			'driver' => array(
+				__NAMESPACE__ . '_driver' => array(
+					'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+					'cache' => 'array',
+					'paths'	=> array(__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity')
 				),
+				'orm_default' => array(
+					'drivers' => array(
+						__NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+					),
+				),
+			),
+			'authentication' => array(
+				'orm_default' => array(
+					'object_manager' => 'Doctrine\ORM\EntityManager',
+						'identity_class' => 'User\Entity\Usuario',
+						'identity_property' => 'login',
+						'credential_property' => 'senha',
+						'credential_callable' => function(\User\Entity\Usuario $usuario, $senha) {
+							if ($usuario->getStatus() != 'Ativo') {
+								return false;
+							}
+				
+							$bcrypt = new Bcrypt();
+							$bcrypt->setCost('14');
+				
+							return $bcrypt->verify($senha, $usuario->getSenha());
+					}
+				)
+			)
 		),
 	# definir e gerenciar layouts, erros, exceptions, doctype base
 	'view_manager' => array(

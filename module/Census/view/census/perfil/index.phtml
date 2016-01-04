@@ -1,0 +1,47 @@
+<a href="/perfil/adicionar"><button class="btn btn-success btn-fill btn-wd">Novo Perfil</button></a>
+<br>&nbsp;
+<div class="panel panel-primary">
+	<div class="panel-heading">
+        <div class="panel-title">
+            Perfis Disponíveis no Sistema
+        </div>
+    </div>
+    <div class="panel-body">
+    	<table class="table">
+    		<thead>
+    			<tr>
+    				<th>Nº</th>
+    				<th>Pai</th>
+    				<th>Nome</th>
+    				<th>Opções</th>
+    			</tr>
+    		</thead>
+    		<tbody>
+    		<?php $counter = 1;?>
+    		<?php foreach ($dados as $item):?>
+    			<tr>
+    				<td><?php echo $counter++ ?></td>
+    				<td><?php echo $item->getPerfilCodigo() ? $item->getPerfilCodigo()->getNome() : "Principal"?></td>
+    				<td><?php echo $item->getNome()?></td>
+    				<td><a href="/perfil/editar/<?php echo $item->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
+    				<a href="/perfil/permissoes/<?php echo $item->getCodigo()?>"><i style="color: blue;" class="glyphicon glyphicon-list-alt"></i></a>
+    				<a href="/perfil/deletar/<?php echo $item->getCodigo()?>" onClick="deleta()"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a></td>
+    				
+    			</tr>
+    			<?php endforeach;?>
+    		</tbody>
+    	</table>
+    </div>
+    <div class="panel-footer">
+    </div>
+</div>
+
+<script>
+	function deleta(){
+		if(confirm("Tem certeza que deseja excluir este registro?")){
+			return true;
+		} else {
+			return false;
+		}
+}
+</script>

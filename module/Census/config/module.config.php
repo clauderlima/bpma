@@ -17,6 +17,9 @@ return array(
 			'RestricaoController' => 'Census\Controller\RestricaoController',
 			'DispensamedicaController' => 'Census\Controller\DispensamedicaController',
 			'AlteracaoController' => 'Census\Controller\AlteracaoController',
+			'RecursoController' => 'Census\Controller\RecursoController',
+			'PerfilController' => 'Census\Controller\PerfilController',
+			'UsuarioController' => 'Census\Controller\UsuarioController',
 		),
 	),
 		
@@ -184,6 +187,48 @@ return array(
 					),
 				),
 			),
+			'recurso' => array(
+				'type'      => 'Segment',
+				'options'   => array(
+					'route'    => '/recurso[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+						'controller' => 'RecursoController',
+						'action'     => 'index',
+					),
+				),
+			),
+			'perfil' => array(
+				'type'      => 'Segment',
+				'options'   => array(
+					'route'    => '/perfil[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+						'controller' => 'PerfilController',
+						'action'     => 'index',
+					),
+				),
+			),
+			'usuario' => array(
+				'type'      => 'Segment',
+				'options'   => array(
+					'route'    => '/usuario[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+						'controller' => 'UsuarioController',
+						'action'     => 'index',
+					),
+				),
+			),
 		),
 	),
 		
@@ -208,6 +253,9 @@ return array(
 			'census-service-dispensamedica' => 'Census\Service\Dispensamedica',
 			'census-service-alteracao' => 'Census\Service\Alteracao',
 			'census-service-numeracaorequerimento' => 'Census\Service\NumeracaoRequerimento',
+			'census-service-usuario' => 'Census\Service\Usuario',
+			'census-service-perfil' => 'Census\Service\Perfil',
+			'census-service-recurso' => 'Census\Service\Recurso',
 		)
 	),
 		'doctrine' => array(
@@ -244,5 +292,6 @@ return array(
 		'Hereditas' => 'layout/census',
 		'Scriba' => 'layout/census',
 		'User' => 'layout/user',
+		'Admin' => 'layout/admin',
 	),
 );

@@ -21,4 +21,15 @@ class AbstractRepository extends EntityRepository
 		
 		return $arrResult;
 	}
+	
+	public function tituloToSlug($strValor) {
+		$filterString = new String();
+		return $filterString->tituloToSlug($strValor);
+	}
+	
+	public function getToken()
+	{
+		$filterString = new String();
+		return $filterString->getToken();
+	}
 }

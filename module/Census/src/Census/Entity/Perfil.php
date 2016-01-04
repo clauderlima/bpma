@@ -1,6 +1,6 @@
 <?php
 
-namespace User\Entity;
+namespace Census\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Zend\Stdlib\Hydrator\ClassMethods;
@@ -9,7 +9,7 @@ use Zend\Stdlib\Hydrator\ClassMethods;
  * Perfil
  *
  * @ORM\Table(name="perfil")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Census\Repository\Perfil")
  */
 class Perfil
 {
@@ -30,11 +30,21 @@ class Perfil
     private $nome;
 
     /**
-     * @var integer
+     * @var \Perfil
      *
-     * @ORM\Column(name="per_PerfilCodigo", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Perfil", inversedBy="children")
+     * @ORM\JoinColumns({
+     * 	@ORM\JoinColumn(name="per_PerfilCodigo", referencedColumnName="per_Codigo")
+     * })
      */
     private $perfilcodigo;
+    
+    /**
+     * @var \Perfil
+     *
+     * @ORM\OneToMany(targetEntity="Perfil", mappedBy="perfil")
+     */
+    private $children;
 
     public function __construct(array $data) {
     	$hydrator = new ClassMethods();
@@ -72,6 +82,16 @@ class Perfil
 
     public function setPerfilcodigo($perfilcodigo){
         $this->perfilcodigo = $perfilcodigo;
+        return $this;
+    }
+
+
+    public function getChildren(){
+        return $this->children;
+    }
+
+    public function setChildren($children){
+        $this->children = $children;
         return $this;
     }
 

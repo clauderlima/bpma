@@ -2,13 +2,24 @@
 
 namespace User;
 
-use Census\Model\Policial,
-	Census\Model\PolicialTable;
-use Zend\Db\ResultSet\ResultSet,
-	Zend\Db\TableGateway\TableGateway;
+use Zend\Authentication\AuthenticationService;
+use Zend\Mvc\ModuleRouteListener;
+use Zend\Mvc\MvcEvent;
 
 class Module
 {
+    public function onBootstrap(MvcEvent $e)
+    {
+        $eventManager        = $e->getApplication()->getEventManager();
+        $moduleRouteListener = new ModuleRouteListener();
+        $moduleRouteListener->attach($eventManager);
+ /*        
+        $moduleManager = $e->getApplication()->getServiceManager()->get('modulemanager');
+        $sharedEvents = $moduleManager->getEventManager()->getSharedManager();
+        $sharedEvents->attach('Zend\Mvc\Controller\AbstractActionController', MvcEvent::EVENT_DISPATCH, array($this, 'mvcPreDispatch'), 100);
+     */
+    }
+
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
@@ -25,42 +36,43 @@ class Module
         );
     }
     
-    public function getViewHelperConfig()
+    public function mvcPreDispatch($event) 
     {
-    	return array(
-    		# registrar View Helper com injecao de dependecia
-    		'factories' => array(
-    		),
-    		'invokables' => array(
-    			'filter' => 'Census\View\Helper\PolicialFilter'
-    		)
-    	);
+    	$sm = $event->getTarget()->getServiceLocator();
+    	$routeMatch = $event->getRouteMatch();
+    	
+    	$moduleName = $routeMatch->getParam('module');
+    	$controllerName = $routeMatch->getParam('controller');
+    	$actionName = $routeMatch->getParam('action');
+    	
+    	$controllerAction = $controllerName . '.' . $actionName;
+    	
+    	$config = include __DIR__ . '/config/module.config.php';
+    	$authService = $sm->get('user-service-auth');
+    	
+    	
+    	// Verificar a lógica uma vez que se o recurso não é encontrado ele não libera o login
+    	if (!$authService->authorize($moduleName, $controllerName, $actionName) && $controllerAction != "UserController.login") {
+    		$flashMessenger = $event->getTarget()->flashMessenger();
+    		$flashMessenger->addMessage(array('error' => 'Você não tem permissão de acesso a esta área'));
+    		$response = $event->getResponse();
+    		$response->getHeaders()->addHeaderLine('Location', '/user/login');
+    		$response->setStatusCode('302');
+    		
+    		return $response;
+    	}
+    	
+    	return true;
     }
     
-    /**
-     * Register Services
-     */
     public function getServiceConfig()
     {
     	return array(
     		'factories' => array(
-    			'PolicialTableGateway' => function ($sm) {
-    			// obter adapter db atraves do service manager
-    			$adapter = $sm->get('AdapterDb');
-    
-    			// configurar ResultSet com nosso model Contato
-    			$resultSetPrototype = new ResultSet();
-    			$resultSetPrototype->setArrayObjectPrototype(new Policial());
-    			//echo "<pre>"; echo print_r($resultSetPrototype); exit;
-    			// return TableGateway configurado para nosso model Contato
-    			return new TableGateway('policial', $adapter, null, $resultSetPrototype);
-    		
-    			},
-    		'ModelPolicial' => function ($sm) {
-    			// return instacia Model PolicialTable
-    			return new PolicialTable($sm->get('PolicialTableGateway'));
+    			'Zend\Authentication\AuthenticationService' => function ($sm) {
+    				return $sm->get('doctrine.authenticationservice.orm_default');
     			}
-    		),
+    		)
     	);
     }
 }

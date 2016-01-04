@@ -1,6 +1,6 @@
 <?php
 
-namespace User\Entity;
+namespace Census\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Zend\Stdlib\Hydrator\ClassMethods;
@@ -28,13 +28,6 @@ class Acl
      * @ORM\Column(name="acl_permissao", type="string", length=10, nullable=false)
      */
     private $permissao;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="res_Codigo", type="integer", nullable=false)
-     */
-    private $resCodigo;
 
     /**
      * @var \Perfil
@@ -83,15 +76,6 @@ class Acl
 
     public function setPermissao($permissao){
         $this->permissao = $permissao;
-        return $this;
-    }
-
-    public function getResCodigo(){
-        return $this->resCodigo;
-    }
-
-    public function setResCodigo($resCodigo){
-        $this->resCodigo = $resCodigo;
         return $this;
     }
 

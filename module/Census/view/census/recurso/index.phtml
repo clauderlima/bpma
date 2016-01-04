@@ -1,0 +1,44 @@
+<a href="/recurso/adicionar"><button class="btn btn-success btn-fill btn-wd">Novo Recurso</button></a>
+<br>&nbsp;
+<div class="panel panel-primary">
+	<div class="panel-heading">
+        <div class="panel-title">
+            Recursos Disponíveis no Sistema
+        </div>
+    </div>
+    <div class="panel-body">
+    	<table class="table">
+    		<thead>
+    			<tr>
+    				<th>Nº</th>
+    				<th>Nome</th>
+    				<th>Opções</th>
+    			</tr>
+    		</thead>
+    		<tbody>
+    		<?php $counter = 1;?>
+    		<?php foreach ($dados as $item):?>
+    			<tr>
+    				<td><?php echo $counter++ ?></td>
+    				<td><?php echo $item->getNome()?></td>
+    				<td><a href="/recurso/editar/<?php echo $item->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
+    				<a href="/recurso/deletar/<?php echo $item->getCodigo()?>" onClick="deleta()"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a></td>
+    				
+    			</tr>
+    			<?php endforeach;?>
+    		</tbody>
+    	</table>
+    </div>
+    <div class="panel-footer">
+    </div>
+</div>
+
+<script>
+	function deleta(){
+		if(confirm("Tem certeza que deseja excluir este registro?")){
+			return true;
+		} else {
+			return false;
+		}
+}
+</script>

@@ -1,6 +1,6 @@
 <?php
 
-namespace User\Entity;
+namespace Census\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Zend\Stdlib\Hydrator\ClassMethods;
@@ -39,8 +39,7 @@ class Recurso
     	$hydrator = new ClassMethods();
     	return $hydrator->extract($this);
     }
-
-
+    
     public function getCodigo(){
         return $this->codigo;
     }

@@ -1,0 +1,29 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+        <div class="panel-title">
+            Gerenciar permissões do perfil [ <?php echo $perfil->getNome()?> ]
+        </div>
+    </div>
+	<form action="" method="post" name="form1">
+    <div class="panel-body">
+    	<?php if (count($resources)):?>
+		<ul>
+			<?php foreach ($resources as $resource):?>
+			<li style="float: left; width: 360px; list-style: none;">
+				<label>
+					<input type="checkbox" name="reccodigo[]" id="reccodigo_<?php echo $resource->getCodigo()?>" value="<?php echo $resource->getCodigo()?>" 
+					<?php if (in_array($resource->getCodigo(), $arrayResourcesSelecionados)):?> checked="checked" <?php endif?>
+					<?php if (in_array($resource->getCodigo(), $arrayResourcesOutroPerfil)):?> disabled="disabled" <?php endif?>>
+					<span class="label <?php echo isset($arrayPerfilClass[$arrayPerfil[$resource->getCodigo()]]) ? $arrayPerfilClass[$arrayPerfil[$resource->getCodigo()]] : 'label-default'?>"><?php echo $resource->getNome()?></span>
+				</label>
+			</li>
+			<?php endforeach;?>
+		</ul>
+	<?php endif?>
+    </div>
+    <div class="panel-footer">
+		<button class="btn btn-primary">Salvar</button>
+		<a style="float: right;" href="/perfil" class="btn btn-primary">Voltar</a>
+    </div>
+	</form>
+</div>
