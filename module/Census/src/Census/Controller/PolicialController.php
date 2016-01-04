@@ -606,6 +606,25 @@ class PolicialController extends AbstractController
     	));
     }
     
+    
+    public function planodechamadaAction()
+    {
+    	$em = $this->getEm();
+    
+    	// Dados Formação
+    	$policial = $em->createQueryBuilder()
+	    	->select('p.nomeguerra,p.nomecompleto,p.telefonefixo,p.telefonecelular,p.postograduacao,p.enderecocidade,p.enderecouf,p.subunidade')
+	    	->from('Census\Entity\Policial', 'p')
+	    	->where('p.subunidade <> :polcodigo')
+	    	->setParameter('polcodigo', 'TRC')
+	    	->orderBy('p.antiguidade', 'ASC')
+	    	->getQuery()->getResult();
+    
+    	return new ViewModel(array(
+    			'policiais' => $policial,
+    	));
+    }
+    
     /**
      * Metodo privado para obter instacia do Model PolicialTable
      *

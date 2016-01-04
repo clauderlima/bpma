@@ -18,6 +18,8 @@ class DocumentoController extends AbstractController
 			->orderBy('e.recebimento', 'ASC')
 			->getQuery()->getResult();
 		
+		$result = array();
+		
 		foreach ($dados as $key => $item)
 		{
 			$result[$key]['protocolo'] = str_pad($item->getProcodigo()->getNumero(), 3, "0", STR_PAD_LEFT);
@@ -37,7 +39,7 @@ class DocumentoController extends AbstractController
 				->orderBy('e.codigo', 'DESC')
 				->setMaxResults(1)
 				->getQuery()->getResult();
-			
+				
 			if ($encaminhamento)
 			{
 				$result[$key]['secao'] = $encaminhamento[0]->getSecao();
@@ -63,10 +65,10 @@ class DocumentoController extends AbstractController
 		$em = $this->getEm();
 	
 		$dados = $em->createQueryBuilder()
-		->select('e')
-		->from('Scriba\Entity\Documento', 'e')
-		->orderBy('e.recebimento', 'ASC')
-		->getQuery()->getResult();
+			->select('e')
+			->from('Scriba\Entity\Documento', 'e')
+			->orderBy('e.recebimento', 'ASC')
+			->getQuery()->getResult();
 	
 		foreach ($dados as $key => $item)
 		{
@@ -171,7 +173,7 @@ class DocumentoController extends AbstractController
 		
 			if ($form->isValid())
 			{
-				if ($service->insert($data, 'Scriba\Entity\Encaminhamento', $dados['codigo']))
+				if ($service->inserir($data, 'Scriba\Entity\Encaminhamento', $dados['codigo']))
 				{
 					$this->flashMessenger()->addSuccessMessage("Documento encaminhado com sucesso!");
 					return $this->redirect()->toUrl('/documento');

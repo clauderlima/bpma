@@ -542,7 +542,8 @@ class Policial
     }
 
     public function getMatricula(){
-        return $this->mask(preg_replace('/[^0-9]/', '', $this->matricula), '###.###-#');
+        //return $this->mask(preg_replace('/[^0-9]/', '', $this->matricula), '###.###-#');
+    	return $this->matricula;
     }
 
     public function setMatricula($matricula){

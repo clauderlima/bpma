@@ -5,6 +5,7 @@ namespace Census\Form;
 use Zend\Form\Element\Date;
 use Zend\Form\Element\Text;
 use Zend\Form\Element\Submit;
+use Zend\Form\Form;
 
 class Dispensamedica extends Form
 {
@@ -12,8 +13,6 @@ class Dispensamedica extends Form
 	{
 		parent::__construct('formDispensamedica');
 
-		
-		
 		// dis_InicioData
 		$inicio = new Date('inicio');
 		$inicio->setLabel('Data do início')

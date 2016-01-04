@@ -933,15 +933,28 @@ function imprimirxxxx(array $data)
 		$data['nrecodigo'] = "";
 		$data['polcodigo'] = "";
 		
+		$qtdprimeiraparcela = ("P".((int) $data['primeiraparcelaqtddias']-1)."D");
+		$qtdsegundaparcela = ("P".((int) $data['primeiraparcelaqtddias']-1)."D");
+		$qtdterceiraparcela = ("P".((int) $data['primeiraparcelaqtddias']-1)."D");
+		
 		$data['primeiraparcela'] = "- 1ª parcela de " . $data['primeiraparcelaqtddias'] . " dias no período de " . 
 			$data['primeiraparcelainicio']->format('d/m') . " à " . $data['primeiraparcelainicio']
-			->add(new \DateInterval("P".($data['primeiraparcelaqtddias']-1)."D"))->format('d/m/Y') . ";";
-		$data['segundaparcela'] = "- 2ª parcela de " . $data['segundaparcelaqtddias'] . " dias no período de " . 
-			$data['segundaparcelainicio']->format('d/m') . " à " . $data['segundaparcelainicio']
-			->add(new \DateInterval("P".($data['terceiraparcelaqtddias']-1)."D"))->format('d/m/Y') . ";";
-		$data['terceiraparcela'] = "- 3ª parcela de " . $data['terceiraparcelaqtddias'] . " dias no período de " . 
-			$data['terceiraparcelainicio']->format('d/m') . " à " . $data['terceiraparcelainicio']
-			->add(new \DateInterval("P".($data['terceiraparcelaqtddias']-1)."D"))->format('d/m/Y') . ";";
+			->add(new \DateInterval("$qtdprimeiraparcela"))->format('d/m/Y') . ";";
+		
+		if (array_key_exists('segundaparcela', $data))
+		{
+			$data['segundaparcela'] = "- 2ª parcela de " . $data['segundaparcelaqtddias'] . " dias no período de " . 
+				$data['segundaparcelainicio']->format('d/m') . " à " . $data['segundaparcelainicio']
+				->add(new \DateInterval("$qtdsegundaparcela"))->format('d/m/Y') . ";";
+		} else $data['segundaparcela'] = "";
+		
+		if (array_key_exists('terceiraparcela', $data))
+		{
+			$data['terceiraparcela'] = "- 3ª parcela de " . $data['terceiraparcelaqtddias'] . " dias no período de " . 
+				$data['terceiraparcelainicio']->format('d/m') . " à " . $data['terceiraparcelainicio']
+				->add(new \DateInterval("$qtdterceiraparcela"))->format('d/m/Y') . ";";
+		} else $data['terceiraparcela'] = "";
+		
 		
 		if ($data['momentooportuno'])
 			$data['restante'] = " - E o restante dos " . $data['momentooportuno'] . " dias para gozo em momento oporturno.";

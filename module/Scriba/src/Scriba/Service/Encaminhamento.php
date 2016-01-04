@@ -4,7 +4,7 @@ namespace Scriba\Service;
 
 class Encaminhamento extends AbstractService
 {
-	public function insert(array $data, $entity, $documento)
+	public function inserir(array $data, $entity, $documento)
 	{	
 		$em = $this->getEm();
 		

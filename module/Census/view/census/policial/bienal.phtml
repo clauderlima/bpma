@@ -21,9 +21,9 @@
 	<tr>
 		<td><?php echo $counter++?></td>
 		<td><?php echo $item['postograduacao'] . " " . $item['nomeguerra']?></td>
-		<td><?php echo $item['bienalvalidade']->format('d/m/Y')?></td>
-		<td><?php echo $item['bienalvalidade']->add(new DateInterval("P2Y"))->format('d/m/Y')?></td>
-		<td><?php $hoje = new \DateTime(); echo ($item['bienalvalidade']->add(new DateInterval("P2Y")) < $hoje) ? "Vencida" : "ok"?>
+		<td><?php echo $item['bienalvalidade'] ? $item['bienalvalidade']->format('d/m/Y') : ""?></td>
+		<td><?php echo $item['bienalvalidade'] ? $item['bienalvalidade']->add(new DateInterval("P2Y"))->format('d/m/Y') : ""?></td>
+		<td><?php $hoje = new \DateTime(); if ($item['bienalvalidade']) echo ($item['bienalvalidade']->add(new DateInterval("P2Y")) < $hoje) ? "Vencida" : "ok"?>
 	<?php endforeach;?>
 	</tr>
 </table>
