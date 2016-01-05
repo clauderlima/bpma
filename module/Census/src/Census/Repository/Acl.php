@@ -17,8 +17,8 @@ class Acl extends AbstractRepository
 			foreach ($acl as $item) {
 				$tipoPermissao = $item->getPermissao();
 				$perfilSlug = $filterString->tituloToSlug($item->getPercodigo()->getNome());
-				$arrPermissoes[$perfilSlug][$tipoPermissao] = $item->getReccodigo()->getNome();
-				$arrAcl['acl']['previlege'] = $arrPermissoes;
+				$arrPermissoes[$perfilSlug][$tipoPermissao][] = $item->getReccodigo()->getNome();
+				$arrAcl['acl']['privilege'] = $arrPermissoes;
 			}
 			
 			return $arrAcl;

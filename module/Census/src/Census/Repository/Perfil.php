@@ -12,7 +12,7 @@ class Perfil extends AbstractRepository
 		$result = $this->find($id)->toArray();
 		
 		if (isset($result['perfil']))
-			$result['perfil'] = $result['perfil']->getId();
+			$result['perfil'] = $result['perfil']->getCodigo();
 		unset($result['children']);
 		
 		return $result;

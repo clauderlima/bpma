@@ -192,6 +192,9 @@ class PolicialController extends AbstractController
     		'alteracoes' => $alteracoes,
     		'abonorequerimentos' => $abonos,
     		'feriasrequerimentos' => $ferias,
+    		'errorMessages' => $this->flashMessenger()->getErrorMessages(),
+    		'successMessages' => $this->flashMessenger()->getSuccessMessages(),
+    		'flashMessages' => $this->flashMessenger()->getMessages(),
     	));
     }
  

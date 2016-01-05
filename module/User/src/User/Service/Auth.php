@@ -3,12 +3,11 @@
 namespace User\Service;
 
 use Zend\Permissions\Acl\getRole;
-use Zend\Session\Container;
 use Census\Service\AbstractService;
 
 class Auth extends AbstractService
 {
-	public function autenticate($params) 
+	public function authenticate($params) 
 	{
 		if (!isset($params['login']) || !isset($params['senha'])) {
 			throw new \Exception('Não foram passsados o login ou senha');
@@ -17,7 +16,7 @@ class Auth extends AbstractService
 		$login = $params['login'];
 		$senha = $params['senha'];
 		
-		$authService = $this->hasIdentity();
+		$authService = $this->authService();
 		$adapter = $authService->getAdapter();
 		$adapter->setIdentityValue($login);
 		$adapter->setCredentialValue($senha);
@@ -44,14 +43,20 @@ class Auth extends AbstractService
 		
 		$resource = $controllerName . '.' . $actionName;
 		$acl = $this->getServiceLocator()->get('user-service-acl')->build();
+		
 		if ($acl->isAllowed($role, $resource)) {
 			return true;
 		}
 	}
 	
+	public function authService()
+	{
+		return $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+	}
+	
 	public function hasIdentity()
 	{
-		$authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+		$authService = $this->authService();
 		if ($authService->hasIdentity()) {
 			return $authService;
 		}
@@ -60,7 +65,7 @@ class Auth extends AbstractService
 	public function getRole()
 	{
 		if ($this->hasIdentity()) {
-			return $this->UserIdentity()->getPerfil()->getNome();
+			return strtolower($this->UserIdentity()->getPerfil()->getNome());
 		}
 	}
 	

@@ -181,7 +181,8 @@ class RequerimentoAbono extends Requerimento
 		);
 		
 		$service = $this->sm->get('census-service-requerimentoabono');
-		$service->insert($data, 'Census\Entity\RequerimentoAbono');
+		if ($service->insert($data, 'Census\Entity\RequerimentoAbono'))
+			$this->flashMessenger()->addSuccessMessage("Requerimento de abono gerado com sucesso!");
 	}
 
 	function imprimir(array $data)

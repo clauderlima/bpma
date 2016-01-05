@@ -3,6 +3,7 @@
 namespace Census\Controller;
 
 use Zend\View\Model\ViewModel;
+use Zend\Stdlib\Hydrator\ClassMethods;
 class UsuarioController extends AbstractController
 {
 	public function indexAction()
@@ -23,7 +24,11 @@ class UsuarioController extends AbstractController
 		// Instaciando services
 		$service = $this->getServiceLocator()->get('census-service-usuario');
 		$dados = $this->getEm('Census\Entity\Policial')->find($id)->toArray();
-		 
+		
+		$usuario = $this->getEm('Census\Entity\Usuario')->findByPolcodigo($id);
+		
+		if ($usuario) return $this->redirect()->toUrl('/usuario/editar/' . $id);
+		
 		// Instaciando o Form
 		$form = new \Census\Form\Usuario();
 		 
@@ -32,14 +37,14 @@ class UsuarioController extends AbstractController
 			// setando o input filter no orm
 			$data = $request->getPost()->toArray();
 			$form->setData($data);
-			$form->setInputFilter(new \Census\Filter\Formacao());
+			$form->setInputFilter(new \Census\Filter\Usuario());
 			 
 			if ($form->isValid())
 			{
-				if ($serviceCurso->insert($data, 'Census\Entity\Curso'))
+				if ($service->insert($data, 'Census\Entity\Usuario'))
 				{
-					$this->flashMessenger()->addSuccessMessage("Curso cadastrado com sucesso!");
-					return $this->redirect()->toUrl('/curso');
+					$this->flashMessenger()->addSuccessMessage("Usuário cadastrado com sucesso!");
+					return $this->redirect()->toUrl('/census/detalhes/' . $id);
 				}
 			} else {
 				$this->flashMessenger()->addErrorMessage('Erro ao cadastrar curso! <br>Verifique se os campos foram preenchidos corretamente.');
@@ -63,15 +68,18 @@ class UsuarioController extends AbstractController
 		$id = (int) $this->params()->fromRoute('id', 0);
 			
 		// Instaciando services
-		$serviceCurso = $this->getServiceLocator()->get('census-service-curso');
+		$service = $this->getServiceLocator()->get('census-service-usuario');
 			
 		// Instaciando o Form
-		$form = new \Census\Form\Curso();
-		$curso = $this->getEm('Census\Entity\Curso')->find($id)->toArray();
+		$form = new \Census\Form\Usuario();
+		$dados = $this->getEm('Census\Entity\Usuario')->findByPolcodigo($id);
 		
-		$dataPolicial = $this->getEm('Census\Entity\Policial')->find($curso['polcodigo']->getCodigo())->toArray();
+		$hydrate = new ClassMethods();
+		$dados = $hydrate->extract($dados[0]);
 		
-		$form->setData($curso);
+		$dataPolicial = $this->getEm('Census\Entity\Policial')->find($id)->toArray();
+		
+		$form->setData($dados);
 		
 		if ($request->isPost())
 		{
@@ -79,17 +87,17 @@ class UsuarioController extends AbstractController
 			$data = $request->getPost()->toArray();
 			
 			$form->setData($data);
-			$form->setInputFilter(new \Census\Filter\Curso());
+			$form->setInputFilter(new \Census\Filter\Usuario());
 	
 			if ($form->isValid())
 			{
-				if ($serviceCurso->update($data, 'Census\Entity\Curso', $id))
+				if ($service->update($data, 'Census\Entity\Usuario', $dados['codigo']))
 				{
-					$this->flashMessenger()->addSuccessMessage("Curso cadastrado com sucesso!");
-					return $this->redirect()->toUrl('/curso');
+					$this->flashMessenger()->addSuccessMessage("Usuário editado com sucesso!");
+					return $this->redirect()->toUrl('/census/detalhes/' . $id);
 				}
 			} else {
-				$this->flashMessenger()->addErrorMessage('Erro ao cadastrar curso! <br>Verifique se os campos foram preenchidos corretamente.');
+				$this->flashMessenger()->addErrorMessage('Erro ao editar usuário! <br>Verifique se os campos foram preenchidos corretamente.');
 			}
 		}
 			
@@ -98,7 +106,7 @@ class UsuarioController extends AbstractController
 				'policial' => $dataPolicial
 		));
 			
-		$view->setTemplate('census/curso/form.phtml');
+		$view->setTemplate('census/usuario/form.phtml');
 			
 		return $view;
 	}

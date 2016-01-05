@@ -75,7 +75,7 @@
     		<div class="sidebar" data-color="blue" data-image="<?php echo $this->basePath('assets/img/loboGuara.png') ?>">
     			<div class="sidebar-wrapper">
     				<div class="logo">
-    					<a href="http://10.201.4.21" class="simple-text">SGP - BPMA</a>
+    					<h2 class="text-center">SGP - BPMA</h2>
     				</div>
     					<ul class="nav">
     						<li>                   
@@ -166,7 +166,11 @@
                         		<span class="icon-bar"></span>
                         		<span class="icon-bar"></span>
  							</button>
- 							<a class="navbar-brand" href="#">Seção Administrativa</a>
+ 							<a class="navbar-brand" href="#">Seção Administrativa - 
+ 							<?php if ($this->useridentity()):?>
+ 								<?php echo $this->useridentity()->getPolcodigo()->getPostoGraduacao() . " " ;
+ 								echo $this->useridentity()->getPolcodigo()->getNomeGuerra() ?>
+ 							<?php endif;?></a>
  						</div>
  						<div class="collapse navbar-collapse">
  							<ul class="nav navbar-nav navbar-left">

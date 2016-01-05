@@ -7,7 +7,8 @@ class Usuario extends AbstractService
 	public function insert(array $data, $entity)
 	{	
 		$data['polcodigo'] = $this->getEmRef('Census\Entity\Policial', $data['polcodigo']);
-
+		$data['percodigo'] = $this->getEmRef('Census\Entity\Perfil', 1);
+		
 		return parent::insert($data, $entity);
 	}
 	

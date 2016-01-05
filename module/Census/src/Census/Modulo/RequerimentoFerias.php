@@ -132,7 +132,8 @@ class RequerimentoFerias extends Requerimento
 		);
 		
 		$service = $this->sm->get('census-service-requerimentoferias');
-		$service->insert($data, 'Census\Entity\RequerimentoFerias');
+		if ($service->insert($data, 'Census\Entity\RequerimentoFerias'))
+			$this->flashMessenger()->addSuccessMessage("Requerimento de reprogramação de férias gerado com sucesso!");
 		
 		//Verificar o conflito que esta dando com o controle de Férias e a Programação de Férias
 		
@@ -408,7 +409,8 @@ function imprimirxxxx(array $data)
 	
 		
 		$service = $this->sm->get('census-service-requerimentoferias');
-		$service->insert($data, 'Census\Entity\RequerimentoFerias');
+		if ($service->insert($data, 'Census\Entity\RequerimentoFerias'))
+			$this->flashMessenger()->addSuccessMessage("Requerimento de não gozo de férias gerado com sucesso!");
 	
 		//Verificar o conflito que esta dando com o controle de Férias e a Programação de Férias
 	
@@ -822,7 +824,8 @@ function imprimirxxxx(array $data)
 		);
 	
 		$service = $this->sm->get('census-service-requerimentoferias');
-		$service->insert($data, 'Census\Entity\RequerimentoFerias');
+		if ($service->insert($data, 'Census\Entity\RequerimentoFerias'))
+			$this->flashMessenger()->addSuccessMessage("Requerimento de parcelamento de férias gerado com sucesso!");
 	
 		//Verificar o conflito que esta dando com o controle de Férias e a Programação de Férias
 	

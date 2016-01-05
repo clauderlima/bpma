@@ -2,6 +2,8 @@
 
 namespace User;
 
+use Zend\Crypt\Password\Bcrypt;
+
 return array(
 	'controllers' => array(
 		'invokables' => array(
@@ -28,7 +30,11 @@ return array(
 			),
 		),
 	),
-		
+	'view_helpers' => array(
+		'invokables' => array(
+			'useridentity' => 'User\View\Helper\UserIdentity',
+		)
+	),
 	# definir e gerenciar servicos
 	'service_manager' => array(
 		'factories' => array(
@@ -56,10 +62,10 @@ return array(
 			'authentication' => array(
 				'orm_default' => array(
 					'object_manager' => 'Doctrine\ORM\EntityManager',
-						'identity_class' => 'User\Entity\Usuario',
+						'identity_class' => 'Census\Entity\Usuario',
 						'identity_property' => 'login',
 						'credential_property' => 'senha',
-						'credential_callable' => function(\User\Entity\Usuario $usuario, $senha) {
+						'credential_callable' => function(\Census\Entity\Usuario $usuario, $senha) {
 							if ($usuario->getStatus() != 'Ativo') {
 								return false;
 							}

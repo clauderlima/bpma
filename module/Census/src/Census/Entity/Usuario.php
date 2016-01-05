@@ -4,6 +4,7 @@ namespace Census\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Crypt\Password\Bcrypt;
 
 /**
  * Usuario
@@ -105,7 +106,7 @@ class Usuario
     }
 
     public function setSenha($senha){
-        $this->senha = $senha;
+        $this->senha = $this->criptSenha($senha);
         return $this;
     }
 
@@ -144,6 +145,13 @@ class Usuario
         $this->polcodigo = $polcodigo;
         return $this;
     }
-
+    
+    public function criptSenha($senha)
+    {
+    	$bcrypt = new Bcrypt();
+    	$bcrypt->setCost('14');
+    	 
+    	return $bcrypt->create($senha);
+    }
 }
 

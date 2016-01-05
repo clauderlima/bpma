@@ -13,7 +13,6 @@ class Acl extends AbstractService
 	{
 		$authService = $this->getServiceLocator()->get('user-service-auth');
 		$role = $authService->getRole();
-		
 		$repositoryPerfil = $this->getEm('Census\Entity\Perfil');
 		$repositoryResource = $this->getEm('Census\Entity\Recurso');
 		$repositoryAcl = $this->getEm('Census\Entity\Acl');
@@ -27,6 +26,7 @@ class Acl extends AbstractService
 		foreach ($config['acl']['roles'] as $role => $parent) {
 			$acl->addRole(new GenericRole($role), $parent);
 		}
+		
 		foreach ($config['acl']['resources'] as $resouce) {
 			$acl->addResource(new GenericResource($resouce));
 		}
