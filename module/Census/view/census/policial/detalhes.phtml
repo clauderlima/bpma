@@ -131,6 +131,7 @@
 				    <li><a href="/alteracao/adicionar/<?php echo $this->filter($policial)->codigo() ?>">Punição</a></li>
   				</ul>
 			</li>
+			<?php if ($this->useridentity()->getPercodigo()->getCodigo() == 6):?>	
 			<li role="presentation" class="dropdown">
 	        	<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
 	          		Sistema <span class="caret"></span>
@@ -139,6 +140,7 @@
 				    <li><a href="/usuario/adicionar/<?php echo $this->filter($policial)->codigo() ?>">Login</a></li>
   				</ul>
 			</li>
+ 			<?php endif;?>
 	    </ul>
 	  </div>
 	  </div>
@@ -150,7 +152,7 @@
     <?php //echo "<pre>"; echo print_r($this->policial);?>
     <br>
     <strong>Dados Pessoais:</strong>
-    	<table class="table table-bordered">
+    	<table class="table">
     		<tr><td colspan="10"><div class="legenda">Nome Completo:</div><div class="campo"><?php echo $this->filter($policial)->nomeCompleto(); ?></div></td><td colspan="2"><div class="legenda">Quadro:</div><div class="campo"><?php echo $this->filter($policial)->quadro(); ?></div></td></tr>
     		<tr><td colspan="3"><div class="legenda">Matricula:</div><div class="campo"><?php echo $this->filter($policial)->matricula(); ?></div></td><td colspan="4"><div class="legenda">Admissão:</div><div class="campo"><?php echo $this->filter($policial)->dataAdmissao(); ?></div></td><td colspan="2"><div class="legenda">Funcional Validade:</div><div class="campo"><?php echo $this->filter($policial)->identidadeFuncionalValidade(); ?></div></td><td colspan="2"><div class="legenda">Sangue:</div><div class="campo"><?php echo $this->filter($policial)->tipoSangue() ?></div></td><td colspan="2"><div class="legenda">Doador?:</div><div class="campo"><?php echo $this->filter($policial)->doadorSangue() ?></div></td></tr>
     		<tr><td colspan="5"><div class="legenda">CNH:</div><div class="campo"><?php echo $this->filter($policial)->cnhCategoria(); ?></div></td><td><div class="legenda">CNH Validade:</div><div class="campo"><?php echo $this->filter($policial)->cnhValidade(); ?></div></td><td colspan="3"><div class="legenda">Último TAF:</div><div class="campo"><?php echo $this->filter($policial)->tafValidade(); ?></div></td><td colspan="2"><div class="legenda">Última Bienal:</div><div class="campo"><?php echo $this->filter($policial)->bienalValidade(); ?></div></td><td colspan="2"><div class="legenda">Porte de Arma:</div><div class="campo"><?php echo $this->filter($policial)->porteArmaSituacao(); ?></div></td></tr>

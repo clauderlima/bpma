@@ -77,7 +77,7 @@ class AbstractService implements ServiceLocatorAwareInterface
 		$em = $this->getEm();
 		$em->persist($entity);
 		$em->flush();
-	
+		
 		return $entity;
 	}
 	

@@ -298,7 +298,7 @@ class Policial
     /**
      * @var string
      *
-     * @ORM\Column(name="pol_Foto", type="blob", length=65535, nullable=true)
+     * @ORM\Column(name="pol_Foto", type="blob", length=255, nullable=true)
      */
     private $foto;
 

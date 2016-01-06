@@ -67,19 +67,19 @@ $("#preview_image").click(function() {
 										<div class="col-xs-8 " style="margin-top: 10px"><?php echo $this->formRow($form->get('nomecompleto')) ?></div>
 										<div class="col-xs-1"></div>
 										<div class="form-group col-md-3">
-							<div id="divFoto">
-								<label>
-								<img id="preview_image" src="<?php 
-								  	if ($dataEntity['foto'])
-									{
-										echo 'data:' . $dataEntity['fototipo'] . ';base64,' . stream_get_contents($dataEntity['foto']);
-									} 
-									?>" style="position: absolute; width: 100%; height: 100%;" />
-								<?php echo $this->formElement($form->get('foto'))?>
-								</label>
-							</div>
-								<?php echo $this->formElementErrors($form->get('foto'))?>
+						<div id="divFoto">
+							<label>
+							<img id="preview_image" src="<?php 
+							  	if ($dataEntity['foto'])
+								{
+									echo 'data:' . $dataEntity['fototipo'] . ';base64,' . stream_get_contents($dataEntity['foto']);
+								} 
+								?>" style="position: absolute; width: 100%; height: 100%;" />
+							<?php echo $this->formElement($form->get('foto'))?>
+							</label>
 						</div>
+							<?php echo $this->formElementErrors($form->get('foto'))?>
+					</div>
 									</div>
 									<!-- Linha 2 do formulário -->
 									<div class="row" style="margin-bottom: 10px">

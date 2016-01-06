@@ -66,7 +66,10 @@ class PolicialController extends AbstractController
     	if ($request->isPost())
     	{
     		// setando o input filter no orm
-    		$data = $request->getPost()->toArray();
+    		$data = array_merge_recursive(
+    				$request->getPost()->toArray(),
+    				$request->getFiles()->toArray());
+
     		$form->setData($data);
     		$form->setInputFilter(new \Census\Filter\Policial());
     			
@@ -220,10 +223,11 @@ class PolicialController extends AbstractController
     	if ($request->isPost())
     	{
     		// setando o input filter no orm
-    		$data = $request->getPost()->toArray();
+    		$data = array_merge_recursive(
+    				$request->getPost()->toArray(),
+    				$request->getFiles()->toArray());
     			
     		$form->setData($data);
-    	
     			
     		$form->setInputFilter(new \Census\Filter\Policial());
     	

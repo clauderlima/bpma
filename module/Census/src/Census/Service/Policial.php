@@ -40,6 +40,6 @@ class Policial extends AbstractService
 			unset($data['foto']);
 		}
 		
-		parent::update($data, $id);
+		return parent::update($data, $entity, $id);
 	}
 }
