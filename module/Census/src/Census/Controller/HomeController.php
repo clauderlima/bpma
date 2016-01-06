@@ -35,10 +35,20 @@ class HomeController extends AbstractActionController
     /* 	$resultSet = new \Zend\Db\ResultSet\ResultSet; // nao necessita do use devido a sintaxe iniciando em \
     	$resultSet->initialize($resultsSql);
     	print_r($resultSet->toArray()); */
+    	
+    	return new ViewModel(array(
+    			'errorMessages' => $this->flashMessenger()->getErrorMessages(),
+    			'successMessages' => $this->flashMessenger()->getSuccessMessages(),
+    			'flashMessages' => $this->flashMessenger()->getMessages(),
+    	));
     }
     
     public function sobreAction()
     {
-    	return new ViewModel();
+    	return new ViewModel(array(
+    			'errorMessages' => $this->flashMessenger()->getErrorMessages(),
+    			'successMessages' => $this->flashMessenger()->getSuccessMessages(),
+    			'flashMessages' => $this->flashMessenger()->getMessages(),
+    	));
     }
 }

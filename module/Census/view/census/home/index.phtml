@@ -1,3 +1,57 @@
+<?php if(count($successMessages)) : ?>
+	<?php foreach ($successMessages as $msg) : ?>
+	<script type="text/javascript">
+    	$(document).ready(function(){
+        	
+        	$.notify({
+            	icon: 'pe-7s-bell',
+            	message: "<?php echo $msg; ?>"
+            	
+            },{
+                type: 'success',
+                timer: 3000
+            });
+            
+    	});
+	</script> 
+	<?php endforeach; ?>
+<?php endif; ?> 
+<?php if(count($errorMessages)) : ?>
+	<?php foreach ($errorMessages as $msg) : ?>
+	<script type="text/javascript">
+    	$(document).ready(function(){
+        	
+        	$.notify({
+            	icon: 'pe-7s-bell',
+            	message: "<?php echo $msg; ?>"
+            	
+            },{
+                type: 'danger',
+                timer: 3000
+            });
+            
+    	});
+	</script> 
+	<?php endforeach; ?>
+<?php endif; ?> 
+<?php if(count($flashMessages)) : ?>
+	<?php foreach ($flashMessages as $msg) : ?>
+	<script type="text/javascript">
+    	$(document).ready(function(){
+        	
+        	$.notify({
+            	icon: 'pe-7s-bell',
+            	message: "<?php echo $msg; ?>"
+            	
+            },{
+                type: 'warning',
+                timer: 3000
+            });
+            
+    	});
+	</script> 
+	<?php endforeach; ?>
+<?php endif; ?> 
 <div class="jumbotron">
     <h2><?php echo sprintf($this->translate('Sistema de Gestão para Unidades Operacionais'), '<span class="zf-green">', '</span>') ?></h2>
 </div>

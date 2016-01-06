@@ -1,0 +1,24 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<div class="panel-title">
+            <h3 class="panel-title"><?php echo $usuario['polcodigo']->getPostograduacao() . " " . $usuario['polcodigo']->getNomeguerra() ?> - Gerenciar Perfil do Sistema</h3>
+        </div>
+    </div>
+    <div class="panel-body">
+    <?php echo $this->form()->openTag($form); ?>
+    	<div class="row">  		
+    		<div class="col-xs-3">
+    			<?php echo $this->formRow($form->get('status')) ?>
+    		</div>
+    		<div class="col-xs-3">
+    			<?php echo $this->formRow($form->get('percodigo')) ?>
+    		</div>
+    		Criar um novo formulário ou setar direto
+    		<input type="hidden" id="polcodigo" name="polcodigo" value="<?php echo $this->policial['codigo']?>">
+    	</div>
+    </div>
+    <div class="panel-footer">
+    <?php echo $this->formSubmit($form->get('submit')) ?>
+    </div>
+    <?php echo $this->form()->closeTag($form); ?> 
+</div>

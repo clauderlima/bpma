@@ -38,4 +38,12 @@ class UserController extends AbstractController
 			'form' => $form
 		));
 	}
+	
+	public function logoutAction()
+	{
+		$serviceAuth = $this->getServiceLocator()->get('user-service-auth');
+		$serviceAuth->logout();
+	
+		return $this->redirect()->toRoute('home');
+	}
 }

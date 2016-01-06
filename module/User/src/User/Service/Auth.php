@@ -65,7 +65,7 @@ class Auth extends AbstractService
 	public function getRole()
 	{
 		if ($this->hasIdentity()) {
-			return strtolower($this->UserIdentity()->getPerfil()->getNome());
+			return strtolower($this->UserIdentity()->getPercodigo()->getNome());
 		}
 	}
 	
@@ -75,5 +75,12 @@ class Auth extends AbstractService
 		if ($authService) {
 			return $authService->getIdentity();
 		}
+	}
+	
+	public function logout()
+	{
+		$serviceAuth = $this->authService();
+	
+		return $serviceAuth->clearIdentity() ?: false;
 	}
 }
