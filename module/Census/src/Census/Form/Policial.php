@@ -7,12 +7,15 @@ use Zend\Form\Element\Text;
 use Zend\Form\Element\Submit;
 use Zend\Form\Element\Date;
 use Zend\Form\Element\Select;
+use Zend\Form\Element\File;
 
 class Policial extends Form
 {
 	public function __construct()
 	{
 		parent::__construct('formPolicial');
+		
+		$this->setAttribute('enctype', 'multipart/form-data');
 		
 		$collectionForm = new \Core\Collection\DadosForm;
 		
@@ -661,13 +664,16 @@ class Policial extends Form
 		));
 		$this->add($antiguidade);
 		
-		//pol_Foto
-		$foto = new Text('foto');
-		$foto->setLabel('')
-		->setAttributes(array(
+		// Foto
+		$foto = new File('foto');
+		$foto->setLabel('Foto')
+			->setAttributes(array(
 				'id' => 'foto',
-				'class' => 'form-control',
-				'placeholder' => ''
+				//'class' => 'hidden',
+				'onchange' => 'preview(this)',
+				'style' => 'height: 110px;
+							width: 90px;
+							visibility: hidden;',
 		));
 		$this->add($foto);
 		

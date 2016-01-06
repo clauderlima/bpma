@@ -1,83 +1,58 @@
-<div class="corpo-table">
-    <table class="table table-striped table-bordered table-hover">
-        <thead>
-			<tr>
-			    <th class="text-center">Nº</th>
-			    <th class="text-center">Matricula</th>
-			    <th class="text-center">Policial</th>
-			    <th class="text-center">Celular</th>
-			    <th class="text-center">SubUnidade</th>
-			    <th class="text-center">Lotação</th> 
-			    <th class="text-center">Ação</th>  
-			</tr>
-        </thead>
- 
-        <tbody>
-        	<?php $counter = 1?>
-            <?php foreach ($this->lista as $pessoa) : ?>
-        	<tr>
-        	<td class="text-center"><?php echo $counter++ ?>
-            <td class="text-center"><?php echo $pessoa['matricula']; ?></td>
-			<td><?php echo $pessoa['postograduacao'] . " " . $pessoa['nomeguerra']; ?></td>
-			<td><?php echo $pessoa['telefonecelular']; ?></td>
-			<td><?php echo $pessoa['subunidade']; ?></td>
-			<td><?php echo $pessoa['lotacao']; ?></td>
-            <td class="text-center">
-                <a class="btn btn-xs btn-info" title="Detalhes"  href="<?php echo $this->url('census', array("action" => "detalhes", "id" => $pessoa['codigo'])); ?>"><span class="glyphicon glyphicon-new-window"></span></a>
-            </td>
-        </tr>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card ">
+				<div class="header">
+					<h4 class="title">Relação</h4>
+					<p class="category">Policiais Militares</p>
+				</div>
+				<div class="content">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-responsive">
+								<table class="table table-striped table-hover">
+									<thead>
+										<tr>
+											<th class="text-center">Nº</th>
+											<th class="text-center">Matricula</th>
+											<th>Policial</th>
+											<th>Celular</th>
+											<th>SubUnidade</th>
+											<th>Lotação</th>
+											<th class="text-center">Ação</th>
+										</tr>
+									</thead>
+
+									<tbody>
+							        	<?php $counter = 1?>
+							            <?php foreach ($this->lista as $pessoa) : ?>
+							        	<tr>
+											<td class="text-center"><?php echo $counter++?>
+								            <td class="text-center"><?php echo $pessoa['matricula']; ?></td>
+											<td><?php echo $pessoa['postograduacao'] . " " . $pessoa['nomeguerra']; ?></td>
+											<td><?php echo $pessoa['telefonecelular']; ?></td>
+											<td><?php echo $pessoa['subunidade']; ?></td>
+											<td><?php echo $pessoa['lotacao']; ?></td>
+								            <td class="text-center">
+								                <a class="btn btn-xs btn-info" title="Detalhes"
+													href="<?php echo $this->url('census', array("action" => "detalhes", "id" => $pessoa['codigo'])); ?>"><span
+													class="glyphicon glyphicon-new-window"></span></a>
+											</td>
+										</tr>
     <?php endforeach; ?>
         </tbody>
     </table>
-</div>	
-
-	<div class="modal fade" id="modal-detalhes-contato">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                Corpo Modal Detalhes Policial
-            </div>
-          </div>
-    </div>
-	
-
-</div>
-<?php $this->headScript()->captureStart(); ?>
-$(function(){
-    // variável para conter a url deletar
-    var url_deletar     = '<?php echo $this->url('census', array("action" => "deletar")); ?>' + '/';
- 
-    // qualquer link que tiver a url deletar vai sofrer um evento quando for clicada
-    $("a[href*='" + url_deletar + "']").click(function (event) {
-        // variável contendo o id referente ao botão clicado
-        var contato_id  = $(this).attr('href').split(url_deletar).pop();
-        // variável contendo mensagem da janela
-        var mensagem = "Deseja realmente apagar o policial de ID " + contato_id + "?";
-        // variável com resposta da mensagem colocada na janela
-        var confirmacao = confirm(mensagem);
- 
-        // se a confirmação for false o fluxo é interrompido
-        if (!confirmacao)
-            // elimar o evendo do botão clicado
-            event.preventDefault();
-    });
-});
-
-$(function(){
-    $('#modal-detalhes-contato').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget)             // Button that triggered the modal
-        var contato_url = button.data('contato-url')    // Extract info from data-* attributes
-        
-        var modal = $(this)
-        modal.
-            find('.modal-body').        // localizar corpo modal
-            html('Carregando...').      // colocar html caso a requição demore
-            load(contato_url)           // inserir conteudo html AJAX
-    })
-});
-
-<?php $this->headScript()->captureEnd(); ?>
-
-<a href="<?php echo $this->url('mapa', array('action' => 'index'))?>" class="btn btn-success" title="Novo">
-Voltar
-    </a>
+								<br>
+								<a
+									href="<?php echo $this->url('ferias', array('action' => 'index'))?>"
+									class="btn btn-success" title="Novo">
+									Voltar
+							    </a>
+							</div>
+						</div>					
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> 

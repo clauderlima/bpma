@@ -87,9 +87,11 @@ class PolicialController extends AbstractController
     			$this->flashMessenger()->addErrorMessage('Erro ao criar contato! <br>Verifique se os campos foram preenchidos corretamente.');
     		}
     	}
+    	$dataEntity['foto'] = "";
     	
     	$view = new ViewModel(array(
-    			'form' => $form
+    			'form' => $form,
+    			'dataEntity' => $dataEntity,
     	));
     	
     	$view->setTemplate('census/policial/formPolicial.phtml');
@@ -239,6 +241,7 @@ class PolicialController extends AbstractController
     	
     	$view = new ViewModel(array(
     			'form' => $form,
+    			'dataEntity' => $dadosPolicial,
     			'flashMessages' => $this->flashMessenger()->getMessages()
     	));
     	$view->setTemplate('census/policial/formPolicial.phtml');

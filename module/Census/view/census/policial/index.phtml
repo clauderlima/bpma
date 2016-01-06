@@ -1,6 +1,6 @@
 <?php if(count($successMessages)) : ?>
 	<?php foreach ($successMessages as $msg) : ?>
-	<script type="text/javascript">
+<script type="text/javascript">
     	$(document).ready(function(){
         	
         	$.notify({
@@ -13,12 +13,12 @@
             });
             
     	});
-	</script> 
-	<?php endforeach; ?>
+	</script>
+<?php endforeach; ?>
 <?php endif; ?> 
 <?php if(count($errorMessages)) : ?>
 	<?php foreach ($errorMessages as $msg) : ?>
-	<script type="text/javascript">
+<script type="text/javascript">
     	$(document).ready(function(){
         	
         	$.notify({
@@ -31,12 +31,12 @@
             });
             
     	});
-	</script> 
-	<?php endforeach; ?>
+	</script>
+<?php endforeach; ?>
 <?php endif; ?> 
 <?php if(count($flashMessages)) : ?>
 	<?php foreach ($flashMessages as $msg) : ?>
-	<script type="text/javascript">
+<script type="text/javascript">
     	$(document).ready(function(){
         	
         	$.notify({
@@ -49,93 +49,119 @@
             });
             
     	});
-	</script> 
-	<?php endforeach; ?>
-<?php endif; ?> 
+	</script>
+<?php endforeach; ?>
+<?php endif; ?>
 
-<div class="topo-table">
-    <a href="<?php echo $this->url('census', array('action' => 'adicionar'))?>" class="btn btn-success" title="Novo">
-    	<span class="glyphicon glyphicon-plus"></span>
-    </a>
- 
-    <div class="btn-group" title="Quantidades por Página">
-	    <button type="button" class="btn btn-default"><?php echo $this->itens_pagina; ?></button>
-	    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-	        <span class="caret"></span>
-	    </button>
-	    <ul class="dropdown-menu pull-right" style="min-width: 75px" role="menu">
-	        <?php foreach (['005', '010', '025', '050', '100'] as $value): ?>
-	            <li class="<?php echo ($this->itens_pagina == $value ? 'active' : ''); ?>">
-	            	<a href="<?php echo $this->url('census', ['action' => 'index'], ['query' => ['pagina' => $this->pagina_atual, 'coluna_nome' => $coluna_nome, 'coluna_sort' => $this->coluna_sort, 'itens_pagina' => $value, 'search' => $this->search]])?>">
-	            		<?php echo $value;  ?>
-	            	</a></li>
-	        <?php endforeach;?>
-	    </ul>
-	</div>
- 
-    <form class="form-inline pull-right" role="form">
-        <div class="form-group">
-            <label class="sr-only" for="localizar">Buscar...</label>
-            <input type="search" name="search" value="<?php echo $this->search; ?>" class="form-control typeahead" id="localizar" placeholder="Buscar..." autocomplete="off">
-        </div>
-        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-    </form>
-</div>
- 
-<br />
- 
-<div class="corpo-table">
-    <table class="table table-striped table-bordered table-hover">
-        <thead>
-			<?php echo $this->partial('partial/colunas_sort'); ?>
-        </thead>
- 
-        <tbody>
-        	
-            <?php foreach ($this->relacao as $pessoa) : ?>
-        	<tr>
-            <td class="text-center"><?php echo $this->filter($pessoa)->matricula(); ?></td>
-			<td><?php echo $this->filter($pessoa)->postoGraduacao() ?></td>
-			<td><?php echo $this->filter($pessoa)->nomeGuerra() ?></td>
-			<td><?php echo $this->filter($pessoa)->telefoneCelular() ?></td>
-			<td><?php echo $this->filter($pessoa)->lotacao() ?></td>
-            <td>
-                <a class="btn btn-xs btn-info" title="Detalhes"  href="<?php echo $this->url('census', array("action" => "detalhes", "id" => $this->filter($pessoa)->codigo())); ?>"><span class="glyphicon glyphicon-new-window"></span></a>
-                	<!--  <button class="btn btn-xs btn-info" data-toggle="modal" data-target="#modal-detalhes-contato" data-contato-url="<?php //echo $this->url('census', array("action" => "detalhes", "id" => $this->filter($pessoa)->codigo())); ?>" title="Visualizar" ><span class="glyphicon glyphicon-new-window"></span></button> -->
-                <a class="btn btn-xs btn-warning" title="Editar" href="<?php echo $this->url('census', array("action" => "editar",   "id" => $this->filter($pessoa)->codigo())); ?>"><span class="glyphicon glyphicon-edit"></span></a>
-                <a class="btn btn-xs btn-danger" title="Deletar" href="<?php echo $this->url('census', array("action" => "deletar",  "id" => $this->filter($pessoa)->codigo())); ?>"><span class="glyphicon glyphicon-floppy-remove"></span></a>
-            </td>
-        </tr>
-    <?php endforeach; ?>
-        </tbody>
-    </table>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card ">
+				<div class="header">
+					<h4 class="title">Consulta</h4>
+					<p class="category">Pesquisar efetivo da unidade</p>
+				</div>
+				<div class="content">
+					<div class="topo-table">
+						<a href="<?php echo $this->url('census', array('action' => 'adicionar'))?>"
+							class="btn btn-success" title="Cadastrar novo policial"> 
+							<span class="pe-7s-add-user"></span>
+						</a>
+
+						<div class="btn-group" title="Quantidades por Página">
+							<button type="button" class="btn btn-default"><?php echo $this->itens_pagina; ?></button>
+							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu pull-right" style="min-width: 75px" role="menu">
+		        				<?php foreach (['005', '010', '025', '050', '100'] as $value): ?>
+		            			<li class="<?php echo ($this->itens_pagina == $value ? 'active' : ''); ?>">
+									<a href="<?php echo $this->url('census', ['action' => 'index'], ['query' => ['pagina' => $this->pagina_atual, 'coluna_nome' => $coluna_nome, 'coluna_sort' => $this->coluna_sort, 'itens_pagina' => $value, 'search' => $this->search]])?>">
+		            					<?php echo $value;  ?>
+		            				</a>
+								</li>
+		        				<?php endforeach;?>
+	    					</ul>
+						</div>
+
+						<form class="form-inline pull-right" role="form">
+							<div class="form-group">
+								<label class="sr-only" for="localizar">Buscar...</label> 
+								<input type="search" name="search" value="<?php echo $this->search; ?>" title="Nome, matricula, CPF e RG"
+									class="form-control typeahead" id="localizar" placeholder="Buscar..." autocomplete="off">
+							</div>
+							<button type="submit" class="btn btn-default">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</form>
+					</div>
+					<br>
+					<div class="corpo-table">
+						<table class="table table-striped table-hover">
+							<thead>
+								<?php echo $this->partial('partial/colunas_sort'); ?>
+        					</thead>
+							<tbody>
+        					<?php foreach ($this->relacao as $pessoa) : ?>
+        						<tr>
+									<td class="text-center"><?php echo $this->filter($pessoa)->matricula(); ?></td>
+									<td><?php echo $this->filter($pessoa)->postoGraduacao() ?></td>
+									<td><?php echo $this->filter($pessoa)->nomeGuerra() ?></td>
+									<td><?php echo $this->filter($pessoa)->telefoneCelular() ?></td>
+									<td><?php echo $this->filter($pessoa)->lotacao() ?></td>
+									<td class="text-center"><a class="btn btn-xs btn-info" title="Detalhes"
+										href="<?php echo $this->url('census', array("action" => "detalhes", "id" => $this->filter($pessoa)->codigo())); ?>"><span
+											class="glyphicon glyphicon-new-window"></span></a> <!--  <button class="btn btn-xs btn-info" data-toggle="modal" data-target="#modal-detalhes-contato" data-contato-url="<?php //echo $this->url('census', array("action" => "detalhes", "id" => $this->filter($pessoa)->codigo())); ?>" title="Visualizar" ><span class="glyphicon glyphicon-new-window"></span></button> -->
+										<a class="btn btn-xs btn-warning" title="Editar"
+										href="<?php echo $this->url('census', array("action" => "editar",   "id" => $this->filter($pessoa)->codigo())); ?>"><span
+											class="glyphicon glyphicon-edit"></span></a> <a
+										class="btn btn-xs btn-danger" title="Deletar"
+										href="<?php echo $this->url('census', array("action" => "deletar",  "id" => $this->filter($pessoa)->codigo())); ?>"><span
+											class="glyphicon glyphicon-floppy-remove"></span></a></td>
+								</tr>
+    						<?php endforeach; ?>
+        					</tbody>
+						</table>
  
     <?php
-	// controle de paginação
-	echo $this->paginationControl(
-    	// objeto contentdo os pessoal
-    	$this->relacao,
-        
-    	// tipo de style da paginação
-    	'Sliding',
-        
-    	// partial que vai conter o html da paginação
-    	[/*path*/ 'partial/paginator.phtml', /*modulo*/ 'Pessoa'],
-        
-    	// link rotas da paginação
-    	['route' => 'census']
-	);
-	?>
+				// controle de paginação
+				echo $this->paginationControl ( 
+						// objeto contentdo os pessoal
+						$this->relacao, 
+						
+						// tipo de style da paginação
+						'Sliding', 
+						
+						// partial que vai conter o html da paginação
+						[  /* path */
+								'partial/paginator.phtml', /*modulo*/ 'Pessoa' 
+						], 
+						
+						// link rotas da paginação
+						[ 
+								'route' => 'census' 
+						] );
+				?>
 	
-</div>	
-	<div class="modal fade" id="modal-detalhes-contato">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                Corpo Modal Detalhes Policial
-            </div>
-          </div>
-    </div>
+</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<br />
+
+
+<div class="modal fade" id="modal-detalhes-contato">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">Corpo Modal Detalhes Policial</div>
+		</div>
+	</div>
 </div>
 <?php $this->headScript()->captureStart(); ?>
 $(function(){

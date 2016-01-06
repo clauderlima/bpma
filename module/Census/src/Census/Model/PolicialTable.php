@@ -90,6 +90,8 @@ class PolicialTable
     		->like('pol_CPF', "%{$like}%")
     		->or
     		->like('pol_NomeCompleto', "%{$like}%")
+    		->or
+    		->like('pol_NomeGuerra', "%{$like}%")
     		;
     	}
     
