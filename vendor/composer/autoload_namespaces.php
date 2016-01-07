@@ -8,7 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'phpDocumentor' => array($vendorDir . '/phpdocumentor/reflection-docblock/src'),
     'ZendXml\\' => array($vendorDir . '/zendframework/zendxml/library'),
-    'ZendService\\LiveDocx\\' => array($vendorDir . '/zendframework/zendservice-livedocx/library'),
+    'ZendService' => array($vendorDir . '/zendframework/zendservice-livedocx/library'),
     'ZendDiagnostics\\' => array($vendorDir . '/zendframework/zenddiagnostics/src'),
     'ZendDiagnosticsTest\\' => array($vendorDir . '/zendframework/zenddiagnostics/tests'),
     'ZFTool\\' => array($vendorDir . '/zendframework/zftool/src'),
