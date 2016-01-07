@@ -9,6 +9,31 @@ class ArmaController extends AbstractController
 	{
 		$dataArma = $this->getEm('Hereditas\Entity\Arma')->findAll();
 
+		
+		$query = $this->getEm()->createQueryBuilder()
+		 ->select('a')
+		 ->from('\Hereditas\Entity\Arma','a')
+		 //->Join('f.polcodigo','p')
+		 //->where('f.anoreferencia = 2015 AND p.subunidade = :subunidade AND f.programacao = :programacao')
+		 //->setParameter('subunidade', 'GOA')
+		 //->setParameter('programacao', 'JAN')
+		 //->orderBy('p.antiguidade', 'ASC')
+		 ->getQuery();
+		  
+		 
+		 //Logica da ARma sem CTgrafi
+/* 		 $armasSemCtgrafi = $query->getResult();
+		
+		 foreach ($armasSemCtgrafi as $item)
+		 {
+		 	if ($item->getCtgrafi() == '')
+		 	{
+		 		echo $item->getCodigo(). " - " . $item->getTombamento() . "<br>";
+		 	}
+		 } */
+
+		
+		
 		return new ViewModel(array(
 			'armas' => $dataArma,
 		));

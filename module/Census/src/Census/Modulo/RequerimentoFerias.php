@@ -239,10 +239,6 @@ function imprimirxxxx(array $data)
 		{
 			$mailMerge->setLocalTemplate('data\abono-cia.docx');
 		}
-	
-		echo "<pre>";
-		print_r($data);
-		exit;
 		
 		$mailMerge->assign('numero', $data['numero'])
 				->assign('nomePolicial', $data['nomepolicial'])
@@ -944,26 +940,26 @@ function imprimirxxxx(array $data)
 			$data['primeiraparcelainicio']->format('d/m') . " à " . $data['primeiraparcelainicio']
 			->add(new \DateInterval("$qtdprimeiraparcela"))->format('d/m/Y') . ";";
 		
-		if (array_key_exists('segundaparcela', $data))
+		if (array_key_exists('segundaparcelainicio', $data))
 		{
 			$data['segundaparcela'] = "- 2ª parcela de " . $data['segundaparcelaqtddias'] . " dias no período de " . 
 				$data['segundaparcelainicio']->format('d/m') . " à " . $data['segundaparcelainicio']
 				->add(new \DateInterval("$qtdsegundaparcela"))->format('d/m/Y') . ";";
-		} else $data['segundaparcela'] = "";
+		} else $data['segundaparcelainicio'] = "";
 		
-		if (array_key_exists('terceiraparcela', $data))
+		if (array_key_exists('terceiraparcelainicio', $data))
 		{
 			$data['terceiraparcela'] = "- 3ª parcela de " . $data['terceiraparcelaqtddias'] . " dias no período de " . 
 				$data['terceiraparcelainicio']->format('d/m') . " à " . $data['terceiraparcelainicio']
 				->add(new \DateInterval("$qtdterceiraparcela"))->format('d/m/Y') . ";";
-		} else $data['terceiraparcela'] = "";
+		} else $data['terceiraparcelainicio'] = "";
 		
 		
 		if ($data['momentooportuno'])
 			$data['restante'] = " - E o restante dos " . $data['momentooportuno'] . " dias para gozo em momento oporturno.";
 		if ($data['naogozo'])
 				$data['restante'] = "E o restante dos " . $data['naogozo'] . " dias para não gozo.";
-	
+				
 		$mailMerge->assign('numero', $data['numero'])
 		->assign('nomePolicial', $data['nomepolicial'])
 		->assign('postoGraduacao', $data['postograduacao'])

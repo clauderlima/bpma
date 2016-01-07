@@ -63,6 +63,13 @@ class Arma
      * @ORM\Column(name="arm_Calibre", type="string", length=45, nullable=false)
      */
     private $calibre;
+    
+    /**
+     * @var Census\Entity\Ctgrafi
+     *
+     * @ORM\OneToOne(targetEntity="Census\Entity\Ctgrafi", mappedBy="armcodigo")
+     */
+    private $ctgrafi;
 
     public function __construct(array $data)
     {
@@ -136,6 +143,16 @@ class Arma
 
     public function setCalibre($calibre){
         $this->calibre = $calibre;
+        return $this;
+    }
+
+
+    public function getCtgrafi(){
+        return $this->ctgrafi;
+    }
+
+    public function setCtgrafi($ctgrafi){
+        $this->ctgrafi = $ctgrafi;
         return $this;
     }
 

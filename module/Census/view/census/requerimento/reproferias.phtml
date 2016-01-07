@@ -38,11 +38,10 @@
     		</tbody>
 		</table>
 
+			<form method="POST" action="/requerimento/requererReproFerias/<?php echo $idpolicial?>">
 		<div class="container">
 			<br>
 
-			<form method="POST"
-				action="/requerimento/requererReproFerias/<?php echo $idpolicial?>">
 				<div class="row">
 					<div class="col-xs-4">
 						<label for="anoreferencia">Ano Referência:</label>	 <select name="anoreferencia" class="form-control">
@@ -70,11 +69,11 @@
 						</select>
 					</div>
 				</div>
-		
-		</div>
-	</div>
 	<div class="panel-footer">
 		<input type="submit" value="Enviar">
 	</div>
+		
+		</div>
 	</form>
+	</div>
 </div>

@@ -371,6 +371,13 @@ class Policial
      * @ORM\Column(name="pol_EnderecoTipo", type="string", length=15, nullable=true)
      */
     private $enderecotipo;
+    
+    /**
+     * @var Census\Entity\Ferias
+     *
+     * @ORM\OneToOne(targetEntity="Census\Entity\Ferias", mappedBy="polcodigo")
+     */
+    private $ferias;
 
     public function __construct(array $data) {
     	$hydrator = new ClassMethods();
@@ -941,6 +948,8 @@ class Policial
         return $this;
     }
 
+    
+    
     private function mask($val, $mask)
 	{
  		$maskared = '';
@@ -963,5 +972,20 @@ class Policial
  		return strrev($maskared);
 	}
     
+
+    public function setCodigo($codigo){
+        $this->codigo = $codigo;
+        return $this;
+    }
+
+    public function getFerias(){
+        return $this->ferias;
+    }
+
+    public function setFerias($ferias){
+        $this->ferias = $ferias;
+        return $this;
+    }
+
 }
 

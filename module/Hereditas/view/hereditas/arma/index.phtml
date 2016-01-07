@@ -31,7 +31,7 @@
     				<td><?php echo $arma->getMarca()?></td>
     				<td><?php echo $arma->getNumeroserie()?></td>
     				<td><?php echo $arma->getTombamento()?></td>
-    				<td></td>
+    				<td><?php echo $arma->getCtgrafi() ? $arma->getCtgrafi()->getPolcodigo()->getPostograduacao() . " " .$arma->getCtgrafi()->getPolcodigo()->getNomeguerra() : ""?></td>
     				<td><a href="/arma/editar/<?php echo $arma->getCodigo()?>"><i class="glyphicon glyphicon-pencil"></i></a> 
     				<a href="/arma/delete/<?php echo $arma->getCodigo()?>" onClick="deleta()"><i style="color: red;" class="glyphicon glyphicon-remove"></i></a></td>
     				

@@ -97,16 +97,90 @@ echo $resumoFerias ['JAN'] + $resumoFerias ['FEV'] + $resumoFerias ['MAR'] + $re
 			<div class="card">
 				<div class="header">
 					<h4 class="title">Férias Gozadas</h4>
-					<p class="category">Controle por subunidade</p>
+					<p class="category">Policiais com os 30 de férias dias definidos</p>
 				</div>
 				<div class="content">
-					Conteúdo
+					<table class="table table-hover table-striped table-bordered">
+						<thead>
+						</thead>
+						<tbody>
+							<tr>
+								<th>Subunidade</th>
+								<th>Situação</th>
+							</tr>
+							<tr>
+								<td>Batalhão</td>
+								<td>
+									<div class="progress" style="height: 10px">
+                                    	<div class="progress-bar progress-bar-info" style="width: 0%">
+                                    	</div>
+                                    	<div class="progress-bar progress-bar-warning" style="width: 2%">
+                                    	</div>
+                                	</div>
+                                </td>
+							</tr>
+							<tr>
+								<td>GOA</td>
+								<td>
+									<div class="progress" style="height: 10px">
+                                    	<div class="progress-bar progress-bar-info" style="width: 0%">
+                                    	</div>
+                                    	<div class="progress-bar progress-bar-warning" style="width: 0%">
+                                    	</div>
+                                	</div>
+								</td>
+							</tr>
+							<tr>
+								<td>GPTur</td>
+								<td>
+									<div class="progress" style="height: 10px">
+                                    	<div class="progress-bar progress-bar-info" style="width: 0%">
+                                    	</div>
+                                    	<div class="progress-bar progress-bar-warning" style="width: 0%">
+                                    	</div>
+                                	</div>
+								</td>
+							</tr>
+							<tr>
+								<td>CiaSul</td>
+								<td>
+									<div class="progress" style="height: 10px">
+                                    	<div class="progress-bar progress-bar-info" style="width: 0%">
+                                    	</div>
+                                    	<div class="progress-bar progress-bar-warning" style="width: 0%">
+                                    	</div>
+                                	</div>
+								</td>
+							<tr>
+								<td>CiaLeste</td>
+								<td>
+									<div class="progress" style="height: 10px">
+                                    	<div class="progress-bar progress-bar-info" style="width: 0%">
+                                    	</div>
+                                    	<div class="progress-bar progress-bar-warning" style="width: 0%">
+                                    	</div>
+                                	</div>
+								</td>
+							</tr>
+							<tr>
+								<td>CiaOeste</td>
+								<td>
+									<div class="progress" style="height: 10px">
+                                    	<div class="progress-bar progress-bar-info" style="width: 0%">
+                                    	</div>
+                                    	<div class="progress-bar progress-bar-warning" style="width: 0%">
+                                    	</div>
+                                	</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 				<div class="footer">
 					<div class="legend">
-						<i class="fa fa-circle text-info"></i> Open <i
-							class="fa fa-circle text-danger"></i> Bounce <i
-							class="fa fa-circle text-warning"></i> Unsubscribe
+						<i class="fa fa-circle text-info"></i> Gozadas <i
+							class="fa fa-circle text-warning"></i> Não Gozadas <i
+							class="fa fa-circle" style="color: #F0F0F0"></i> Pendentes
 					</div>
 				</div>
 
@@ -120,7 +194,7 @@ echo $resumoFerias ['JAN'] + $resumoFerias ['FEV'] + $resumoFerias ['MAR'] + $re
 					<p class="category">Distribuição no ano</p>
 				</div>
 				<div class="content">
-					<div class="ct-chart ct-perfect-fourth"></div>
+					<div class="ct-chart" id="feriaschart"></div>
 				</div>
 				<div class="footer">
 					<div class="legend">
@@ -131,6 +205,47 @@ echo $resumoFerias ['JAN'] + $resumoFerias ['FEV'] + $resumoFerias ['MAR'] + $re
 			</div>
 		</div>
 	</div>
+	
+	<?php if ($policiaisSemFerias):?>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="header">
+					<h4 class="title">Pendências</h4>
+					<p class="category">Policiais sem férias lançadas no sistema</p>
+				</div>
+				<div class="content table-responsive table-full-width">
+					<table class="table table-hover table-striped">
+						<thead>
+							<tr>
+								<th>Nº</th>
+								<th>Policial</th>
+								<th>Subunidade</th>
+								<th>Lotação</th>
+								<th>Celular</th>
+							</tr>
+						</thead>
+						<tbody>
+						<?php $counter = 1?>
+						<?php foreach ($policiaisSemFerias as $policial):?>
+						<?php if ($policial->getFerias() == ""):?>
+							<tr>
+								<td><?php echo $counter++ ?></td>
+								<td><?php echo $policial->getPostoGraduacao() . " " . $policial->getNomeGuerra() ?></td>
+								<td><?php echo $policial->getSubunidade() ?></td>
+								<td><?php echo $policial->getLotacao() ?></td>
+								<td><?php echo $policial->getTelefonecelular() ?></td>
+							</tr>
+						<?php endif;?>
+						<?php endforeach;?>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php endif;?>
 </div>  
 
 <script type="text/javascript">
@@ -162,5 +277,5 @@ echo $resumoFerias ['JAN'] + $resumoFerias ['FEV'] + $resumoFerias ['MAR'] + $re
 		// Create a new line chart object where as first parameter we pass in a selector
 		// that is resolving to our chart container element. The Second parameter
 		// is the actual data object.
-		new Chartist.Bar('.ct-chart', data, options);
+		new Chartist.Bar('#feriaschart', data, options);
 </script>
