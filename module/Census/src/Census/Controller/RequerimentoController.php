@@ -406,9 +406,6 @@ class RequerimentoController extends AbstractController
 		$form = new \Census\Form\RequerimentoFerias();
 		$abono = $this->getEm('Census\Entity\RequerimentoFerias')->find($id)->toArray();
 		
-		echo "<pre>";
-		print_r($abono);
-		exit;
 		
 		$dataPolicial = $this->getEm('Census\Entity\Policial')->find($abono['polcodigo']->getCodigo())->toArray();
 		

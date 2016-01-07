@@ -5,9 +5,9 @@
         </div>
         <?php //echo "<pre>"; echo print_r($policial); exit;?>
     </div>
+    <?php $idpolicial = $dados[0]['codigo']?>
     <form method="POST" action="/requerimento/requerernaogozoferias/<?php echo $idpolicial?>">
 	<div class="panel-body">
-    <?php $idpolicial = $dados[0]['codigo']?>
 			<div class="row">
 				<div class="col-xs-4">
 					Ano Referência: <select name="anoreferencia">

@@ -412,7 +412,7 @@ class Policial extends Form
 					'label' => 'Praças',
 					'options' => array (
 						''	=> 'Selecione ...',
-						'Sd 2ª Classe'	=> 'Soldado 2ª Classe',
+						'Civil'	=> 'Funcionário Civil',
 						'Sd'	=> 'Soldado',
 						'Cb'	=> 'Cabo',
 						'3º Sgt'	=> '3º Sargento',

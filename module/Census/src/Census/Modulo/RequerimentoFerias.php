@@ -919,7 +919,7 @@ function imprimirxxxx(array $data)
 	
 		$mailMerge->setUsername('clauderlima')
 			->setPassword('cclvcldf')
-			->setService (MailMerge::SERVICE_FREE);  // for LiveDocx Premium, use MailMerge::SERVICE_PREMIUM 
+			->setService (MailMerge::SERVICE_FREE);  // for LiveDocx Premium, use MailMerge::SERVICE_PREMIUM  
 	
 		if ($data['template'] == 'BTL')
 		{
@@ -927,7 +927,7 @@ function imprimirxxxx(array $data)
 		} else
 		{
 			$mailMerge->setLocalTemplate('data\parcelamentoferias-cia.docx');
-		} 
+		}
 		
 		$data['nrecodigo'] = "";
 		$data['polcodigo'] = "";
@@ -940,20 +940,29 @@ function imprimirxxxx(array $data)
 			$data['primeiraparcelainicio']->format('d/m') . " à " . $data['primeiraparcelainicio']
 			->add(new \DateInterval("$qtdprimeiraparcela"))->format('d/m/Y') . ";";
 		
-		if (array_key_exists('segundaparcelainicio', $data))
+			
+		if ($data['segundaparcelainicio'] != "")
 		{
 			$data['segundaparcela'] = "- 2ª parcela de " . $data['segundaparcelaqtddias'] . " dias no período de " . 
 				$data['segundaparcelainicio']->format('d/m') . " à " . $data['segundaparcelainicio']
 				->add(new \DateInterval("$qtdsegundaparcela"))->format('d/m/Y') . ";";
-		} else $data['segundaparcelainicio'] = "";
-		
-		if (array_key_exists('terceiraparcelainicio', $data))
+		} else 
 		{
+			$data['segundaparcela'] = " ";
+		}
+		
+		if ($data['terceiraparcelainicio'] != Null)
+		{
+			die('aqui');
+			
 			$data['terceiraparcela'] = "- 3ª parcela de " . $data['terceiraparcelaqtddias'] . " dias no período de " . 
 				$data['terceiraparcelainicio']->format('d/m') . " à " . $data['terceiraparcelainicio']
 				->add(new \DateInterval("$qtdterceiraparcela"))->format('d/m/Y') . ";";
-		} else $data['terceiraparcelainicio'] = "";
+		} else $data['terceiraparcela'] = " "; 
 		
+		
+		$data['terceiraparcela'] = "";
+		$data['restante'] = "";
 		
 		if ($data['momentooportuno'])
 			$data['restante'] = " - E o restante dos " . $data['momentooportuno'] . " dias para gozo em momento oporturno.";

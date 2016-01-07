@@ -785,7 +785,7 @@ class Policial
     		case 'Sd':
     			$antiguidade = $antPostGrad-100000;
     			break;
-    		case 'Sd 2º Classe':
+    		case 'Civil':
     			$antiguidade = $antPostGrad-150000;
     			break;
     	}
@@ -839,7 +839,7 @@ class Policial
        		case 'Sd':
        			$antPostGrad = $antiguidade+100000;
        			break;
-       		case 'Sd 2º Classe':
+       		case 'Civil':
        			$antPostGrad = $antiguidade+150000;
        			break;
         }

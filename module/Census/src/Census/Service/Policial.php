@@ -23,7 +23,7 @@ class Policial extends AbstractService
 		return parent::insert($data, $entity);
 	}
 	
-	public function update($data, $entity, $id)
+	public function update(array $data, $entity, $id)
 	{
 		if ($data['foto']['name'])
 		{
