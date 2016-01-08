@@ -423,13 +423,22 @@ class RequerimentoController extends AbstractController
 			{
 				if ($service->update($data, 'Census\Entity\RequerimentoFerias', $id))
 				{
-					$this->flashMessenger()->addSuccessMessage("Curso cadastrado com sucesso!");
+					$this->flashMessenger()->addSuccessMessage("Requerimento editado com sucesso!");
 					return $this->redirect()->toUrl('/census/detalhes/' . $abono['polcodigo']->getCodigo());
 				}
 			} else {
-				$this->flashMessenger()->addErrorMessage('Erro ao cadastrar curso! <br>Verifique se os campos foram preenchidos corretamente.');
+				$this->flashMessenger()->addErrorMessage('Erro ao editar requerimento! <br>Verifique se os campos foram preenchidos corretamente.');
 			}
 		}
+		
+		$view = new ViewModel(array(
+			'form' => $form,
+			'policial' => $dataPolicial
+		));
+			
+		$view->setTemplate('census/requerimento/feriasform.phtml');
+			
+		return $view;
 	}
 	
 	public function deletarParcelamentoFeriasAction()

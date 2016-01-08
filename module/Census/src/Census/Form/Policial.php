@@ -552,6 +552,7 @@ class Policial extends Form
 				'Sec' => 'Secretaria',
 				'NCS' => 'Núcleo de Comunicação Social',
 				'NProj' => 'Núcleo de Projetos',
+				'SSLog' => 'SubSeção de Logística',
 				'Almox' => 'Almoxarifado',
 				'NMan' => 'Núcleo de Manutenção',
 				'SOp' => 'Seção Operacional',

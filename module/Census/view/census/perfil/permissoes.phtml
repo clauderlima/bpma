@@ -14,7 +14,7 @@
 					<input type="checkbox" name="reccodigo[]" id="reccodigo_<?php echo $resource->getCodigo()?>" value="<?php echo $resource->getCodigo()?>" 
 					<?php if (in_array($resource->getCodigo(), $arrayResourcesSelecionados)):?> checked="checked" <?php endif?>
 					<?php if (in_array($resource->getCodigo(), $arrayResourcesOutroPerfil)):?> disabled="disabled" <?php endif?>>
-					<span class="label <?php echo isset($arrayPerfilClass[$arrayPerfil[$resource->getCodigo()]]) ? $arrayPerfilClass[$arrayPerfil[$resource->getCodigo()]] : 'label-default'?>"><?php echo $resource->getNome()?></span>
+					<span class="label <?php echo 'label-default'?>"><?php echo $resource->getNome()?></span>
 				</label>
 			</li>
 			<?php endforeach;?>
