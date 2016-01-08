@@ -1,20 +1,17 @@
-<a href="/documento/adicionar"><button class="btn btn-success btn-fill btn-wd">Novo Documento</button></a>
-<br>&nbsp;
-
 <div class="container-fluid">
- 	<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card">
 				<div class="header">
 					<h4 class="title">Secretaria</h4>
-					<p class="category">Documentos em posse da seção</p>
+					<p class="category">Documentos na seção</p>
 				</div>
+				<div class="text-left" style="margin-left: 20px"><a href="/documento/adicionar"><button class="btn btn-success btn-fill btn-wd">Novo Documento</button></a></div>
 				<div class="content content-full-width">
 					<table class="table">
     					<thead>
     						<tr>
-			    				<th>Prot</th>
+			    				<th class="text-center">Prot</th>
 			    				<th>Documento</th>
 			    				<th>Data</th>
 			    				<th>Origem</th>
@@ -22,111 +19,335 @@
 			    				<th>Recebimento</th>
 			    				<th>Desde</th>
 			    				<th>Status</th>
-			    				<th>Opções</th>
+			    				<th class="text-center">Opções</th>
     						</tr>
     					</thead>
-    		<tbody>
-    		<?php foreach ($dados as $item):?>
-    			<?php if ($item['secao'] == "Secretaria"):?>
-    			<?php if ($item['status'] != "Arquivado"):?>
-	    			<tr>
-	    				<th><?php echo $item['protocolo']?></th>
-	    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
-	    				<td><?php echo $item['data']?></td>
-	    				<td><?php echo $item['origem']?></td>
-	    				<td><?php echo $item['assunto']?></td>
-	    				<td><?php echo $item['recebimento']?></td>
-	    				<td><?php echo $item['desde']?></td>
-	    				<td><?php 
-	    						if ($item['status'])
-	    						{
-		    						switch ($item['status']) {
-		    							case 'Tramitado':
-		    								$tramite = "Tramitando";
-		    							break;
-		    							
-		    							case 'Arquivado':
-		    								$tramite = "Arquivado";
-		    							break;
-		    						}
-	    						} else 
-	    						{
-	    							$tramite = "Recebido";
-	    						}
-	    						echo $tramite ?></td>
-	    				<td><a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward"></i></a></td>
-	    			</tr>
-	    			<?php endif;?>
-	    			<?php endif;?>
-	    		<?php endforeach;?>
-    		</tbody>
-    	</table>
+			    		<tbody>
+			    		<?php foreach ($dados as $item):?>
+			    			<?php if ($item['secao'] == "Sec" || $item['secao'] == "Secretaria"):?>
+			    			<?php if ($item['status'] != "Arquivado"):?>
+				    			<tr>
+				    				<th class="text-center"><?php echo $item['protocolo']?></th>
+				    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
+				    				<td><?php echo $item['data']?></td>
+				    				<td><?php echo $item['origem']?></td>
+				    				<td><?php echo $item['assunto']?></td>
+				    				<td><?php echo $item['recebimento']?></td>
+				    				<td><?php echo $item['desde']?></td>
+				    				<td><?php 
+				    						if ($item['status'])
+				    						{
+					    						switch ($item['status']) {
+					    							case 'Tramitado':
+					    								$tramite = "Tramitando";
+					    							break;
+					    							
+					    							case 'Arquivado':
+					    								$tramite = "Arquivado";
+					    							break;
+					    						}
+				    						} else 
+				    						{
+				    							$tramite = "Recebido";
+				    						}
+				    						echo $tramite ?></td>
+				    				<td class="text-center">
+				    					<a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward" title="Tramitar"></i></a>&nbsp;
+				    					<?php if ($this->useridentity()->getPercodigo()->getCodigo() == 6 || $this->useridentity()->getPercodigo()->getCodigo() == 8):?>
+				    					<a href="/documento/editar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-pencil" title="Editar"></i></a>
+				    					<?php endif;?>
+				    				</td>
+				    			</tr>
+				    			<?php endif;?>
+				    			<?php endif;?>
+				    		<?php endforeach;?>
+			    		</tbody>
+			    	</table>
 	  			</div>
 			</div>
 		</div>
 	</div>
+</div>
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="header">
+					<h4 class="title">Núcleo de Gestão de Pessoal</h4>
+					<p class="category">Documentos na seção</p>
+				</div>
+				<div class="content content-full-width">
+					<table class="table">
+    					<thead>
+    						<tr>
+			    				<th class="text-center">Prot</th>
+			    				<th>Documento</th>
+			    				<th>Data</th>
+			    				<th>Origem</th>
+			    				<th>Assunto</th>
+			    				<th>Recebimento</th>
+			    				<th>Desde</th>
+			    				<th>Status</th>
+			    				<th class="text-center">Opções</th>
+    						</tr>
+    					</thead>
+			    		<tbody>
+			    		<?php foreach ($dados as $item):?>
+			    			<?php if ($item['secao'] == "NGP"):?>
+			    			<?php if ($item['status'] != "Arquivado"):?>
+				    			<tr>
+				    				<th class="text-center"><?php echo $item['protocolo']?></th>
+				    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
+				    				<td><?php echo $item['data']?></td>
+				    				<td><?php echo $item['origem']?></td>
+				    				<td><?php echo $item['assunto']?></td>
+				    				<td><?php echo $item['recebimento']?></td>
+				    				<td><?php echo $item['desde']?></td>
+				    				<td><?php 
+				    						if ($item['status'])
+				    						{
+					    						switch ($item['status']) {
+					    							case 'Tramitado':
+					    								$tramite = "Tramitando";
+					    							break;
+					    							
+					    							case 'Arquivado':
+					    								$tramite = "Arquivado";
+					    							break;
+					    						}
+				    						} else 
+				    						{
+				    							$tramite = "Recebido";
+				    						}
+				    						echo $tramite ?></td>
+				    				<td class="text-center">
+				    					<a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward" title="Tramitar"></i></a>&nbsp;
+				    					<?php if ($this->useridentity()->getPercodigo()->getCodigo() == 6 || $this->useridentity()->getPercodigo()->getCodigo() == 8):?>
+				    					<a href="/documento/editar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-pencil" title="Editar"></i></a>
+				    					<?php endif;?>
+				    				</td>
+				    			</tr>
+				    			<?php endif;?>
+				    			<?php endif;?>
+				    		<?php endforeach;?>
+			    		</tbody>
+			    	</table>
+	  			</div>
+			</div>
+		</div>
 	</div>
 </div>
 
-<div class="panel panel-primary">
-	<div class="panel-heading">
-        <div class="panel-title">
-            Documentos em tramitação na Unidade
-        </div>
-    </div>
-    <div class="panel-body">
-    	<table class="table">
-    		<thead>
-    			<tr>
-    				<th>Prot</th>
-    				<th>Documento</th>
-    				<th>Data</th>
-    				<th>Origem</th>
-    				<th>Assunto</th>
-    				<th>Recebimento</th>
-    				<th>Seção Atual</th>
-    				<th>Desde</th>
-    				<th>Status</th>
-    				<th>Opções</th>
-    			</tr>
-    		</thead>
-    		<tbody>
-    		<?php foreach ($dados as $item):?>
-    		<?php if ($item['status'] != "Arquivado"):?>
-    			<tr>
-    				<th><?php echo $item['protocolo']?></th>
-    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
-    				<td><?php echo $item['data']?></td>
-    				<td><?php echo $item['origem']?></td>
-    				<td><?php echo $item['assunto']?></td>
-    				<td><?php echo $item['recebimento']?></td>
-    				<td><?php echo $item['secao']?></td>
-    				<td><?php echo $item['desde']?></td>
-    				<td><?php 
-    						if ($item['status'])
-    						{
-	    						switch ($item['status']) {
-	    							case 'Tramitado':
-	    								$tramite = "Tramitando";
-	    							break;
-	    							
-	    							case 'Arquivado':
-	    								$tramite = "Arquivado";
-	    							break;
-	    						}
-    						} else 
-    						{
-    							$tramite = "Recebido";
-    						}
-    						echo $tramite ?></td>
-    				<td><a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward"></i></a></td>
-    			</tr>
-    			<?php endif;?>
-    			<?php endforeach;?>
-    		</tbody>
-    	</table>
-    </div>
-    <div class="panel-footer">
-    </div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="header">
+					<h4 class="title">Núcleo de Controle e Correição</h4>
+					<p class="category">Documentos na seção</p>
+				</div>
+				<div class="content content-full-width">
+					<table class="table">
+    					<thead>
+    						<tr>
+			    				<th class="text-center">Prot</th>
+			    				<th>Documento</th>
+			    				<th>Data</th>
+			    				<th>Origem</th>
+			    				<th>Assunto</th>
+			    				<th>Recebimento</th>
+			    				<th>Desde</th>
+			    				<th>Status</th>
+			    				<th class="text-center">Opções</th>
+    						</tr>
+    					</thead>
+			    		<tbody>
+			    		<?php foreach ($dados as $item):?>
+			    			<?php if ($item['secao'] == "NCC"):?>
+			    			<?php if ($item['status'] != "Arquivado"):?>
+				    			<tr>
+				    				<th class="text-center"><?php echo $item['protocolo']?></th>
+				    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
+				    				<td><?php echo $item['data']?></td>
+				    				<td><?php echo $item['origem']?></td>
+				    				<td><?php echo $item['assunto']?></td>
+				    				<td><?php echo $item['recebimento']?></td>
+				    				<td><?php echo $item['desde']?></td>
+				    				<td><?php 
+				    						if ($item['status'])
+				    						{
+					    						switch ($item['status']) {
+					    							case 'Tramitado':
+					    								$tramite = "Tramitando";
+					    							break;
+					    							
+					    							case 'Arquivado':
+					    								$tramite = "Arquivado";
+					    							break;
+					    						}
+				    						} else 
+				    						{
+				    							$tramite = "Recebido";
+				    						}
+				    						echo $tramite ?></td>
+				    				<td class="text-center">
+					    				<a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward" title="Tramitar"></i></a>&nbsp;
+					    				<?php if ($this->useridentity()->getPercodigo()->getCodigo() == 6 || $this->useridentity()->getPercodigo()->getCodigo() == 8):?>
+					    				<a href="/documento/editar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-pencil" title="Editar"></i></a>
+					    				<?php endif;?>
+				    				</td>
+				    			</tr>
+				    			<?php endif;?>
+				    			<?php endif;?>
+				    		<?php endforeach;?>
+			    		</tbody>
+			    	</table>
+	  			</div>
+			</div>
+		</div>
+	</div>
 </div>
 
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="header">
+					<h4 class="title">Subseção de Logística</h4>
+					<p class="category">Documentos na seção</p>
+				</div>
+				<div class="content content-full-width">
+					<table class="table">
+    					<thead>
+    						<tr>
+			    				<th class="text-center">Prot</th>
+			    				<th>Documento</th>
+			    				<th>Data</th>
+			    				<th>Origem</th>
+			    				<th>Assunto</th>
+			    				<th>Recebimento</th>
+			    				<th>Desde</th>
+			    				<th>Status</th>
+			    				<th class="text-center">Opções</th>
+    						</tr>
+    					</thead>
+			    		<tbody>
+			    		<?php foreach ($dados as $item):?>
+			    			<?php if ($item['secao'] == "SSLog"):?>
+			    			<?php if ($item['status'] != "Arquivado"):?>
+				    			<tr>
+				    				<th class="text-center"><?php echo $item['protocolo']?></th>
+				    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
+				    				<td><?php echo $item['data']?></td>
+				    				<td><?php echo $item['origem']?></td>
+				    				<td><?php echo $item['assunto']?></td>
+				    				<td><?php echo $item['recebimento']?></td>
+				    				<td><?php echo $item['desde']?></td>
+				    				<td><?php 
+				    						if ($item['status'])
+				    						{
+					    						switch ($item['status']) {
+					    							case 'Tramitado':
+					    								$tramite = "Tramitando";
+					    							break;
+					    							
+					    							case 'Arquivado':
+					    								$tramite = "Arquivado";
+					    							break;
+					    						}
+				    						} else 
+				    						{
+				    							$tramite = "Recebido";
+				    						}
+				    						echo $tramite ?></td>
+				    				<td class="text-center">
+				    					<a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward" title="Tramitar"></i></a>&nbsp;
+				    					<?php if ($this->useridentity()->getPercodigo()->getCodigo() == 6 || $this->useridentity()->getPercodigo()->getCodigo() == 8):?>
+				    					<a href="/documento/editar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-pencil" title="Editar"></i></a>
+				    					<?php endif;?>
+				    				</td>
+				    			</tr>
+				    			<?php endif;?>
+				    			<?php endif;?>
+				    		<?php endforeach;?>
+			    		</tbody>
+			    	</table>
+	  			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="header">
+					<h4 class="title">Outras Seções</h4>
+					<p class="category">Documentos em tramitação em outras seções</p>
+				</div>
+				<div class="content content-full-width">
+					<table class="table">
+    					<thead>
+    						<tr>
+			    				<th class="text-center">Prot</th>
+			    				<th>Documento</th>
+			    				<th>Data</th>
+			    				<th>Origem</th>
+			    				<th>Assunto</th>
+			    				<th>Seção</th>
+			    				<th>Recebimento</th>
+			    				<th>Desde</th>
+			    				<th>Status</th>
+			    				<th class="text-center">Opções</th>
+    						</tr>
+    					</thead>
+			    		<tbody>
+			    		<?php foreach ($dados as $item):?>
+			    			<?php if ($item['secao'] != "Sec" && $item['secao'] != "Secretaria"  && $item['secao'] != "NGP" && $item['secao'] != "NCC" && $item['secao'] != "SSLog"):?>
+			    			<?php if ($item['status'] != "Arquivado"):?>
+				    			<tr>
+				    				<th class="text-center"><?php echo $item['protocolo']?></th>
+				    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
+				    				<td><?php echo $item['data']?></td>
+				    				<td><?php echo $item['origem']?></td>
+				    				<td><?php echo $item['assunto']?></td>
+				    				<td><?php echo $item['secao']?></td>
+				    				<td><?php echo $item['recebimento']?></td>
+				    				<td><?php echo $item['desde']?></td>
+				    				<td><?php 
+				    						if ($item['status'])
+				    						{
+					    						switch ($item['status']) {
+					    							case 'Tramitado':
+					    								$tramite = "Tramitando";
+					    							break;
+					    							
+					    							case 'Arquivado':
+					    								$tramite = "Arquivado";
+					    							break;
+					    						}
+				    						} else 
+				    						{
+				    							$tramite = "Recebido";
+				    						}
+				    						echo $tramite ?></td>
+				    				<td class="text-center">
+				    				<a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward" title="Tramitar"></i></a>&nbsp;
+				    				<?php if ($this->useridentity()->getPercodigo()->getCodigo() == 6 || $this->useridentity()->getPercodigo()->getCodigo() == 8):?>
+				    				<a href="/documento/editar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-pencil" title="Editar"></i></a>
+									<?php endif;?>				    				
+				    				</td>
+				    			</tr>
+				    			<?php endif;?>
+				    			<?php endif;?>
+				    		<?php endforeach;?>
+			    		</tbody>
+			    	</table>
+	  			</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -64,10 +64,10 @@ class Arma extends \Hereditas\Entity\Arma implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'codigo', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'tombamento', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'especie', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'marca', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'modelo', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'numeroserie', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'calibre');
+            return array('__isInitialized__', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'codigo', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'tombamento', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'especie', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'marca', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'modelo', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'numeroserie', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'calibre', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'ctgrafi');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'codigo', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'tombamento', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'especie', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'marca', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'modelo', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'numeroserie', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'calibre');
+        return array('__isInitialized__', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'codigo', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'tombamento', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'especie', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'marca', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'modelo', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'numeroserie', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'calibre', '' . "\0" . 'Hereditas\\Entity\\Arma' . "\0" . 'ctgrafi');
     }
 
     /**
@@ -340,6 +340,28 @@ class Arma extends \Hereditas\Entity\Arma implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCalibre', array($calibre));
 
         return parent::setCalibre($calibre);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCtgrafi()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCtgrafi', array());
+
+        return parent::getCtgrafi();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCtgrafi($ctgrafi)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCtgrafi', array($ctgrafi));
+
+        return parent::setCtgrafi($ctgrafi);
     }
 
 }

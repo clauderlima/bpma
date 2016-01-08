@@ -179,7 +179,7 @@ class DocumentoController extends AbstractController
 					return $this->redirect()->toUrl('/documento');
 				}
 			} else {
-				$this->flashMessenger()->addErrorMessage('Erro ao cadastrar documento! <br>Verifique se os campos foram preenchidos corretamente.');
+				$this->flashMessenger()->addErrorMessage('Erro ao encaminhar documento! <br>Verifique se os campos foram preenchidos corretamente.');
 			}
 		}
 		
@@ -225,7 +225,7 @@ class DocumentoController extends AbstractController
 					return $this->redirect()->toUrl('/documento');
 				}
 			} else {
-				$this->flashMessenger()->addErrorMessage('Erro ao cadastrar documento! <br>Verifique se os campos foram preenchidos corretamente.');
+				$this->flashMessenger()->addErrorMessage('Erro ao arquivar documento! <br>Verifique se os campos foram preenchidos corretamente.');
 			}
 		}
 	
@@ -257,6 +257,50 @@ class DocumentoController extends AbstractController
 		$view = new ViewModel(array(
 				'dados' => $dados,
 		));
+			
+		return $view;
+	}
+	
+	public function editarAction()
+	{
+		// Definindo variaveis
+		$request = $this->getRequest();
+		$id = (int) $this->params()->fromRoute('id', 0);
+			
+		// Instaciando services
+		$service = $this->getServiceLocator()->get('scriba-service-documento');
+			
+		// Instaciando o Form
+		$form = new \Scriba\Form\Documento();
+		$documento = $this->getEm('Scriba\Entity\Documento')->find($id)->toArray();
+	
+		$form->setData($documento);
+	
+		if ($request->isPost())
+		{
+			// setando o input filter no orm
+			$data = $request->getPost()->toArray();
+				
+			$form->setData($data);
+			$form->setInputFilter(new \Census\Filter\Curso());
+	
+			if ($form->isValid())
+			{
+				if ($service->update($data, 'Scriba\Entity\Documento', $id))
+				{
+					$this->flashMessenger()->addSuccessMessage("Documento editado com sucesso!");
+					return $this->redirect()->toUrl('/documento');
+				}
+			} else {
+				$this->flashMessenger()->addErrorMessage('Erro ao editar documento! <br>Verifique se os campos foram preenchidos corretamente.');
+			}
+		}
+			
+		$view = new ViewModel(array(
+				'form' => $form,
+		));
+			
+		$view->setTemplate('scriba/documento/form.phtml');
 			
 		return $view;
 	}
