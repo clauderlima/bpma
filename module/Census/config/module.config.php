@@ -293,5 +293,6 @@ return array(
 		'Scriba' => 'layout/census',
 		'User' => 'layout/user',
 		'Admin' => 'layout/admin',
+		'Obsequium' => 'layout/census',
 	),
 );

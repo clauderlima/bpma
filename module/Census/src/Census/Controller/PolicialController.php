@@ -288,7 +288,7 @@ class PolicialController extends AbstractController
     	 
     	// Dados Formação
     	$policial = $em->createQueryBuilder()
-    	->select('p.nomeguerra,p.datanascimento,p.dataadmissao,p.postograduacao,p.subunidade')
+    	->select('p.nomeguerra,p.datanascimento,p.dataadmissao,p.postograduacao,p.subunidade,p.servicoposto,p.servicofuncao,p.lotacao,p.codigo')
     	->from('Census\Entity\Policial', 'p')
     	->where('p.subunidade <> :polcodigo')
     	->setParameter('polcodigo', 'TRC')
@@ -348,7 +348,7 @@ class PolicialController extends AbstractController
     
     	// Dados Formação
     	$policial = $em->createQueryBuilder()
-	    	->select('p.nomeguerra,p.bienalvalidade,p.dataadmissao,p.postograduacao,p.subunidade')
+	    	->select('p.nomeguerra,p.bienalvalidade,p.dataadmissao,p.postograduacao,p.codigo,p.subunidade,p.datanascimento,p.lotacao,p.servicoposto,p.servicofuncao')
 	    	->from('Census\Entity\Policial', 'p')
 	    	->where('p.subunidade <> :polcodigo')
 	    	->setParameter('polcodigo', 'TRC')
@@ -623,7 +623,7 @@ class PolicialController extends AbstractController
     
     	// Dados Formação
     	$policial = $em->createQueryBuilder()
-	    	->select('p.nomeguerra,p.nomecompleto,p.telefonefixo,p.telefonecelular,p.postograduacao,p.enderecocidade,p.enderecouf,p.subunidade')
+	    	->select('p.nomeguerra,p.nomecompleto,p.telefonefixo,p.servicoposto,p.telefonecelular,p.postograduacao,p.enderecocidade,p.enderecouf,p.subunidade')
 	    	->from('Census\Entity\Policial', 'p')
 	    	->where('p.subunidade <> :polcodigo')
 	    	->setParameter('polcodigo', 'TRC')

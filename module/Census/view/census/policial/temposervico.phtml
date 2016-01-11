@@ -1,28 +1,59 @@
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <div class="panel-title">
-            <div class="campo">Tempo de Serviço do Efetivo do BPMA</div>
-        </div>
-    </div>
-
-<table class="table">
-<tr>
-		<th>Nº</th>
-		<th>Policial</th>
-		<th>Tempo de Serviço</th>
-		<th>Idade</th>
-	</tr>
-	<?php 
-	$counter = 1;
-	$hoje = new \DateTime()?>
-	<?php foreach ($policiais as $item):?>
-	
-	<tr>
-		<td><?php echo $counter++?></td>
-		<td><?php echo $item['postograduacao'] . " " . $item['nomeguerra']?></td>
-		<td><?php $temposervico = $hoje->diff($item['dataadmissao']); echo "{$temposervico->y} anos, {$temposervico->m} meses e {$temposervico->d} dias";?></td>
-		<td><?php $idade = $hoje->diff($item['datanascimento']); echo "{$idade->y} anos"?></td>
-	<?php endforeach;?>
-	</tr>
-</table>
+<div class="card ">
+	<div class="header">
+		<h4 class="title">Tempo de Serviço</h4>
+		<p class="category">Relação de policiais por tempo de serviço</p>
+	</div>
+	<div class="content">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="table-responsive"></div>
+				<table class="table table-condensed table-striped table-hover">
+					<tr>
+						<th>Nº</th>
+						<th>Policial</th>
+						<th>Tempo de Serviço</th>
+						<th>Idade</th>
+						<th>SubUnidade</th>
+						<th>Lotação</th>
+					</tr>
+					<?php 
+					$counter = 1;
+					$hoje = new \DateTime()?>
+					<?php foreach ($policiais as $item):?>
+					
+					<tr>
+						<td><?php echo $counter++?></td>
+						<td>
+							<a href="/census/detalhes/<?php echo $item['codigo']?>">
+    				    	<i title="<?php 
+    				    		if ($item['subunidade'] == "Btl") 
+    				    		{
+    				    			$class="Batalhão"; 
+    				    		} else 
+    				    		{ 
+    				    			$class = $item['subunidade'];
+    				    		} ; 
+    				    		echo $class ? $class : "Sem Classificação"; 
+    				    		echo $item['servicoposto'] ? " - " . $item['servicoposto'] : " - Sem local"; 
+    				    		echo $item['servicofuncao'] ? " - " . $item['servicofuncao'] : " - Sem função"?>">
+    				    		<?php echo $item['postograduacao'] . " " . $item['nomeguerra']?>
+    				    	</i></a>
+						</td>
+						<td><?php $temposervico = $hoje->diff($item['dataadmissao']); echo "{$temposervico->y} anos, {$temposervico->m} meses e {$temposervico->d} dias";?></td>
+						<td><?php $idade = $hoje->diff($item['datanascimento']); echo "{$idade->y} anos"?></td>
+						<td><?php
+							if ($item['subunidade'] == "Btl") 
+    				    		{
+    				    			echo "Batalhão"; 
+    				    		} else 
+    				    		{ 
+    				    			echo $item['subunidade'];
+    				    		} ; ?></td>
+						<td><?php echo $item['lotacao']?></td>
+					<?php endforeach;?>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
 </div>

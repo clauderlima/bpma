@@ -378,6 +378,13 @@ class Policial
      * @ORM\OneToOne(targetEntity="Census\Entity\Ferias", mappedBy="polcodigo")
      */
     private $ferias;
+    
+    /**
+     * @var Obsequium\Entity\Escala
+     *
+     * @ORM\OneToOne(targetEntity="Obsequium\Entity\Escala", mappedBy="polcodigo")
+     */
+    private $escala;
 
     public function __construct(array $data) {
     	$hydrator = new ClassMethods();
@@ -984,6 +991,16 @@ class Policial
 
     public function setFerias($ferias){
         $this->ferias = $ferias;
+        return $this;
+    }
+
+
+    public function getEscala(){
+        return $this->escala;
+    }
+
+    public function setEscala($escala){
+        $this->escala = $escala;
         return $this;
     }
 

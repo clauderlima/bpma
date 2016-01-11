@@ -12,6 +12,7 @@ return array(
     	'Scriba',
     	'User',
     	'Core',
+    	'Obsequium',
     	'DoctrineModule',
     	'DoctrineORMModule',
     	'EdpModuleLayouts'

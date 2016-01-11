@@ -1,37 +1,59 @@
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <div class="panel-title">
-            <div class="campo">Plano de Chamada</div>
-        </div>
-    </div>
-	<div class="panel-body">
-		<table class="table">
-		<tr>
-				<th>Nº</th>
-				<th>Policial</th>
-				<th>Telefones</th>
-				<th>Cidade de Residência</th>
-				<th>Sub Unidade</th>
-			</tr>
-			<?php 
-			$counter = 1;
-			$hoje = new \DateTime()?>
-			<?php foreach ($policiais as $item):?>
-			
-			<tr>
-				<td><?php echo $counter++?></td>
-				<td><?php echo $item['postograduacao'] . " " . $item['nomeguerra']?></td>
-				<td><?php echo $item['telefonefixo'] . "  " . $item['telefonecelular']?></td>
-				<td><?php echo $item['enderecocidade'] . "-" . $item['enderecouf'] ?></td>
-				<td><?php 
-					switch ($item['subunidade']) {
-						case 'Btl':
-						 	$item['subunidade'] = 'Batalhão';
-						break;
-					}
-				echo $item['subunidade']?></td>
-			<?php endforeach;?>
-			</tr>
-		</table>
+<div class="card ">
+	<div class="header">
+		<h4 class="title">Bienal</h4>
+		<p class="category">Situação atual dos policiais</p>
+	</div>
+	<div class="content">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="table-responsive"></div>
+				<table class="table table-condensed table-striped table-hover">
+					<tr>
+						<th>Nº</th>
+						<th>Policial</th>
+						<th>Telefones</th>
+						<th>Cidade</th>
+						<th>Local de Trabalho</th>
+						<th>SubUnidade</th>
+					</tr>
+					<?php 
+					$counter = 1;
+					$hoje = new \DateTime()?>
+					<?php foreach ($policiais as $item):?>
+					
+					<tr>
+						<td><?php echo $counter++?></td>
+						<td>
+							<a href="/census/detalhes/<?php echo $item['codigo']?>">
+    				    	<i title="<?php 
+    				    		if ($item['subunidade'] == "Btl") 
+    				    		{
+    				    			$class="Batalhão"; 
+    				    		} else 
+    				    		{ 
+    				    			$class = $item['subunidade'];
+    				    		} ; 
+    				    		echo $class ? $class : "Sem Classificação"; 
+    				    		echo $item['servicoposto'] ? " - " . $item['servicoposto'] : " - Sem local"; 
+    				    		echo $item['servicofuncao'] ? " - " . $item['servicofuncao'] : " - Sem função"?>">
+    				    		<?php echo $item['postograduacao'] . " " . $item['nomeguerra']?>
+    				    	</i></a>
+						</td>
+						<td><?php echo $item['telefonefixo'] . "  " . $item['telefonecelular']?></td>
+						<td><?php echo $item['enderecocidade']?></td>
+						<td><?php echo $item['servicoposto']?></td>
+						<td><?php
+							if ($item['subunidade'] == "Btl") 
+    				    		{
+    				    			echo "Batalhão"; 
+    				    		} else 
+    				    		{ 
+    				    			echo $item['subunidade'];
+    				    		} ; ?></td>
+					<?php endforeach;?>
+					</tr>
+				</table>
+			</div>
+		</div>
 	</div>
 </div>
