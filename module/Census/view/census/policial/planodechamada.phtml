@@ -10,10 +10,11 @@
 				<table class="table table-condensed table-striped table-hover">
 					<tr>
 						<th>Nº</th>
-						<th>Policial</th>
+						<th>Matrícula</th>
+						<th>Post/Grad</th>
+						<th>Nome Completo</th>
 						<th>Telefones</th>
-						<th>Cidade</th>
-						<th>Local de Trabalho</th>
+						<th>Endereço</th>
 						<th>SubUnidade</th>
 					</tr>
 					<?php 
@@ -23,25 +24,13 @@
 					
 					<tr>
 						<td><?php echo $counter++?></td>
-						<td>
-							<a href="/census/detalhes/<?php echo $item['codigo']?>">
-    				    	<i title="<?php 
-    				    		if ($item['subunidade'] == "Btl") 
-    				    		{
-    				    			$class="Batalhão"; 
-    				    		} else 
-    				    		{ 
-    				    			$class = $item['subunidade'];
-    				    		} ; 
-    				    		echo $class ? $class : "Sem Classificação"; 
-    				    		echo $item['servicoposto'] ? " - " . $item['servicoposto'] : " - Sem local"; 
-    				    		echo $item['servicofuncao'] ? " - " . $item['servicofuncao'] : " - Sem função"?>">
-    				    		<?php echo $item['postograduacao'] . " " . $item['nomeguerra']?>
-    				    	</i></a>
+						<td> <a href="/census/detalhes/<?php echo $item['codigo']?>">
+							<?php echo $item['matricula']?></a></td>
+						<td><?php echo $item['postograduacao'] . " " . $item['quadro']?></td>
+						<td><?php echo $item['nomecompleto']?></a>
 						</td>
 						<td><?php echo $item['telefonefixo'] . "  " . $item['telefonecelular']?></td>
-						<td><?php echo $item['enderecocidade']?></td>
-						<td><?php echo $item['servicoposto']?></td>
+						<td><?php echo $item['enderecoquadra'] . " " . $item['enderecoconjunto'] . ", ".  $item['endereconumero'] . " - "  . $item['enderecocidade'] . "-" . $item['enderecouf']?></td>
 						<td><?php
 							if ($item['subunidade'] == "Btl") 
     				    		{

@@ -623,7 +623,7 @@ class PolicialController extends AbstractController
     
     	// Dados Formação
     	$policial = $em->createQueryBuilder()
-	    	->select('p.nomeguerra,p.nomecompleto,p.telefonefixo,p.servicoposto,p.telefonecelular,p.postograduacao,p.enderecocidade,p.enderecouf,p.subunidade')
+	    	->select('p.nomeguerra,p.matricula,p.nomecompleto,p.enderecoconjunto,p.enderecoquadra,p.endereconumero,p.enderecouf,p.quadro,p.nomecompleto,p.telefonefixo,p.servicofuncao,p.codigo,p.servicoposto,p.telefonecelular,p.postograduacao,p.enderecocidade,p.enderecouf,p.subunidade')
 	    	->from('Census\Entity\Policial', 'p')
 	    	->where('p.subunidade <> :polcodigo')
 	    	->setParameter('polcodigo', 'TRC')

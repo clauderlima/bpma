@@ -561,7 +561,7 @@ class Policial
     }
 
     public function setMatricula($matricula){
-        $this->matricula = preg_replace('/[^0-9]/', '', $matricula);
+        $this->matricula = preg_replace('/[^0-9X]/', '', $matricula);
         return $this;
     }
 

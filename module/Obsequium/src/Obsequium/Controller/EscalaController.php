@@ -17,7 +17,7 @@ class EscalaController extends AbstractController
 			->setParameter('data', $dia)
 			->orderBy('e.codigo', 'DESC')
 			->getQuery()->getResult();
-		
+			
 		return new ViewModel(array(
 			'dados' => $escala,
 		));

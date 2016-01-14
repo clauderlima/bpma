@@ -932,16 +932,19 @@ function imprimirxxxx(array $data)
 		$data['nrecodigo'] = "";
 		$data['polcodigo'] = "";
 		
+		if (!$data['segundaparcelaqtddias']) $qtddias2=1; else $qtddias2 = $data['segundaparcelaqtddias'];
+		if (!$data['terceiraparcelaqtddias']) $qtddias3=1; else $qtddias3 = $data['terceiraparcelaqtddias'];
+		
 		$qtdprimeiraparcela = ("P".((int) $data['primeiraparcelaqtddias']-1)."D");
-		$qtdsegundaparcela = ("P".((int) $data['primeiraparcelaqtddias']-1)."D");
-		$qtdterceiraparcela = ("P".((int) $data['primeiraparcelaqtddias']-1)."D");
+		$qtdsegundaparcela = ("P".((int) $qtddias2-1)."D");
+		$qtdterceiraparcela = ("P".((int) $qtddias3=1-1)."D");
 		
 		$data['primeiraparcela'] = "- 1ª parcela de " . $data['primeiraparcelaqtddias'] . " dias no período de " . 
 			$data['primeiraparcelainicio']->format('d/m') . " à " . $data['primeiraparcelainicio']
 			->add(new \DateInterval("$qtdprimeiraparcela"))->format('d/m/Y') . ";";
 		
 			
-		if ($data['segundaparcelainicio'] != "")
+		if ($data['segundaparcelainicio'] != Null)
 		{
 			$data['segundaparcela'] = "- 2ª parcela de " . $data['segundaparcelaqtddias'] . " dias no período de " . 
 				$data['segundaparcelainicio']->format('d/m') . " à " . $data['segundaparcelainicio']
@@ -953,8 +956,6 @@ function imprimirxxxx(array $data)
 		
 		if ($data['terceiraparcelainicio'] != Null)
 		{
-			die('aqui');
-			
 			$data['terceiraparcela'] = "- 3ª parcela de " . $data['terceiraparcelaqtddias'] . " dias no período de " . 
 				$data['terceiraparcelainicio']->format('d/m') . " à " . $data['terceiraparcelainicio']
 				->add(new \DateInterval("$qtdterceiraparcela"))->format('d/m/Y') . ";";

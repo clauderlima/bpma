@@ -28,6 +28,8 @@ class Documento extends Form
 					'Ofício' => 'Ofício',
 					'Mensagem' => 'Mensagem',
 					'Memorando' => 'Memorando',
+					'Circular' => 'Circular',
+					'Parte' => 'Parte',
 					'Portaria' => 'Portaria',
 					'Requerimento' => 'Requerimento',
 					'Carta' => 'Carta',
