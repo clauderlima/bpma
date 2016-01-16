@@ -22,10 +22,12 @@ class Encaminhamento extends AbstractService
 			$data['encaminhamento'] = $this->getEmRef('Scriba\Entity\Encaminhamento', $encaminhamento[0]->getCodigo());
 		}
 		
+		
 		$hoje = new \DateTime('now');
 		$data['data'] = $hoje->format('Y-m-d');
 		$data['doccodigo'] = $this->getEmRef('Scriba\Entity\Documento', $documento);
 		$data['polcodigo'] = $this->getEmRef('Census\Entity\Policial', $data['polcodigo']);
+		$data['polcodigotramitador'] = $this->getEmRef('Census\Entity\Policial', $data['polcodigotramitador']);
 		$data['status'] = "Tramitado";
 		
 		return parent::insert($data, $entity);
@@ -53,6 +55,7 @@ class Encaminhamento extends AbstractService
 		$data['data'] = $hoje->format('Y-m-d');
 		$data['doccodigo'] = $this->getEmRef('Scriba\Entity\Documento', $documento);
 		$data['polcodigo'] = $this->getEmRef('Census\Entity\Policial', $data['polcodigo']);
+		$data['polcodigotramitador'] = $this->getEmRef('Census\Entity\Policial', $data['polcodigotramitador']);
 		$data['status'] = "Arquivado";
 	
 		return parent::insert($data, $entity);
@@ -61,6 +64,7 @@ class Encaminhamento extends AbstractService
 	public function update(array $data, $entity, $id)
 	{
 		$data['polcodigo'] = $this->getEmRef('Census\Entity\Policial', $data['polcodigo']);
+		$data['polcodigotramitador'] = $this->getEmRef('Census\Entity\Policial', $data['polcodigotramitador']);
 	
 		return parent::update($data, $entity, $id);
 	}

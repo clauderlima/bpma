@@ -74,6 +74,17 @@ class Encaminhamento
      * 
      */
     private $polcodigo;
+    
+    /**
+     * @var \Policial
+     *
+     * @ORM\ManyToOne(targetEntity="Census\Entity\Policial")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="pol_CodigoTramitador", referencedColumnName="pol_Codigo")
+     * })
+     *
+     */
+    private $polcodigotramitador;
 
     public function __construct(array $data) {
     	$hydrator = new ClassMethods();
@@ -148,6 +159,16 @@ class Encaminhamento
     public function setStatus($status){
     	$this->status = $status;
     	return $this;
+    }
+
+
+    public function getPolcodigotramitador(){
+        return $this->polcodigotramitador;
+    }
+
+    public function setPolcodigotramitador($polcodigotramitador){
+        $this->polcodigotramitador = $polcodigotramitador;
+        return $this;
     }
 
 }

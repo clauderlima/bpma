@@ -32,6 +32,7 @@
     		<div class="col-xs-4">
     			<?php echo $this->formRow($form->get('polcodigo')) ?>
     		</div>
+    		<input type="hidden" name="polcodigotramitador" value="<?php echo $this->useridentity()->getPolcodigo()->getCodigo()?>">
     	</div>
     </div>
     <div class="panel-footer">

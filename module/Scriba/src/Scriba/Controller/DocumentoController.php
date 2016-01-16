@@ -45,6 +45,7 @@ class DocumentoController extends AbstractController
 				$result[$key]['secao'] = $encaminhamento[0]->getSecao();
 				$result[$key]['desde'] = $encaminhamento[0]->getData()->format('d/m/Y');
 				$result[$key]['status'] = $encaminhamento[0]->getStatus();
+				$result[$key]['polcodigotramitador'] = $encaminhamento[0]->getPolcodigotramitador();
 			} else 
 			{
 				$result[$key]['secao'] = "Secretaria";

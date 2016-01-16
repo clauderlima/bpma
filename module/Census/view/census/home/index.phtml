@@ -55,3 +55,55 @@
 <div class="jumbotron">
     <h2><?php echo sprintf($this->translate('Sistema de Gestão para Unidades Operacionais'), '<span class="zf-green">', '</span>') ?></h2>
 </div>
+
+<div class="card">
+	<div class="header">
+		<h4 class="title">Documentação</h4>
+		<p class="category">Documentos sob sua responsabilidade</p>
+	</div>
+	<div class="content content-full-width">
+		<table class="table">
+    		<thead>
+    	 		<tr>
+		 			<th class="text-center">Nº</th>
+	    			<th class="text-center">Prot</th>
+	    			<th>Documento</th>
+	    			<th>Data</th>
+	    			<th>Origem</th>
+	    			<th>Assunto</th>
+	  				<th>Recebido</th>
+	   				<th>Sua posse</th>
+	   				<th>Remetente</th>
+   				</tr>
+   			</thead>
+    		<tbody>
+    		<?php $count = 1?>
+	   		<?php foreach ($dados as $item):?>
+	   		<?php if (isset($item['polcodigo'])):?>
+			<?php if ($item['polcodigo'] == $this->useridentity()->getPolcodigo()->getCodigo()):?>
+			<?php if ($item['status'] != "Arquivado"):?>
+	   			<tr>
+	   				<th class="text-center"><?php echo $count++ ?></th>
+	   				<td class="text-center"><?php echo $item['protocolo']?></td>
+	   				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
+	   				<td><?php echo $item['data']?></td>
+	   				<td><?php echo $item['origem']?></td>
+	   				<td><?php echo $item['assunto']?></td>
+	   				<td><?php echo $item['recebimento']?></td>
+	   				<td><?php echo $item['desde']?></td>
+	   				<td><?php
+	   					if ($item['polcodigotramitador'])
+	   					{
+	   						echo $item['polcodigotramitador']->getPostograduacao() . " " . $item['polcodigotramitador']->getNomeguerra();
+	   					}
+	   					?>
+	   				</td>
+				</tr>
+				<?php endif;?>
+				<?php endif;?>
+				<?php endif;?>
+		   		<?php endforeach;?>
+			</tbody>
+		</table>
+  	</div>
+</div>

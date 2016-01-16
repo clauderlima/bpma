@@ -108,9 +108,8 @@
 						</a>
 						<div class="collapse" id="collapseExample">
 							<ul class="nav">
-								<li><a href="#">Perfil</a></li>
-								<li><a href="#">Editar Perfil</a></li>
-								<li><a href="#">Configurações</a></li>
+								<li><a href="/census/detalhes/<?php echo $this->useridentity()->getPolcodigo()->getCodigo() ?>">Perfil</a></li>
+								<li><a href="/census/editar/<?php echo $this->useridentity()->getPolcodigo()->getCodigo() ?>">Editar Perfil</a></li>
 							</ul>
 						</div>
 					</div>

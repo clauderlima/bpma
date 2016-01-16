@@ -98,14 +98,17 @@
     <?php if ($dados):?>
     <div class="panel-footer">
     	<div class="row">
+    		<?php if ($this->useridentity()->getPolcodigo()->getLotacao() ==  $dados[$keys[$item]]->getSecao()):?>
     		<div class="col-xs-6 text-center">
     			<?php if ($dados[$keys[$item]]->getStatus() != "Arquivado"):?>
     				<a href="/documento/arquivar/<?php if ($dados) echo $dados[0]->getDoccodigo()->getCodigo()?>"><i class="btn btn-warning glyphicon glyphicon-inbox"> Arquivar</i></a>
     		</div>
+    	
     		<div class="col-xs-6 text-center">
     				<a href="/documento/tramitar/<?php if ($dados) echo $dados[0]->getDoccodigo()->getCodigo()?>"><i class="btn btn-success glyphicon glyphicon-step-forward"> Tramitar</i></a>
     			<?php endif;?>
     		</div>
+   			<?php endif;?>
     	</div>
     </div>
     <?php endif;?>

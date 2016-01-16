@@ -1,6 +1,4 @@
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
+<?php if ($this->useridentity()->getPolcodigo()->getLotacao() == "Sec"):?>
 			<div class="card">
 				<div class="header">
 					<h4 class="title">Secretaria</h4>
@@ -11,46 +9,39 @@
 					<table class="table">
     					<thead>
     						<tr>
+    							<th class="text-center">Nº</th>
 			    				<th class="text-center">Prot</th>
 			    				<th>Documento</th>
 			    				<th>Data</th>
 			    				<th>Origem</th>
 			    				<th>Assunto</th>
 			    				<th>Recebimento</th>
-			    				<th>Desde</th>
-			    				<th>Status</th>
+			    				<th>Na seção</th>
+			    				<th>Tramitador</th>
 			    				<th class="text-center">Opções</th>
     						</tr>
     					</thead>
 			    		<tbody>
+			    		<?php $count = 1?>
 			    		<?php foreach ($dados as $item):?>
 			    			<?php if ($item['secao'] == "Sec" || $item['secao'] == "Secretaria"):?>
 			    			<?php if ($item['status'] != "Arquivado"):?>
 				    			<tr>
-				    				<th class="text-center"><?php echo $item['protocolo']?></th>
+				    				<th class="text-center"><?php echo $count++ ?></th>
+				    				<td class="text-center"><?php echo $item['protocolo']?></td>
 				    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
 				    				<td><?php echo $item['data']?></td>
 				    				<td><?php echo $item['origem']?></td>
 				    				<td><?php echo $item['assunto']?></td>
 				    				<td><?php echo $item['recebimento']?></td>
 				    				<td><?php echo $item['desde']?></td>
-				    				<td><?php 
-				    						if ($item['status'])
-				    						{
-					    						switch ($item['status']) {
-					    							case 'Tramitado':
-					    								$tramite = "Tramitando";
-					    							break;
-					    							
-					    							case 'Arquivado':
-					    								$tramite = "Arquivado";
-					    							break;
-					    						}
-				    						} else 
-				    						{
-				    							$tramite = "Recebido";
-				    						}
-				    						echo $tramite ?></td>
+				    				<td> <?php 
+				    					if ($item['polcodigotramitador'])
+				    					{
+				    						echo $item['polcodigotramitador']->getPostograduacao() . " " . $item['polcodigotramitador']->getNomeguerra();
+				    					}
+				    					?>
+						    		</td>
 				    				<td class="text-center">
 				    					<a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward" title="Tramitar"></i></a>&nbsp;
 				    					<?php if ($this->useridentity()->getPercodigo()->getCodigo() == 6 || $this->useridentity()->getPercodigo()->getCodigo() == 8):?>
@@ -64,15 +55,10 @@
 			    		</tbody>
 			    	</table>
 	  			</div>
-			</div>
-		</div>
-	</div>
 </div>
+<?php endif;?>
 
-
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
+<?php if ($this->useridentity()->getPolcodigo()->getLotacao() == "NGP"):?>
 			<div class="card">
 				<div class="header">
 					<h4 class="title">Núcleo de Gestão de Pessoal</h4>
@@ -82,46 +68,37 @@
 					<table class="table">
     					<thead>
     						<tr>
+			    				<th class="text-center">Nº</th>
 			    				<th class="text-center">Prot</th>
 			    				<th>Documento</th>
 			    				<th>Data</th>
 			    				<th>Origem</th>
 			    				<th>Assunto</th>
-			    				<th>Recebimento</th>
-			    				<th>Desde</th>
-			    				<th>Status</th>
+			    				<th>Na seção</th>
+			    				<th>Tramitador</th>
 			    				<th class="text-center">Opções</th>
     						</tr>
     					</thead>
 			    		<tbody>
+			    		<?php $count=1?>
 			    		<?php foreach ($dados as $item):?>
 			    			<?php if ($item['secao'] == "NGP"):?>
 			    			<?php if ($item['status'] != "Arquivado"):?>
 				    			<tr>
-				    				<th class="text-center"><?php echo $item['protocolo']?></th>
+				    				<th class="text-center"><?php echo $count++ ?></th>
+				    				<td class="text-center"><?php echo $item['protocolo']?></td>
 				    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
 				    				<td><?php echo $item['data']?></td>
 				    				<td><?php echo $item['origem']?></td>
 				    				<td><?php echo $item['assunto']?></td>
-				    				<td><?php echo $item['recebimento']?></td>
 				    				<td><?php echo $item['desde']?></td>
-				    				<td><?php 
-				    						if ($item['status'])
-				    						{
-					    						switch ($item['status']) {
-					    							case 'Tramitado':
-					    								$tramite = "Tramitando";
-					    							break;
-					    							
-					    							case 'Arquivado':
-					    								$tramite = "Arquivado";
-					    							break;
-					    						}
-				    						} else 
-				    						{
-				    							$tramite = "Recebido";
-				    						}
-				    						echo $tramite ?></td>
+				    				<td> <?php 
+				    					if ($item['polcodigotramitador'])
+				    					{
+				    						echo $item['polcodigotramitador']->getPostograduacao() . " " . $item['polcodigotramitador']->getNomeguerra();
+				    					}
+				    					?>
+						    		</td>
 				    				<td class="text-center">
 				    					<a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward" title="Tramitar"></i></a>&nbsp;
 				    					<?php if ($this->useridentity()->getPercodigo()->getCodigo() == 6 || $this->useridentity()->getPercodigo()->getCodigo() == 8):?>
@@ -135,14 +112,468 @@
 			    		</tbody>
 			    	</table>
 	  			</div>
-			</div>
-		</div>
+</div>
+<?php endif;?>
+
+<?php if ($this->useridentity()->getPolcodigo()->getLotacao() == "NCS"):?>
+			<div class="card">
+				<div class="header">
+					<h4 class="title">Núcleo de Comunicação Social</h4>
+					<p class="category">Documentos na seção</p>
+				</div>
+				<div class="content content-full-width">
+					<table class="table">
+    					<thead>
+    						<tr>
+			    				<th class="text-center">Nº</th>
+			    				<th class="text-center">Prot</th>
+			    				<th>Documento</th>
+			    				<th>Data</th>
+			    				<th>Origem</th>
+			    				<th>Assunto</th>
+			    				<th>Na seção</th>
+			    				<th>Tramitador</th>
+			    				<th class="text-center">Opções</th>
+    						</tr>
+    					</thead>
+			    		<tbody>
+			    		<?php $count=1?>
+			    		<?php foreach ($dados as $item):?>
+			    			<?php if ($item['secao'] == "NCS"):?>
+			    			<?php if ($item['status'] != "Arquivado"):?>
+				    			<tr>
+				    				<th class="text-center"><?php echo $count++ ?></th>
+				    				<td class="text-center"><?php echo $item['protocolo']?></td>
+				    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
+				    				<td><?php echo $item['data']?></td>
+				    				<td><?php echo $item['origem']?></td>
+				    				<td><?php echo $item['assunto']?></td>
+				    				<td><?php echo $item['desde']?></td>
+				    				<td> <?php 
+				    					if ($item['polcodigotramitador'])
+				    					{
+				    						echo $item['polcodigotramitador']->getPostograduacao() . " " . $item['polcodigotramitador']->getNomeguerra();
+				    					}
+				    					?>
+						    		</td>
+				    				<td class="text-center">
+				    					<a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward" title="Tramitar"></i></a>&nbsp;
+				    					<?php if ($this->useridentity()->getPercodigo()->getCodigo() == 6 || $this->useridentity()->getPercodigo()->getCodigo() == 8):?>
+				    					<a href="/documento/editar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-pencil" title="Editar"></i></a>
+				    					<?php endif;?>
+				    				</td>
+				    			</tr>
+				    			<?php endif;?>
+				    			<?php endif;?>
+				    		<?php endforeach;?>
+			    		</tbody>
+			    	</table>
+	  			</div>
+</div>
+<?php endif;?>
+
+<?php if ($this->useridentity()->getPolcodigo()->getLotacao() == "NProj"):?>
+			<div class="card">
+				<div class="header">
+					<h4 class="title">Núcleo de Projetos</h4>
+					<p class="category">Documentos na seção</p>
+				</div>
+				<div class="content content-full-width">
+					<table class="table">
+    					<thead>
+    						<tr>
+			    				<th class="text-center">Nº</th>
+			    				<th class="text-center">Prot</th>
+			    				<th>Documento</th>
+			    				<th>Data</th>
+			    				<th>Origem</th>
+			    				<th>Assunto</th>
+			    				<th>Na seção</th>
+			    				<th>Tramitador</th>
+			    				<th class="text-center">Opções</th>
+    						</tr>
+    					</thead>
+			    		<tbody>
+			    		<?php $count=1?>
+			    		<?php foreach ($dados as $item):?>
+			    			<?php if ($item['secao'] == "NProj"):?>
+			    			<?php if ($item['status'] != "Arquivado"):?>
+				    			<tr>
+				    				<th class="text-center"><?php echo $count++ ?></th>
+				    				<td class="text-center"><?php echo $item['protocolo']?></td>
+				    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
+				    				<td><?php echo $item['data']?></td>
+				    				<td><?php echo $item['origem']?></td>
+				    				<td><?php echo $item['assunto']?></td>
+				    				<td><?php echo $item['desde']?></td>
+				    				<td> <?php 
+				    					if ($item['polcodigotramitador'])
+				    					{
+				    						echo $item['polcodigotramitador']->getPostograduacao() . " " . $item['polcodigotramitador']->getNomeguerra();
+				    					}
+				    					?>
+						    		</td>
+				    				<td class="text-center">
+				    					<a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward" title="Tramitar"></i></a>&nbsp;
+				    					<?php if ($this->useridentity()->getPercodigo()->getCodigo() == 6 || $this->useridentity()->getPercodigo()->getCodigo() == 8):?>
+				    					<a href="/documento/editar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-pencil" title="Editar"></i></a>
+				    					<?php endif;?>
+				    				</td>
+				    			</tr>
+				    			<?php endif;?>
+				    			<?php endif;?>
+				    		<?php endforeach;?>
+			    		</tbody>
+			    	</table>
+	  			</div>
+</div>
+<?php endif;?>
+
+<?php if ($this->useridentity()->getPolcodigo()->getLotacao() == "SSLog"):?>
+			<div class="card">
+				<div class="header">
+					<h4 class="title">Sub Seção de Logística</h4>
+					<p class="category">Documentos na seção</p>
+				</div>
+				<div class="content content-full-width">
+					<table class="table">
+    					<thead>
+    						<tr>
+			    				<th class="text-center">Nº</th>
+			    				<th class="text-center">Prot</th>
+			    				<th>Documento</th>
+			    				<th>Data</th>
+			    				<th>Origem</th>
+			    				<th>Assunto</th>
+			    				<th>Na seção</th>
+			    				<th>Tramitador</th>
+			    				<th class="text-center">Opções</th>
+    						</tr>
+    					</thead>
+			    		<tbody>
+			    		<?php $count=1?>
+			    		<?php foreach ($dados as $item):?>
+			    			<?php if ($item['secao'] == "SSLog"):?>
+			    			<?php if ($item['status'] != "Arquivado"):?>
+				    			<tr>
+				    				<th class="text-center"><?php echo $count++ ?></th>
+				    				<td class="text-center"><?php echo $item['protocolo']?></td>
+				    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
+				    				<td><?php echo $item['data']?></td>
+				    				<td><?php echo $item['origem']?></td>
+				    				<td><?php echo $item['assunto']?></td>
+				    				<td><?php echo $item['desde']?></td>
+				    				<td> <?php 
+				    					if ($item['polcodigotramitador'])
+				    					{
+				    						echo $item['polcodigotramitador']->getPostograduacao() . " " . $item['polcodigotramitador']->getNomeguerra();
+				    					}
+				    					?>
+						    		</td>
+				    				<td class="text-center">
+				    					<a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward" title="Tramitar"></i></a>&nbsp;
+				    					<?php if ($this->useridentity()->getPercodigo()->getCodigo() == 6 || $this->useridentity()->getPercodigo()->getCodigo() == 8):?>
+				    					<a href="/documento/editar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-pencil" title="Editar"></i></a>
+				    					<?php endif;?>
+				    				</td>
+				    			</tr>
+				    			<?php endif;?>
+				    			<?php endif;?>
+				    		<?php endforeach;?>
+			    		</tbody>
+			    	</table>
+	  			</div>
+</div>
+<?php endif;?>
+
+<?php if ($this->useridentity()->getPolcodigo()->getLotacao() == "Almox"):?>
+<div class="card">
+	<div class="header">
+		<h4 class="title">Almoxarifado</h4>
+		<p class="category">Documentos na seção</p>
+	</div>
+	<div class="content content-full-width">
+		<table class="table">
+			<thead>
+				<tr>
+    				<th class="text-center">Nº</th>
+    				<th class="text-center">Prot</th>
+    				<th>Documento</th>
+    				<th>Data</th>
+    				<th>Origem</th>
+    				<th>Assunto</th>
+    				<th>Na seção</th>
+    				<th>Tramitador</th>
+    				<th class="text-center">Opções</th>
+				</tr>
+			</thead>
+    		<tbody>
+    		<?php $count=1?>
+    		<?php foreach ($dados as $item):?>
+   			<?php if ($item['secao'] == "Almox"):?>
+   			<?php if ($item['status'] != "Arquivado"):?>
+    			<tr>
+    				<th class="text-center"><?php echo $count++ ?></th>
+    				<td class="text-center"><?php echo $item['protocolo']?></td>
+    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
+    				<td><?php echo $item['data']?></td>
+    				<td><?php echo $item['origem']?></td>
+    				<td><?php echo $item['assunto']?></td>
+    				<td><?php echo $item['desde']?></td>
+    				<td><?php 
+    					if ($item['polcodigotramitador'])
+    					{
+    						echo $item['polcodigotramitador']->getPostograduacao() . " " . $item['polcodigotramitador']->getNomeguerra();
+    					}
+    					?>
+			    		</td>
+			    	<td class="text-center">
+			    		<a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward" title="Tramitar"></i></a>&nbsp;
+			    		<?php if ($this->useridentity()->getPercodigo()->getCodigo() == 6 || $this->useridentity()->getPercodigo()->getCodigo() == 8):?>
+			    		<a href="/documento/editar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-pencil" title="Editar"></i></a>
+			    		<?php endif;?>
+			    	</td>
+		    	</tr>
+		    <?php endif;?>
+		    <?php endif;?>
+		    <?php endforeach;?>
+		    </tbody>
+	    </table>
 	</div>
 </div>
+<?php endif;?>
 
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
+<?php if ($this->useridentity()->getPolcodigo()->getLotacao() == "NMan"):?>
+<div class="card">
+	<div class="header">
+		<h4 class="title">Núcleo de Manutenção</h4>
+		<p class="category">Documentos na seção</p>
+	</div>
+	<div class="content content-full-width">
+		<table class="table">
+			<thead>
+				<tr>
+    				<th class="text-center">Nº</th>
+    				<th class="text-center">Prot</th>
+    				<th>Documento</th>
+    				<th>Data</th>
+    				<th>Origem</th>
+    				<th>Assunto</th>
+    				<th>Na seção</th>
+    				<th>Tramitador</th>
+    				<th class="text-center">Opções</th>
+				</tr>
+			</thead>
+    		<tbody>
+    		<?php $count=1?>
+    		<?php foreach ($dados as $item):?>
+   			<?php if ($item['secao'] == "NMan"):?>
+   			<?php if ($item['status'] != "Arquivado"):?>
+    			<tr>
+    				<th class="text-center"><?php echo $count++ ?></th>
+    				<td class="text-center"><?php echo $item['protocolo']?></td>
+    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
+    				<td><?php echo $item['data']?></td>
+    				<td><?php echo $item['origem']?></td>
+    				<td><?php echo $item['assunto']?></td>
+    				<td><?php echo $item['desde']?></td>
+    				<td><?php 
+    					if ($item['polcodigotramitador'])
+    					{
+    						echo $item['polcodigotramitador']->getPostograduacao() . " " . $item['polcodigotramitador']->getNomeguerra();
+    					}
+    					?>
+		    		</td>
+			    	<td class="text-center">
+			    		<a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward" title="Tramitar"></i></a>&nbsp;
+			    		<?php if ($this->useridentity()->getPercodigo()->getCodigo() == 6 || $this->useridentity()->getPercodigo()->getCodigo() == 8):?>
+			    		<a href="/documento/editar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-pencil" title="Editar"></i></a>
+			    		<?php endif;?>
+			    	</td>
+		    	</tr>
+		    <?php endif;?>
+		    <?php endif;?>
+		    <?php endforeach;?>
+		    </tbody>
+	    </table>
+	</div>
+</div>
+<?php endif;?>
+
+<?php if ($this->useridentity()->getPolcodigo()->getLotacao() == "SOp"):?>
+<div class="card">
+	<div class="header">
+		<h4 class="title">Seção Operacional</h4>
+		<p class="category">Documentos na seção</p>
+	</div>
+	<div class="content content-full-width">
+		<table class="table">
+			<thead>
+				<tr>
+    				<th class="text-center">Nº</th>
+    				<th class="text-center">Prot</th>
+    				<th>Documento</th>
+    				<th>Data</th>
+    				<th>Origem</th>
+    				<th>Assunto</th>
+    				<th>Na seção</th>
+    				<th>Tramitador</th>
+    				<th class="text-center">Opções</th>
+				</tr>
+			</thead>
+    		<tbody>
+    		<?php $count=1?>
+    		<?php foreach ($dados as $item):?>
+   			<?php if ($item['secao'] == "SOp"):?>
+   			<?php if ($item['status'] != "Arquivado"):?>
+    			<tr>
+    				<th class="text-center"><?php echo $count++ ?></th>
+    				<td class="text-center"><?php echo $item['protocolo']?></td>
+    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
+    				<td><?php echo $item['data']?></td>
+    				<td><?php echo $item['origem']?></td>
+    				<td><?php echo $item['assunto']?></td>
+    				<td><?php echo $item['desde']?></td>
+    				<td><?php 
+    					if ($item['polcodigotramitador'])
+    					{
+    						echo $item['polcodigotramitador']->getPostograduacao() . " " . $item['polcodigotramitador']->getNomeguerra();
+    					}
+    					?>
+		    		</td>
+			    	<td class="text-center">
+			    		<a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward" title="Tramitar"></i></a>&nbsp;
+			    		<?php if ($this->useridentity()->getPercodigo()->getCodigo() == 6 || $this->useridentity()->getPercodigo()->getCodigo() == 8):?>
+			    		<a href="/documento/editar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-pencil" title="Editar"></i></a>
+			    		<?php endif;?>
+			    	</td>
+		    	</tr>
+		    <?php endif;?>
+		    <?php endif;?>
+		    <?php endforeach;?>
+		    </tbody>
+	    </table>
+	</div>
+</div>
+<?php endif;?>
+
+<?php if ($this->useridentity()->getPolcodigo()->getLotacao() == "SSInt"):?>
+<div class="card">
+	<div class="header">
+		<h4 class="title">Sub Seção de Inteligência</h4>
+		<p class="category">Documentos na seção</p>
+	</div>
+	<div class="content content-full-width">
+		<table class="table">
+			<thead>
+				<tr>
+    				<th class="text-center">Nº</th>
+    				<th class="text-center">Prot</th>
+    				<th>Documento</th>
+    				<th>Data</th>
+    				<th>Origem</th>
+    				<th>Assunto</th>
+    				<th>Na seção</th>
+    				<th>Tramitador</th>
+    				<th class="text-center">Opções</th>
+				</tr>
+			</thead>
+    		<tbody>
+    		<?php $count=1?>
+    		<?php foreach ($dados as $item):?>
+   			<?php if ($item['secao'] == "SSInt"):?>
+   			<?php if ($item['status'] != "Arquivado"):?>
+    			<tr>
+    				<th class="text-center"><?php echo $count++ ?></th>
+    				<td class="text-center"><?php echo $item['protocolo']?></td>
+    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
+    				<td><?php echo $item['data']?></td>
+    				<td><?php echo $item['origem']?></td>
+    				<td><?php echo $item['assunto']?></td>
+    				<td><?php echo $item['desde']?></td>
+    				<td><?php 
+    					if ($item['polcodigotramitador'])
+    					{
+    						echo $item['polcodigotramitador']->getPostograduacao() . " " . $item['polcodigotramitador']->getNomeguerra();
+    					}
+    					?>
+		    		</td>
+			    	<td class="text-center">
+			    		<a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward" title="Tramitar"></i></a>&nbsp;
+			    		<?php if ($this->useridentity()->getPercodigo()->getCodigo() == 6 || $this->useridentity()->getPercodigo()->getCodigo() == 8):?>
+			    		<a href="/documento/editar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-pencil" title="Editar"></i></a>
+			    		<?php endif;?>
+			    	</td>
+		    	</tr>
+		    <?php endif;?>
+		    <?php endif;?>
+		    <?php endforeach;?>
+		    </tbody>
+	    </table>
+	</div>
+</div>
+<?php endif;?>
+
+<?php if ($this->useridentity()->getPolcodigo()->getLotacao() == "SAd"):?>
+<div class="card">
+	<div class="header">
+		<h4 class="title">Seção Administrativa</h4>
+		<p class="category">Documentos na seção</p>
+	</div>
+	<div class="content content-full-width">
+		<table class="table">
+			<thead>
+				<tr>
+    				<th class="text-center">Nº</th>
+    				<th class="text-center">Prot</th>
+    				<th>Documento</th>
+    				<th>Data</th>
+    				<th>Origem</th>
+    				<th>Assunto</th>
+    				<th>Na seção</th>
+    				<th>Remetente</th>
+    				<th class="text-center">Opções</th>
+				</tr>
+			</thead>
+    		<tbody>
+    		<?php $count=1?>
+    		<?php foreach ($dados as $item):?>
+   			<?php if ($item['secao'] == "SAd"):?>
+   			<?php if ($item['status'] != "Arquivado"):?>
+    			<tr>
+    				<th class="text-center"><?php echo $count++ ?></th>
+    				<td class="text-center"><?php echo $item['protocolo']?></td>
+    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
+    				<td><?php echo $item['data']?></td>
+    				<td><?php echo $item['origem']?></td>
+    				<td><?php echo $item['assunto']?></td>
+    				<td><?php echo $item['desde']?></td>
+    				<td><?php 
+    					if ($item['polcodigotramitador'])
+    					{
+    						echo $item['polcodigotramitador']->getPostograduacao() . " " . $item['polcodigotramitador']->getNomeguerra();
+    					}
+    					?>
+		    		</td>
+			    	<td class="text-center">
+			    		<a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward" title="Tramitar"></i></a>&nbsp;
+			    		<?php if ($this->useridentity()->getPercodigo()->getCodigo() == 6 || $this->useridentity()->getPercodigo()->getCodigo() == 8):?>
+			    		<a href="/documento/editar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-pencil" title="Editar"></i></a>
+			    		<?php endif;?>
+			    	</td>
+		    	</tr>
+		    <?php endif;?>
+		    <?php endif;?>
+		    <?php endforeach;?>
+		    </tbody>
+	    </table>
+	</div>
+</div>
+<?php endif;?>
+
+
+
+<?php if ($this->useridentity()->getPolcodigo()->getLotacao() == "NCC"):?>
 			<div class="card">
 				<div class="header">
 					<h4 class="title">Núcleo de Controle e Correição</h4>
@@ -152,46 +583,38 @@
 					<table class="table">
     					<thead>
     						<tr>
+    							<th class="text-center">Nº</th>
 			    				<th class="text-center">Prot</th>
 			    				<th>Documento</th>
 			    				<th>Data</th>
 			    				<th>Origem</th>
 			    				<th>Assunto</th>
-			    				<th>Recebimento</th>
-			    				<th>Desde</th>
-			    				<th>Status</th>
+			    				<th>Na seção</th>
+			    				<th>Remetente</th>
 			    				<th class="text-center">Opções</th>
     						</tr>
     					</thead>
 			    		<tbody>
+			    		<?php $count = 1?>
 			    		<?php foreach ($dados as $item):?>
 			    			<?php if ($item['secao'] == "NCC"):?>
 			    			<?php if ($item['status'] != "Arquivado"):?>
 				    			<tr>
-				    				<th class="text-center"><?php echo $item['protocolo']?></th>
+				    				<th class="text-center"><?php echo $count++ ?></th>
+				    				<td class="text-center"><?php echo $item['protocolo']?></td>
 				    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
 				    				<td><?php echo $item['data']?></td>
 				    				<td><?php echo $item['origem']?></td>
 				    				<td><?php echo $item['assunto']?></td>
 				    				<td><?php echo $item['recebimento']?></td>
 				    				<td><?php echo $item['desde']?></td>
-				    				<td><?php 
-				    						if ($item['status'])
-				    						{
-					    						switch ($item['status']) {
-					    							case 'Tramitado':
-					    								$tramite = "Tramitando";
-					    							break;
-					    							
-					    							case 'Arquivado':
-					    								$tramite = "Arquivado";
-					    							break;
-					    						}
-				    						} else 
-				    						{
-				    							$tramite = "Recebido";
-				    						}
-				    						echo $tramite ?></td>
+									<td> <?php 
+				    					if ($item['polcodigotramitador'])
+				    					{
+				    						echo $item['polcodigotramitador']->getPostograduacao() . " " . $item['polcodigotramitador']->getNomeguerra();
+				    					}
+				    					?>
+						    		</td>
 				    				<td class="text-center">
 					    				<a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward" title="Tramitar"></i></a>&nbsp;
 					    				<?php if ($this->useridentity()->getPercodigo()->getCodigo() == 6 || $this->useridentity()->getPercodigo()->getCodigo() == 8):?>
@@ -205,148 +628,144 @@
 			    		</tbody>
 			    	</table>
 	  			</div>
-			</div>
+</div>
+<?php endif;?>
+
+<?php if ($this->useridentity()->getPolcodigo()->getLotacao() == "Cmd"):?>
+<div class="card">
+<div class="container-fluid">
+	<div class="row">
+		<div class="header">
+			<h4 class="title">Comando</h4>
+			<p class="category">Documentos aguardando decisão</p>
+		</div>
+		<div class="content content-full-width">
+			<table class="table">
+    			<thead>
+    				<tr>
+    					<th class="text-center">Nº</th>
+			    		<th class="text-center">Prot</th>
+			    		<th>Documento</th>
+			    		<th>Data</th>
+			    		<th>Origem</th>
+			    		<th>Assunto</th>
+			    		<th>Desde</th>
+			    		<th>Tramitador</th>
+			    		<th class="text-center">Opções</th>
+    				</tr>
+    			</thead>
+			    <tbody>
+			    <?php $count = 1?>
+	    		<?php foreach ($dados as $item):?>
+	    		<?php if ($item['secao'] == "Cmd"):?>
+	    		<?php if ($item['status'] != "Arquivado"):?>
+	    			<tr>
+	    				<th class="text-center"><?php echo $count++ ?></th>
+	    				<td class="text-center"><?php echo $item['protocolo']?></td>
+	    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
+	    				<td><?php echo $item['data']?></td>
+	    				<td><?php echo $item['origem']?></td>
+	    				<td><?php echo $item['assunto']?></td>
+	    				<td><?php echo $item['desde']?></td>
+	    				<td> <?php 
+	    					if ($item['polcodigotramitador'])
+	    					{
+	    						echo $item['polcodigotramitador']->getPostograduacao() . " " . $item['polcodigotramitador']->getNomeguerra();
+	    					}
+	    					?>
+			    		</td>
+	    				<td class="text-center">
+	    				<a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward" title="Tramitar"></i></a>&nbsp;
+	    				<?php if ($this->useridentity()->getPercodigo()->getCodigo() == 6 || $this->useridentity()->getPercodigo()->getCodigo() == 8):?>
+	    				<a href="/documento/editar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-pencil" title="Editar"></i></a>
+						<?php endif;?>				    				
+	    				</td>
+	    			</tr>
+    			<?php endif;?>
+    			<?php endif;?>
+	    		<?php endforeach;?>
+	    		</tbody>
+    		</table>
 		</div>
 	</div>
 </div>
-
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="card">
-				<div class="header">
-					<h4 class="title">Subseção de Logística</h4>
-					<p class="category">Documentos na seção</p>
-				</div>
-				<div class="content content-full-width">
-					<table class="table">
-    					<thead>
-    						<tr>
-			    				<th class="text-center">Prot</th>
-			    				<th>Documento</th>
-			    				<th>Data</th>
-			    				<th>Origem</th>
-			    				<th>Assunto</th>
-			    				<th>Recebimento</th>
-			    				<th>Desde</th>
-			    				<th>Status</th>
-			    				<th class="text-center">Opções</th>
-    						</tr>
-    					</thead>
-			    		<tbody>
-			    		<?php foreach ($dados as $item):?>
-			    			<?php if ($item['secao'] == "SSLog"):?>
-			    			<?php if ($item['status'] != "Arquivado"):?>
-				    			<tr>
-				    				<th class="text-center"><?php echo $item['protocolo']?></th>
-				    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
-				    				<td><?php echo $item['data']?></td>
-				    				<td><?php echo $item['origem']?></td>
-				    				<td><?php echo $item['assunto']?></td>
-				    				<td><?php echo $item['recebimento']?></td>
-				    				<td><?php echo $item['desde']?></td>
-				    				<td><?php 
-				    						if ($item['status'])
-				    						{
-					    						switch ($item['status']) {
-					    							case 'Tramitado':
-					    								$tramite = "Tramitando";
-					    							break;
-					    							
-					    							case 'Arquivado':
-					    								$tramite = "Arquivado";
-					    							break;
-					    						}
-				    						} else 
-				    						{
-				    							$tramite = "Recebido";
-				    						}
-				    						echo $tramite ?></td>
-				    				<td class="text-center">
-				    					<a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward" title="Tramitar"></i></a>&nbsp;
-				    					<?php if ($this->useridentity()->getPercodigo()->getCodigo() == 6 || $this->useridentity()->getPercodigo()->getCodigo() == 8):?>
-				    					<a href="/documento/editar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-pencil" title="Editar"></i></a>
-				    					<?php endif;?>
-				    				</td>
-				    			</tr>
-				    			<?php endif;?>
-				    			<?php endif;?>
-				    		<?php endforeach;?>
-			    		</tbody>
-			    	</table>
-	  			</div>
-			</div>
-		</div>
-	</div>
 </div>
+<?php endif;?>
 
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="card">
-				<div class="header">
-					<h4 class="title">Outras Seções</h4>
-					<p class="category">Documentos em tramitação em outras seções</p>
+
+<div class="card">
+	<div class="header">
+		<h4 class="title">Batalhão de Polícia Militar Ambiental</h4>
+		<p class="category">Todos os documentos tramitando na unidade</p>
+	</div>
+	<div class="content">
+		<div class="panel-group" id="accordion">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-target="#collapseOne" href="#" data-toggle="collapse"
+							class="collapsed" aria-expanded="false"> Visualizar <b
+							class="caret"></b>
+						</a>
+					</h4>
 				</div>
-				<div class="content content-full-width">
-					<table class="table">
-    					<thead>
-    						<tr>
-			    				<th class="text-center">Prot</th>
-			    				<th>Documento</th>
-			    				<th>Data</th>
-			    				<th>Origem</th>
-			    				<th>Assunto</th>
-			    				<th>Seção</th>
-			    				<th>Recebimento</th>
-			    				<th>Desde</th>
-			    				<th>Status</th>
-			    				<th class="text-center">Opções</th>
-    						</tr>
-    					</thead>
-			    		<tbody>
-			    		<?php foreach ($dados as $item):?>
-			    			<?php if ($item['secao'] != "Sec" && $item['secao'] != "Secretaria"  && $item['secao'] != "NGP" && $item['secao'] != "NCC" && $item['secao'] != "SSLog"):?>
-			    			<?php if ($item['status'] != "Arquivado"):?>
-				    			<tr>
-				    				<th class="text-center"><?php echo $item['protocolo']?></th>
-				    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
-				    				<td><?php echo $item['data']?></td>
-				    				<td><?php echo $item['origem']?></td>
-				    				<td><?php echo $item['assunto']?></td>
-				    				<td><?php echo $item['secao']?></td>
-				    				<td><?php echo $item['recebimento']?></td>
-				    				<td><?php echo $item['desde']?></td>
-				    				<td><?php 
-				    						if ($item['status'])
-				    						{
-					    						switch ($item['status']) {
-					    							case 'Tramitado':
-					    								$tramite = "Tramitando";
-					    							break;
-					    							
-					    							case 'Arquivado':
-					    								$tramite = "Arquivado";
-					    							break;
-					    						}
-				    						} else 
-				    						{
-				    							$tramite = "Recebido";
-				    						}
-				    						echo $tramite ?></td>
-				    				<td class="text-center">
-				    				<a href="/documento/tramitar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-step-forward" title="Tramitar"></i></a>&nbsp;
-				    				<?php if ($this->useridentity()->getPercodigo()->getCodigo() == 6 || $this->useridentity()->getPercodigo()->getCodigo() == 8):?>
-				    				<a href="/documento/editar/<?php echo $item['codigo']?>"><i class="glyphicon glyphicon-pencil" title="Editar"></i></a>
-									<?php endif;?>				    				
-				    				</td>
-				    			</tr>
-				    			<?php endif;?>
-				    			<?php endif;?>
-				    		<?php endforeach;?>
-			    		</tbody>
-			    	</table>
-	  			</div>
+				<div id="collapseOne" class="panel-collapse collapse"
+					aria-expanded="false" style="height: 0px;">
+					<div class="panel-body">
+						<div class="content content-full-width">
+							<table class="table">
+    							<thead>
+    								<tr>
+		    							<th class="text-center">Nº</th>
+					    				<th class="text-center">Prot</th>
+					    				<th>Documento</th>
+					    				<th>Data</th>
+					    				<th>Origem</th>
+					    				<th>Assunto</th>
+					    				<th>Recebido</th>
+					    				<th>Seção</th>
+					    				<th>Desde</th>
+					    				<th>Status</th>
+    								</tr>
+    							</thead>
+					    		<tbody>
+					    		<?php $count = 1?>
+					    		<?php foreach ($dados as $item):?>
+					    			<?php if ($item['status'] != "Arquivado"):?>
+						    			<tr>
+						    				<th class="text-center"><?php echo $count++ ?></th>
+						    				<td class="text-center"><?php echo $item['protocolo']?></td>
+						    				<td><a href="/documento/detalhar/<?php echo $item['codigo']?>"><?php echo $item['tipo'] . " " . $item['numero']?></a></td>
+						    				<td><?php echo $item['data']?></td>
+						    				<td><?php echo $item['origem']?></td>
+						    				<td><?php echo $item['assunto']?></td>
+						    				<td><?php echo $item['recebimento']?></td>
+						    				<td><?php echo ($item['secao'] == "Sec") ? "Secretaria" : $item['secao'] ?></td>
+						    				<td><?php echo $item['desde']?></td>
+						    				<td><?php
+												if ($item ['status']) {
+													switch ($item ['status']) {
+														case 'Tramitado' :
+															$tramite = "Tramitando";
+															break;
+														
+														case 'Arquivado' :
+															$tramite = "Arquivado";
+															break;
+													}
+												} else {
+													$tramite = "Recebido";
+												}
+												echo $tramite ?>
+											</td>
+						    			</tr>
+						    			<?php endif;?>
+						    		<?php endforeach;?>
+					    		</tbody>
+			    			</table>
+	  					</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
