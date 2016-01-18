@@ -1,0 +1,57 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<div class="panel-title">
+            Requerimento de interrupcao de férias para <?php echo $dados[0]->getPolcodigo()->getPostograduacao() . " " . $dados[0]->getPolcodigo()->getNomeguerra(); ?>
+        </div>
+    </div>
+	<div class="panel-body">
+    <?php $idpolicial = $dados[0]->getPolcodigo()->getCodigo()?>
+    
+   <table class="table">
+			<thead>
+				<tr>
+					<th class="text-center">Ref.</th>
+					<th class="text-center">Mês</th>
+					<th class="text-center">Gozada</th>
+					<th class="text-center">Parcela</th>
+					<th class="text-center">Início</th>
+					<th class="text-center">Qtd Dias</th>
+					<th class="text-center">Boletim</th>
+					<th class="text-center">Opções</th>
+				</tr>
+			</thead>
+			<tbody>
+    				<?php foreach ($dados as $feria):?>
+      				<tr>
+					<td class="text-center"><?php echo $feria->getAnoreferencia()?></td>
+					<td class="text-center"><?php echo $feria->getProgramacao()?></td>
+					<td class="text-center"><?php echo $feria->getNaogozo()?></td>
+					<td class="text-center"><?php if ($feria->getParcela()) echo $feria->getParcela() . "ª Parcela"?></td>
+					<td class="text-center"><?php if ($feria->getInicio()) echo $feria->getInicio()->format('d/m/Y')?></td>
+					<td class="text-center"><?php echo $feria->getQtddias()?></td>
+					<td class="text-center"><?php echo $feria->getBoletim()?></td>
+					<td class="text-center"><a
+						href="/ferias/deletar/<?php echo $feria->getCodigo()?>"><i
+							style="color: red;" class="glyphicon glyphicon-remove"></i></a></td>
+				</tr>
+      			<?php endforeach;?>
+    		</tbody>
+		</table>
+
+			<form method="POST" action="/requerimento/requererInterrupcaoFerias/<?php echo $idpolicial?>">
+		<div class="container">
+			<br>
+
+				<div class="row">
+					<div class="col-xs-4">
+						<label for="data">Data:</label>	 <input name="data" type="date" class="form-control">
+					</div>
+				</div>
+	<div class="panel-footer">
+		<input type="submit" value="Enviar">
+	</div>
+		
+		</div>
+	</form>
+	</div>
+</div>

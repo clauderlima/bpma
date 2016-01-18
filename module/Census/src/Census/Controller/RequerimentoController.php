@@ -490,12 +490,43 @@ class RequerimentoController extends AbstractController
 	
 	public function InterrupcaoFeriasAction()
 	{
-	
+		$id = (int) $this->params()->fromRoute('id', 0);
+		
+		//$query = $this->getEm()->createQuery("SELECT p.codigo, p.postograduacao, p.nomeguerra
+		//		FROM Census\Entity\Policial p WHERE p.codigo = :codigo");
+		
+		$query = $this->getEm()->createQueryBuilder()
+			->select('f', 'p')
+			->from('Census\Entity\Ferias', 'f')
+			->innerJoin('f.polcodigo', 'p')
+			->where('p.codigo = :codigo')
+			->setParameter('codigo',$id);
+		
+		$dados = $query->getQuery()->getResult();
+		
+		if (!$dados)
+		{
+			$this->flashMessenger()->addErrorMessage("O policial não possui férias programada no sistema");
+			return $this->redirect()->toUrl('/ferias/adicionar/' . $id);
+		}
+		
+		$view = new ViewModel();
+		$view->setVariable('dados', $dados);
+		return $view;
 	}
 	
 	public function requererInterrupcaoFeriasAction()
 	{
-	
+		$id = (int) $this->params()->fromRoute('id', 0);
+		
+		//Pega dados do Formulário
+		$dadosform = $this->getRequest()->getPost()->toArray();
+		
+		$interrupcao = new \Census\Modulo\RequerimentoFerias($this->getServiceLocator()->get('servicemanager'));
+		
+		$interrupcao->requerinterrupcaoferias($id, $dadosform);
+		
+		return $this->redirect()->toUrl('/census/detalhes/' . $id);
 	}
 	
 	public function editarInterrupcaoFeriasAction()
