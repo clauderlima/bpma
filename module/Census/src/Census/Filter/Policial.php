@@ -29,7 +29,7 @@ class Policial extends InputFilter
 		
 		$this->add(array(
 			'name'		=> 'cpf',
-			'required'	=> true,
+			'required'	=> false,
 			'filters'	=> array(
 				array('name' => 'Zend\Filter\StripTags'),
 				array('name' => 'Zend\Filter\StringTrim'),
@@ -49,7 +49,7 @@ class Policial extends InputFilter
 		
 		$this->add(array(
 		    'name'		=> 'rg',
-		    'required'	=> true,
+		    'required'	=> false,
 		    'filters'	=> array(
 		        array('name' => '\Zend\Filter\Digits')
 		    ),
@@ -67,7 +67,7 @@ class Policial extends InputFilter
 		
 		$this->add(array(
 			'name'		=> 'orgaoexpedidor',
-			'required'	=> true,
+			'required'	=> false,
 			'filters'	=> array(
 				array('name' => 'Zend\Filter\StringToUpper')
 			),
@@ -209,7 +209,7 @@ class Policial extends InputFilter
 		
 		$this->add(array(
 				'name'		=> 'telefonecelular',
-				'required'	=> true,
+				'required'	=> false,
 				'filters'	=> array(
 				
 				),
@@ -227,7 +227,7 @@ class Policial extends InputFilter
 		
 		$this->add(array(
 				'name'		=> 'email',
-				'required'	=> true,
+				'required'	=> false,
 				'filters'	=> array(
 		
 				),
@@ -343,7 +343,7 @@ class Policial extends InputFilter
 		
 		$this->add(array(
 				'name'		=> 'dataadmissao',
-				'required'	=> true,
+				'required'	=> false,
 				'filters'	=> array(
 		
 				),
@@ -419,6 +419,29 @@ class Policial extends InputFilter
 				),
 		));
 		
+		$this->add(array(
+				'name'		=> 'servicoescala',
+				'required'	=> false,
+				'filters'	=> array(
+		
+				),
+		));
+		
+		$this->add(array(
+				'name'		=> 'servicohorario',
+				'required'	=> false,
+				'filters'	=> array(
+		
+				),
+		));
+		
+		$this->add(array(
+				'name'		=> 'portearmasituacao',
+				'required'	=> false,
+				'filters'	=> array(
+		
+				),
+		));
 	}
 	
 }

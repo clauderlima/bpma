@@ -30,6 +30,7 @@ class Encaminhamento extends Form
 				'NCS' => 'Núcleo de Comunicação Social',
 				'SSInt' => 'SubSeção de Inteligência',
 				'NMan' => 'Núcleo de Manutenção',
+				'NProj' => 'Núcleo de Projetos',
 				'GOA' => 'Grupamento de Operações Ambientais',
 				'GPTur' => 'Grupamento de Policamento Turístico',
 				'CiaSul' => 'Companhia Rural Sul',

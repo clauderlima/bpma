@@ -14,6 +14,7 @@
     			<label for="policial">Policial</label>
     			<select name="polcodigo" id="polcodigo" class="form-control"></select>
     		</div>
+    		<input type="hidden" name="polcodigotramitador" value="<?php echo $this->useridentity()->getPolcodigo()->getCodigo()?>">
     	</div>
     </div>
     <div class="panel-footer">

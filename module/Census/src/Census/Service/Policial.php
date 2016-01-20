@@ -18,8 +18,13 @@ class Policial extends AbstractService
 		
 			$data['fototipo'] = $fotoTipo;
 			$data['foto'] = $fotoData;
+		} else 
+		{
+			$data['foto'] = "";
 		}
-
+		
+		
+		
 		return parent::insert($data, $entity);
 	}
 	

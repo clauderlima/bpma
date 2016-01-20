@@ -23,6 +23,8 @@ class RequerimentoFerias extends Requerimento
 	private $momentoOportuno;
 	private $naoGozo;
 	private $interrupcao;
+	private $qtdrestante;
+	private $restante;
 	
 	public function requerreproferias($id, $anoreferencia, $novomes)
 	{
@@ -1032,7 +1034,7 @@ function imprimirxxxx(array $data)
 	
 		$hoje = new \DateTime('now');
 		
-		$this->anoExercicioFerias = ($hoje->format('Y')-1);
+		$this->anoExercicioFerias = $dadosform['anoreferencia'];
 		$this->tipo = "Interrupção de Férias";
 	
 		$this->interrupcao = $dadosform['data'];
@@ -1044,14 +1046,18 @@ function imprimirxxxx(array $data)
 	
 		// feriasProgramacao
 		$feriasprogramacao = $em->createQueryBuilder()
-		->select('f')
-		->from('Census\Entity\Ferias', 'f')
-		->where('f.polcodigo = :polcodigo AND f.anoreferencia = :anoref')
-		->setParameter('polcodigo', $id)
-		->setParameter('anoref', $this->anoExercicioFerias)
-		->orderBy('f.codigo', 'ASC')
-		->getQuery()->getResult();
+			->select('f')
+			->from('Census\Entity\Ferias', 'f')
+			->where('f.polcodigo = :polcodigo AND f.anoreferencia = :anoref')
+			->setParameter('polcodigo', $id)
+			->setParameter('anoref', $this->anoExercicioFerias)
+			->orderBy('f.codigo', 'ASC')
+			->getQuery()->getResult();
 			
+			
+		echo "<pre>";
+		print_r($feriasprogramacao);
+		exit;
 		if ($feriasprogramacao)
 		{
 			$this->feriasProgramacao = $feriasprogramacao['0']->getProgramacao();
@@ -1113,6 +1119,8 @@ function imprimirxxxx(array $data)
 				'feriasprogramacao' => $this->feriasProgramacao,
 	
 				'interrupcao' => $this->interrupcao,
+				'qtdrestante' => $this->qtdrestante,
+				'restante' => $this->restante,
 	
 				'datasolicitacao' => $this->dataAtual,
 				'datainclusao' => $this->dataInclusao,

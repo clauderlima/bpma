@@ -36,7 +36,7 @@
 				    				<td><?php echo $item['recebimento']?></td>
 				    				<td><?php echo $item['desde']?></td>
 				    				<td> <?php 
-				    					if ($item['polcodigotramitador'])
+				    					if (isset($item['polcodigotramitador']))
 				    					{
 				    						echo $item['polcodigotramitador']->getPostograduacao() . " " . $item['polcodigotramitador']->getNomeguerra();
 				    					}
@@ -631,7 +631,7 @@
 </div>
 <?php endif;?>
 
-<?php if ($this->useridentity()->getPolcodigo()->getLotacao() == "Cmd"):?>
+<?php if ($this->useridentity()->getPolcodigo()->getLotacao() == "Cmd" || $this->useridentity()->getPolcodigo()->getLotacao() == "Sec"):?>
 <div class="card">
 <div class="container-fluid">
 	<div class="row">

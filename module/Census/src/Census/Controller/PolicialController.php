@@ -378,211 +378,214 @@ class PolicialController extends AbstractController
     	
     	foreach ($policial as $item)
     	{
-    		switch ($item['datanascimento']->format('m')) {
-    			case '01':
-    				$idade = $hoje->diff($item['datanascimento']);
-    				$data = array(
-    					'nomeguerra' => $item['nomeguerra'],
-    					'dianascimento' => $item['datanascimento']->format('d'),
-    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
-    					'postograduacao' => $item['postograduacao'],
-    					'subunidade' => $item['subunidade'],
-    					'lotacao' => $item['lotacao'],
-    					'idade' => $idade->y . " anos"
-    				);
-    				
-    				$dataPolicialJAN[] = $data;
-    			break;
-    			
-    			case '02':
-    				$idade = $hoje->diff($item['datanascimento']);
-    				$data = array(
-    					'nomeguerra' => $item['nomeguerra'],
-    					'dianascimento' => $item['datanascimento']->format('d'),
-    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
-    					'postograduacao' => $item['postograduacao'],
-    					'subunidade' => $item['subunidade'],
-    					'lotacao' => $item['lotacao'],
-    					'idade' => $idade->y . " anos"
-    				);
-    			
-    			$dataPolicialFEV[] = $data;
-    			break;
-    				
-    			case '03':
-    				$idade = $hoje->diff($item['datanascimento']);
-    				$data = array(
-    					'nomeguerra' => $item['nomeguerra'],
-    					'dianascimento' => $item['datanascimento']->format('d'),
-    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
-    					'postograduacao' => $item['postograduacao'],
-    					'subunidade' => $item['subunidade'],
-    					'lotacao' => $item['lotacao'],
-    					'idade' => $idade->y . " anos"
-    				);
-    				
-    			$dataPolicialMAR[] = $data;
-    			break;
-    					
-    					
-    			case '04':
-    				$idade = $hoje->diff($item['datanascimento']);
-    				$data = array(
-    					'nomeguerra' => $item['nomeguerra'],
-    					'dianascimento' => $item['datanascimento']->format('d'),
-    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
-    					'postograduacao' => $item['postograduacao'],
-    					'subunidade' => $item['subunidade'],
-    					'lotacao' => $item['lotacao'],
-    					'idade' => $idade->y . " anos"
-    				);
-    					
-    			$dataPolicialABR[] = $data;
-    			break;
-    						
-    						
-    			case '05':
-    				$idade = $hoje->diff($item['datanascimento']);
-    				$data = array(
-						'nomeguerra' => $item['nomeguerra'],
-						'dianascimento' => $item['datanascimento']->format('d'),
-						'datanascimento' => $item['datanascimento']->format('d/m/Y'),
-						'postograduacao' => $item['postograduacao'],
-    					'subunidade' => $item['subunidade'],
-    					'lotacao' => $item['lotacao'],
-						'idade' => $idade->y . " anos"
-					);
-    						
-				$dataPolicialMAI[] = $data;
-				break;
-    							
-    							
-    							
-    			case '06':
-    				$idade = $hoje->diff($item['datanascimento']);
-    				$data = array(
-    					'nomeguerra' => $item['nomeguerra'],
-    					'dianascimento' => $item['datanascimento']->format('d'),
-    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
-    					'postograduacao' => $item['postograduacao'],
-    					'subunidade' => $item['subunidade'],
-    					'lotacao' => $item['lotacao'],
-    					'idade' => $idade->y . " anos"
-    				);
-    							
-    			$dataPolicialJUN[] = $data;
-    			break;
-    								
-    								
-    			case '06':
-    				$idade = $hoje->diff($item['datanascimento']);
-    				$data = array(
-    					'nomeguerra' => $item['nomeguerra'],
-    					'dianascimento' => $item['datanascimento']->format('d'),
-    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
-    					'postograduacao' => $item['postograduacao'],
-    					'subunidade' => $item['subunidade'],
-    					'lotacao' => $item['lotacao'],
-    					'idade' => $idade->y . " anos"
-    				);
-    								
-    			$dataPolicialJUL[] = $data;
-    			break;
-    			
-    			case '07':
-    				$idade = $hoje->diff($item['datanascimento']);
-    				$data = array(
-    					'nomeguerra' => $item['nomeguerra'],
-    					'dianascimento' => $item['datanascimento']->format('d'),
-    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
-    					'postograduacao' => $item['postograduacao'],
-    					'subunidade' => $item['subunidade'],
-    					'lotacao' => $item['lotacao'],
-    					'idade' => $idade->y . " anos"
-    				);
-    			
-    				$dataPolicialJUL[] = $data;
-    				break;
-    				 
-    			case '08':
-    				$idade = $hoje->diff($item['datanascimento']);
-    				$data = array(
-    					'nomeguerra' => $item['nomeguerra'],
-    					'dianascimento' => $item['datanascimento']->format('d'),
-    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
-    					'postograduacao' => $item['postograduacao'],
-    					'subunidade' => $item['subunidade'],
-    					'lotacao' => $item['lotacao'],
-    					'idade' => $idade->y . " anos"
-    				);
-    				 
-    				$dataPolicialAGO[] = $data;
-    				break;
-    			
-    			case '09':
-    				$idade = $hoje->diff($item['datanascimento']);
-    				$data = array(
-    					'nomeguerra' => $item['nomeguerra'],
-    					'dianascimento' => $item['datanascimento']->format('d'),
-    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
-    					'postograduacao' => $item['postograduacao'],
-    					'subunidade' => $item['subunidade'],
-    					'lotacao' => $item['lotacao'],
-    					'idade' => $idade->y . " anos"
-    				);
-    			
-    				$dataPolicialSET[] = $data;
-    				break;
-    					
-    					
-    			case '10':
-    				$idade = $hoje->diff($item['datanascimento']);
-    				$data = array(
-    					'nomeguerra' => $item['nomeguerra'],
-    					'dianascimento' => $item['datanascimento']->format('d'),
-    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
-    					'postograduacao' => $item['postograduacao'],
-    					'subunidade' => $item['subunidade'],
-    					'lotacao' => $item['lotacao'],
-    					'idade' => $idade->y . " anos"
-    				);
-    					
-    				$dataPolicialOUT[] = $data;
-    				break;
-    			
-    			
-    			case '11':
-    				$idade = $hoje->diff($item['datanascimento']);
-    				$data = array(
-    					'nomeguerra' => $item['nomeguerra'],
-    					'dianascimento' => $item['datanascimento']->format('d'),
-    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
-    					'postograduacao' => $item['postograduacao'],
-    					'subunidade' => $item['subunidade'],
-    					'lotacao' => $item['lotacao'],
-    					'idade' => $idade->y . " anos"
-    				);
-    			
-    				$dataPolicialNOV[] = $data;
-    				break;
-    					
-    					
-    					
-    			case '12':
-    				$idade = $hoje->diff($item['datanascimento']);
-    				$data = array(
-    					'nomeguerra' => $item['nomeguerra'],
-    					'dianascimento' => $item['datanascimento']->format('d'),
-    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
-    					'postograduacao' => $item['postograduacao'],
-    					'subunidade' => $item['subunidade'],
-    					'lotacao' => $item['lotacao'],
-    					'idade' => $idade->y . " anos"
-    				);
-    					
-    				$dataPolicialDEZ[] = $data;
-    				break;
-    		}
+    		if (isset($item['datanascimento']))
+    		{
+	    		switch ($item['datanascimento']->format('m')) {
+	    			case '01':
+	    				$idade = $hoje->diff($item['datanascimento']);
+	    				$data = array(
+	    					'nomeguerra' => $item['nomeguerra'],
+	    					'dianascimento' => $item['datanascimento']->format('d'),
+	    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+	    					'postograduacao' => $item['postograduacao'],
+	    					'subunidade' => $item['subunidade'],
+	    					'lotacao' => $item['lotacao'],
+	    					'idade' => $idade->y . " anos"
+	    				);
+	    				
+	    				$dataPolicialJAN[] = $data;
+	    			break;
+	    			
+	    			case '02':
+	    				$idade = $hoje->diff($item['datanascimento']);
+	    				$data = array(
+	    					'nomeguerra' => $item['nomeguerra'],
+	    					'dianascimento' => $item['datanascimento']->format('d'),
+	    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+	    					'postograduacao' => $item['postograduacao'],
+	    					'subunidade' => $item['subunidade'],
+	    					'lotacao' => $item['lotacao'],
+	    					'idade' => $idade->y . " anos"
+	    				);
+	    			
+	    			$dataPolicialFEV[] = $data;
+	    			break;
+	    				
+	    			case '03':
+	    				$idade = $hoje->diff($item['datanascimento']);
+	    				$data = array(
+	    					'nomeguerra' => $item['nomeguerra'],
+	    					'dianascimento' => $item['datanascimento']->format('d'),
+	    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+	    					'postograduacao' => $item['postograduacao'],
+	    					'subunidade' => $item['subunidade'],
+	    					'lotacao' => $item['lotacao'],
+	    					'idade' => $idade->y . " anos"
+	    				);
+	    				
+	    			$dataPolicialMAR[] = $data;
+	    			break;
+	    					
+	    					
+	    			case '04':
+	    				$idade = $hoje->diff($item['datanascimento']);
+	    				$data = array(
+	    					'nomeguerra' => $item['nomeguerra'],
+	    					'dianascimento' => $item['datanascimento']->format('d'),
+	    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+	    					'postograduacao' => $item['postograduacao'],
+	    					'subunidade' => $item['subunidade'],
+	    					'lotacao' => $item['lotacao'],
+	    					'idade' => $idade->y . " anos"
+	    				);
+	    					
+	    			$dataPolicialABR[] = $data;
+	    			break;
+	    						
+	    						
+	    			case '05':
+	    				$idade = $hoje->diff($item['datanascimento']);
+	    				$data = array(
+							'nomeguerra' => $item['nomeguerra'],
+							'dianascimento' => $item['datanascimento']->format('d'),
+							'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+							'postograduacao' => $item['postograduacao'],
+	    					'subunidade' => $item['subunidade'],
+	    					'lotacao' => $item['lotacao'],
+							'idade' => $idade->y . " anos"
+						);
+	    						
+					$dataPolicialMAI[] = $data;
+					break;
+	    							
+	    							
+	    							
+	    			case '06':
+	    				$idade = $hoje->diff($item['datanascimento']);
+	    				$data = array(
+	    					'nomeguerra' => $item['nomeguerra'],
+	    					'dianascimento' => $item['datanascimento']->format('d'),
+	    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+	    					'postograduacao' => $item['postograduacao'],
+	    					'subunidade' => $item['subunidade'],
+	    					'lotacao' => $item['lotacao'],
+	    					'idade' => $idade->y . " anos"
+	    				);
+	    							
+	    			$dataPolicialJUN[] = $data;
+	    			break;
+	    								
+	    								
+	    			case '06':
+	    				$idade = $hoje->diff($item['datanascimento']);
+	    				$data = array(
+	    					'nomeguerra' => $item['nomeguerra'],
+	    					'dianascimento' => $item['datanascimento']->format('d'),
+	    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+	    					'postograduacao' => $item['postograduacao'],
+	    					'subunidade' => $item['subunidade'],
+	    					'lotacao' => $item['lotacao'],
+	    					'idade' => $idade->y . " anos"
+	    				);
+	    								
+	    			$dataPolicialJUL[] = $data;
+	    			break;
+	    			
+	    			case '07':
+	    				$idade = $hoje->diff($item['datanascimento']);
+	    				$data = array(
+	    					'nomeguerra' => $item['nomeguerra'],
+	    					'dianascimento' => $item['datanascimento']->format('d'),
+	    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+	    					'postograduacao' => $item['postograduacao'],
+	    					'subunidade' => $item['subunidade'],
+	    					'lotacao' => $item['lotacao'],
+	    					'idade' => $idade->y . " anos"
+	    				);
+	    			
+	    				$dataPolicialJUL[] = $data;
+	    				break;
+	    				 
+	    			case '08':
+	    				$idade = $hoje->diff($item['datanascimento']);
+	    				$data = array(
+	    					'nomeguerra' => $item['nomeguerra'],
+	    					'dianascimento' => $item['datanascimento']->format('d'),
+	    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+	    					'postograduacao' => $item['postograduacao'],
+	    					'subunidade' => $item['subunidade'],
+	    					'lotacao' => $item['lotacao'],
+	    					'idade' => $idade->y . " anos"
+	    				);
+	    				 
+	    				$dataPolicialAGO[] = $data;
+	    				break;
+	    			
+	    			case '09':
+	    				$idade = $hoje->diff($item['datanascimento']);
+	    				$data = array(
+	    					'nomeguerra' => $item['nomeguerra'],
+	    					'dianascimento' => $item['datanascimento']->format('d'),
+	    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+	    					'postograduacao' => $item['postograduacao'],
+	    					'subunidade' => $item['subunidade'],
+	    					'lotacao' => $item['lotacao'],
+	    					'idade' => $idade->y . " anos"
+	    				);
+	    			
+	    				$dataPolicialSET[] = $data;
+	    				break;
+	    					
+	    					
+	    			case '10':
+	    				$idade = $hoje->diff($item['datanascimento']);
+	    				$data = array(
+	    					'nomeguerra' => $item['nomeguerra'],
+	    					'dianascimento' => $item['datanascimento']->format('d'),
+	    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+	    					'postograduacao' => $item['postograduacao'],
+	    					'subunidade' => $item['subunidade'],
+	    					'lotacao' => $item['lotacao'],
+	    					'idade' => $idade->y . " anos"
+	    				);
+	    					
+	    				$dataPolicialOUT[] = $data;
+	    				break;
+	    			
+	    			
+	    			case '11':
+	    				$idade = $hoje->diff($item['datanascimento']);
+	    				$data = array(
+	    					'nomeguerra' => $item['nomeguerra'],
+	    					'dianascimento' => $item['datanascimento']->format('d'),
+	    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+	    					'postograduacao' => $item['postograduacao'],
+	    					'subunidade' => $item['subunidade'],
+	    					'lotacao' => $item['lotacao'],
+	    					'idade' => $idade->y . " anos"
+	    				);
+	    			
+	    				$dataPolicialNOV[] = $data;
+	    				break;
+	    					
+	    					
+	    					
+	    			case '12':
+	    				$idade = $hoje->diff($item['datanascimento']);
+	    				$data = array(
+	    					'nomeguerra' => $item['nomeguerra'],
+	    					'dianascimento' => $item['datanascimento']->format('d'),
+	    					'datanascimento' => $item['datanascimento']->format('d/m/Y'),
+	    					'postograduacao' => $item['postograduacao'],
+	    					'subunidade' => $item['subunidade'],
+	    					'lotacao' => $item['lotacao'],
+	    					'idade' => $idade->y . " anos"
+	    				);
+	    					
+	    				$dataPolicialDEZ[] = $data;
+	    				break;
+	    			}
+	    		}
     	}
     	$dataPolicial['JAN'] = $dataPolicialJAN;
     	$dataPolicial['FEV'] = $dataPolicialFEV;
