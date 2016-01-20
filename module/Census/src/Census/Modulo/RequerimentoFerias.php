@@ -838,7 +838,6 @@ function imprimirxxxx(array $data)
 		$data['datasolicitacao'] = strftime('%d de %B de %Y', strtotime($data['datasolicitacao']->format('Y-m-d')));
 		$data['datainclusao'] = $data['datainclusao']->format('d/m/Y');
 	
-	
 		switch ($data['feriasprogramacao']) {
 			case 'JAN':
 				$data['feriasprogramacao'] = "janeiro";
@@ -934,17 +933,23 @@ function imprimirxxxx(array $data)
 		$data['nrecodigo'] = "";
 		$data['polcodigo'] = "";
 		
+		if (!$data['primeiraparcelaqtddias']) $qtddias1=1; else $qtddias1 = $data['primeiraparcelaqtddias'];
 		if (!$data['segundaparcelaqtddias']) $qtddias2=1; else $qtddias2 = $data['segundaparcelaqtddias'];
 		if (!$data['terceiraparcelaqtddias']) $qtddias3=1; else $qtddias3 = $data['terceiraparcelaqtddias'];
 		
-		$qtdprimeiraparcela = ("P".((int) $data['primeiraparcelaqtddias']-1)."D");
+		$qtdprimeiraparcela = ("P".((int) $qtddias1-1)."D");
 		$qtdsegundaparcela = ("P".((int) $qtddias2-1)."D");
-		$qtdterceiraparcela = ("P".((int) $qtddias3=1-1)."D");
+		$qtdterceiraparcela = ("P".((int) $qtddias3-1)."D");
 		
-		$data['primeiraparcela'] = "- 1ª parcela de " . $data['primeiraparcelaqtddias'] . " dias no período de " . 
+		if ($data['primeiraparcelaqtddias'] > 0)
+		{
+			$data['primeiraparcela'] = "- 1ª parcela de " . $data['primeiraparcelaqtddias'] . " dias no período de " . 
 			$data['primeiraparcelainicio']->format('d/m') . " à " . $data['primeiraparcelainicio']
 			->add(new \DateInterval("$qtdprimeiraparcela"))->format('d/m/Y') . ";";
-		
+		} else
+		{
+			$data['primeiraparcela'] = " ";
+		}
 			
 		if ($data['segundaparcelaqtddias'] > 0)
 		{
