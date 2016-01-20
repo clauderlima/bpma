@@ -700,14 +700,13 @@ function imprimirxxxx(array $data)
 		$this->terceiraParcelaQtdDias = $dadosform['qtddias3'];
 		$totaldias = $dadosform['qtddias1']+$dadosform['qtddias2']+$dadosform['qtddias3'];
 		
+		if (!isset($dadosform['restante'])) $dadosform['restante'] = null;
+		
 		if ($totaldias < 30)
 		{
 			if ($dadosform['restante'] == 'naogozo') 
 			{
 				$this->naoGozo = 30 - $totaldias;
-			} else 
-			{
-				$this->momentoOportuno = 30 - $totaldias;
 			}
 		}
 		
@@ -947,7 +946,7 @@ function imprimirxxxx(array $data)
 			->add(new \DateInterval("$qtdprimeiraparcela"))->format('d/m/Y') . ";";
 		
 			
-		if ($data['segundaparcelainicio'] != Null)
+		if ($data['segundaparcelaqtddias'] > 0)
 		{
 			$data['segundaparcela'] = "- 2ª parcela de " . $data['segundaparcelaqtddias'] . " dias no período de " . 
 				$data['segundaparcelainicio']->format('d/m') . " à " . $data['segundaparcelainicio']
@@ -957,7 +956,7 @@ function imprimirxxxx(array $data)
 			$data['segundaparcela'] = " ";
 		}
 		
-		if ($data['terceiraparcelainicio'] != Null)
+		if ($data['terceiraparcelaqtddias'] > 0)
 		{
 			$data['terceiraparcela'] = "- 3ª parcela de " . $data['terceiraparcelaqtddias'] . " dias no período de " . 
 				$data['terceiraparcelainicio']->format('d/m') . " à " . $data['terceiraparcelainicio']
@@ -965,7 +964,6 @@ function imprimirxxxx(array $data)
 		} else $data['terceiraparcela'] = " "; 
 		
 		
-		$data['terceiraparcela'] = "";
 		$data['restante'] = "";
 		
 		if ($data['momentooportuno'])
