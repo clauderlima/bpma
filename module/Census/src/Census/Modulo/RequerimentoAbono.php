@@ -223,10 +223,10 @@ class RequerimentoAbono extends Requerimento
 	
 		if ($data['template'] == 'BTL')
 		{
-			$mailMerge->setLocalTemplate('data\abono-btl.docx');
+			$mailMerge->setLocalTemplate('\var\www\html\data\abono-btl.docx');
 		} else 
 		{
-			$mailMerge->setLocalTemplate('data\abono-cia.docx');
+			$mailMerge->setLocalTemplate('\var\www\html\data\abono-cia.docx');
 		}
 
 		
@@ -266,10 +266,10 @@ class RequerimentoAbono extends Requerimento
 	
 		if ($this->template == 'BTL')
 		{
-			$filename = 'c:\BPMA\requerimentos\abono\Abono-' . $this->numero . '-BTL-' . $this->matricula . '.pdf';
+			$filename = '\var\requerimentos\abono\Abono-' . $this->numero . '-BTL-' . $this->matricula . '.pdf';
 		} else 
 		{
-			$filename = 'c:\BPMA\requerimentos\abono\Abono-' . $this->numero . '-CIA-' . $this->matricula . '.pdf';
+			$filename = '\var\requerimentos\abono\Abono-' . $this->numero . '-CIA-' . $this->matricula . '.pdf';
 		}
 		
 		file_put_contents($filename, $document);

@@ -282,10 +282,10 @@ function imprimirxxxx(array $data)
 	
 		if ($this->tipoRequerimento == 'BTL')
 		{
-			$filename = 'c:\BPMA\requerimentos\abono\Abono-' . $this->numero . '-BTL-' . $this->matricula . '.pdf';
+			$filename = '\var\requerimentos\abono\Abono-' . $this->numero . '-BTL-' . $this->matricula . '.pdf';
 		} else 
 		{
-			$filename = 'c:\BPMA\requerimentos\abono\Abono-' . $this->numero . '-CIA-' . $this->matricula . '.pdf';
+			$filename = '\var\requerimentos\abono\Abono-' . $this->numero . '-CIA-' . $this->matricula . '.pdf';
 		}
 		
 		file_put_contents($filename, $document);
@@ -472,10 +472,10 @@ function imprimirxxxx(array $data)
 	
 		if ($data['template'] == 'BTL')
 		{
-			$mailMerge->setLocalTemplate('data\naogozoferias-btl.docx');
+			$mailMerge->setLocalTemplate('\var\www\html\data\naogozoferias-btl.docx');
 		} else
 		{
-			$mailMerge->setLocalTemplate('data\naogozoferias-cia.docx');
+			$mailMerge->setLocalTemplate('\var\www\html\data\naogozoferias-cia.docx');
 		}
 	
 		$mailMerge->assign('numero', $data['numero'])
@@ -516,10 +516,10 @@ function imprimirxxxx(array $data)
 	
 		if ($this->template == 'BTL')
 		{
-			$filename = 'c:\BPMA\requerimentos\abono\Abono-' . $this->numero . '-BTL-' . $this->matricula . '.pdf';
+			$filename = '\var\requerimentos\abono\Abono-' . $this->numero . '-BTL-' . $this->matricula . '.pdf';
 		} else
 		{
-			$filename = 'c:\BPMA\requerimentos\abono\Abono-' . $this->numero . '-CIA-' . $this->matricula . '.pdf';
+			$filename = '\var\requerimentos\abono\Abono-' . $this->numero . '-CIA-' . $this->matricula . '.pdf';
 		}
 	
 		file_put_contents($filename, $document);
@@ -626,10 +626,10 @@ function imprimirxxxx(array $data)
 	
 		if ($data['template'] == 'BTL')
 		{
-			$mailMerge->setLocalTemplate('data\reproferias-btl.docx');
+			$mailMerge->setLocalTemplate('\var\www\html\data\reproferias-btl.docx');
 		} else
 		{
-			$mailMerge->setLocalTemplate('data\reproferias-cia.docx');
+			$mailMerge->setLocalTemplate('\var\www\html\data\reproferias-cia.docx');
 		}	
 		
 		$mailMerge->assign('numero', $data['numero'])
@@ -670,10 +670,10 @@ function imprimirxxxx(array $data)
 	
 		if ($this->template == 'BTL')
 		{
-			$filename = 'c:\BPMA\requerimentos\ferias\ReproFerias-' . $this->numero . '-BTL-' . $this->matricula . '.pdf';
+			$filename = '\var\requerimentos\ferias\ReproFerias-' . $this->numero . '-BTL-' . $this->matricula . '.pdf';
 		} else
 		{
-			$filename = 'c:\BPMA\requerimentos\ferias\ReproFerias-' . $this->numero . '-CIA-' . $this->matricula . '.pdf';
+			$filename = '\var\requerimentos\ferias\ReproFerias-' . $this->numero . '-CIA-' . $this->matricula . '.pdf';
 		}
 	
 		file_put_contents($filename, $document);
@@ -924,10 +924,10 @@ function imprimirxxxx(array $data)
 	
 		if ($data['template'] == 'BTL')
 		{
-			$mailMerge->setLocalTemplate('data\parcelamentoferias-btl.docx');
+			$mailMerge->setLocalTemplate('\var\www\html\data\parcelamentoferias-btl.docx');
 		} else
 		{
-			$mailMerge->setLocalTemplate('data\parcelamentoferias-cia.docx');
+			$mailMerge->setLocalTemplate('\var\www\html\data\parcelamentoferias-cia.docx');
 		}
 		
 		$data['nrecodigo'] = "";
@@ -1016,10 +1016,10 @@ function imprimirxxxx(array $data)
 	
 		if ($this->template == 'BTL')
 		{
-			$filename = 'c:\BPMA\requerimentos\ferias\ReproFerias-' . $this->numero . '-BTL-' . $this->matricula . '.pdf';
+			$filename = '\var\requerimentos\ferias\ReproFerias-' . $this->numero . '-BTL-' . $this->matricula . '.pdf';
 		} else
 		{
-			$filename = 'c:\BPMA\requerimentos\ferias\ReproFerias-' . $this->numero . '-CIA-' . $this->matricula . '.pdf';
+			$filename = '\var\requerimentos\ferias\ReproFerias-' . $this->numero . '-CIA-' . $this->matricula . '.pdf';
 		}
 	
 		file_put_contents($filename, $document);
